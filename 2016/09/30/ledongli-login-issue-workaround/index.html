@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>乐动力“网络不给力”问题的处理 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="MX5上的乐动力 App 很早以前就不能登录了，各种途径都是提示“网络不给力”，等了大半年看他们是否会修正这个问题，但是每次版本更新后都试了，问题依旧存在。而且，无论是官网还是 App或是微博客服，都没有提供相关的说明该如何操作。为了不丢失数据，只好自己动手了。
+进入 Flyme 5 的访客系统，安">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="乐动力“网络不给力”问题的处理"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> 乐动力“网络不给力”问题的处理</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>MX5上的乐动力 App 很早以前就不能登录了，各种途径都是提示“网络不给力”，等了大半年看他们是否会修正这个问题，但是每次版本更新后都试了，问题依旧存在。而且，无论是官网还是 App或是微博客服，都没有提供相关的说明该如何操作。<br>为了不丢失数据，只好自己动手了。</p>
+<p>进入 Flyme 5 的访客系统，安装微信和乐动力 App，测试登录正常，之前的数据也能正常同步下来。</p>
+<h4 id="第一步，祭出-Charles-看看都干了啥"><a href="#第一步，祭出-Charles-看看都干了啥" class="headerlink" title="第一步，祭出 Charles 看看都干了啥"></a>第一步，祭出 Charles 看看都干了啥</h4><p>启动 Charles，然后在手机上设置代理，进行登录，发现一个正常的登录主要做了几个操作：</p>
+<ol>
+<li>adduser，发送一个 pc 串，返回一个临时的 id</li>
+<li>authbywechat，登录请求，url参数 uid 为之前请求的临时 id，返回用户 id</li>
+<li>getinfo，获得用户相关信息，包括头像 url</li>
+<li>updatewechatinfo，更新数据</li>
+<li>updateinfo，更新数据</li>
+</ol>
+<h4 id="第二步，进入正常的系统，看看无法登录的版本都做了些什么"><a href="#第二步，进入正常的系统，看看无法登录的版本都做了些什么" class="headerlink" title="第二步，进入正常的系统，看看无法登录的版本都做了些什么"></a>第二步，进入正常的系统，看看无法登录的版本都做了些什么</h4><ol>
+<li>authbywechat，url参数 uid 为<strong>残留的用户 id</strong>，返回 {“errorCode”: -10001, “ret”: “auth fail”}</li>
+</ol>
+<p>返回错误后就没有后续请求了。</p>
+<p>现在看来就是验证的时候的 uid 的问题。查看反编译后的代码的时候发现，登录成功后这个 uid 是会被覆盖的。这样的话，给 App 一些正常的数据，让他先登录成功一次，以后理论上就不会有问题了。</p>
+<p>如果是 root 的设备，直接把 SharedPreferences 中的 uid 的值改为0，App 就会进入 adduser 的流程，这样会比较简单。我不想 root 这个设备，所以写了些代码来模拟登录的流程。</p>
+<h4 id="第三部，拦截请求，修改数据"><a href="#第三部，拦截请求，修改数据" class="headerlink" title="第三部，拦截请求，修改数据"></a>第三部，拦截请求，修改数据</h4><p>把正常登录的数据保存下来，在拦截到请求后把这些数据返回给 App。可能这部分也可以在 Charles 中完成，不过我修改了 hosts 文件，然后直接写了些 php 代码：<br>hosts 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">127.0.0.1 walk.ledongli.cn</div></pre></td></tr></table></figure></p>
+<p>路由部分：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Route::post(<span class="string">'/v2/rest/users/authbywechat'</span>, <span class="string">'MsgController@handleAuthWeChat'</span>);</div><div class="line">Route::post(<span class="string">'/v2/rest/users/getinfo'</span>, <span class="string">'MsgController@handleGetInfo'</span>);</div><div class="line">Route::post(<span class="string">'/v2/rest/users/updatewechatinfo'</span>, <span class="string">'MsgController@handleUpdateWeChatInfo'</span>);</div><div class="line">Route::post(<span class="string">'/v2/rest/users/updateinfo'</span>, <span class="string">'MsgController@handleUpdateInfo'</span>);</div></pre></td></tr></table></figure></p>
+<p>响应部分(uid 和部分返回值删除了）：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handleUpdateWeChatInfo</span><span class="params">(Request $request)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> response()-&gt;json([<span class="string">"errorCode"</span> =&gt; <span class="number">0</span>, <span class="string">"ret"</span> =&gt; <span class="keyword">null</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handleUpdateInfo</span><span class="params">(Request $request)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> response()-&gt;json([<span class="string">"errorCode"</span> =&gt; <span class="number">0</span>, <span class="string">"ret"</span> =&gt; <span class="keyword">null</span>]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handleAuthWeChat</span><span class="params">(Request $request)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> response()-&gt;json([<span class="string">"errorCode"</span> =&gt; <span class="number">0</span>, <span class="string">"ret"</span> =&gt; [<span class="string">"uid"</span> =&gt; xxxxxxxxxx]]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handleGetInfo</span><span class="params">(Request $request)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> response()-&gt;json([<span class="string">"errorCode"</span> =&gt; <span class="number">0</span>, <span class="string">"ret"</span> =&gt; [<span class="string">"target"</span> =&gt; , <span class="string">"weight"</span> =&gt; <span class="string">""</span>, <span class="string">"gender"</span> =&gt; <span class="string">"m"</span>, <span class="string">"checkined"</span> =&gt; , <span class="string">"checkin_mcount"</span> =&gt; , <span class="string">"birthdate"</span> =&gt; <span class="string">""</span>, <span class="string">"height"</span> =&gt; <span class="string">""</span>, <span class="string">"is_wechat"</span> =&gt; <span class="keyword">true</span>, <span class="string">"avatar"</span> =&gt; <span class="string">""</span>, <span class="string">"is_qq"</span> =&gt; <span class="keyword">false</span>, <span class="string">"is_sina"</span> =&gt; <span class="keyword">false</span>, <span class="string">"nickname"</span> =&gt; <span class="string">""</span>, <span class="string">"email"</span> =&gt; <span class="string">""</span>, <span class="string">"is_email"</span> =&gt; <span class="keyword">false</span>]]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>登录进入 App 之后，把 hosts 文件还原，去掉手机上 wifi 的代理，再在 App 中点击<code>立即备份数据</code>，可以看到开始正常备份了。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><ul>
+<li>之所以出现这个问题，是因为残留的 uid 去请求登录的时候会导致失败。可能的原因大概是某一个版本的登录逻辑改变了，但是没有处理好老版本的兼容性。其实哪怕多加一个按钮能重置一下用于登录的临时 id 也好啊。</li>
+<li>同步的时候也出现了问题，同步一两条数据后就会卡住不动，不会自动重新开始，需要用户反复的进行操作才能把所有的数据同步完。</li>
+<li>退出登录的时候，居然<strong>真的</strong>把用户的数据删除了。</li>
+</ul>
+<p>综合来看，乐动力这个 App 在这部分上设计得是比较烂的，可能只是一个临时的外包产品的品质。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2017/09/21/custom-eui-control-in-egret/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/07/30/React-with-Node-js-in-Webstorm/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-30 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/php/">php<span>2</span></a></li> <li><a href="/tags/charles/">charles<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

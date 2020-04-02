@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 14 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header ">
+  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      dig deeper, do different
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+        <!-- render top articles firstly -->
+        
+        <!-- render other articles -->
+        
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-02-23 </div>
+			<div class="article-title"><a href="/2010/02/23/windows-cmd-and-unicode/" >Windows命令行窗口与Unicode</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>一.</p>
+<p>还记得刚开始学习C语言的时候，最早接触的 runtime 函数，就是 printf，这应该是一个最基础的函数了。<br>但是这样的一个函数，即使在VC2005和Windows 7下面，对输出Unicode字符这样的任务，依然会给程序员带了麻烦。</p>
+<p>下面的代码是一个Unicode版本的测试程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wmain</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">wchar_t</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">    wprintf(<span class="string">L"测试"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看着完全没有问题，但是在console中就是没有任何的输出。</p>
+<p>二.</p>
+<p>单步进入<code>wprintf</code>，发现如下代码：<br><code>retval = _woutput_l(stdout,format,NULL,arglist);</code><br>其中，宏<code>stdout</code>为标准输出，定义如下：<br><code>#define stdout (&amp;__iob_func()[1])</code><br><code>__iob_func</code>的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* These functions are for enabling STATIC_CPPLIB functionality */</span></div><div class="line">_CRTIMP FILE * __cdecl __iob_func(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> _iob;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>_iob是一个FILE类型的数组，第0个元素为stdin，第1个元素为stdout，第3个为stderr。<br>而FILE类型是一个结构体：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> &#123;</span></div><div class="line">        <span class="keyword">char</span> *_ptr;</div><div class="line">        <span class="keyword">int</span>   _cnt;</div><div class="line">        <span class="keyword">char</span> *_base;</div><div class="line">        <span class="keyword">int</span>   _flag;</div><div class="line">        <span class="keyword">int</span>   _file;</div><div class="line">        <span class="keyword">int</span>   _charbuf;</div><div class="line">        <span class="keyword">int</span>   _bufsiz;</div><div class="line">        <span class="keyword">char</span> *_tmpfname;</div><div class="line">        &#125;;</div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> <span class="title">FILE</span>;</span></div></pre></td></tr></table></figure></p>
+<p>_iob在调试器中的信息 （点击查看原图）:<br><a href="http://www.deskangel.com/wordpress/wp-content/uploads/2010/02/sc_v22281_13.png" target="_blank" rel="external"><img src="http://www.deskangel.com/wordpress/wp-content/uploads/2010/02/sc_v22281_13.png" alt="information of _iob" title="_iob在调试器中的信息"></a></p>
+<p>从图中可以看出，std本身就不支持UNICODE。</p>
+<p>三.</p>
+<p>我们还可以更深入一点，进入<code>_woutput_l</code>函数，会发现该函数调用<br><code>WRITE_CHAR(ch, &amp;charsout);</code> 宏逐个输出字符。</p>
+<p>该宏的定义和<code>_woutput_l</code>在同一个文件（output.c）中找到：<br><code>#define WRITE_CHAR(ch, pnw)         write_char(ch, stream, pnw)</code><br>其中ch为第一个字符，“测”；stream为<code>_woutput_l</code>的第一个参数，就是stdout。</p>
+<p>四.</p>
+<p><code>write_char</code>的代码很简单：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">LOCAL(<span class="keyword">void</span>) write_char (</div><div class="line">    _TCHAR ch,</div><div class="line">    FILE *f,</div><div class="line">    <span class="keyword">int</span> *pnumwritten</div><div class="line">    )</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ( (f-&gt;_flag &amp; _IOSTRG) &amp;&amp; f-&gt;_base == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        ++(*pnumwritten);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _UNICODE</span></div><div class="line">    <span class="keyword">if</span> (_putwc_nolock(ch, f) == WEOF)</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span>  <span class="comment">/* _UNICODE */</span></span></div><div class="line">    <span class="keyword">if</span> (_putc_nolock(ch, f) == EOF)</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">/* _UNICODE */</span></span></div><div class="line">        *pnumwritten = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        ++(*pnumwritten);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>五.</p>
+<p>进入<code>_fputwc_nolock</code>（即<code>_putwc_nolock</code>）。该函数的声明为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">wint_t</span> __cdecl _fputwc_nolock (</div><div class="line">        <span class="keyword">wchar_t</span> ch,</div><div class="line">        FILE *str</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>函数中对str有三个判断，<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (_textmode_safe(_fileno(str)) == __IOINFO_TM_UTF16LE)</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (_textmode_safe(_fileno(str)) == __IOINFO_TM_UTF8)</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> ((_osfile_safe(_fileno(str)) &amp; FTEXT))</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第一第二个判断很明显，判断目标文件是否为UTF16 little endian编码和UTF8编码。<br>对stdout，这里会进入第三个判断，其中FTEXT表示文件句柄为文本模式。<br>在该条件下，函数接着调用<code>wctomb_s</code>:<br><code>wctomb_s(&amp;size, mbc, MB_LEN_MAX, ch)</code><br>做编码转换，即试图把wide char的ch转换为multi-byte的mbc。</p>
+<p>六.</p>
+<p><code>wctomb_s</code>调用<code>_wctomb_s_l</code>，仅仅把locale参数设为NULL：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="keyword">errno_t</span> __<span class="function">cdecl <span class="title">wctomb_s</span> <span class="params">(</span></span></div><div class="line">        <span class="keyword">int</span> *pRetValue,</div><div class="line">        <span class="keyword">char</span> *dst,</div><div class="line">        <span class="keyword">size_t</span> sizeInBytes,</div><div class="line">        <span class="keyword">wchar_t</span> wchar</div><div class="line">        )</div><div class="line">&#123;</div><div class="line">        <span class="keyword">return</span> _wctomb_s_l(pRetValue, dst, sizeInBytes, wchar, <span class="literal">NULL</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>七.</p>
+<p><code>_wctomb_s_l</code>函数是<code>wctomb_s</code>的locale版，根据locale做不同的工作。声明如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="keyword">int</span> __cdecl _wctomb_s_l (</div><div class="line">        <span class="keyword">int</span> *pRetValue,</div><div class="line">        <span class="keyword">char</span> *dst,</div><div class="line">        <span class="keyword">size_t</span> sizeInBytes,</div><div class="line">        <span class="keyword">wchar_t</span> wchar,</div><div class="line">        <span class="keyword">_locale_t</span> plocinfo</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>函数对locale有一个判断，<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( _loc_update.GetLocaleT()-&gt;locinfo-&gt;lc_handle[LC_CTYPE] == _CLOCALEHANDLE )</div><div class="line">&#123;</div><div class="line">        <span class="keyword">if</span> ( wchar &gt; <span class="number">255</span> )  <span class="comment">/* validate high byte */</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (dst != <span class="literal">NULL</span> &amp;&amp; sizeInBytes &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">memset</span>(dst, <span class="number">0</span>, sizeInBytes);</div><div class="line">            &#125;</div><div class="line">            errno = EILSEQ;</div><div class="line">            <span class="keyword">return</span> errno;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (dst != <span class="literal">NULL</span>)</div><div class="line">        &#123;</div><div class="line">            _VALIDATE_RETURN_ERRCODE(sizeInBytes &gt; <span class="number">0</span>, ERANGE);</div><div class="line">            *dst = (<span class="keyword">char</span>) wchar;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (pRetValue != <span class="literal">NULL</span>)</div><div class="line">        &#123;</div><div class="line">            *pRetValue = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果locale是C locale的话，那么当wchar大于255，即超出ANSI范围时，不做转换，直接返回；<br>小于255，即为ANSI字符时，则转换为char类型。</p>
+<p>如果不是c locale，则调用<code>WideCharToMultiByte</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( ((size = WideCharToMultiByte( _loc_update.GetLocaleT()-&gt;locinfo-&gt;lc_codepage,</div><div class="line">                                   <span class="number">0</span>,</div><div class="line">                                   &amp;wchar,</div><div class="line">                                   <span class="number">1</span>,</div><div class="line">                                   dst,</div><div class="line">                                   (<span class="keyword">int</span>)sizeInBytes,</div><div class="line">                                   <span class="literal">NULL</span>,</div><div class="line">                                   &amp;defused) ) == <span class="number">0</span>) ||</div><div class="line">     (defused) )</div></pre></td></tr></table></figure></p>
+<p>测试代码没有设置locale，所以判断wchar，自然大于255，函数直接返回。层层返回，没有调用任何实际的输出。</p>
+<p>八.</p>
+<p>稍稍修改一下测试程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wmain</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">wchar_t</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">    wprintf(<span class="string">L"%s"</span>, <span class="string">L"测试"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出的是两个问号。单步跟踪，我们可以发现，在<code>_woutput_l</code>中，没有直接调用<code>WRITE_CHAR</code>，而是调用<code>WRITE_STRING</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">WRITE_STRING(text.wz, textlen, &amp;charsout);</div><div class="line"></div><div class="line">WRITE_STRING的代码：</div><div class="line">LOCAL(<span class="keyword">void</span>) write_string (</div><div class="line">    _TCHAR *<span class="built_in">string</span>,</div><div class="line">    <span class="keyword">int</span> len,</div><div class="line">    FILE *f,</div><div class="line">    <span class="keyword">int</span> *pnumwritten</div><div class="line">    )</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ( (f-&gt;_flag &amp; _IOSTRG) &amp;&amp; f-&gt;_base == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        (*pnumwritten) += len;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (len-- &gt; <span class="number">0</span>) &#123;</div><div class="line">        write_char(*<span class="built_in">string</span>++, f, pnumwritten);</div><div class="line">        <span class="keyword">if</span> (*pnumwritten == <span class="number">-1</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (errno == EILSEQ)</div><div class="line">                write_char(_T(<span class="string">'?'</span>), f, pnumwritten);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在write_char写入Unicode字符失败后，就会写入一个”?”，所以输出的会是问号。</p>
+<p>九.</p>
+<p>如何输出Unicode呢？有两个方法：</p>
+<ol>
+<li><p>设置正确的locale。<br>我们看到整个过程最后会调用<code>WideCharToMultiByte</code>把Unicode根据locale转换成multiple byte。<br>这可以解决一点问题，但不完美。除了绕了个圈，又把wide char转换成multiple byte之外，还无法解决多种语言混合输出的问题。<br>比如，无法同时输出俄文和中文。</p>
+</li>
+<li><p>使用<code>WriteConsole</code>。<br>如下代码可以完美的解决Unicode的问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">wchar_t</span> szText[] = <span class="string">L"测试"</span>;</div><div class="line"></div><div class="line">HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);</div><div class="line">WriteConsole(hStdOutput, szText, (DWORD)wcslen(szText), <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div></pre></td></tr></table></figure></li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2010/02/23/windows-cmd-and-unicode/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-02-20 </div>
+			<div class="article-title"><a href="/2010/02/20/how-to-design-class/" >如何设计类</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>一.</p>
+<p>类是面向对象的基础。面向对象有三大特点：封装，继承和多态。</p>
+<p>我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。</p>
+<p>无论Java还是C++，只要讲解面向对象，都会有一些例子用来说明什么是封装，继承和多态。</p>
+<p>大部分都会用shape来举例。</p>
+<p>shape作为抽象的基类，circle，square和triangle继承自shape。shape会有个draw的函数，多半还是个虚函数。</p>
+<p>这样的例子对初学者来说也是简单易懂的，很能说明白面向对象是什么。</p>
+<p>但这却是一个非常糟糕的开端，就像小时候父母告诉你是从胳肢窝里出来的一样，从一开始就给了你一个错误的概念。</p>
+<p>二.</p>
+<p>面向对象的产生，不仅仅是为了解决问题，还应该要站在待解决问题的角度来描述问题，从而让问题本身更容易被理解和解决。</p>
+<p>换个说法，就是我们应该如实的描述问题，不夸张不过分。</p>
+<p>什么是夸张？你从胳肢窝里出来就是夸张。shape有个draw的函数，也是夸张。你见过一个会draw自己的shape？</p>
+<p>有人认为这无伤大雅，把draw放在shape中，能更简洁的解决问题。</p>
+<p>但我们应该从一开始就建立一个正确的概念。</p>
+<p>三.</p>
+<p>然而把draw放在shape中并不能简洁的解决问题。</p>
+<p>我们需要在真实的环境中使用这些类，比如Microsoft Windows。我们使用GDI来画这些shape。我们需要一个DC。</p>
+<p>怎么表示？在shape中聚合一个HDC，还是把HDC作为参数传递给draw？（应该没有人会让shape从DC继承吧？）</p>
+<p>我们还需要一个画笔，来表达这个shape的其他属性，比如颜色，粗细等。</p>
+<p>我们还需要知道位置，这个shape在DC上的位置。</p>
+<p>问题开始变得复杂了，shape类以及它的子类与GDI对象耦合在一起。</p>
+<p>四.</p>
+<p>shape类以及它的子类本应该是独立的。</p>
+<p>cycle在在Windows下是cycle，在Linux下也应该是cycle，不管有没有GDI对象。</p>
+<p>问题出在什么地方？</p>
+<p>在这个例子中显而易见：只有在真正开始draw的时候，才需要GDI对象，而shape本身，并不能做draw这件事情。</p>
+<p>把一件不能做的事情，或是不适合做的事情硬塞给对象来实现，迟早是会出问题的。</p>
+<p>最糟糕的不是我们发现不了问题，而恰恰是问题迟早会被发现。</p>
+<p>五.</p>
+<p>如何从一开始就避免这样的情况，而不是在第二次的时候才做正确？</p>
+<p>我们如何才能够设计出一个正确的类？或者更确切的说，如何才能够正确的设计出一个类？</p>
+<p>从一开始就如实的描述问题，不夸张不过分。不给它不拥有的属性，更不给它不应该有的父类。</p>
+<p>这是最基本的设计原则。</p>
+<p>六.</p>
+<p>对于设计现实中不存在对应的类，同样需要如实描述——如实描述想法，设计。不要想的是孙悟空，出来的却是二郎神。</p>
+<p>计算机只识别0和1，这是个讲究精确的行业。</p>
+
+	
+	</div>
+  <a type="button" href="/2010/02/20/how-to-design-class/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-02-09 </div>
+			<div class="article-title"><a href="/2010/02/09/symbollink-for-speedcommander/" >SymbolLink for Speedcommander</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><a href="http://www.speedproject.de/enu/speedcommander/" target="_blank" rel="external">Speedcommander</a> is a dual panel file manager.</p>
+<p>SymbolLink is a small win32 application to make <a href="http://www.speedproject.de/enu/speedcommander/" target="_blank" rel="external">Speedcommander</a> creating symbol link easier for vista and win7.<br>Usage:<br><code>&lt;span style=&quot;color: #ff6600;&quot;&gt;symbollink [source] link&lt;/span&gt;</code><br>If the ‘source’ is absent, it will delete the link.</p>
+<p>How to add into Speedcommander:</p>
+<ol>
+<li>New a custom tool (User tool) in Speedcommander for SymbolLink.exe</li>
+<li>Set ‘$(ActSel) $(InactDir)’ as its parameter</li>
+<li>Select a folder or a file in the active panel</li>
+<li>Run the  tool, it will create a symbol link for the selected one in the inactive panel</li>
+<li>Select a symbol link in the active panel and run the tool, it will remove the link.<br>Download: <a href="http://www.deskangel.com/download/SymbolLink.7z" target="_blank" rel="external">SymbolLink</a>, <a href="http://www.deskangel.com/download/symbollink.cpp" target="_blank" rel="external">source code</a></li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2010/02/09/symbollink-for-speedcommander/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-02-08 </div>
+			<div class="article-title"><a href="/2010/02/08/various-memory-terms/" >Various Memory Terms</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><strong>1. terms for memory</strong></p>
+<p><span style="color: #ff6600;">physical memory</span>: it is physical object which costed your money to<br>install it into your PC. the capacity depends on what you purchased.</p>
+<p><span style="color: #ff6600;">virtual memory</span>: it is not physical. it is not a file in operating<br>system. it only exists in logic. it is a conception. the size, a.k.a.,<br>address space, depends on your cpu architecture (x86, x64 or i64, etc.).</p>
+<p><span style="color: #ff6600;">page file</span>: it is not physical, but it is a file in operating<br>system. the size can be changed by a system wide setting.</p>
+<p>(some Chinese engineers confuse ‘virtual memory’ with ‘page file’ because of the translation. if you<br>discuss with them, you’d better make sure what you are discussing about.)</p>
+<p><strong>2. the relationships</strong></p>
+<p>when a process is launching, it needs to allocate memories. it allocates memories<br>from its own address space, a.k.a. virtual memory, regardless which<br>function (new, VirtualAlloc, etc.) was called.</p>
+<p>when cpu executes a process and want to access a memory block which<br>has been allocated from virtual memory, it needs the memory block in<br>physical memory. if there is no free space for the block in physical<br>memory, os will move some unused blocks from physical memory to page<br>file. so, os will do those things:<br>a.) mapping virtual memory to physical memory<br>b.) move unused memory block from physical memory to page file/files<br>c.) move needed memory block from page file/files to physical memory<br><strong>3. terms for virtual memory</strong><br>1.) <span style="color: #ff6600;">page</span><br>we used ‘page’ in page file, but there is another term ‘page’ related<br>to virtual memory. while allocating from virtual memory, the minimum<br>unit is a page. a page has three states:</p>
+<p>a.) free<br>b.) reserved<br>c.) committed</p>
+<p>free, this is easy to understand, the page hasn’t been allocated.<br>reserved, the page has been allocated, but has been committed.<br>committed, the page has been mapped into physical memory.</p>
+<p>2.) <span style="color: #ff6600;">working set</span><br>working set is a set, a container. it collects a set of pages in the<br>virtual memory of a process, and the pages currently resident in<br>physical memory.<br>working set has a minimum size and a maximum size, which can be set by<br>SetProcessWorkingSetSize.</p>
+<p><em>Above is a simple introduction to the terms used to refer memory. For<br>further study, please refer to msdn.</em></p>
+
+	
+	</div>
+  <a type="button" href="/2010/02/08/various-memory-terms/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-01-25 </div>
+			<div class="article-title"><a href="/2010/01/25/aero-effect-on-win7-x64-with-dual-view/" >Aero effect on win7 x64 with dual view</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Aero has been disabled for win7 x64 since it was installed on my pc. The graphic card is Nvidia Geforce 7300. I updated the driver to the latest one, but still no lucky.<br>There is only one error in windows event log:</p>
+<blockquote>
+<p>The Desktop Window Manager has encountered a fatal error (0x8007000e)</p>
+</blockquote>
+<p>The error indicates ‘out of memory’. This make sense. I connected two monitors to the graphic card and enabled dual view by setting Multiple displays to ‘Extend these displays’ in display settings. And the ‘dual view’ consumes more video memory. (<a href="http://msdn.microsoft.com/en-us/library/ms800219.aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/ms800219.aspx</a>)</p>
+<p>After disabled the second monitor, Aero effect is back.</p>
+<p><del>~</del>~~~<br>Update:<br>After install a new graphic card, GT240, Aero effect can be enabled under ‘dual view’ mode now.</p>
+
+	
+	</div>
+  <a type="button" href="/2010/01/25/aero-effect-on-win7-x64-with-dual-view/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/page/13/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/15/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+		
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+		
+			<li><a href="/categories/News/">News<span>3</span></a></li>
+		
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+		
+			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+		
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+		
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/vista/">vista<span>1</span></a></li>
+		
+			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
+		
+			<li><a href="/tags/dacalc/">dacalc<span>4</span></a></li>
+		
+			<li><a href="/tags/osx/">osx<span>4</span></a></li>
+		
+			<li><a href="/tags/speedcommander/">speedcommander<span>1</span></a></li>
+		
+			<li><a href="/tags/node-js/">node.js<span>2</span></a></li>
+		
+			<li><a href="/tags/taskbar/">taskbar<span>1</span></a></li>
+		
+			<li><a href="/tags/eclipse/">eclipse<span>1</span></a></li>
+		
+			<li><a href="/tags/jenkins/">jenkins<span>1</span></a></li>
+		
+			<li><a href="/tags/wsizer/">wsizer<span>2</span></a></li>
+		
+			<li><a href="/tags/Android/">Android<span>1</span></a></li>
+		
+			<li><a href="/tags/sftp/">sftp<span>1</span></a></li>
+		
+			<li><a href="/tags/blockchain/">blockchain<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/tags/regular-expression/">regular expression<span>2</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/daysanddate/">daysanddate<span>4</span></a></li>
+		
+			<li><a href="/tags/php/">php<span>2</span></a></li>
+		
+			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
+		
+			<li><a href="/tags/memory/">memory<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>65</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      </li>
+    
+      <li>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

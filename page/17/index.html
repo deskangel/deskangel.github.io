@@ -1,0 +1,468 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 17 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header ">
+  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      dig deeper, do different
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+        <!-- render top articles firstly -->
+        
+        <!-- render other articles -->
+        
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-03-18 </div>
+			<div class="article-title"><a href="/2009/03/18/calculate-window-size-in-vista/" >Calculate window size in Vista</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Usually, we use <code>GetWindowRect</code> to calculate windows size in windows. It works always right until vista comes.</p>
+<p>Under Vista, if you still use <code>GetWindowRect</code> to retrieve windows rectangle size, you can not always get the collect value.</p>
+<p>For some windows which can not be resized, the function return bigger size than it is.</p>
+<p>The problem is caused of the new Desktop Window Management features, exactly,  <a href="http://msdn.microsoft.com/en-us/library/bb688195(VS.85" target="_blank" rel="external">extending frame</a>.aspx “Custom Window Frame Using DWM”).</p>
+<p>To resolve the problem, you can use DWM api, <code>DwmGetWindowAttribute</code>, instead of the <code>GetWindowRect</code> before Microsoft fixed it.</p>
+<p>The api which can be used like following,</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DwmGetWindowAttribute(h_wnd, DWMWA_EXTENDED_FRAME_BOUNDS, &amp;rt_target_wnd, <span class="keyword">sizeof</span>(RECT));</div></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/2009/03/18/calculate-window-size-in-vista/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-02-26 </div>
+			<div class="article-title"><a href="/2009/02/26/base-rules-of-regular-expression/" >正则表达式基本规则</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>这里不介绍正则表达式的基本概念，而是对其规则进行一些整理。网上的分类大<br>多是按照类似的功能来划分，贪婪、非贪婪，前向，后向，乱七八糟的让人很混<br>乱。这里只列出最基本的15中规则。只要掌握这15条规则，认识这些“元字符”，<br>剩下的就是遇到具体的表达式进行具体的分析了。</p>
+<p>一.<br>‘’有两种情况，如果后面紧跟的为，<br>1.) 元字符，或我称之为“正则符”，如’^’，’’，’$’等等。此时，其代<br>表的意义为“取消后面紧跟的正则符的特殊含义”。<br>2.) 其他字符，则’’和其紧跟的另一字符组成“正则符”。如’r’，’t’等比<br>较通用。其他组合，各软件的实现或许会有细微的差别。</p>
+<p>二. <strong>[]</strong><br>含义是匹配中括号中的任意字符。</p>
+<p>三. <strong>[^]</strong><br>含义是匹配中括号中包含的字符以外的任意字符。</p>
+<p>四. <strong>{}</strong><br>一般可以写成这样：{m,n}。含义是匹配表达式前一个字符<br>最少m次，最多n次。<br>其中m或n也可以省略一个，比如，<br>{n}，表示匹配前一个字符n次；<br>{m,}，表示匹配前一个字符只是m次。</p>
+<p>五. <strong>()</strong><br>含义是把括号中的表达式当成一个整体来匹配，同时也可以在以后作为一个独立<br>的表达式来引用。</p>
+<p>六. <strong>^</strong><br>含义是匹配字符串的开始。</p>
+<p>七. <strong>$</strong><br>含义是匹配字符串的结尾。</p>
+<p>八. <strong>?</strong><br>等于{0,1}。</p>
+<p>九. <strong>+</strong><br>等于{1,}。</p>
+<p>十. <strong>*</strong><br>等于{0,}。</p>
+<p>十一. <strong>.</strong><br>含义是匹配除换行符以外的所以字符。</p>
+<p>十二. <strong>|</strong><br>含义是匹配前面的字符或表达式或是匹配后面的字符。</p>
+<p>十三. <strong>a-z</strong><br>含义是匹配所有小写的英文字符。</p>
+<p>十四. <strong>A-Z</strong><br>含义是匹配所有的大写的英文字符。</p>
+<p>十五. <strong>0-9</strong><br>含义是匹配所有的数字。</p>
+
+	
+	</div>
+  <a type="button" href="/2009/02/26/base-rules-of-regular-expression/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-02-20 </div>
+			<div class="article-title"><a href="/2009/02/20/three-scroll-methods-in-emacs/" >Emacs的三种行滚动方式</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>第一种，光标到达屏幕边缘触发滚动。这是Emacs默认的滚动方式。</p>
+<p>第二种，光标粘住某一行(stick the text line)，直到该行离开屏幕，光标停留在屏幕边缘。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> down)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-up</span> (<span class="name">or</span> n <span class="number">1</span>))))</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> up)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-down</span> (<span class="name">or</span> n <span class="number">1</span>))))</div></pre></td></tr></table></figure></p>
+<p>第三种，光标停留在屏幕上的某一行(stick the absolut line)，无论怎么滚动，光标都不会移动。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;; scroll functions</span></div><div class="line">(<span class="name">defun</span> hold-line-scroll-up()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-up</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">defun</span> hold-line-scroll-down()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-down</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">-1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-n"</span>) 'hold-line-scroll-up)</div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-p"</span>) 'hold-line-scroll-down)</div></pre></td></tr></table></figure></p>
+<p>这三种方式，第一种太简单了。第二、三种各有优缺点，所以绑定到不同的按键组合。</p>
+
+	
+	</div>
+  <a type="button" href="/2009/02/20/three-scroll-methods-in-emacs/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-02-20 </div>
+			<div class="article-title"><a href="/2009/02/20/three-scroll-methods-of-emacs/" >Emacs的三种行滚动方式</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>第一种，光标到达屏幕边缘触发滚动。这是Emacs默认的滚动方式。</p>
+<p>第二种，光标粘住某一行(stick the text line)，直到该行离开屏幕，光标停留在屏幕边缘。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> down)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-up</span> (<span class="name">or</span> n <span class="number">1</span>))))</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> up)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-down</span> (<span class="name">or</span> n <span class="number">1</span>))))</div></pre></td></tr></table></figure></p>
+<p>第三种，光标停留在屏幕上的某一行(stick the absolut line)，无论怎么滚动，光标都不会移动。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;; scroll functions</span></div><div class="line">(<span class="name">defun</span> hold-line-scroll-up()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-up</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">defun</span> hold-line-scroll-down()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-down</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">-1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-n"</span>) 'hold-line-scroll-up)</div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-p"</span>) 'hold-line-scroll-down)</div></pre></td></tr></table></figure></p>
+<p>这三种方式，第一种太简单了。第二、三种各有优缺点，所以绑定到不同的按键组合。</p>
+
+	
+	</div>
+  <a type="button" href="/2009/02/20/three-scroll-methods-of-emacs/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-02-19 </div>
+			<div class="article-title"><a href="/2009/02/19/wsizer-control-window-by-keyboard/" >Wsizer: 用键盘控制窗口</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><strong>Wsizer</strong>是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和<a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a>一样，那些功能都来源于日常使用的积累。</p>
+<p>作为第一版，它包含三个部分的功能。</p>
+<p>第一个功能，<em><strong>最小化窗口到系统托盘区</strong></em>。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。<br>操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区。系统托盘区的图标是窗口的主图标。</p>
+<p>第二个功能是<em><strong>显示窗口的大小和位置</strong></em>。当窗口在屏幕上移动的时候，Wsizer在该窗口的中间画出大小和位置信息。用户可以根据需要选择仅仅显示<br>大小、位置或是全部。通过该功能你可以观察到一些有趣的事情，比如在窗口最大化之后，窗口的左上角不是位于(0, 0)坐标。</p>
+<p>最后的功能是<em><strong>热键功能</strong></em>。通过预定义的热键，用户可以对当前窗口进行更多方便快捷的操作。<span style="color: #ff0000;">所有的热键都可以由用户自己更改</span>。<br>热键功能也可以分为三个部分：<br>1.) <em>改变窗口大小到预定义尺寸</em>。比如Wsizer默认提过3个预先定义的尺寸640x480;720x480;800x600，用户就可以通过快捷键’win+[‘和’win+]’<br>轻松控制窗口的大小。当窗口宽度小于640，按一下’win+[‘，窗口之间扩大到720x480；再按，扩大到800x600……；如果按’win+]’，窗口将缩<br>小到定义的大小。</p>
+<p>2.)<em> 改变窗口宽度或高度</em>。这个功能可以让用户单独控制窗口的宽度或是高度。预定于的快捷键为：<br>增加宽度：win+right<br>减少宽度：win+left<br>增加高度：win+down<br>减少高度：win+up</p>
+<p>3.) <em>改变窗口位置</em>。以上的功能仅仅只是对窗口尺寸的控制。通过Wsizer，用户还可以方便的移动窗口。手一会离开键盘去拿鼠标，一会又放下鼠标<br>去敲键盘是比较累人而且没有效率的。因为在用鼠标的时候不想按键盘，我在DeskAngel中加入了映射’Right Button + Left Button’到’Alt + Right<br>Button’的功能，方便控制取词软件；因为在用键盘的时候不想去按鼠标，我在Wsizer中加入了热键移动窗口的功能。预定义的快捷键为：<br>窗口往左移动：win+ctrl+left<br>窗口往右移动：win+ctrl+right<br>窗口往上移动：win+ctrl+up<br>窗口往下移动：win+ctrl+down</p>
+<p>如果你喜欢上述的功能，现在就可以下载试用：<a href="http://wsizer.deskangel.com/download.html" target="_blank" rel="external">http://wsizer.deskangel.com/download.html</a></p>
+<p>任何问题都可以发送邮件或是访问论坛。</p>
+
+	
+	</div>
+  <a type="button" href="/2009/02/19/wsizer-control-window-by-keyboard/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/page/16/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/18/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+		
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+		
+			<li><a href="/categories/News/">News<span>3</span></a></li>
+		
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+		
+			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+		
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+		
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/psi/">psi<span>1</span></a></li>
+		
+			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
+		
+			<li><a href="/tags/virtualbox/">virtualbox<span>1</span></a></li>
+		
+			<li><a href="/tags/symbolink/">symbolink<span>1</span></a></li>
+		
+			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
+		
+			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
+		
+			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
+		
+			<li><a href="/tags/wine/">wine<span>1</span></a></li>
+		
+			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/egret/">egret<span>1</span></a></li>
+		
+			<li><a href="/tags/adjbrightness/">adjbrightness<span>1</span></a></li>
+		
+			<li><a href="/tags/vs/">vs<span>1</span></a></li>
+		
+			<li><a href="/tags/as3/">as3<span>4</span></a></li>
+		
+			<li><a href="/tags/eclipse/">eclipse<span>1</span></a></li>
+		
+			<li><a href="/tags/opensource/">opensource<span>1</span></a></li>
+		
+			<li><a href="/tags/console/">console<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu/">ubuntu<span>4</span></a></li>
+		
+			<li><a href="/tags/win7/">win7<span>1</span></a></li>
+		
+			<li><a href="/tags/eos/">eos<span>1</span></a></li>
+		
+			<li><a href="/tags/puremvc/">puremvc<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>65</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      </li>
+    
+      <li>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

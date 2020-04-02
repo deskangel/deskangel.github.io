@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>docker之程序员系列 （一） | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。
+OSX 下的选择虽然官方提供了一个工具（boot2docker），但是说到底，它其实也是在 OSX 下使用 virtualbox 虚拟了一个 linux 出来，然后再在 linux 下进行 ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="docker之程序员系列 （一）"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> docker之程序员系列 （一）</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><em>因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。</em></p>
+<h4 id="OSX-下的选择"><a href="#OSX-下的选择" class="headerlink" title="OSX 下的选择"></a>OSX 下的选择</h4><p>虽然官方提供了一个工具（<a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">boot2docker</a>），但是说到底，它其实也是在 OSX 下使用 virtualbox 虚拟了一个 linux 出来，然后再在 linux 下进行 docker 操作。那么对于我这样的凡事都希望清晰、简单的人来说，第一选择肯定不会使用这个工具，而是会选择从头开始。如果你和我一样，那么我们需要下面这几样东西：</p>
+<ol>
+<li>virtualbox</li>
+<li>ubuntu server 14.04</li>
+</ol>
+<p>linux 安装完成之后，为了更好的使用，你需要知道几件关于 virtualbox 的事情：</p>
+<ol>
+<li>如何映射端口</li>
+<li>在命令行启动虚拟机</li>
+</ol>
+<p>映射端口在 virtualbox 的gui 界面中就可以简单的完成。下面我贴出命令行启动和保存虚拟机的代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VBoxManage startvm Ubuntu --<span class="built_in">type</span> headless</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VBoxManage controlvm Ubuntu savestate</div></pre></td></tr></table></figure>
+<h4 id="Ubuntu-下-docker-安装和配置"><a href="#Ubuntu-下-docker-安装和配置" class="headerlink" title="Ubuntu 下 docker 安装和配置"></a>Ubuntu 下 docker 安装和配置</h4><p>docker 安装和配置和其他程序没有什么两样。使用<em>apt-get</em>进行安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get udpate</div><div class="line">sudo apt-get install docker.io</div></pre></td></tr></table></figure></p>
+<p>此时 docker 的每次运行都需要加上前缀<strong>sudo</strong>，比较麻烦。可以进行如下的处理：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo groupadd docker</div><div class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</div></pre></td></tr></table></figure></p>
+<p>其中，<em>USER</em>替换成 ubuntu 的当前用户。具体可以参考 <a href="http://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo" target="_blank" rel="external">askubuntu.com</a>。</p>
+<h4 id="第一个-image"><a href="#第一个-image" class="headerlink" title="第一个 image"></a>第一个 image</h4><p>现在我们需要一个 image。这里也有几种选择：</p>
+<ol>
+<li><p>从网上下载。如果网络速度比较快的话，可以使用下面的命令从 docker 官方库中搜索并拉一个 image 下来：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search ubuntu</div><div class="line">docker pull ubuntu</div></pre></td></tr></table></figure>
+</li>
+<li><p>自己做一个</p>
+</li>
+</ol>
+<p>如果你选择自己做一个，也是有多个选择，但这里我选择简单一点，使用 debootstrap 工具。而使用这个工具，不需要一个参数一个参数自己输入，docker 官方提供了一个脚本<code>mkimage.sh</code>。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/docker/docker.git</div><div class="line"><span class="built_in">cd</span> docker</div><div class="line">./mkimage.sh</div></pre></td></tr></table></figure></p>
+<p>按照提示进行即可。</p>
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><p>现在我们有了一个baseimage，在我们启动它之前，我们可以给它打一个 tag。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看当前用于的 image</span></div><div class="line">docker images</div><div class="line"><span class="comment"># 给 image 打 tag，格式为[repository[:tag]]</span></div><div class="line">docker tag &lt;image_id&gt; ubuntu:14.04</div></pre></td></tr></table></figure></p>
+<p>当我们拥有多个 image 之后，可以很容易的通过 tag 来识别各自的用处。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 运行这个 dock</span></div><div class="line">docker run -it --name first ubuntu:14.04</div></pre></td></tr></table></figure></p>
+<p>这样就启动了一个容器，把这个容器命名为 first，并且获得一个控制台。</p>
+<h4 id="保存修改"><a href="#保存修改" class="headerlink" title="保存修改"></a>保存修改</h4><p>容器的一大优势就是很方便的丢弃一些数据和状态。如果你只是临时性的运行一下程序，验证一些想法，容器是非常方便的。当退出并且删除容器之后，所有的数据都会被抛弃。<br>但是当你需要保存数据或是状态，那么需要显示的进行保存。docker 的一些概念和 git 相似，这里也是通过 commit 来保存容器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit first tag</div></pre></td></tr></table></figure></p>
+<p>tag可以是原来的 image 的 tag，也可以是一个新的 tag。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2015/04/29/sftp-user-creat-and-config/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/04/18/Blog-moved/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-04-22 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Software/">Software<span>34</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/docker/">docker<span>3</span></a></li> <li><a href="/tags/linux/">linux<span>2</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

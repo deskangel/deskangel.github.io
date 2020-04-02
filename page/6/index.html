@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 6 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header ">
+  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      dig deeper, do different
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+        <!-- render top articles firstly -->
+        
+        <!-- render other articles -->
+        
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2012-09-23 </div>
+			<div class="article-title"><a href="/2012/09/23/extract-file-from-pkg-in-osx/" >OSX 下提取pkg包中的文件</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>今天犯了个错误，本来想把几个文件夹复制到/usr/share/vim/vim73/目录下合并的，谁知osx下却是替换的操作（系统确实有替换的提示，但是windows下的目录，都是合并的操作:-(）——它真的替换了，结果原来的文件丢失了。</p>
+<p>系统是OSX 10.8，没有从安装盘装回软件的选项，只有自己动手。</p>
+<ol>
+<li><p>翻出安装盘挂载，很明显应该是在Packages目录下的文件；</p>
+</li>
+<li><p>逐个启动里面的pkg文件，但是并不进行下一步，而是选择 <code>File-&gt;Show Files</code> 查看是否所需的包。最后发现是在<code>BSD.pkg</code>里面；</p>
+</li>
+<li><p>启动Terminal，运行命令 <code>pkgutil --expand BSD.pkg ~/wxue/bsd</code>，把文件都提取到bsd目录下；</p>
+</li>
+<li><p>进入<code>~/wxue/bsd</code> 目录，把最大的那个文件（Payload）增加后缀<code>.pax.gz</code>；</p>
+</li>
+<li><p>接下去就简单了，解压即可。</p>
+</li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2012/09/23/extract-file-from-pkg-in-osx/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2012-09-08 </div>
+			<div class="article-title"><a href="/2012/09/08/different-encoding-files-with-python/" >Python处理多个不同编码的文件</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>当需要把多个不同编码的文件合并成一个的时候，unicode是一个很好的选择。但是如果把不同的编码转换成unicode，python并没有提供一个很好的方法。</p>
+<p>Python内部是使用unicode来编码，但要把不同的编码转换成unicode，首先需要知道需要转换的内容是什么编码的。这种设计用来处理转码特定的编码文件没有问题，但是要写一个通用的工具，将是不可能的任务。</p>
+<p>但是对于一些特殊的项目，还是可以做一些事情的。有一个检测文本编码类型的库可以借用：<a href="http://pypi.python.org/pypi/chardet" target="_blank" rel="external">chardet</a> 。</p>
+<p>chardet的使用很简单。它的输入如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;'confidence': 0.62467997951868914, 'encoding': 'GB2312'&#125;</div></pre></td></tr></table></figure></p>
+<p>从它的输出可以看到，这并不是一个非常有效的方法，但是聊胜于无。</p>
+<p>在我的案例里面，是这样使用的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">sf = codecs.open(<span class="string">"xxx.txt"</span>, <span class="string">"w"</span>, <span class="string">"utf-8"</span>)</div><div class="line"></div><div class="line">of1 = codecs.open(f1, <span class="string">"r"</span>)</div><div class="line"></div><div class="line">line1 = of1.read()</div><div class="line">enc = chardet.detect(line1)</div><div class="line"><span class="keyword">print</span> enc</div><div class="line"><span class="keyword">if</span> enc[<span class="string">'encoding'</span>] == <span class="string">'utf-8'</span>:</div><div class="line"> line1 = unicode(line1, <span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"><span class="keyword">else</span>:</div><div class="line"> line1 = line1.decode(<span class="string">'gb18030'</span>)</div><div class="line"></div><div class="line">sf.write(line1)</div></pre></td></tr></table></figure></p>
+<p>对中文需要注意的是， 虽然chardet 能检测出的中文编码是gb2312，但是最好用<span style="color: #ff0000;">gb18030<span style="color: #000000;">来处理它，后者的覆盖会更全一点。</span></span></p>
+
+	
+	</div>
+  <a type="button" href="/2012/09/08/different-encoding-files-with-python/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2012-08-17 </div>
+			<div class="article-title"><a href="/2012/08/17/purmvc-useless/" >pureMVC对项目并无益处</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<ol>
+<li><p>首先，在稍大一点的项目中，pureMVC的消息传递会成为一个比较严重的瓶颈。</p>
+</li>
+<li><p>其次， 使用麻烦。先要定义消息，注册消息，创建command，注册command，分发command，处理command等等。绝大多数情况下，程序需要处理的只是command中携带的数据，而非command本身，以上步骤完全是不必要的。</p>
+</li>
+<li><p>太过于灵活。一个框架，如果既可以这样使用，也可以那样使用，那么用户基本上不知道该怎么使用。pureMVC的消息传递并非只有一条路径。Message和Notification可以在很多地方发起。当一个框架的使用需要用文档而不是代码本身来规范，这个框架的设计通常都是不知所谓的。</p>
+</li>
+</ol>
+<p>这三点是互相影响的。比如，考虑到灵活、强大，必然会导致性能问题，以及使用上的复杂化。 对于框架上的选择，并不推荐使用类似的设计。这种设计模式的框架，和通常的库框架——比如MFC——不同，并不能提供任何功能上的好处，实在是没引入的必要，特别是对那些规模较大的项目。</p>
+
+	
+	</div>
+  <a type="button" href="/2012/08/17/purmvc-useless/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2012-05-30 </div>
+			<div class="article-title"><a href="/2012/05/30/international-language-setting-of-flashbuilder/" >Flash builder项目多国化设置问题</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>在配置多国化的时候，在ActionScript Compiler的Additional Compiler argument中是这样设置的：</p>
+<pre escaped="true" lang="php" line="1">-locale zh_CN</pre>
+其他都没有问题，但是ActionScript Build Path中的Output folder怎么都无法设置。
+
+最后查到的问题是，Additional Compiler argument应该是如下设置的：
+<pre escaped="true" lang="php" line="1">-locale=zh_CN</pre>
+	
+	</div>
+  <a type="button" href="/2012/05/30/international-language-setting-of-flashbuilder/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2012-04-05 </div>
+			<div class="article-title"><a href="/2012/04/05/when-to-trigger-added-to-stage/" >ADDED_TO_STAGE的触发时机</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Adobe的help文件说，这个event的触发时机是：</p>
+<blockquote>
+<p>The following methods trigger this event: DisplayObjectContainer.addChild(), DisplayObjectContainer.addChildAt().</p>
+</blockquote>
+<p>这个很容易给人误导。设想一下有显示对象A、B、C，他们的关系如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">B.addChild(C);</div><div class="line">A.addChild(B);</div><div class="line">stage.addChild(A);</div></pre></td></tr></table></figure>
+<p>当我们在ADDED_TO_STAGE事件，什么时候会触发呢？是在</p>
+<p><code>B.addChild(C);</code>的时候？还是在<br><code>A.addChild(B);</code>的时候？还是在<br><code>stage.addChild(A);</code>的时候？</p>
+<p>答案是在<code>stage.addChild(A);</code>的时候，<code>ADDED_TO_STAGE</code>事件才会逐个触发，这一点从名字上也比较好理解。</p>
+<p>所以，在程序里，一定要<code>Event.ADDED_TO_STAGE</code>和<code>Event.REMOVED_FROM_STAGE</code>同时出现，这样会减少很多Bug。因为如果<code>Event.ADDED_TO_STAGE</code>没有触发，<code>Event.REMOVED_FROM_STAGE</code>也是铁定不会触发的。</p>
+<p><em>有一种错误的使用方法是，把事件注册写在构造函数里面，然后在<code>Event.REMOVED_FROM_STAGE</code>事件中移除注册的事件，其实很可能事件移除是不会被调用的。切记！</em></p>
+
+	
+	</div>
+  <a type="button" href="/2012/04/05/when-to-trigger-added-to-stage/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/page/5/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/7/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+		
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+		
+			<li><a href="/categories/News/">News<span>3</span></a></li>
+		
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+		
+			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+		
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+		
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/vs/">vs<span>1</span></a></li>
+		
+			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
+		
+			<li><a href="/tags/vista/">vista<span>1</span></a></li>
+		
+			<li><a href="/tags/eclipse/">eclipse<span>1</span></a></li>
+		
+			<li><a href="/tags/opensource/">opensource<span>1</span></a></li>
+		
+			<li><a href="/tags/deskangel/">deskangel<span>3</span></a></li>
+		
+			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
+		
+			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
+		
+			<li><a href="/tags/wine/">wine<span>1</span></a></li>
+		
+			<li><a href="/tags/egret/">egret<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/tags/win7/">win7<span>1</span></a></li>
+		
+			<li><a href="/tags/wsizer/">wsizer<span>2</span></a></li>
+		
+			<li><a href="/tags/psi/">psi<span>1</span></a></li>
+		
+			<li><a href="/tags/regular-expression/">regular expression<span>2</span></a></li>
+		
+			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
+		
+			<li><a href="/tags/lua/">lua<span>3</span></a></li>
+		
+			<li><a href="/tags/english/">english<span>1</span></a></li>
+		
+			<li><a href="/tags/ooLauncher/">ooLauncher<span>1</span></a></li>
+		
+			<li><a href="/tags/jenkins/">jenkins<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>65</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      </li>
+    
+      <li>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

@@ -1,0 +1,543 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 2 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header ">
+  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      dig deeper, do different
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+        <!-- render top articles firstly -->
+        
+        <!-- render other articles -->
+        
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2015-09-20 </div>
+			<div class="article-title"><a href="/2015/09/20/phpstorm-remote-debug-with-xdebug/" >phpStorm remote debug with xdebug</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>因为使用了 docker 进行了环境隔离，所以需要对 phpStorm 进行远程调试的配置。</p>
+<p>网上有一些教程，不是太复杂就是已经过时。经过摸索，一下是完整的配置流程。</p>
+<p>版本： ubuntu 14.04 LTS, phpStorm 9, php5-fpm</p>
+<p>首先是服务器端的设置：</p>
+<ol>
+<li><p>安装xdebug </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install php5-xdebug</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 xdebug </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php5/fpm/conf.d/20-xdebug.ini</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">zend_extension=xdebug.so</div><div class="line">xdebug.remote_mode=&quot;req&quot;</div><div class="line">xdebug.idekey=&quot;PHPSTORM&quot;</div><div class="line">xdebug.remote_enable=1</div><div class="line">xdebug.remote_connect_back=1</div></pre></td></tr></table></figure></p>
+<p>上面的设置也可以直接放在 php.ini 中。</p>
+<p>接下来进行客户端的设置：</p>
+<ol>
+<li>点击phpStorm菜单<code>Run -&gt; Start Listening for PHP Debug Connections</code></li>
+<li>设置断点</li>
+<li>安装 xdebug-helper  Chrome 浏览器插件</li>
+<li>打开要调试的网页，激活地址栏的 xdebug-helper</li>
+<li>如果一切都设置正确，在 phpStorm 会弹出对话框进行文件映射等设置。</li>
+</ol>
+<p>这样就可以了。</p>
+<p>PS：<br>如果在 phpStorm 中创建 Remote debug 配置，也是可以收到 debug 断点的。</p>
+<p>如果是apache2，xdebug 的默认配置文件会出现在 <code>/etc/php5modes-available/xdebug.ini</code></p>
+<p><strong>UPDATE</strong><br>如果web 服务器是在<code>Docker for Mac</code>下使用的话，<code>xdebug.remote_connect_back=1</code>会不起作用，因为这里的 docker container 接受到的 ip 都是来自<code>172.17.0.1</code>，所以需要显式的指定 ip 和端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">zend_extension=xdebug.so</div><div class="line">xdebug.remote_mode=&quot;req&quot;</div><div class="line">xdebug.idekey=&quot;PHPSTORM&quot;</div><div class="line">xdebug.remote_enable=1</div><div class="line">xdebug.remote_host=&quot;192.168.1.22&quot;</div><div class="line">xdebug.remote_port=9000</div><div class="line">xdebug.remote_connect_back=0</div></pre></td></tr></table></figure></p>
+<p>这里的嗯<code>Docker for Mac</code>的版本是 v1.12，之后是否会修复这个问题，不得而知。<br>————2016.08.21</p>
+
+	
+	</div>
+  <a type="button" href="/2015/09/20/phpstorm-remote-debug-with-xdebug/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2015-09-13 </div>
+			<div class="article-title"><a href="/2015/09/13/osx-virtualbox-shared-folder-permission-issue/" >搞定 osx 下 virtualbox 中的 docker container 访问共享文件夹的权限问题</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>案例是这样的：</p>
+<ul>
+<li>有一台 osx 系统</li>
+<li>安装了 virtualbox 虚拟机</li>
+<li>在虚拟机里面装 Linux</li>
+<li>在 Linux 里面装了 docker</li>
+<li>用 docker 装了 Ubuntu 的 image</li>
+<li>在 Ubuntu 的 container 中装了 nginx</li>
+</ul>
+<p>现在把OSX 下的一个 web 开发文件夹共享给 virtualbox下的 Linux，然后在通过 docker 映射到 container 下，nginx 的 root 目录指向这个文件夹，提供 web 服务。</p>
+<p>但是问题来了，nginx 会报错说“permission denied”。在 container 下可以很明显的看到，共享文件夹中的内容是存放在了<code>999</code>这个 group 中。</p>
+<p>分析一下原因，根源在于 virtualbox 从某一个版本开始，无法修改 osx 共享目录的权限了。可以看到，在 virtualbox 下的 Linux 中，共享文件夹的权限在一个叫做<code>vboxsf</code>的 group 下面。</p>
+<p>以下是解决方法：</p>
+<ul>
+<li>在 container 下创建一个叫做<code>vboxsf</code>的 group： <code>groupadd vboxsf</code></li>
+<li>修改这个 group 的 id 为999：<code>vim /etc/group</code></li>
+<li>把 www-data 这个用户加入到<code>vboxsf</code>中：<code>usermod -a -G vboxsf www-data</code></li>
+<li>重启 nginx：<code>service nginx restart</code></li>
+</ul>
+
+	
+	</div>
+  <a type="button" href="/2015/09/13/osx-virtualbox-shared-folder-permission-issue/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2015-06-06 </div>
+			<div class="article-title"><a href="/2015/06/06/java-compress-javascript-uncompress/" >java压缩，javascript 解压缩总结</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>这里描述如何在 client 端使用 javascript 处理通过 ajax 调用返回的压缩数据。服务器端使用java 的<code>DeflaterOutputStream</code>来进行数据的压缩。</p>
+<p>最早尝试使用<code>jquery</code>的<code>$.ajax</code>方法来做 ajax 调用，但是其返回的数据都是字符串类型的，部分字节被强制转换了，导致这部分数据无法正确的解码。</p>
+<p><em>如果仔细观察，浏览器的开发者模式中<code>Response</code>页面得到的数据格式是正常的，但是在 <code>success: function (data)</code>中数据是不正确的。</em></p>
+<h4 id="接收字节流而不是字符串"><a href="#接收字节流而不是字符串" class="headerlink" title="接收字节流而不是字符串"></a>接收字节流而不是字符串</h4><p>所以，如果需要 ajax 能够接收字节流而仅仅是字符串，需要使用 <code>XMLHttpRequest</code>自己来实现，v1和 v2都可以，下面给出的代码使用 v2的特性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxRequest</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    request.open(data.type, data.url, <span class="literal">true</span>);</div><div class="line">    request.responseType = <span class="string">"arraybuffer"</span>;</div><div class="line">    request.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded; charset=UTF-8"</span>);</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">            data.success(request.response);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    request.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.error) &#123;</div><div class="line">            data.error(request.response);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    request.send(data.data);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用的代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> szActionUrl = http_host + path;</div><div class="line"><span class="keyword">var</span> content = <span class="string">"userName="</span> + userName + <span class="string">"&amp;password="</span> + password;</div><div class="line">ajaxRequest(&#123;</div><div class="line">    <span class="attr">url</span>: szActionUrl,</div><div class="line">    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">    <span class="attr">data</span>: content,</div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"success"</span>);</div><div class="line">        decodeToJson(data);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"failed"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h4><p>解压缩使用的是 <a href="https://github.com/imaya/zlib.js" target="_blank" rel="external">zlib</a>，在使用前先加入引用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"JavaScript"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"zlip/inflate.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>javascript 的代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">uintToString</span>(<span class="params">uintArray</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> encodedString = <span class="built_in">String</span>.fromCharCode.apply(<span class="literal">null</span>, uintArray);</div><div class="line">    <span class="keyword">var</span> decodedString = <span class="built_in">decodeURIComponent</span>(<span class="built_in">escape</span>(encodedString));</div><div class="line">    <span class="keyword">return</span> decodedString;</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">decodeToJson</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> uintArray = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> inflate = <span class="keyword">new</span> Zlib.Inflate(uintArray);</div><div class="line">    <span class="keyword">var</span> plainArray = inflate.decompress();</div><div class="line"></div><div class="line">    <span class="keyword">var</span> s = uintToString(plainArray);</div><div class="line">    <span class="built_in">console</span>.log(s);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> result = <span class="built_in">JSON</span>.parse(s);</div><div class="line">    <span class="keyword">return</span> result;      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中的<code>uintToString</code>是用来把 <code>Uint8Array</code>转换成字符串，<code>decodeURIComponent</code>可以正确的处理 utf-8编码的字符。</p>
+
+	
+	</div>
+  <a type="button" href="/2015/06/06/java-compress-javascript-uncompress/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2015-04-29 </div>
+			<div class="article-title"><a href="/2015/04/29/sftp-user-creat-and-config/" >sftp用户创建与设置</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>环境：ubuntu server 14.04<br>目的：用户只能通过 sftp 访问指定目录，并且不能登录 shell</p>
+<p>网上有很多这方面的介绍，最有价值的是<a href="http://solderintheveins.co.uk/2011/03/ubuntu-sftp-only-account-how-to/" target="_blank" rel="external">这里</a>。但是按照这篇文档还是遇到了两个坑：</p>
+<ol>
+<li>配置没有加载</li>
+<li>sshd 无法正常启动</li>
+</ol>
+<p>这并不能说是参考文章，只是它没有提到而已。解决方法在下面会以<em>斜体</em>的字体表明。</p>
+<p>下面是需要的步骤；</p>
+<h5 id="创建用户组"><a href="#创建用户组" class="headerlink" title="创建用户组"></a>创建用户组</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo addgroup sftponly</div></pre></td></tr></table></figure>
+<p>之后将通过用户组来控制权限，所以创建一个新的用户组是有必要的。</p>
+<h5 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo useradd -d /home/bob -s /usr/lib/sftp-server -M -N -g sftponly bob</div></pre></td></tr></table></figure>
+<p>把新用户 bob 加入到 sftponly 这个用户组。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo passwd bob</div></pre></td></tr></table></figure></p>
+<p>为新用户 bob 设置密码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo "/usr/lib/sftp-server" &gt;&gt; /etc/shells</div></pre></td></tr></table></figure>
+<p>把 sftp-server 作为一个 shell 加入到 shell 列表。</p>
+<h5 id="创建用户目录"><a href="#创建用户目录" class="headerlink" title="创建用户目录"></a>创建用户目录</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /home/bob/uploads</div><div class="line">sudo chown bob:sftponly /home/bob/uploads</div></pre></td></tr></table></figure>
+<p>为新用户创建 home 目录和 sftp 目录，并设置所有权。<br><em>需要注意的一点是，/home/bob 目录的 owner 需要是 root，权限最好是755</em></p>
+<h5 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
+<p>打开 sshd_config 配置文件，把 <code>Subsystem sftp /usr/lib/openssh/sftp-server</code> 注释掉，在下面加上 <code>Subsystem sftp internal-sftp</code>。</p>
+<p>在<em>最后一行</em>添加上：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Match group sftponly</div><div class="line">    ChrootDirectory %h</div><div class="line">    X11Forwarding no</div><div class="line">    AllowTcpForwarding no</div><div class="line">    ForceCommand internal-sftp</div></pre></td></tr></table></figure></p>
+<p><em>注意：上面的代码一定要加在最有一行，否则 sshd 会无法启动</em></p>
+<h5 id="重启-sshd"><a href="#重启-sshd" class="headerlink" title="重启 sshd"></a>重启 sshd</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service ssh restart</div></pre></td></tr></table></figure>
+<p><em>注意：参考中使用<code>sudo /etc/init.d/ssh restart</code>来重启 sshd，没有任何的效果。</em></p>
+<p>当使用 service 来重新启动的时候，如果正常会显示：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh stop/waiting</div><div class="line">ssh start/running, process 12760</div></pre></td></tr></table></figure></p>
+<p>如果出错，则只会显示<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh stop/waiting</div><div class="line">ssh start/running</div></pre></td></tr></table></figure></p>
+<p>`</p>
+
+	
+	</div>
+  <a type="button" href="/2015/04/29/sftp-user-creat-and-config/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2015-04-22 </div>
+			<div class="article-title"><a href="/2015/04/22/docker-for-programmer/" >docker之程序员系列 （一）</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><em>因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。</em></p>
+<h4 id="OSX-下的选择"><a href="#OSX-下的选择" class="headerlink" title="OSX 下的选择"></a>OSX 下的选择</h4><p>虽然官方提供了一个工具（<a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">boot2docker</a>），但是说到底，它其实也是在 OSX 下使用 virtualbox 虚拟了一个 linux 出来，然后再在 linux 下进行 docker 操作。那么对于我这样的凡事都希望清晰、简单的人来说，第一选择肯定不会使用这个工具，而是会选择从头开始。如果你和我一样，那么我们需要下面这几样东西：</p>
+<ol>
+<li>virtualbox</li>
+<li>ubuntu server 14.04</li>
+</ol>
+<p>linux 安装完成之后，为了更好的使用，你需要知道几件关于 virtualbox 的事情：</p>
+<ol>
+<li>如何映射端口</li>
+<li>在命令行启动虚拟机</li>
+</ol>
+<p>映射端口在 virtualbox 的gui 界面中就可以简单的完成。下面我贴出命令行启动和保存虚拟机的代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VBoxManage startvm Ubuntu --<span class="built_in">type</span> headless</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VBoxManage controlvm Ubuntu savestate</div></pre></td></tr></table></figure>
+<h4 id="Ubuntu-下-docker-安装和配置"><a href="#Ubuntu-下-docker-安装和配置" class="headerlink" title="Ubuntu 下 docker 安装和配置"></a>Ubuntu 下 docker 安装和配置</h4><p>docker 安装和配置和其他程序没有什么两样。使用<em>apt-get</em>进行安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get udpate</div><div class="line">sudo apt-get install docker.io</div></pre></td></tr></table></figure></p>
+<p>此时 docker 的每次运行都需要加上前缀<strong>sudo</strong>，比较麻烦。可以进行如下的处理：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo groupadd docker</div><div class="line">sudo gpasswd -a <span class="variable">$&#123;USER&#125;</span> docker</div></pre></td></tr></table></figure></p>
+<p>其中，<em>USER</em>替换成 ubuntu 的当前用户。具体可以参考 <a href="http://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo" target="_blank" rel="external">askubuntu.com</a>。</p>
+<h4 id="第一个-image"><a href="#第一个-image" class="headerlink" title="第一个 image"></a>第一个 image</h4><p>现在我们需要一个 image。这里也有几种选择：</p>
+<ol>
+<li><p>从网上下载。如果网络速度比较快的话，可以使用下面的命令从 docker 官方库中搜索并拉一个 image 下来：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search ubuntu</div><div class="line">docker pull ubuntu</div></pre></td></tr></table></figure>
+</li>
+<li><p>自己做一个</p>
+</li>
+</ol>
+<p>如果你选择自己做一个，也是有多个选择，但这里我选择简单一点，使用 debootstrap 工具。而使用这个工具，不需要一个参数一个参数自己输入，docker 官方提供了一个脚本<code>mkimage.sh</code>。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/docker/docker.git</div><div class="line"><span class="built_in">cd</span> docker</div><div class="line">./mkimage.sh</div></pre></td></tr></table></figure></p>
+<p>按照提示进行即可。</p>
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><p>现在我们有了一个baseimage，在我们启动它之前，我们可以给它打一个 tag。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看当前用于的 image</span></div><div class="line">docker images</div><div class="line"><span class="comment"># 给 image 打 tag，格式为[repository[:tag]]</span></div><div class="line">docker tag &lt;image_id&gt; ubuntu:14.04</div></pre></td></tr></table></figure></p>
+<p>当我们拥有多个 image 之后，可以很容易的通过 tag 来识别各自的用处。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 运行这个 dock</span></div><div class="line">docker run -it --name first ubuntu:14.04</div></pre></td></tr></table></figure></p>
+<p>这样就启动了一个容器，把这个容器命名为 first，并且获得一个控制台。</p>
+<h4 id="保存修改"><a href="#保存修改" class="headerlink" title="保存修改"></a>保存修改</h4><p>容器的一大优势就是很方便的丢弃一些数据和状态。如果你只是临时性的运行一下程序，验证一些想法，容器是非常方便的。当退出并且删除容器之后，所有的数据都会被抛弃。<br>但是当你需要保存数据或是状态，那么需要显示的进行保存。docker 的一些概念和 git 相似，这里也是通过 commit 来保存容器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit first tag</div></pre></td></tr></table></figure></p>
+<p>tag可以是原来的 image 的 tag，也可以是一个新的 tag。</p>
+
+	
+	</div>
+  <a type="button" href="/2015/04/22/docker-for-programmer/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/3/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+		
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+		
+			<li><a href="/categories/News/">News<span>3</span></a></li>
+		
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+		
+			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+		
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+		
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/deskangel/">deskangel<span>3</span></a></li>
+		
+			<li><a href="/tags/dual-view/">dual view<span>1</span></a></li>
+		
+			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
+		
+			<li><a href="/tags/speedcommander/">speedcommander<span>1</span></a></li>
+		
+			<li><a href="/tags/eclipse/">eclipse<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>3</span></a></li>
+		
+			<li><a href="/tags/vs/">vs<span>1</span></a></li>
+		
+			<li><a href="/tags/android/">android<span>10</span></a></li>
+		
+			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
+		
+			<li><a href="/tags/daysanddate/">daysanddate<span>4</span></a></li>
+		
+			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
+		
+			<li><a href="/tags/java/">java<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+		
+			<li><a href="/tags/flash-builder/">flash builder<span>2</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/algorithm/">algorithm<span>3</span></a></li>
+		
+			<li><a href="/tags/ubuntu/">ubuntu<span>4</span></a></li>
+		
+			<li><a href="/tags/proxy/">proxy<span>1</span></a></li>
+		
+			<li><a href="/tags/english/">english<span>1</span></a></li>
+		
+			<li><a href="/tags/ooLauncher/">ooLauncher<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>65</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      </li>
+    
+      <li>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

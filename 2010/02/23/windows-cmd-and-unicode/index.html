@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Windows命令行窗口与Unicode | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="一.
+还记得刚开始学习C语言的时候，最早接触的 runtime 函数，就是 printf，这应该是一个最基础的函数了。但是这样的一个函数，即使在VC2005和Windows 7下面，对输出Unicode字符这样的任务，依然会给程序员带了麻烦。
+下面的代码是一个Unicode版本的测试程序：12345">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Windows命令行窗口与Unicode"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> Windows命令行窗口与Unicode</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>一.</p>
+<p>还记得刚开始学习C语言的时候，最早接触的 runtime 函数，就是 printf，这应该是一个最基础的函数了。<br>但是这样的一个函数，即使在VC2005和Windows 7下面，对输出Unicode字符这样的任务，依然会给程序员带了麻烦。</p>
+<p>下面的代码是一个Unicode版本的测试程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wmain</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">wchar_t</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">    wprintf(<span class="string">L"测试"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看着完全没有问题，但是在console中就是没有任何的输出。</p>
+<p>二.</p>
+<p>单步进入<code>wprintf</code>，发现如下代码：<br><code>retval = _woutput_l(stdout,format,NULL,arglist);</code><br>其中，宏<code>stdout</code>为标准输出，定义如下：<br><code>#define stdout (&amp;__iob_func()[1])</code><br><code>__iob_func</code>的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* These functions are for enabling STATIC_CPPLIB functionality */</span></div><div class="line">_CRTIMP FILE * __cdecl __iob_func(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> _iob;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>_iob是一个FILE类型的数组，第0个元素为stdin，第1个元素为stdout，第3个为stderr。<br>而FILE类型是一个结构体：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> &#123;</span></div><div class="line">        <span class="keyword">char</span> *_ptr;</div><div class="line">        <span class="keyword">int</span>   _cnt;</div><div class="line">        <span class="keyword">char</span> *_base;</div><div class="line">        <span class="keyword">int</span>   _flag;</div><div class="line">        <span class="keyword">int</span>   _file;</div><div class="line">        <span class="keyword">int</span>   _charbuf;</div><div class="line">        <span class="keyword">int</span>   _bufsiz;</div><div class="line">        <span class="keyword">char</span> *_tmpfname;</div><div class="line">        &#125;;</div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">iobuf</span> <span class="title">FILE</span>;</span></div></pre></td></tr></table></figure></p>
+<p>_iob在调试器中的信息 （点击查看原图）:<br><a href="http://www.deskangel.com/wordpress/wp-content/uploads/2010/02/sc_v22281_13.png" target="_blank" rel="external"><img src="http://www.deskangel.com/wordpress/wp-content/uploads/2010/02/sc_v22281_13.png" alt="information of _iob" title="_iob在调试器中的信息"></a></p>
+<p>从图中可以看出，std本身就不支持UNICODE。</p>
+<p>三.</p>
+<p>我们还可以更深入一点，进入<code>_woutput_l</code>函数，会发现该函数调用<br><code>WRITE_CHAR(ch, &amp;charsout);</code> 宏逐个输出字符。</p>
+<p>该宏的定义和<code>_woutput_l</code>在同一个文件（output.c）中找到：<br><code>#define WRITE_CHAR(ch, pnw)         write_char(ch, stream, pnw)</code><br>其中ch为第一个字符，“测”；stream为<code>_woutput_l</code>的第一个参数，就是stdout。</p>
+<p>四.</p>
+<p><code>write_char</code>的代码很简单：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">LOCAL(<span class="keyword">void</span>) write_char (</div><div class="line">    _TCHAR ch,</div><div class="line">    FILE *f,</div><div class="line">    <span class="keyword">int</span> *pnumwritten</div><div class="line">    )</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ( (f-&gt;_flag &amp; _IOSTRG) &amp;&amp; f-&gt;_base == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        ++(*pnumwritten);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _UNICODE</span></div><div class="line">    <span class="keyword">if</span> (_putwc_nolock(ch, f) == WEOF)</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span>  <span class="comment">/* _UNICODE */</span></span></div><div class="line">    <span class="keyword">if</span> (_putc_nolock(ch, f) == EOF)</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">/* _UNICODE */</span></span></div><div class="line">        *pnumwritten = <span class="number">-1</span>;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        ++(*pnumwritten);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>五.</p>
+<p>进入<code>_fputwc_nolock</code>（即<code>_putwc_nolock</code>）。该函数的声明为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">wint_t</span> __cdecl _fputwc_nolock (</div><div class="line">        <span class="keyword">wchar_t</span> ch,</div><div class="line">        FILE *str</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>函数中对str有三个判断，<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (_textmode_safe(_fileno(str)) == __IOINFO_TM_UTF16LE)</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (_textmode_safe(_fileno(str)) == __IOINFO_TM_UTF8)</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> ((_osfile_safe(_fileno(str)) &amp; FTEXT))</div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第一第二个判断很明显，判断目标文件是否为UTF16 little endian编码和UTF8编码。<br>对stdout，这里会进入第三个判断，其中FTEXT表示文件句柄为文本模式。<br>在该条件下，函数接着调用<code>wctomb_s</code>:<br><code>wctomb_s(&amp;size, mbc, MB_LEN_MAX, ch)</code><br>做编码转换，即试图把wide char的ch转换为multi-byte的mbc。</p>
+<p>六.</p>
+<p><code>wctomb_s</code>调用<code>_wctomb_s_l</code>，仅仅把locale参数设为NULL：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="keyword">errno_t</span> __<span class="function">cdecl <span class="title">wctomb_s</span> <span class="params">(</span></span></div><div class="line">        <span class="keyword">int</span> *pRetValue,</div><div class="line">        <span class="keyword">char</span> *dst,</div><div class="line">        <span class="keyword">size_t</span> sizeInBytes,</div><div class="line">        <span class="keyword">wchar_t</span> wchar</div><div class="line">        )</div><div class="line">&#123;</div><div class="line">        <span class="keyword">return</span> _wctomb_s_l(pRetValue, dst, sizeInBytes, wchar, <span class="literal">NULL</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>七.</p>
+<p><code>_wctomb_s_l</code>函数是<code>wctomb_s</code>的locale版，根据locale做不同的工作。声明如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="keyword">int</span> __cdecl _wctomb_s_l (</div><div class="line">        <span class="keyword">int</span> *pRetValue,</div><div class="line">        <span class="keyword">char</span> *dst,</div><div class="line">        <span class="keyword">size_t</span> sizeInBytes,</div><div class="line">        <span class="keyword">wchar_t</span> wchar,</div><div class="line">        <span class="keyword">_locale_t</span> plocinfo</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>函数对locale有一个判断，<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( _loc_update.GetLocaleT()-&gt;locinfo-&gt;lc_handle[LC_CTYPE] == _CLOCALEHANDLE )</div><div class="line">&#123;</div><div class="line">        <span class="keyword">if</span> ( wchar &gt; <span class="number">255</span> )  <span class="comment">/* validate high byte */</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (dst != <span class="literal">NULL</span> &amp;&amp; sizeInBytes &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">memset</span>(dst, <span class="number">0</span>, sizeInBytes);</div><div class="line">            &#125;</div><div class="line">            errno = EILSEQ;</div><div class="line">            <span class="keyword">return</span> errno;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (dst != <span class="literal">NULL</span>)</div><div class="line">        &#123;</div><div class="line">            _VALIDATE_RETURN_ERRCODE(sizeInBytes &gt; <span class="number">0</span>, ERANGE);</div><div class="line">            *dst = (<span class="keyword">char</span>) wchar;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (pRetValue != <span class="literal">NULL</span>)</div><div class="line">        &#123;</div><div class="line">            *pRetValue = <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果locale是C locale的话，那么当wchar大于255，即超出ANSI范围时，不做转换，直接返回；<br>小于255，即为ANSI字符时，则转换为char类型。</p>
+<p>如果不是c locale，则调用<code>WideCharToMultiByte</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( ((size = WideCharToMultiByte( _loc_update.GetLocaleT()-&gt;locinfo-&gt;lc_codepage,</div><div class="line">                                   <span class="number">0</span>,</div><div class="line">                                   &amp;wchar,</div><div class="line">                                   <span class="number">1</span>,</div><div class="line">                                   dst,</div><div class="line">                                   (<span class="keyword">int</span>)sizeInBytes,</div><div class="line">                                   <span class="literal">NULL</span>,</div><div class="line">                                   &amp;defused) ) == <span class="number">0</span>) ||</div><div class="line">     (defused) )</div></pre></td></tr></table></figure></p>
+<p>测试代码没有设置locale，所以判断wchar，自然大于255，函数直接返回。层层返回，没有调用任何实际的输出。</p>
+<p>八.</p>
+<p>稍稍修改一下测试程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wmain</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">wchar_t</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">    wprintf(<span class="string">L"%s"</span>, <span class="string">L"测试"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出的是两个问号。单步跟踪，我们可以发现，在<code>_woutput_l</code>中，没有直接调用<code>WRITE_CHAR</code>，而是调用<code>WRITE_STRING</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">WRITE_STRING(text.wz, textlen, &amp;charsout);</div><div class="line"></div><div class="line">WRITE_STRING的代码：</div><div class="line">LOCAL(<span class="keyword">void</span>) write_string (</div><div class="line">    _TCHAR *<span class="built_in">string</span>,</div><div class="line">    <span class="keyword">int</span> len,</div><div class="line">    FILE *f,</div><div class="line">    <span class="keyword">int</span> *pnumwritten</div><div class="line">    )</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ( (f-&gt;_flag &amp; _IOSTRG) &amp;&amp; f-&gt;_base == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        (*pnumwritten) += len;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (len-- &gt; <span class="number">0</span>) &#123;</div><div class="line">        write_char(*<span class="built_in">string</span>++, f, pnumwritten);</div><div class="line">        <span class="keyword">if</span> (*pnumwritten == <span class="number">-1</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (errno == EILSEQ)</div><div class="line">                write_char(_T(<span class="string">'?'</span>), f, pnumwritten);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在write_char写入Unicode字符失败后，就会写入一个”?”，所以输出的会是问号。</p>
+<p>九.</p>
+<p>如何输出Unicode呢？有两个方法：</p>
+<ol>
+<li><p>设置正确的locale。<br>我们看到整个过程最后会调用<code>WideCharToMultiByte</code>把Unicode根据locale转换成multiple byte。<br>这可以解决一点问题，但不完美。除了绕了个圈，又把wide char转换成multiple byte之外，还无法解决多种语言混合输出的问题。<br>比如，无法同时输出俄文和中文。</p>
+</li>
+<li><p>使用<code>WriteConsole</code>。<br>如下代码可以完美的解决Unicode的问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">wchar_t</span> szText[] = <span class="string">L"测试"</span>;</div><div class="line"></div><div class="line">HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);</div><div class="line">WriteConsole(hStdOutput, szText, (DWORD)wcslen(szText), <span class="literal">NULL</span>, <span class="literal">NULL</span>);</div></pre></td></tr></table></figure></li>
+</ol>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2010/02/24/deskangel-convert-path-text-to-paste-able-object/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2010/02/20/how-to-design-class/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2010-02-23 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/unicode/">unicode<span>1</span></a></li> <li><a href="/tags/console/">console<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

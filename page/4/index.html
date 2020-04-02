@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header ">
+  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      dig deeper, do different
+</div>    
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+        <!-- render top articles firstly -->
+        
+        <!-- render other articles -->
+        
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2013-09-26 </div>
+			<div class="article-title"><a href="/2013/09/26/Keyboard-backlight-controller-Open-Source/" >&#39;Keyboard backlight controller&#39; Open Source</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>All the source code have been put into github:<a href="https://github.com/fantastxmw/kbLight" target="_blank" rel="external">https://github.com/fantastxmw/kbLight</a></p>
+<p>Hope you would like it!</p>
+
+	
+	</div>
+  <a type="button" href="/2013/09/26/Keyboard-backlight-controller-Open-Source/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2013-05-21 </div>
+			<div class="article-title"><a href="/2013/05/21/tolua++-namespace-issue/" >tolua++:namespace导致的问题</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>在用 <code>cocos2d-x</code> 的时候，可以把自己的类和 <code>cocos2d-x</code> 的类混在一起，即简单的把自己需要导出的类放到 <code>cocos2d</code>的 pkg 文件中。</p>
+<p>网上也有推荐这样的做法，但是这样虽然简单，却让人难以接受。</p>
+<p>我选择了比较麻烦的一种，就是自己重新定义 pkg 文件，并且导出了一个独立的cpp文件。摸过一些简单的坑之后，还算比较顺利，只是在pkg文件中没有注意处理 <code>cocos2d</code> 的 <code>namespace</code>，导致了在lua脚本中，自定义类中获得的比如 <code>CCNode</code> 之类的对象后无法访问其成员函数而已。</p>
+<p>具体的原因，因为在cocos2d-x的pkg中，它是删除了namespace的，所以tolua++生成的代码是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tolua_usertype(tolua_S,<span class="string">"CCNode"</span>);</div></pre></td></tr></table></figure>
+<p>而在我的pkg文件中，由于没有处理namespace，生成的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tolua_usertype(tolua_S,<span class="string">"cocos::CCNode"</span>);</div></pre></td></tr></table></figure>
+<p>这就导致了同一个类在lua脚本中被认为是两个不同的对象。</p>
+<p>解决的方法很简单，去掉namespace即可。</p>
+
+	
+	</div>
+  <a type="button" href="/2013/05/21/tolua++-namespace-issue/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2013-04-19 </div>
+			<div class="article-title"><a href="/2013/04/19/pointer-vector-initialization/" >指针vector初始化</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>C++中，在申明的时候初始化一个vector的时候可以指明vector的大小和默认值。但是如果用NULL来初始化指针的时候，会遇到问题。</p>
+<p><pre class="lang:c++ decode:true ">class A;<br>vector&lt;A <em>&gt; vtTest&lt;2, NULL&gt;;</em></pre><br>在XCode中报错：说不能把int型赋值给A。原因就是NULL本身是不带具体的类型的，默认会被认为是一个int类型。</p>
+<p>所以，解决的方法就是类型强制转换。</p>
+
+	
+	</div>
+  <a type="button" href="/2013/04/19/pointer-vector-initialization/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2013-03-20 </div>
+			<div class="article-title"><a href="/2013/03/20/ubuntu-jenkins/" >Ubuntu下部署Jenkins的一些要点</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Jenkins是一个开源的持续集成的工具，安装什么的都没有问题，非常简单。但是在配置的时候还是遇到了几个问题：</p>
+<ol>
+<li><p>配置权限管理的时候，一定要先创建一个用户之后再进行。如果没有创建用户，又去掉了”Allow users to sign up”的勾，那么只能去编辑config.xml了。</p>
+</li>
+<li><p>jenkins用户需要提升到root权限来进行一些操作。先把他加入到root group，再编辑/etc/sudoers设在sudo的时候不需要密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo gpasswd -a jenkins root</div><div class="line">$ sudo vim /etc/sudoers</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在sudoers中加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jenkins ALL=NOPASSWD:ALL</div></pre></td></tr></table></figure></p>
+<p>当然，也可以使用expect工具来提升脚本执行时的权限</p>
+<ol>
+<li>多个命令执行的时候，无法正确的反映执行的状态，往往其中已经出现错误了，jenkins还是返回成功。这个问题可以通过检查每个命令的返回值来处理，比如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">sudo make clean</div><div class="line">if [ $? -ne 0 ]; then</div><div class="line">    exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">sudo make</div><div class="line">if [ $? -ne 0 ]; then</div><div class="line">    exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">sudo make install</div><div class="line">if [ $? -ne 0 ]; then</div><div class="line">    exit 1</div><div class="line">fi</div></pre></td></tr></table></figure></li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/2013/03/20/ubuntu-jenkins/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2013-03-18 </div>
+			<div class="article-title"><a href="/2013/03/18/ubuntun-install-git/" >Ubuntun下GIT服务器的建立</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>使用环境：小团队</p>
+<h2 id="安装openssh-server-git"><a href="#安装openssh-server-git" class="headerlink" title="安装openssh-server, git"></a>安装openssh-server, git</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div><div class="line">sudo apt-get install openssh-server</div></pre></td></tr></table></figure>
+<h2 id="添加git账号"><a href="#添加git账号" class="headerlink" title="添加git账号"></a>添加git账号</h2><p>这儿方案中，所有的人共享一个账号，即git账号：<br><code>sudo adduser git</code><br>按照提示设置账号内容，密码等。</p>
+<h2 id="配置登陆认证"><a href="#配置登陆认证" class="headerlink" title="配置登陆认证"></a>配置登陆认证</h2><p>使用公钥来避免每次都需要输入密码的麻烦。可以给每个用户配置一个不同的公钥。</p>
+<p>这里直接在Ubuntu上为用户生成公钥-密钥对，把公钥加入认证文件，密钥发给用户。<br><code>ssh-keygen</code><br>为不同的用户指定不同的文件名，比如：id_rsa.wxue，将生成id_rsa.wxue和id_rsa.wxue.pub。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cat .ssh/id_rsa.wxue.pub</div><div class="line">/home/git/.ssh/authorized_keys</div></pre></td></tr></table></figure></p>
+<p>这些密钥可以用来登陆git账号了。</p>
+<h2 id="创建GIT仓库"><a href="#创建GIT仓库" class="headerlink" title="创建GIT仓库"></a>创建GIT仓库</h2><p>把git的仓库放在/opt/gitrepo下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd /opt</div><div class="line">mkdri gitrepo</div><div class="line">cd gitrepo</div><div class="line">mkdir project.git</div><div class="line">cd project.git</div><div class="line">git --bare init</div></pre></td></tr></table></figure></p>
+<h2 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h2><p>现在git账号的权限，只能做git相关的操作<br><code>sudo vim /etc/passwd</code><br>把git的shell从<code>/bin/bash</code>改为<code>/usr/bin/git-shell</code></p>
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><ol>
+<li>说说在osx下的配置，其他linux系统也是一样。<br>把相关用户的密钥放在它电脑的.ssh目录下，然后编辑或是创建config文件<br><code>$ vim ~/.ssh/config</code><br>在config文件中加入如下内容：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Host 192.168.1.222 192.168.1.222</div><div class="line">IdentityFile ~/.ssh/id_rsa.wxue</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果只有一个id_rsa密钥文件，也可以不创建config文件。</p>
+<p>修改config文件的属性<br><code>$ chmod 644 ~/.ssh/config</code><br>文件的目录也可以做一下限制，只有git帐号才可以打开：<br><code>$ sudo chown git:git gitrepo</code></p>
+<ol>
+<li>windows下的配置<br>Windows下一般使用图形化工具<a href="https://code.google.com/p/tortoisegit/" target="_blank" rel="external">TortoiseGit</a>。TortoiseGit如果使用plink则无法使用id_rsa，需要转换从PuTTY Key Generator格式的ppk密钥。在TortoiseGit目录下可以找到PuTTY Key Generator工具，把id_rsa导入进去，并保存成ppk文件，放在用户目录的.ssh目录下。</li>
+</ol>
+<p>还没完，还需要在TortoiseGit目录中找到Pageant程序，把ppk文件加入到里面。或者，在添加remote的时候，把ppk绑定进来。</p>
+
+	
+	</div>
+  <a type="button" href="/2013/03/18/ubuntun-install-git/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+		
+    	<li class="prev"><a href="/page/3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+  		
+
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+
+		
+		   <li class="next"> <a href="/page/5/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+        
+	
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+		
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+		
+			<li><a href="/categories/News/">News<span>3</span></a></li>
+		
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+		
+			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+		
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+		
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/pkg/">pkg<span>1</span></a></li>
+		
+			<li><a href="/tags/win7/">win7<span>1</span></a></li>
+		
+			<li><a href="/tags/vs/">vs<span>1</span></a></li>
+		
+			<li><a href="/tags/deskangel/">deskangel<span>3</span></a></li>
+		
+			<li><a href="/tags/psi/">psi<span>1</span></a></li>
+		
+			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
+		
+			<li><a href="/tags/vista/">vista<span>1</span></a></li>
+		
+			<li><a href="/tags/taskbar/">taskbar<span>1</span></a></li>
+		
+			<li><a href="/tags/docker/">docker<span>3</span></a></li>
+		
+			<li><a href="/tags/sftp/">sftp<span>1</span></a></li>
+		
+			<li><a href="/tags/puremvc/">puremvc<span>1</span></a></li>
+		
+			<li><a href="/tags/openpgp/">openpgp<span>1</span></a></li>
+		
+			<li><a href="/tags/regular-expression/">regular expression<span>2</span></a></li>
+		
+			<li><a href="/tags/dual-view/">dual view<span>1</span></a></li>
+		
+			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
+		
+			<li><a href="/tags/dacalc/">dacalc<span>4</span></a></li>
+		
+			<li><a href="/tags/eos/">eos<span>1</span></a></li>
+		
+			<li><a href="/tags/proxy/">proxy<span>1</span></a></li>
+		
+			<li><a href="/tags/emacs/">emacs<span>3</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>65</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      </li>
+    
+      <li>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      </li>
+    
+      <li>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      </li>
+    
+      <li>
+        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

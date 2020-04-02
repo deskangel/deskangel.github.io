@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AS3中置换滤镜的理解 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="在ActionScription中，DisplacementMapFilter是一个非常强大的滤镜，很多的特效，比如火焰，波纹等都会使用到它。另一方面，它也比较多变，让初学者难以掌握它的功能。下面的分析从AS3中使用的公式开始。
+在Adobe的官方文档)中，提到DisplacementMapFilt">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="AS3中置换滤镜的理解"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> AS3中置换滤镜的理解</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><span style="font-size: small;"><span style="line-height: normal;">在ActionScription中，DisplacementMapFilter是一个非常强大的滤镜，很多的特效，比如火焰，波纹等都会使用到它。另一方面，它也比较多变，让初学者难以掌握它的功能。下面的分析从AS3中使用的公式开始。</span></span></p>
+<p><span style="font-size: small;"><span style="line-height: normal;">在<a href="http://help.adobe.com/zh_CN/FlashPlatform/reference/actionscript/3/flash/filters/DisplacementMapFilter.html?filter_flash=cs5&amp;filter_flashplayer=10.2&amp;filter_air=2.6#DisplacementMapFilter(" target="_blank" rel="external">Adobe的官方文档</a>)中，提到DisplacementMapFilter使用如下的公式：</span></span></p>
+<p><pre escaped="true">dstPixel[x, y] = srcPixel[x + ((componentX(x, y) - 128) <em> scaleX) / 256, y + ((componentY(x, y) - 128) </em> scaleY) / 256)]</pre><br>我们先来理解该公式。</p>
+<p>这里面涉及到三个像素，源图上的srcPixel，置换图上的componentX和componentY以及最后生成的目标图上的dstPixel。为了便于理解，我们把上面的公式变化一下：</p>
+<p><pre escaped="true">dstPixel[x, y] = srcPixel[(x + X), (y + Y)]<br>X = (componentX(x, y) - 128) <em> scaleX) / 256<br>Y = (componentY(x, y) - 128) </em> scaleY) / 256</pre><br>有上面的公式就可能很容易的看出来，，目标像素dstPixel [x, y] 就是源像素srcPixel [x, y]分别在x方向上偏移X距离，y方向上偏移Y距离后的一个结果。</p>
+<p><strong><span style="color: #ff0000;">所以DisplacementMapFilter的根本效果就是像素的偏移！</span></strong></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">那么像素的偏移如何可以创造出那么绚烂的效果呢？很简单，就是对偏移量的控制。很容易想象一张正常的图片，上面的每个像素经过不同距离的偏移之后，它会产生的扭曲、挤压的效果。结合其他的滤镜，就可以创建很酷的效果。</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">我们回到偏移量的公式：</span></p>
+<p><pre escaped="true">X = (componentX(x, y) - 128) <em> scaleX) / 256<br>Y = (componentY(x, y) - 128) </em> scaleY) / 256</pre><br>里面有四个变数：置换图的像素componentX，componentY以及scaleX和scaleY。变数越多，结果就越难以琢磨。这也是置换滤镜的困难所在。</p>
+<p>我们来深入看一下这个公式每一个量（变量和常量）的含义。</p>
+<p>&nbsp;</p>
+<p>先看componentX和componentY的含义。</p>
+<p>我们知道一个像素有四个通道：3个颜色通道RGB和1个Alpha通道。componentX和componentY在这里表示一个像素的颜色通道。因此，componentX(x, y)和componentY表示置换图上位置为(x, y)的像素点的指定颜色通道的值。颜色通道的设置可以通过构造函数来指定，并且源像素srcPixel(x, y)在x与y方向的偏移量可以由componentX(x, y)和componentY(x, y)分别指定。scaleX和scaleY作用类似，不必再提。</p>
+<p>举个例子，比如置换图上(x, y)的点RGB值为0xaabbcc。现在指定 x 方向上的颜色通道为红色，y 方向上的颜色通道为绿色。componentX(x, y)的值就是0xaa，componentY(x, y)的值就是0xbb。其他值忽略。</p>
+<p>&nbsp;</p>
+<p>再看常量128。这里不说为什么要减128，只看减了128之后是什么。</p>
+<p>我们知道一个颜色通道的范围为 0 ~ 255， (componentX(x, y) - 128)的结果为 (-128, 127)，其效果就是这个指定的颜色通道的值的范围只有 0 ~ 127，但是它有方向。看偏移量的公式，这个方向也是最后偏移量的方向，这个很好理解，就不再赘述。</p>
+<p>&nbsp;</p>
+<p>最后我们看256以及scaleX和scaleY。我们再把偏移量公式稍微变化一下：</p>
+<p><pre escaped="true">X = ((componentX(x, y) - 128) / 256) <em> scaleX<br>Y = ((componentY(x, y) - 128) / 256) </em> scaleY</pre><br>上面我们知道，(componentX(x, y) - 128)的值为 -128 ~ 127，除以256之后就是±(0, 0.5)，这可以看成是scale的一个系数。</p>
+<p>&nbsp;</p>
+<p>整个偏移量的含义就比较明显了：<strong><span style="color: #ff0000;">scale的值缩小若干倍就是偏移量</span></strong>。</p>
+<p>&nbsp;</p>
+<p>至此，置换滤镜的含义就可以总结为：<strong><span style="color: #ff0000;">用置换图上某个位置的像素的某个颜色通道值控制缩放比例，得到一个偏移量；用该偏移量对源图上对应的像素进行偏移，得到目标图上对应位置的像素值。</span></strong><span style="color: #ff0000;"><span style="color: #000000;">说白了就是<strong>用置换图上的像素控制源图上的像素进行偏移</strong>。</span></span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">虽然上面的结论比较拗口，但还不是DisplacementMapFilter提供的功能的全部。我们看一下它的构造函数：</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">DisplacementMapFilter(</div><div class="line">    mapBitmap:[BitmapData](../../flash/display/BitmapData.html) = null, </div><div class="line">    mapPoint:[Point](../../flash/geom/Point.html) = null, </div><div class="line">    componentX:[uint](../../uint.html) = 0, </div><div class="line">    componentY:[uint](../../uint.html) = 0, </div><div class="line">    scaleX:[Number](../../Number.html) = 0.0, </div><div class="line">    scaleY:[Number](../../Number.html) = 0.0, </div><div class="line">    mode:[String](../../String.html) = &quot;wrap&quot;,</div><div class="line">    color:[uint](../../uint.html) = 0, </div><div class="line">    alpha:[Number](../../Number.html) = 0.0</div><div class="line">    )</div></pre></td></tr></table></figure></p>
+<p>其中mapPoint, mode, color和alpha我们并没有讨论。好在他们的含义并不难以理解，不提。</p>
+<p><span style="color: #000000;"><br></span></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2011/06/21/memory-test-of-bitmapdata/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2011/03/20/perspective-of-three-desktop-oses/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2011-06-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/as3/">as3<span>4</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

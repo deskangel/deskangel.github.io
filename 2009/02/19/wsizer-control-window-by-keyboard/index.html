@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Wsizer: 用键盘控制窗口 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="Wsizer是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和DeskAngel一样，那些功能都来源于日常使用的积累。
+作为第一版，它包含三个部分的功能。
+第一个功能，最小化窗口到系统托盘区。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。操作也和">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Wsizer: 用键盘控制窗口"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> Wsizer: 用键盘控制窗口</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><strong>Wsizer</strong>是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和<a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a>一样，那些功能都来源于日常使用的积累。</p>
+<p>作为第一版，它包含三个部分的功能。</p>
+<p>第一个功能，<em><strong>最小化窗口到系统托盘区</strong></em>。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。<br>操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区。系统托盘区的图标是窗口的主图标。</p>
+<p>第二个功能是<em><strong>显示窗口的大小和位置</strong></em>。当窗口在屏幕上移动的时候，Wsizer在该窗口的中间画出大小和位置信息。用户可以根据需要选择仅仅显示<br>大小、位置或是全部。通过该功能你可以观察到一些有趣的事情，比如在窗口最大化之后，窗口的左上角不是位于(0, 0)坐标。</p>
+<p>最后的功能是<em><strong>热键功能</strong></em>。通过预定义的热键，用户可以对当前窗口进行更多方便快捷的操作。<span style="color: #ff0000;">所有的热键都可以由用户自己更改</span>。<br>热键功能也可以分为三个部分：<br>1.) <em>改变窗口大小到预定义尺寸</em>。比如Wsizer默认提过3个预先定义的尺寸640x480;720x480;800x600，用户就可以通过快捷键’win+[‘和’win+]’<br>轻松控制窗口的大小。当窗口宽度小于640，按一下’win+[‘，窗口之间扩大到720x480；再按，扩大到800x600……；如果按’win+]’，窗口将缩<br>小到定义的大小。</p>
+<p>2.)<em> 改变窗口宽度或高度</em>。这个功能可以让用户单独控制窗口的宽度或是高度。预定于的快捷键为：<br>增加宽度：win+right<br>减少宽度：win+left<br>增加高度：win+down<br>减少高度：win+up</p>
+<p>3.) <em>改变窗口位置</em>。以上的功能仅仅只是对窗口尺寸的控制。通过Wsizer，用户还可以方便的移动窗口。手一会离开键盘去拿鼠标，一会又放下鼠标<br>去敲键盘是比较累人而且没有效率的。因为在用鼠标的时候不想按键盘，我在DeskAngel中加入了映射’Right Button + Left Button’到’Alt + Right<br>Button’的功能，方便控制取词软件；因为在用键盘的时候不想去按鼠标，我在Wsizer中加入了热键移动窗口的功能。预定义的快捷键为：<br>窗口往左移动：win+ctrl+left<br>窗口往右移动：win+ctrl+right<br>窗口往上移动：win+ctrl+up<br>窗口往下移动：win+ctrl+down</p>
+<p>如果你喜欢上述的功能，现在就可以下载试用：<a href="http://wsizer.deskangel.com/download.html" target="_blank" rel="external">http://wsizer.deskangel.com/download.html</a></p>
+<p>任何问题都可以发送邮件或是访问论坛。</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2009/02/20/three-scroll-methods-of-emacs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2009/02/06/use-system-input-method-in-ntemacs/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2009-02-19 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Software/">Software<span>34</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/wsizer/">wsizer<span>2</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
