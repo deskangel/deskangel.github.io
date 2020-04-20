@@ -18,24 +18,24 @@
 
   
   
-    <link href="/favicon.png" rel="icon">
+    <link href="/deskangel.github.io/favicon.png" rel="icon">
   
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
   <![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
   
   <!-- analytics -->
   
@@ -53,30 +53,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
+       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/archives" title="All the articles.">
+			<a href="/deskangel.github.io/archives" title="All the articles.">
 			  <i class="fa fa-archive"></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/categories" title="All the categories.">
+			<a href="/deskangel.github.io/categories" title="All the categories.">
 			  <i class="fa fa-folder"></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/tags" title="All the tags.">
+			<a href="/deskangel.github.io/tags" title="All the tags.">
 			  <i class="fa fa-tags"></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/deskangel.github.io/about" title="About me.">
 			  <i class="fa fa-user"></i>About
 			</a>
 		  </li>
@@ -116,8 +116,68 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2010-11-19 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2010/11/19/use-cpp-dev-mysql-app/" >用C++开发MYSQL应用</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>简单的介绍如何用Visual Studio C++开发MYSQL的应用。为新手指明开发环境的准备和资源的位置。<br>首先是准备工作。需要下载三个开发库：</p>
+<ol>
+<li>去官方网站下载<a href="http://mysql.com/downloads/connector/cpp/" target="_blank" rel="external">mysql-connector/c++</a>。有多个版本，我下载的是mysql-connector-c++-noinstall-1.1.0-win32-vs2005.zip。connector-c++提供了两个lib，mysqlcppconn.lib和mysqlcppconn-static.lib，不幸的是最终运行的时候他们都需要libmysql.dll。</li>
+<li>所以还需要下载<a href="http://mysql.com/downloads/connector/c/" target="_blank" rel="external">connector/c</a>。同样有多个版本可以选择，我下载的是mysql-connector-c-noinstall-6.0.2-win32-vs2005.zip。把两个压缩包解压到同一个地方，开发包就准备好了，但是准备工作还没有完成。</li>
+<li>你还需要下载<a href="http://www.boost.org/" target="_blank" rel="external">boost</a>库才可以编译程序，因为新的版本的connector中使用了boost。<br>然后是工程的配置， 主要是选择哪个lib。我选择使用mysqlcppconn.lib+libmysql.lib。其他的组合在visual studio 2010下都会有很多链接错误。相信所有的错误都是可以通过配置解决的，具体策略视需求而定。</li>
+</ol>
+<p>最后，mysql网站提供了一些<a href="http://dev.mysql.com/doc/refman/5.1/en/connector-cpp.html" target="_blank" rel="external">manual</a>和<a href="http://dev.mysql.com/doc/refman/5.1/en/connector-cpp-getting-started-examples.html" target="_blank" rel="external">example</a>。</p>
+<p>下面是一个简单的例子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysql_connection.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysql_driver.h"</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_HOST <span class="meta-string">"xxx"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_USER <span class="meta-string">"xxxxx"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_PASS <span class="meta-string">"xxxxxx"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_DB <span class="meta-string">"xxxxxx"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">url</span><span class="params">(argc &gt;= <span class="number">2</span> ? argv[<span class="number">1</span>] : EXAMPLE_HOST)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">user</span><span class="params">(argc &gt;= <span class="number">3</span> ? argv[<span class="number">2</span>] : EXAMPLE_USER)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">pass</span><span class="params">(argc &gt;= <span class="number">4</span> ? argv[<span class="number">3</span>] : EXAMPLE_PASS)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">database</span><span class="params">(argc &gt;= <span class="number">5</span> ? argv[<span class="number">4</span>] : EXAMPLE_DB)</span></span>;</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt; &lt; <span class="string">"Connecting to MYSQL server..."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">        sql::mysql::MySQL_Driver *driver;</div><div class="line">        sql::Connection *con;</div><div class="line"></div><div class="line">        driver = sql::mysql::get_driver_instance();</div><div class="line">        con = driver-&gt;connect(EXAMPLE_HOST, EXAMPLE_USER, EXAMPLE_PASS);</div><div class="line"></div><div class="line">        <span class="built_in">cout</span> &lt; &lt; <span class="string">"Done! Querying..."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">        sql::Statement *stmt;</div><div class="line">        stmt = con-&gt;createStatement();</div><div class="line">        stmt-&gt;execute(<span class="string">"USE "</span> EXAMPLE_DB);</div><div class="line">        <span class="comment">//stmt-&gt;execute("DROP TABLE IF EXISTS test");</span></div><div class="line">        <span class="comment">//stmt-&gt;execute("SELECT * FROM `test` LIMIT 0, 30 ");</span></div><div class="line"></div><div class="line">        sql::ResultSet  *res;</div><div class="line">        res = stmt-&gt;executeQuery(<span class="string">"SELECT * FROM test LIMIT 0, 30 "</span>);</div><div class="line"></div><div class="line">        <span class="built_in">cout</span> &lt; &lt; <span class="string">"Done! Printing..."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (res-&gt;next()) &#123;</div><div class="line">            <span class="comment">//// You can use either numeric offsets...</span></div><div class="line">            <span class="comment">//cout &lt; &lt; "id = " &lt;&lt; res-&gt;getInt(1); // getInt(1) returns the first column</span></div><div class="line">            <span class="comment">// ... or column names for accessing results.</span></div><div class="line">            <span class="comment">// The latter is recommended.</span></div><div class="line">            <span class="built_in">cout</span> &lt; &lt; <span class="string">"Project: "</span> &lt;&lt; res-&gt;getString(<span class="string">"project"</span>) &lt; &lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Deadline:"</span> &lt;&lt; res-&gt;getString(<span class="string">"deadline"</span>) &lt; &lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Price:   "</span> &lt;&lt; res-&gt;getString(<span class="string">"price"</span>) &lt; &lt; <span class="built_in">endl</span>;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"People:  "</span> &lt;&lt; res-&gt;getString(<span class="string">"people"</span>) &lt; &lt; <span class="built_in">endl</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">delete</span> res;</div><div class="line"></div><div class="line">        <span class="keyword">delete</span> stmt;</div><div class="line"></div><div class="line">        <span class="keyword">delete</span> con;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">catch</span> (sql::SQLException &amp;e) &#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">          The MySQL Connector/C++ throws three different exceptions:</div><div class="line"></div><div class="line">          - sql::MethodNotImplementedException (derived from sql::SQLException)</div><div class="line">          - sql::InvalidArgumentException (derived from sql::SQLException)</div><div class="line">          - sql::SQLException (derived from std::runtime_error)</div><div class="line">        */</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"# ERR: SQLException in "</span> &lt;&lt; __FILE__;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">") on line "</span> &lt;&lt; __LINE__ &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="comment">/* Use what() (derived from std::runtime_error) to fetch the error message */</span></div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"# ERR: "</span> &lt;&lt; e.what();</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">" (MySQL error code: "</span> &lt;&lt; e.getErrorCode();</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">", SQLState: "</span> &lt;&lt; e.getSQLState() &lt;&lt; <span class="string">" )"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> EXIT_FAILURE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Done."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2010/11/19/use-cpp-dev-mysql-app/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-11-11 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2010/11/11/the-lights-in-froyd-villainrom-1-5/" >The lights in Froyd Villainrom 1.5</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Froyd villainrom is a great rom. But if you don’t like the lights (the led blinking, the trackball light) you can replace the lights.hero.so file under the path <span style="color: #ff6600;">/system/lib/hw/</span> with the file from older versions. If you don’t have one, you can download from <a href="http://www.deskangel.com/download/lights.hero.so" title="lights.hero.so" target="_blank" rel="external">here</a>.</p>
+<p>You can do following steps in console to replace a file under /system/ folder if you have adb tools:</p>
+<pre>adb remount
+
+adb pull /system/lib/hw/lights.hero.so ./lights.hero.so.bk
+
+adb push ./lights.hero.so /system/lib/hw/</pre>
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2010/11/11/the-lights-in-froyd-villainrom-1-5/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2010-10-21 </div>
-			<div class="article-title"><a href="/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/" >Ads free version for DaysandDate and AdjBrightness</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/" >Ads free version for DaysandDate and AdjBrightness</a></div>						
 		</h3>
 	
 
@@ -132,7 +192,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -143,7 +203,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2010-08-30 </div>
-			<div class="article-title"><a href="/2010/08/30/error-rc1106-invalid-option-ologo/" >error RC1106: invalid option: -ologo</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/08/30/error-rc1106-invalid-option-ologo/" >error RC1106: invalid option: -ologo</a></div>						
 		</h3>
 	
 
@@ -157,7 +217,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/08/30/error-rc1106-invalid-option-ologo/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/08/30/error-rc1106-invalid-option-ologo/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -168,7 +228,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2010-07-20 </div>
-			<div class="article-title"><a href="/2010/07/20/wine-in-mac/" >使用wine在Mac上运行Win程序</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/07/20/wine-in-mac/" >使用wine在Mac上运行Win程序</a></div>						
 		</h3>
 	
 
@@ -187,72 +247,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/07/20/wine-in-mac/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2010-07-19 </div>
-			<div class="article-title"><a href="/2010/07/19/adjust-brightness-for-android-devices/" >Adjust brightness for Android devices</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><a href="http://www.deskangel.com/adjbrightness/images/snap20100701_165318.png" target="_blank" rel="external"><img src="http://www.deskangel.com/adjbrightness/images/snap20100701_165318-200x300.png" alt="AdjBrightness main page" title="AdjBrightness"></a></p>
-<p>The settings for brightness of buttons and screen are very rough in Android devices, like in HTC Hero. But if your rom is <span style="color: #ff0000;">ROOTED</span>, you can download and install <a href="market://search?q=pname:com.deskangel.adjbrightness" target="_blank" rel="external">AdjBrightness</a>, which can adjust the brightness of the screen from the value 2 to 255.</p>
-<p>There are six predefined values in the main page, simply click one of them to set the brightness. If the predefined values cannot fit your request, just type the brightness value you want in the edit box and set it.</p>
-<p>Besides those, in the option page, you can find several settings:</p>
-<ol>
-<li>Auto restore: Tick this if you want AdjBrightness to restore the brightness after the screen turned on.</li>
-<li>Notification: Tick this, AdjBrightness will display a message on screen every after it set the brightness.</li>
-<li>Lock brightness: This is really cool. Tick this if you do not want other applications to change the brightness. After tick this, you needn’t tick the Auto restore.</li>
-<li>Lock off button light: This is for background light of keyboard. If you don’t like the light as well, tick this to turn off and lock it.<br>You can download this application from Google Market. Just search adjbrightness or access following link in your phone <a href="market://search?q=pname:com.deskangel.adjbrightness" title="market://search?q=pname:com.deskangel.adjbrightness" target="_blank" rel="external">market://search?q=pname:com.deskangel.adjbrightness</a>.</li>
-</ol>
-<p>Always, if you encounter any problem, drop me an <a href="mailto:william.xue@gmail.com" title="email" target="_blank" rel="external">email</a>.</p>
-<p><span style="color: #ff0000;">NOTICE</span>: If you cannot turn on the screen, please keep the “Auto restore” ticked in settings.</p>
-
-	
-	</div>
-  <a type="button" href="/2010/07/19/adjust-brightness-for-android-devices/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2010-07-08 </div>
-			<div class="article-title"><a href="/2010/07/08/share-daysanddate-and-get-ads-removal-code/" >Share DaysAndDate and get Ads removal code</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>Long story short, everybody who recommended DaysAndDate or wrote reviews/shared experiences for it in <strong>three places</strong> in internet (blog, twitter, forum, etc.) will get an Ads removal code for DaysAndDate as a gift after they emailed the links of above places to <a href="mailto:william.xue@gmail.com?subject=Shared DaysAndDate" target="_blank" rel="external">william.xue@gmail.com</a>.</p>
-<p>If you like the application but hate the Ads, this is a chance to spread the application to world and get ride of the Ads from your device. Two birds with one stone. DO NOT WASTE IT!</p>
-<p>It is running from now to 11/30/2010.</p>
-<p>Quick introduction:</p>
-<blockquote>
-<p>DaysAndDate tells you how many days between two dates or the date before/after several days. For example, how many days left to your next birthday from now? Or what is the date after your baby has been born 100 days?<br>Link to the DaysAndDate in Android Market:<br><a href="market://search?q=pname:com.deskangel.DaysAndDate" target="_blank" rel="external">market://search?q=pname:com.deskangel.DaysAndDate</a></p>
-</blockquote>
-
-	
-	</div>
-  <a type="button" href="/2010/07/08/share-daysanddate-and-get-ads-removal-code/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/07/20/wine-in-mac/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -267,13 +262,13 @@
 <ul class="pagination">
 	 
 		
-    	<li class="prev"><a href="/page/8/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+    	<li class="prev"><a href="/deskangel.github.io/page/8/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
   		
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/deskangel.github.io/"><i class="fa fa-home"></i>Home</a></li>
 
 		
-		   <li class="next"> <a href="/page/10/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"> <a href="/deskangel.github.io/page/10/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
 	
 </ul>
@@ -305,19 +300,19 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Critique/">Critique<span>5</span></a></li>
 		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Information/">Information<span>8</span></a></li>
 		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/categories/News/">News<span>3</span></a></li>
 		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Programming/">Programming<span>38</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
 		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Source/">Source<span>1</span></a></li>
 		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
 		
 		</ul>
 	</div>
@@ -328,48 +323,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/virtualbox/">virtualbox<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/pomelo/">pomelo<span>1</span></a></li>
 		
-			<li><a href="/tags/git/">git<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/speedcommander/">speedcommander<span>1</span></a></li>
 		
-			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/algorithm/">algorithm<span>3</span></a></li>
 		
-			<li><a href="/tags/lua/">lua<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/eclipse/">eclipse<span>1</span></a></li>
 		
-			<li><a href="/tags/egret/">egret<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/javascript/">javascript<span>1</span></a></li>
 		
-			<li><a href="/tags/pkg/">pkg<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/lua/">lua<span>3</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ibus/">ibus<span>1</span></a></li>
 		
-			<li><a href="/tags/vista/">vista<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/psi/">psi<span>1</span></a></li>
 		
-			<li><a href="/tags/as3/">as3<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/vs/">vs<span>1</span></a></li>
 		
-			<li><a href="/tags/daysanddate/">daysanddate<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/charles/">charles<span>1</span></a></li>
 		
-			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/egret/">egret<span>1</span></a></li>
 		
-			<li><a href="/tags/cocostudio/">cocostudio<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/busybox/">busybox<span>1</span></a></li>
 		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/memory/">memory<span>1</span></a></li>
 		
-			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/deskangel/">deskangel<span>3</span></a></li>
 		
-			<li><a href="/tags/eclipse/">eclipse<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/xdebug/">xdebug<span>1</span></a></li>
 		
-			<li><a href="/tags/emacs/">emacs<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/c-c/">c/c++<span>6</span></a></li>
 		
-			<li><a href="/tags/psi/">psi<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/sftp/">sftp<span>1</span></a></li>
 		
-			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/opensource/">opensource<span>1</span></a></li>
 		
-			<li><a href="/tags/puremvc/">puremvc<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ubuntu/">ubuntu<span>4</span></a></li>
 		
-			<li><a href="/tags/blockchain/">blockchain<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/dafileserver/">dafileserver<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>65</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
@@ -382,23 +377,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+        <a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
       </li>
     
       <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+        <a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
       </li>
     
       <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+        <a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
       </li>
     
       <li>
-        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+        <a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
       </li>
     
       <li>
-        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+        <a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
       </li>
     
   </ul>
@@ -417,7 +412,7 @@
   </div>
   <div class="container-narrow">
   <footer> <p>
-  &copy; 2018 William Hsueh
+  &copy; 2020 William Hsueh
   
       with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
 </p> </footer>
@@ -430,15 +425,15 @@
   <span>▲</span> 
 </a>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/deskangel.github.io/js/gallery.js"></script>
+<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
+<script src="/deskangel.github.io/js/main.js"></script>
+<script src="/deskangel.github.io/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -452,7 +447,7 @@
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/" + search_path;
+	 var path = "/deskangel.github.io/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 

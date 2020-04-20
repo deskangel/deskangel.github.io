@@ -18,24 +18,24 @@
 
   
   
-    <link href="/favicon.png" rel="icon">
+    <link href="/deskangel.github.io/favicon.png" rel="icon">
   
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
   <![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
   
   <!-- analytics -->
   
@@ -53,30 +53,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
+       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/archives" title="All the articles.">
+			<a href="/deskangel.github.io/archives" title="All the articles.">
 			  <i class="fa fa-archive"></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/categories" title="All the categories.">
+			<a href="/deskangel.github.io/categories" title="All the categories.">
 			  <i class="fa fa-folder"></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/tags" title="All the tags.">
+			<a href="/deskangel.github.io/tags" title="All the tags.">
 			  <i class="fa fa-tags"></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/deskangel.github.io/about" title="About me.">
 			  <i class="fa fa-user"></i>About
 			</a>
 		  </li>
@@ -116,8 +116,72 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2010-03-16 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2010/03/16/add-lib-in-eclipse/" >在eclipse中添加一个library</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>当我把一个Android工程目录从一台电脑拷贝到另一台电脑后，编译出来的程序提示找不到<span style="color: #ff0000;">com.admob.android.ads.AdView</span>这个类。</p>
+<p>经过摸索，终于得出了在eclipse中添加一个library的正确流程。如下：</p>
+<ol>
+<li>选中project，右键选择Import-&gt;File System，选择文件，在Into folder栏中输入存放文件的目录名称，如project name\libs</li>
+<li>选中project，右键选择Build path-&gt;Configure Build Path…-&gt;Add External JARs…，选择要导入的library文件，点击Okay即可</li>
+<li>如果library有更新，可以打开Configure Build Path…属性对话框，选中需要更新的library，点击Migrate JAR File…，在弹出的对话框中选择新的版本即可<br>我使用的是3.52版，也许不同的版本会有不同的方法。这些都是一些基本的操作，仅供入门参考。</li>
+</ol>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2010/03/16/add-lib-in-eclipse/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2010-03-11 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2010/03/11/opera-mini-5-beta-2-for-android/" >Opera mini 5 beta 2 for Android</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>Opera终于放出了Android版本的<a href="http://m.opera.com/cn/next/en/Opera_Mini_5_Android_beta.apk?act=dl&amp;tag=mini5android" title="Opera mini 5" target="_blank" rel="external">Opera mini 5</a>。下载后简单测试了一下，发现了一些问题：</p>
+<p>[caption id=”attachment_230” align=”alignright” width=”200” caption=”opera:config”]<a href="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100311_214429.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100311_214429-200x300.png" alt="Configuration" title="opera:config"></a>[/caption]</p>
+<ol>
+<li>中英文混合排版比较乱</li>
+<li><a href="http://www.kong.net下滚动不能" target="_blank" rel="external">http://www.kong.net下滚动不能</a></li>
+<li>“border-bottom: 1px dotted”，看不成dotted的效果</li>
+<li>非mobile view 模式下，中文会显示成□□，放大后正常</li>
+<li>opera:about中显示version 10.00<br>同时也发现它支持在地址栏输入opera:config进行配置，配置页面load完之后，地址会变为config:，如右图。</li>
+</ol>
+<p>因为众所周知的原因，下的是中国服务器版本，访问国内网站速度非常快，但是访问国外的网站速度就慢了。</p>
+<p>与UCWeb浏览器相比较，缩放、网址输入等等细节都要较ucweb方便。除了访问中文网站排版和滚动有问题外，其他都正常。访问英文网站暂时没有发现问题。</p>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2010/03/11/opera-mini-5-beta-2-for-android/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2010-03-10 </div>
-			<div class="article-title"><a href="/2010/03/10/resource-name-in-android/" >Android资源文件名</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/03/10/resource-name-in-android/" >Android资源文件名</a></div>						
 		</h3>
 	
 
@@ -133,7 +197,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/03/10/resource-name-in-android/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/03/10/resource-name-in-android/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -144,7 +208,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2010-03-10 </div>
-			<div class="article-title"><a href="/2010/03/10/google-market-alternative/" >Google market alternative</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/03/10/google-market-alternative/" >Google market alternative</a></div>						
 		</h3>
 	
 
@@ -160,7 +224,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/03/10/google-market-alternative/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/03/10/google-market-alternative/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -171,7 +235,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2010-03-04 </div>
-			<div class="article-title"><a href="/2010/03/04/convert-dec-num-to-string/" >十进制整数到字符串的转换</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2010/03/04/convert-dec-num-to-string/" >十进制整数到字符串的转换</a></div>						
 		</h3>
 	
 
@@ -193,70 +257,7 @@
 
 	
 	</div>
-  <a type="button" href="/2010/03/04/convert-dec-num-to-string/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2010-03-02 </div>
-			<div class="article-title"><a href="/2010/03/02/days-and-date/" >Days and Date</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><a href="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100302_172708.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100302_172708.png" alt="" title="snap20100302_172708"></a><br>DaysandDate是我第一个Android程序，嗯，也是我第一个java程序。好吧，我承认这个界面有点简陋，也许等我找到一个美工之后才有可能改善。（如果你有好的设计并愿意合作，可以给我email: william.xue AT gmail.com）</p>
-<p>这个程序的功能是使用修正儒略日在两个日期和天数之间进行换算。直白一点就是计算：</p>
-<ol>
-<li>某个两个日期之间间隔的天数</li>
-<li>某个日期加上或减去若干天之后是哪一天</li>
-</ol>
-<p>计算完后会显示这两个日期所对应的星期，点击等于号后面的按钮可以把整个计算表达式保持到历史记录里面。之所以没有自动保持，是因为改变任意一个数值程序都会进行计算并更新，没有必要保存下来。</p>
-<p>功能比较简单，但是比较使用，可以用来计算还有多少天女友过生日，与女友认识了多少天等等。</p>
-<p><a href="http://www.deskangel.com/download/DaysAndDate.apk" target="_blank" rel="external">点此下载</a> (v2.1，新版本可以在Android Market找到)</p>
-
-	
-	</div>
-  <a type="button" href="/2010/03/02/days-and-date/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2010-02-24 </div>
-			<div class="article-title"><a href="/2010/02/24/deskangel-convert-path-text-to-paste-able-object/" >DeskAngel convert path text to paste-able object</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>From the DeskAngel version v2.2.2.66, two new features are introduced. You can see two new menu items in the shortcut menu:</p>
-<ol>
-<li><span style="color: #ff0000;">Path to pastable object</span></li>
-<li><span style="color: #ff0000;">Pastable object to path</span><br>Use cases:<br>If you copied a path from somewhere, e.g. log file, then click “Path to pastable object”, you can paste it just as you copied the file itself.</li>
-</ol>
-<p>If you copied a file but you want to get the full path of it, you can click “Pastable object to path”, then when you do paste in a text edit, you get the full path.</p>
-<p>Both features are very useful sometimes. Hope you will like them and any feedback is welcome.</p>
-<p>You can get the latest version from  <a href="http://www.deskangel.com/deskangel/index?target=download" target="_blank" rel="external">here</a>.</p>
-
-	
-	</div>
-  <a type="button" href="/2010/02/24/deskangel-convert-path-text-to-paste-able-object/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2010/03/04/convert-dec-num-to-string/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -271,13 +272,13 @@
 <ul class="pagination">
 	 
 		
-    	<li class="prev"><a href="/page/12/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+    	<li class="prev"><a href="/deskangel.github.io/page/12/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
   		
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/deskangel.github.io/"><i class="fa fa-home"></i>Home</a></li>
 
 		
-		   <li class="next"> <a href="/page/14/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"> <a href="/deskangel.github.io/page/14/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
 	
 </ul>
@@ -309,19 +310,19 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Critique/">Critique<span>5</span></a></li>
 		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Information/">Information<span>8</span></a></li>
 		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/categories/News/">News<span>3</span></a></li>
 		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Programming/">Programming<span>38</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
 		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Source/">Source<span>1</span></a></li>
 		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
 		
 		</ul>
 	</div>
@@ -332,48 +333,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/egret/">egret<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/win7/">win7<span>1</span></a></li>
 		
-			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ooLauncher/">ooLauncher<span>1</span></a></li>
 		
-			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/english/">english<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/daysanddate/">daysanddate<span>4</span></a></li>
 		
-			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/console/">console<span>1</span></a></li>
 		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/unicode/">unicode<span>1</span></a></li>
 		
-			<li><a href="/tags/wsizer/">wsizer<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/pomelo/">pomelo<span>1</span></a></li>
 		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/xdebug/">xdebug<span>1</span></a></li>
 		
-			<li><a href="/tags/flash-builder/">flash builder<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/android/">android<span>10</span></a></li>
 		
-			<li><a href="/tags/proxy/">proxy<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/java/">java<span>1</span></a></li>
 		
-			<li><a href="/tags/node-js/">node.js<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/sftp/">sftp<span>1</span></a></li>
 		
-			<li><a href="/tags/puremvc/">puremvc<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/react/">react<span>1</span></a></li>
 		
-			<li><a href="/tags/adjbrightness/">adjbrightness<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/vista/">vista<span>1</span></a></li>
 		
-			<li><a href="/tags/php/">php<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/blockchain/">blockchain<span>1</span></a></li>
 		
-			<li><a href="/tags/dual-view/">dual view<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/mysql/">mysql<span>1</span></a></li>
 		
-			<li><a href="/tags/virtualbox/">virtualbox<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/lua/">lua<span>3</span></a></li>
 		
-			<li><a href="/tags/lua/">lua<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/puremvc/">puremvc<span>1</span></a></li>
 		
-			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/taskbar/">taskbar<span>1</span></a></li>
 		
-			<li><a href="/tags/pkg/">pkg<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/speedcommander/">speedcommander<span>1</span></a></li>
 		
-			<li><a href="/tags/osx/">osx<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/node-js/">node.js<span>2</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>65</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
@@ -386,23 +387,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+        <a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
       </li>
     
       <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+        <a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
       </li>
     
       <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+        <a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
       </li>
     
       <li>
-        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+        <a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
       </li>
     
       <li>
-        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+        <a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
       </li>
     
   </ul>
@@ -421,7 +422,7 @@
   </div>
   <div class="container-narrow">
   <footer> <p>
-  &copy; 2018 William Hsueh
+  &copy; 2020 William Hsueh
   
       with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
 </p> </footer>
@@ -434,15 +435,15 @@
   <span>▲</span> 
 </a>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/deskangel.github.io/js/gallery.js"></script>
+<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
+<script src="/deskangel.github.io/js/main.js"></script>
+<script src="/deskangel.github.io/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -456,7 +457,7 @@
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/" + search_path;
+	 var path = "/deskangel.github.io/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 

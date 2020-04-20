@@ -18,24 +18,24 @@
 
   
   
-    <link href="/favicon.png" rel="icon">
+    <link href="/deskangel.github.io/favicon.png" rel="icon">
   
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
   <![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
   
   <!-- analytics -->
   
@@ -53,30 +53,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
+       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/archives" title="All the articles.">
+			<a href="/deskangel.github.io/archives" title="All the articles.">
 			  <i class="fa fa-archive"></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/categories" title="All the categories.">
+			<a href="/deskangel.github.io/categories" title="All the categories.">
 			  <i class="fa fa-folder"></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/tags" title="All the tags.">
+			<a href="/deskangel.github.io/tags" title="All the tags.">
 			  <i class="fa fa-tags"></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/deskangel.github.io/about" title="About me.">
 			  <i class="fa fa-user"></i>About
 			</a>
 		  </li>
@@ -288,6 +288,10 @@
 		
             
 		
+            
+		
+            
+		
         
         <!-- render other articles -->
         
@@ -296,8 +300,81 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2020-04-20 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" >DaFileShare 开发笔记</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。</p>
+<p>DaFileShare 的代码很简单，分成两个部分：</p>
+<ul>
+<li>Command line 的 http server 提供文件分享功能</li>
+<li>Mac App 对其进行封装，提供拖放支持</li>
+</ul>
+<p>开发 DaFileShare 之前没有做过 Mac App 的开发，也没有接触过 Swift，一切都是新学，所以记一下Mac App的开发过程，以及遇到的问题，至于 Command line 部分，没有什么好讲的。</p>
+<p>第一个遇到的问题就是<code>拖放</code>。</p>
+<h3 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h3><p>Macos 的拖放是通过剪切板实现的，首先App需要注册拖放的类型。第一个纠结的问题是：在哪里注册？</p>
+<p>参考了网上的文章和 Apple 的开发文档，NSView 提供了拖放的支持，但是还需要进行一些处理。经过测试，<code>awakFromNib</code> 是一个很好的入口，哪怕用的是<code>StoryBoard</code>，一样会进入这个函数。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">awakeFromNib</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.awakeFromNib()</div><div class="line">    <span class="keyword">self</span>.registerForDraggedTypes([<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为新手的原因，不知道如何把 NSView 类和 StoryBoard，Google 了很久也没有任何发现，直到后来看到 <code>identity inspector</code> 下的 <code>Custom Class</code>，尝试着把 StoryBoard 中的 view 的类改为自己的类才算成功。</p>
+<h4 id="获取拖放的数据"><a href="#获取拖放的数据" class="headerlink" title="获取拖放的数据"></a>获取拖放的数据</h4><p>可能是因为 Swift 的快速发展，网上一些文章已经过时，获取剪切板数据的方法在 Xcode 11.4.1 下已经失效了。下面是可以工作的代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">performDragOperation</span><span class="params">(<span class="number">_</span> sender: NSDraggingInfo)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> pboard = sender.draggingPasteboard</div><div class="line">    <span class="keyword">let</span> dragTypes = pboard.types! <span class="keyword">as</span> <span class="type">NSArray</span></div><div class="line">    <span class="keyword">if</span> dragTypes.<span class="built_in">contains</span>(<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL) &#123;</div><div class="line">        <span class="keyword">let</span> files = pboard.propertyList(forType: <span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>(rawValue: <span class="string">"NSFilenamesPboardType"</span>)) <span class="keyword">as</span>! [<span class="type">String</span>]</div><div class="line">        <span class="keyword">let</span> numberOfFiles = files.<span class="built_in">count</span></div><div class="line">        <span class="keyword">if</span> numberOfFiles &gt; <span class="number">0</span> &#123;</div><div class="line">            <span class="keyword">let</span> filePath = files[<span class="number">0</span>] <span class="keyword">as</span> <span class="type">String</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> delegate = <span class="keyword">self</span>.delegate &#123;</div><div class="line">                <span class="type">NSLog</span>(<span class="string">"file path \(filePath)"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><p>第二个遇到的大问题是关闭：view 的关闭，窗口的关闭，App 的关闭。<br>由于想在退出 App 的时候进行一些处理，特别是 Command line 的 http server 进程的关闭，结果就遇到问题了。</p>
+<h4 id="同步关闭"><a href="#同步关闭" class="headerlink" title="同步关闭"></a>同步关闭</h4><p>首先，点击窗口上的关闭按钮后，只是关闭了窗口，但是 App 没有退出。再次点击 Dock 上的 App 图标，也没有像其他应用一样再次打开窗口，而是没有任何反应。<br>因为我不需要再打开窗口，只需要同步关闭，这个比较好处理，在 <code>AppDelegate</code> 中加一个函数即可：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationShouldTerminateAfterLastWindowClosed</span><span class="params">(<span class="number">_</span> sender: NSApplication)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="不同的关闭方式"><a href="#不同的关闭方式" class="headerlink" title="不同的关闭方式"></a>不同的关闭方式</h4><p>然后，只需要找个地方同一处理关闭事件就好了吧？——然而并不是！<br>正常的关闭方式有三种：关闭按钮，菜单Quit，Cmd+Q。三种方式，三个表现形式！！</p>
+<hr>
+<h5 id="关闭按钮"><a href="#关闭按钮" class="headerlink" title="关闭按钮"></a>关闭按钮</h5><p>窗口上的关闭按钮可能是最正常的方式了。点击后，<code>ViewController</code> 的 <code>viewDidDisappear</code> 被调用，但是如果你在 <code>AppDelegate</code> 有写<br><code>applicationShouldTerminate</code> 函数，你会发现这个函数关闭没有调用到。</p>
+<h5 id="菜单-Quit"><a href="#菜单-Quit" class="headerlink" title="菜单 Quit"></a>菜单 Quit</h5><p>通过菜单——不管是 Dock 上的菜单还是菜单栏上——的Quit，<code>applicationShouldTerminate</code> 被调用到了，但是，<code>viewDidDisappear</code> 没有调用。</p>
+<h5 id="Cmd-Q"><a href="#Cmd-Q" class="headerlink" title="Cmd+Q"></a>Cmd+Q</h5><p>一句话，什么都不调用！！</p>
+<hr>
+<p>通过查阅资料，是因为在”macOS 10.6”中引入了一个叫做<code>Sudden Termination</code>的机制来快速关闭 App。由于刚开始接触 macos 开发，不想一开始就钻研太深，还是尽早把 App 实现才是正事，所以只看了如何关闭这个机制。没错，这个<code>Sudden Termination</code>可以关闭，只需要一行代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至此，这三种关闭方式都会调用到<code>applicationShouldTerminate</code>和<code>viewDidDisappear</code>，选一个地方处理就可以。我是在<code>viewDidDisappear</code>中进行处理，因为主要的逻辑代码在<code>ViewController</code>中。</p>
+<h5 id="异常关闭"><a href="#异常关闭" class="headerlink" title="异常关闭"></a>异常关闭</h5><p>异常关闭有两种：一种是程序出现 Exception 导致退出的，一种是被 kill 掉。</p>
+<p>根据 Windows 上的经验，第一种应该有一个全局处理比如“unCaughtException” 这样的函数来处理，但是我没有尝试；第二种应该是需要捕获 signal 来处理，我尝试了但是没有成功，于是为了省事，把 kill signal屏蔽掉了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line"></div><div class="line">    signal(<span class="type">SIGTERM</span>, <span class="type">SIG_IGN</span>) <span class="comment">// ignore the termination signal</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Xcode 11.4.1，Swift 5，macos 10.15.4</p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>你可以下载 <a href="https://github.com/deskangel/deskangel.github.io/releases/download/19042020/DaFileShare.app.zip" target="_blank" rel="external">DaFileShare</a></p>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2018-10-24 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" >vsc-with-gdb-remote</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2018-03-31 </div>
-			<div class="article-title"><a href="/2018/03/31/build-eos-on-ubuntu-16-04/" >Build EOS on ubuntu 16.04</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" >Build EOS on ubuntu 16.04</a></div>						
 		</h3>
 	
 
@@ -322,7 +399,7 @@
 
 	
 	</div>
-  <a type="button" href="/2018/03/31/build-eos-on-ubuntu-16-04/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -333,7 +410,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2017-09-21 </div>
-			<div class="article-title"><a href="/2017/09/21/custom-eui-control-in-egret/" >custom-eui-control-in-egret</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" >custom-eui-control-in-egret</a></div>						
 		</h3>
 	
 
@@ -356,7 +433,7 @@
 
 	
 	</div>
-  <a type="button" href="/2017/09/21/custom-eui-control-in-egret/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -367,7 +444,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-09-30 </div>
-			<div class="article-title"><a href="/2016/09/30/ledongli-login-issue-workaround/" >乐动力“网络不给力”问题的处理</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" >乐动力“网络不给力”问题的处理</a></div>						
 		</h3>
 	
 
@@ -405,132 +482,7 @@
 
 	
 	</div>
-  <a type="button" href="/2016/09/30/ledongli-login-issue-workaround/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-07-30 </div>
-			<div class="article-title"><a href="/2016/07/30/React-with-Node-js-in-Webstorm/" >React with Node.js in Webstorm</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>软件环境：</p>
-<table>
-<thead>
-<tr>
-<th>软件</th>
-<th>版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OSX</td>
-<td>10.11.6</td>
-</tr>
-<tr>
-<td>WebStorm</td>
-<td>2016.2</td>
-</tr>
-<tr>
-<td>Node.js</td>
-<td>6.3.1</td>
-</tr>
-<tr>
-<td>React</td>
-<td>15.3.1</td>
-</tr>
-</tbody>
-</table>
-<p>Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用淘宝的镜像。</p>
-<h3 id="安装-express"><a href="#安装-express" class="headerlink" title="安装 express"></a>安装 express</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org -g express-generator</div><div class="line">express -e -css sass reactStudy</div><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装 react"></a>安装 react</h3><p>安装 react、react-dom、babel、browserify、watchify 等模块。package.json 文件的内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"taskmgr"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"start"</span>: <span class="string">"node ./bin/www"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"babel-cli"</span>: <span class="string">"^6.11.4"</span>,</div><div class="line">    <span class="attr">"babel-preset-es2015"</span>: <span class="string">"^6.9.0"</span>,</div><div class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.11.1"</span>,</div><div class="line">    <span class="attr">"babelify"</span>: <span class="string">"^7.3.0"</span>,</div><div class="line">    <span class="attr">"body-parser"</span>: <span class="string">"~1.15.1"</span>,</div><div class="line">    <span class="attr">"cookie-parser"</span>: <span class="string">"~1.4.3"</span>,</div><div class="line">    <span class="attr">"debug"</span>: <span class="string">"~2.2.0"</span>,</div><div class="line">    <span class="attr">"ejs"</span>: <span class="string">"~2.4.1"</span>,</div><div class="line">    <span class="attr">"express"</span>: <span class="string">"~4.13.4"</span>,</div><div class="line">    <span class="attr">"express-session"</span>: <span class="string">"^1.14.0"</span>,</div><div class="line">    <span class="attr">"morgan"</span>: <span class="string">"~1.7.0"</span>,</div><div class="line">    <span class="attr">"mysql"</span>: <span class="string">"^2.11.1"</span>,</div><div class="line">    <span class="attr">"node-sass-middleware"</span>: <span class="string">"0.8.0"</span>,</div><div class="line">    <span class="attr">"passport"</span>: <span class="string">"^0.3.2"</span>,</div><div class="line">    <span class="attr">"react"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"serve-favicon"</span>: <span class="string">"~2.3.0"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">    <span class="attr">"browserify"</span>: <span class="string">"^13.1.0"</span>,</div><div class="line">    <span class="attr">"watchify"</span>: <span class="string">"^3.7.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><p>在 views 目录下创建一个文件作为主文件：main.js。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> Main = React.createClass(&#123;</div><div class="line"></div><div class="line">    <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello william&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Main /&gt;,</div><div class="line">    document.getElementById('content')</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>也可以使用 ES2015的方式来写：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello World!&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(&lt;App/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</div></pre></td></tr></table></figure></p>
-<h3 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h3><p>在<strong>WebStorm-&gt;Preferences…-&gt;Tools-&gt;File Watchers</strong>下添加Babel。以下字段需要注意修改：</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Value</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td>Babel</td>
-<td>这里不要修改，不然还会提示添加 Babel Watcher</td>
-</tr>
-<tr>
-<td>File type</td>
-<td>javascript</td>
-<td>也可以选其他类型，只要和你自己的文件匹配</td>
-</tr>
-<tr>
-<td>Program</td>
-<td>$ProjectFileDir$/node_modules/browserify/bin/cmd.js</td>
-<td></td>
-</tr>
-<tr>
-<td>Arguments</td>
-<td>-t [ babelify –presets [ es2015 react ] ] ./views/main.js -o public/javascripts/index.bundle.js</td>
-<td>如果要调试，需要加上 -d 参数</td>
-</tr>
-</tbody>
-</table>
-<p>在<code>index.ejs</code>文件的下方添加<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>最后的效果：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>因为对 Babel 和 browserify 不熟悉，所以这一段是花时间最多的地方。开始的时候因为用了 jsx 扩展名，在文件头的注释中有<code>@jsx</code>，render 函数翻译出来的代码会带上 <code>file</code> 函数而不是<code>React.createElement</code>，导致错误。后来重启 WebStorm 就好了。</p>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束."></a>结束.</h3>
-	
-	</div>
-  <a type="button" href="/2016/07/30/React-with-Node-js-in-Webstorm/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-04-18 </div>
-			<div class="article-title"><a href="/2016/04/18/Node-js-from-scratch/" >Node.js from scratch</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>使用 webstorm，从创建一个空白的工程开始构建一个 Node.js 的websocket服务器。</p>
-<ol>
-<li>创建空白工程</li>
-<li>添加一个 js 文件，比如 main.js</li>
-<li>添加一个 package.json 文件</li>
-<li>在控制台中进入工程的根目录，使用命令<code>npm install --save ws</code>添加websocket模块。使用<code>--save</code>参数会把模块的依赖直接添加到 package.json 文件中。</li>
-<li>编辑webstorm 的 Run/Debug配置，新建一个 Node.js 的配置，在 <code>JavaScript file:</code>这一栏里面写上<code>main.js</code>。</li>
-<li>在 main.js 中填入如下代码：</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> WebSocketServer = <span class="built_in">require</span>(<span class="string">'ws'</span>).Server;</div><div class="line"><span class="keyword">var</span> wss = <span class="keyword">new</span> WebSocketServer(&#123;<span class="attr">port</span>: <span class="number">8280</span>&#125;);</div><div class="line"></div><div class="line">wss.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> <span class="title">connection</span>(<span class="params">ws</span>) </span>&#123;</div><div class="line">   ws.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="title">incoming</span>(<span class="params">message</span>) </span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'received: %s'</span>, message);</div><div class="line">   &#125;);</div><div class="line"></div><div class="line">    ws.send(<span class="string">'something'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>至此，一个服务器就搭建好了。</p>
-<p>注意点：<br>在 webstorm 中，可能会提示<code>Unresolved function or method require()</code>，这是因为没有开启<code>Node.js Core library</code>。在 webstorm 的<code>Preferences-&gt;Languages &amp; Frameworks-&gt;Node.js and NPM</code>下开启就可以了。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/04/18/Node-js-from-scratch/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -548,10 +500,10 @@
           <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
         
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/deskangel.github.io/"><i class="fa fa-home"></i>Home</a></li>
 
 		
-		   <li class="next"> <a href="/page/2/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"> <a href="/deskangel.github.io/page/2/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
 	
 </ul>
@@ -583,19 +535,19 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Critique/">Critique<span>5</span></a></li>
 		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Information/">Information<span>8</span></a></li>
 		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/categories/News/">News<span>3</span></a></li>
 		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Programming/">Programming<span>38</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
 		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Source/">Source<span>1</span></a></li>
 		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
 		
 		</ul>
 	</div>
@@ -606,48 +558,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/docker/">docker<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/win7/">win7<span>1</span></a></li>
 		
-			<li><a href="/tags/game/">game<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/as3/">as3<span>4</span></a></li>
 		
-			<li><a href="/tags/lua/">lua<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/webstorm/">webstorm<span>2</span></a></li>
 		
-			<li><a href="/tags/ibus/">ibus<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/vista/">vista<span>1</span></a></li>
 		
-			<li><a href="/tags/adjbrightness/">adjbrightness<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
+			<li><a href="/deskangel.github.io/tags/blockchain/">blockchain<span>1</span></a></li>
 		
-			<li><a href="/tags/node-js/">node.js<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/memory/">memory<span>1</span></a></li>
 		
-			<li><a href="/tags/Android/">Android<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/wine/">wine<span>1</span></a></li>
 		
-			<li><a href="/tags/dual-view/">dual view<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/dafileserver/">dafileserver<span>1</span></a></li>
 		
-			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/english/">english<span>1</span></a></li>
 		
-			<li><a href="/tags/deskangel/">deskangel<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/jenkins/">jenkins<span>1</span></a></li>
 		
-			<li><a href="/tags/blockchain/">blockchain<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/taskbar/">taskbar<span>1</span></a></li>
 		
-			<li><a href="/tags/jenkins/">jenkins<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/Android/">Android<span>1</span></a></li>
 		
-			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/sftp/">sftp<span>1</span></a></li>
 		
-			<li><a href="/tags/console/">console<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/xdebug/">xdebug<span>1</span></a></li>
 		
-			<li><a href="/tags/android/">android<span>10</span></a></li>
+			<li><a href="/deskangel.github.io/tags/docker/">docker<span>3</span></a></li>
 		
-			<li><a href="/tags/flash-builder/">flash builder<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/adjbrightness/">adjbrightness<span>1</span></a></li>
 		
-			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/egret/">egret<span>1</span></a></li>
 		
-			<li><a href="/tags/busybox/">busybox<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/openpgp/">openpgp<span>1</span></a></li>
 		
-			<li><a href="/tags/openpgp/">openpgp<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ibus/">ibus<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>65</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
@@ -660,23 +612,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+        <a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
       </li>
     
       <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+        <a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
       </li>
     
       <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+        <a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
       </li>
     
       <li>
-        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+        <a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
       </li>
     
       <li>
-        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+        <a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
       </li>
     
   </ul>
@@ -695,7 +647,7 @@
   </div>
   <div class="container-narrow">
   <footer> <p>
-  &copy; 2018 William Hsueh
+  &copy; 2020 William Hsueh
   
       with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
 </p> </footer>
@@ -708,15 +660,15 @@
   <span>▲</span> 
 </a>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/deskangel.github.io/js/gallery.js"></script>
+<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
+<script src="/deskangel.github.io/js/main.js"></script>
+<script src="/deskangel.github.io/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -730,7 +682,7 @@
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/" + search_path;
+	 var path = "/deskangel.github.io/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 

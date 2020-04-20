@@ -3,8 +3,63 @@
   
     
     <entry>
+      <title><![CDATA[DaFileShare 开发笔记]]></title>
+      <url>/deskangel.github.io/2020/04/20/dafileserver-dev-notes/</url>
+      <content type="html"><![CDATA[<p>一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。</p>
+<p>DaFileShare 的代码很简单，分成两个部分：</p>
+<ul>
+<li>Command line 的 http server 提供文件分享功能</li>
+<li>Mac App 对其进行封装，提供拖放支持</li>
+</ul>
+<p>开发 DaFileShare 之前没有做过 Mac App 的开发，也没有接触过 Swift，一切都是新学，所以记一下Mac App的开发过程，以及遇到的问题，至于 Command line 部分，没有什么好讲的。</p>
+<p>第一个遇到的问题就是<code>拖放</code>。</p>
+<h3 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h3><p>Macos 的拖放是通过剪切板实现的，首先App需要注册拖放的类型。第一个纠结的问题是：在哪里注册？</p>
+<p>参考了网上的文章和 Apple 的开发文档，NSView 提供了拖放的支持，但是还需要进行一些处理。经过测试，<code>awakFromNib</code> 是一个很好的入口，哪怕用的是<code>StoryBoard</code>，一样会进入这个函数。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">awakeFromNib</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.awakeFromNib()</div><div class="line">    <span class="keyword">self</span>.registerForDraggedTypes([<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为新手的原因，不知道如何把 NSView 类和 StoryBoard，Google 了很久也没有任何发现，直到后来看到 <code>identity inspector</code> 下的 <code>Custom Class</code>，尝试着把 StoryBoard 中的 view 的类改为自己的类才算成功。</p>
+<h4 id="获取拖放的数据"><a href="#获取拖放的数据" class="headerlink" title="获取拖放的数据"></a>获取拖放的数据</h4><p>可能是因为 Swift 的快速发展，网上一些文章已经过时，获取剪切板数据的方法在 Xcode 11.4.1 下已经失效了。下面是可以工作的代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">performDragOperation</span><span class="params">(<span class="number">_</span> sender: NSDraggingInfo)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> pboard = sender.draggingPasteboard</div><div class="line">    <span class="keyword">let</span> dragTypes = pboard.types! <span class="keyword">as</span> <span class="type">NSArray</span></div><div class="line">    <span class="keyword">if</span> dragTypes.<span class="built_in">contains</span>(<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL) &#123;</div><div class="line">        <span class="keyword">let</span> files = pboard.propertyList(forType: <span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>(rawValue: <span class="string">"NSFilenamesPboardType"</span>)) <span class="keyword">as</span>! [<span class="type">String</span>]</div><div class="line">        <span class="keyword">let</span> numberOfFiles = files.<span class="built_in">count</span></div><div class="line">        <span class="keyword">if</span> numberOfFiles &gt; <span class="number">0</span> &#123;</div><div class="line">            <span class="keyword">let</span> filePath = files[<span class="number">0</span>] <span class="keyword">as</span> <span class="type">String</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> delegate = <span class="keyword">self</span>.delegate &#123;</div><div class="line">                <span class="type">NSLog</span>(<span class="string">"file path \(filePath)"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><p>第二个遇到的大问题是关闭：view 的关闭，窗口的关闭，App 的关闭。<br>由于想在退出 App 的时候进行一些处理，特别是 Command line 的 http server 进程的关闭，结果就遇到问题了。</p>
+<h4 id="同步关闭"><a href="#同步关闭" class="headerlink" title="同步关闭"></a>同步关闭</h4><p>首先，点击窗口上的关闭按钮后，只是关闭了窗口，但是 App 没有退出。再次点击 Dock 上的 App 图标，也没有像其他应用一样再次打开窗口，而是没有任何反应。<br>因为我不需要再打开窗口，只需要同步关闭，这个比较好处理，在 <code>AppDelegate</code> 中加一个函数即可：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationShouldTerminateAfterLastWindowClosed</span><span class="params">(<span class="number">_</span> sender: NSApplication)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="不同的关闭方式"><a href="#不同的关闭方式" class="headerlink" title="不同的关闭方式"></a>不同的关闭方式</h4><p>然后，只需要找个地方同一处理关闭事件就好了吧？——然而并不是！<br>正常的关闭方式有三种：关闭按钮，菜单Quit，Cmd+Q。三种方式，三个表现形式！！</p>
+<hr>
+<h5 id="关闭按钮"><a href="#关闭按钮" class="headerlink" title="关闭按钮"></a>关闭按钮</h5><p>窗口上的关闭按钮可能是最正常的方式了。点击后，<code>ViewController</code> 的 <code>viewDidDisappear</code> 被调用，但是如果你在 <code>AppDelegate</code> 有写<br><code>applicationShouldTerminate</code> 函数，你会发现这个函数关闭没有调用到。</p>
+<h5 id="菜单-Quit"><a href="#菜单-Quit" class="headerlink" title="菜单 Quit"></a>菜单 Quit</h5><p>通过菜单——不管是 Dock 上的菜单还是菜单栏上——的Quit，<code>applicationShouldTerminate</code> 被调用到了，但是，<code>viewDidDisappear</code> 没有调用。</p>
+<h5 id="Cmd-Q"><a href="#Cmd-Q" class="headerlink" title="Cmd+Q"></a>Cmd+Q</h5><p>一句话，什么都不调用！！</p>
+<hr>
+<p>通过查阅资料，是因为在”macOS 10.6”中引入了一个叫做<code>Sudden Termination</code>的机制来快速关闭 App。由于刚开始接触 macos 开发，不想一开始就钻研太深，还是尽早把 App 实现才是正事，所以只看了如何关闭这个机制。没错，这个<code>Sudden Termination</code>可以关闭，只需要一行代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至此，这三种关闭方式都会调用到<code>applicationShouldTerminate</code>和<code>viewDidDisappear</code>，选一个地方处理就可以。我是在<code>viewDidDisappear</code>中进行处理，因为主要的逻辑代码在<code>ViewController</code>中。</p>
+<h5 id="异常关闭"><a href="#异常关闭" class="headerlink" title="异常关闭"></a>异常关闭</h5><p>异常关闭有两种：一种是程序出现 Exception 导致退出的，一种是被 kill 掉。</p>
+<p>根据 Windows 上的经验，第一种应该有一个全局处理比如“unCaughtException” 这样的函数来处理，但是我没有尝试；第二种应该是需要捕获 signal 来处理，我尝试了但是没有成功，于是为了省事，把 kill signal屏蔽掉了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line"></div><div class="line">    signal(<span class="type">SIGTERM</span>, <span class="type">SIG_IGN</span>) <span class="comment">// ignore the termination signal</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Xcode 11.4.1，Swift 5，macos 10.15.4</p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>你可以下载 <a href="https://github.com/deskangel/deskangel.github.io/releases/download/19042020/DaFileShare.app.zip" target="_blank" rel="external">DaFileShare</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Software </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> dafileserver </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[vsc-with-gdb-remote]]></title>
+      <url>/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Build EOS on ubuntu 16.04]]></title>
-      <url>/2018/03/31/build-eos-on-ubuntu-16-04/</url>
+      <url>/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/</url>
       <content type="html"><![CDATA[<p>为了和官方测试链对接，选择的是<code>dawn-2.x</code>分支。官方推荐的是在<code>Ubuntu 16.10</code>上面编译，但是我只有16.04，想来应该是差不多的。</p>
 <p>参考<a href="https://github.com/EOSIO/eos/blob/DAWN-2018-02-14/README.md" target="_blank" rel="external">官方文档</a>，直接开干。</p>
 <h4 id="第一个坑"><a href="#第一个坑" class="headerlink" title="第一个坑"></a>第一个坑</h4><p>第一个坑其实是关于git的，具体一点就是关于git的子模块的。如果在命令行checkout dawn-2.x分支，一定不要忘了在子模块不会自动切换分支。而且，手动切换后，也会留下一堆<code>Untracked files</code>，我是直接没管。</p>
@@ -39,7 +94,7 @@
     
     <entry>
       <title><![CDATA[custom-eui-control-in-egret]]></title>
-      <url>/2017/09/21/custom-eui-control-in-egret/</url>
+      <url>/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/</url>
       <content type="html"><![CDATA[<p>如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。</p>
 <ol>
 <li>创建一个 exml 文件，用来定义控件的显示元素，这里要注意的<code>classname</code> 的设置，比如设置成 <code>game.CustomButton</code>。game 为模块名（文档上也称呼为命名空间），后面需要用到。</li>
@@ -70,7 +125,7 @@
     
     <entry>
       <title><![CDATA[乐动力“网络不给力”问题的处理]]></title>
-      <url>/2016/09/30/ledongli-login-issue-workaround/</url>
+      <url>/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/</url>
       <content type="html"><![CDATA[<p>MX5上的乐动力 App 很早以前就不能登录了，各种途径都是提示“网络不给力”，等了大半年看他们是否会修正这个问题，但是每次版本更新后都试了，问题依旧存在。而且，无论是官网还是 App或是微博客服，都没有提供相关的说明该如何操作。<br>为了不丢失数据，只好自己动手了。</p>
 <p>进入 Flyme 5 的访客系统，安装微信和乐动力 App，测试登录正常，之前的数据也能正常同步下来。</p>
 <h4 id="第一步，祭出-Charles-看看都干了啥"><a href="#第一步，祭出-Charles-看看都干了啥" class="headerlink" title="第一步，祭出 Charles 看看都干了啥"></a>第一步，祭出 Charles 看看都干了啥</h4><p>启动 Charles，然后在手机上设置代理，进行登录，发现一个正常的登录主要做了几个操作：</p>
@@ -118,7 +173,7 @@
     
     <entry>
       <title><![CDATA[React with Node.js in Webstorm]]></title>
-      <url>/2016/07/30/React-with-Node-js-in-Webstorm/</url>
+      <url>/deskangel.github.io/2016/07/30/React-with-Node-js-in-Webstorm/</url>
       <content type="html"><![CDATA[<p>软件环境：</p>
 <table>
 <thead>
@@ -209,7 +264,7 @@
     
     <entry>
       <title><![CDATA[Node.js from scratch]]></title>
-      <url>/2016/04/18/Node-js-from-scratch/</url>
+      <url>/deskangel.github.io/2016/04/18/Node-js-from-scratch/</url>
       <content type="html"><![CDATA[<p>使用 webstorm，从创建一个空白的工程开始构建一个 Node.js 的websocket服务器。</p>
 <ol>
 <li>创建空白工程</li>
@@ -243,7 +298,7 @@
     
     <entry>
       <title><![CDATA[phpStorm remote debug with xdebug]]></title>
-      <url>/2015/09/20/phpstorm-remote-debug-with-xdebug/</url>
+      <url>/deskangel.github.io/2015/09/20/phpstorm-remote-debug-with-xdebug/</url>
       <content type="html"><![CDATA[<p>因为使用了 docker 进行了环境隔离，所以需要对 phpStorm 进行远程调试的配置。</p>
 <p>网上有一些教程，不是太复杂就是已经过时。经过摸索，一下是完整的配置流程。</p>
 <p>版本： ubuntu 14.04 LTS, phpStorm 9, php5-fpm</p>
@@ -294,7 +349,7 @@
     
     <entry>
       <title><![CDATA[搞定 osx 下 virtualbox 中的 docker container 访问共享文件夹的权限问题]]></title>
-      <url>/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</url>
+      <url>/deskangel.github.io/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</url>
       <content type="html"><![CDATA[<p>案例是这样的：</p>
 <ul>
 <li>有一台 osx 系统</li>
@@ -339,7 +394,7 @@
     
     <entry>
       <title><![CDATA[java压缩，javascript 解压缩总结]]></title>
-      <url>/2015/06/06/java-compress-javascript-uncompress/</url>
+      <url>/deskangel.github.io/2015/06/06/java-compress-javascript-uncompress/</url>
       <content type="html"><![CDATA[<p>这里描述如何在 client 端使用 javascript 处理通过 ajax 调用返回的压缩数据。服务器端使用java 的<code>DeflaterOutputStream</code>来进行数据的压缩。</p>
 <p>最早尝试使用<code>jquery</code>的<code>$.ajax</code>方法来做 ajax 调用，但是其返回的数据都是字符串类型的，部分字节被强制转换了，导致这部分数据无法正确的解码。</p>
 <p><em>如果仔细观察，浏览器的开发者模式中<code>Response</code>页面得到的数据格式是正常的，但是在 <code>success: function (data)</code>中数据是不正确的。</em></p>
@@ -371,7 +426,7 @@
     
     <entry>
       <title><![CDATA[sftp用户创建与设置]]></title>
-      <url>/2015/04/29/sftp-user-creat-and-config/</url>
+      <url>/deskangel.github.io/2015/04/29/sftp-user-creat-and-config/</url>
       <content type="html"><![CDATA[<p>环境：ubuntu server 14.04<br>目的：用户只能通过 sftp 访问指定目录，并且不能登录 shell</p>
 <p>网上有很多这方面的介绍，最有价值的是<a href="http://solderintheveins.co.uk/2011/03/ubuntu-sftp-only-account-how-to/" target="_blank" rel="external">这里</a>。但是按照这篇文档还是遇到了两个坑：</p>
 <ol>
@@ -419,7 +474,7 @@
     
     <entry>
       <title><![CDATA[docker之程序员系列 （一）]]></title>
-      <url>/2015/04/22/docker-for-programmer/</url>
+      <url>/deskangel.github.io/2015/04/22/docker-for-programmer/</url>
       <content type="html"><![CDATA[<p><em>因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。</em></p>
 <h4 id="OSX-下的选择"><a href="#OSX-下的选择" class="headerlink" title="OSX 下的选择"></a>OSX 下的选择</h4><p>虽然官方提供了一个工具（<a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="external">boot2docker</a>），但是说到底，它其实也是在 OSX 下使用 virtualbox 虚拟了一个 linux 出来，然后再在 linux 下进行 docker 操作。那么对于我这样的凡事都希望清晰、简单的人来说，第一选择肯定不会使用这个工具，而是会选择从头开始。如果你和我一样，那么我们需要下面这几样东西：</p>
 <ol>
@@ -473,7 +528,7 @@
     
     <entry>
       <title><![CDATA[blog 从 Dreamhost 搬到了 Linode]]></title>
-      <url>/2015/04/18/Blog-moved/</url>
+      <url>/deskangel.github.io/2015/04/18/Blog-moved/</url>
       <content type="html"><![CDATA[<p>Dreamhost 从国内访问越来越差，速度慢不说，有时候还连不上。</p>
 <p>除此之外，每月$8.5的共享服务器在价格方面也完全没有优势，没有 root 权限，很多东西都无法操作。</p>
 <p>而且，虽然他们说硬盘大小是没有限制的，但是上次放了多一点东西就发邮件过来要求删除，说什么不能作为备份用途云云。</p>
@@ -492,7 +547,7 @@
     
     <entry>
       <title><![CDATA[Pomelo开发环境搭建之 Docker]]></title>
-      <url>/2015/02/01/pomelo-dev-env-with-docker/</url>
+      <url>/deskangel.github.io/2015/02/01/pomelo-dev-env-with-docker/</url>
       <content type="html"><![CDATA[<p>因为不想把当前的 osx 的环境弄得更复杂以及想实战一下docker，所以选择了在docker下搭建pomelo 的开发环境，大致的过程如下：</p>
 <h4 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h4><ol>
 <li>安装 VirtualBox</li>
@@ -545,7 +600,7 @@
     
     <entry>
       <title><![CDATA[Quick-cocos2d-x 接入 protobuf]]></title>
-      <url>/2014/12/10/quick-cocos2d-x-with-protobuf/</url>
+      <url>/deskangel.github.io/2014/12/10/quick-cocos2d-x-with-protobuf/</url>
       <content type="html"><![CDATA[<ol>
 <li><p>下载云风的 pbc：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:cloudwu/pbc.git</div></pre></td></tr></table></figure>
@@ -579,7 +634,7 @@
     
     <entry>
       <title><![CDATA[使用 Cocostudio 创建 listview item]]></title>
-      <url>/2014/11/29/cocostudio-create-listview-item/</url>
+      <url>/deskangel.github.io/2014/11/29/cocostudio-create-listview-item/</url>
       <content type="html"><![CDATA[<p>为了快速开发一个小游戏，使用了 Cocostudio 2.0 作为 UI 编辑器。其实 Cocostudio 的功能比较弱，特别是针对稍微复杂一点的控件（Widget），无法做到所见即所得，不得不写一些代码。</p>
 <p>游戏中用到了一个 listview，但是 Cocostudio2.0中没有 listview，所以只能写代码实现，这个是没有办法的。好在一个 listview 本身还是比较简单的，但是 listview 中的 item 可以很复杂，是否有办法简化呢？</p>
 <p>尝试了很久之后，还真找到了一个迂回的方法，即：</p>
@@ -610,7 +665,7 @@
     
     <entry>
       <title><![CDATA[常用正则表达式符号]]></title>
-      <url>/2014/07/04/common-regular-expression-signs/</url>
+      <url>/deskangel.github.io/2014/07/04/common-regular-expression-signs/</url>
       <content type="html"><![CDATA[<h4 id="转意符号"><a href="#转意符号" class="headerlink" title="转意符号"></a>转意符号</h4><table>
 <thead>
 <tr>
@@ -767,7 +822,7 @@
     
     <entry>
       <title><![CDATA['Keyboard backlight controller' Open Source]]></title>
-      <url>/2013/09/26/Keyboard-backlight-controller-Open-Source/</url>
+      <url>/deskangel.github.io/2013/09/26/Keyboard-backlight-controller-Open-Source/</url>
       <content type="html"><![CDATA[<p>All the source code have been put into github:<a href="https://github.com/fantastxmw/kbLight" target="_blank" rel="external">https://github.com/fantastxmw/kbLight</a></p>
 <p>Hope you would like it!</p>
 ]]></content>
@@ -791,7 +846,7 @@
     
     <entry>
       <title><![CDATA[tolua++:namespace导致的问题]]></title>
-      <url>/2013/05/21/tolua++-namespace-issue/</url>
+      <url>/deskangel.github.io/2013/05/21/tolua++-namespace-issue/</url>
       <content type="html"><![CDATA[<p>在用 <code>cocos2d-x</code> 的时候，可以把自己的类和 <code>cocos2d-x</code> 的类混在一起，即简单的把自己需要导出的类放到 <code>cocos2d</code>的 pkg 文件中。</p>
 <p>网上也有推荐这样的做法，但是这样虽然简单，却让人难以接受。</p>
 <p>我选择了比较麻烦的一种，就是自己重新定义 pkg 文件，并且导出了一个独立的cpp文件。摸过一些简单的坑之后，还算比较顺利，只是在pkg文件中没有注意处理 <code>cocos2d</code> 的 <code>namespace</code>，导致了在lua脚本中，自定义类中获得的比如 <code>CCNode</code> 之类的对象后无法访问其成员函数而已。</p>
@@ -822,7 +877,7 @@
     
     <entry>
       <title><![CDATA[指针vector初始化]]></title>
-      <url>/2013/04/19/pointer-vector-initialization/</url>
+      <url>/deskangel.github.io/2013/04/19/pointer-vector-initialization/</url>
       <content type="html"><![CDATA[<p>C++中，在申明的时候初始化一个vector的时候可以指明vector的大小和默认值。但是如果用NULL来初始化指针的时候，会遇到问题。</p>
 <p><pre class="lang:c++ decode:true ">class A;<br>vector&lt;A <em>&gt; vtTest&lt;2, NULL&gt;;</em></pre><br>在XCode中报错：说不能把int型赋值给A。原因就是NULL本身是不带具体的类型的，默认会被认为是一个int类型。</p>
 <p>所以，解决的方法就是类型强制转换。</p>
@@ -845,7 +900,7 @@
     
     <entry>
       <title><![CDATA[Ubuntu下部署Jenkins的一些要点]]></title>
-      <url>/2013/03/20/ubuntu-jenkins/</url>
+      <url>/deskangel.github.io/2013/03/20/ubuntu-jenkins/</url>
       <content type="html"><![CDATA[<p>Jenkins是一个开源的持续集成的工具，安装什么的都没有问题，非常简单。但是在配置的时候还是遇到了几个问题：</p>
 <ol>
 <li><p>配置权限管理的时候，一定要先创建一个用户之后再进行。如果没有创建用户，又去掉了”Allow users to sign up”的勾，那么只能去编辑config.xml了。</p>
@@ -880,7 +935,7 @@
     
     <entry>
       <title><![CDATA[Ubuntun下GIT服务器的建立]]></title>
-      <url>/2013/03/18/ubuntun-install-git/</url>
+      <url>/deskangel.github.io/2013/03/18/ubuntun-install-git/</url>
       <content type="html"><![CDATA[<p>使用环境：小团队</p>
 <h2 id="安装openssh-server-git"><a href="#安装openssh-server-git" class="headerlink" title="安装openssh-server, git"></a>安装openssh-server, git</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div><div class="line">sudo apt-get install openssh-server</div></pre></td></tr></table></figure>
 <h2 id="添加git账号"><a href="#添加git账号" class="headerlink" title="添加git账号"></a>添加git账号</h2><p>这儿方案中，所有的人共享一个账号，即git账号：<br><code>sudo adduser git</code><br>按照提示设置账号内容，密码等。</p>
@@ -920,7 +975,7 @@
     
     <entry>
       <title><![CDATA[Lua与C/C++的一些简单交互]]></title>
-      <url>/2013/03/13/lua-with-c-cpp/</url>
+      <url>/deskangel.github.io/2013/03/13/lua-with-c-cpp/</url>
       <content type="html"><![CDATA[<h2 id="我只写简单的！"><a href="#我只写简单的！" class="headerlink" title="我只写简单的！"></a>我只写简单的！</h2><ul>
 <li>lua版本 5.1.4</li>
 <li>环境 ubuntu 12.04</li>
@@ -956,7 +1011,7 @@
     
     <entry>
       <title><![CDATA[Lua与C++的集成]]></title>
-      <url>/2013/03/12/lua-and-c++/</url>
+      <url>/deskangel.github.io/2013/03/12/lua-and-c++/</url>
       <content type="html"><![CDATA[<h4 id="——一个最简单的Lua与C-的例子"><a href="#——一个最简单的Lua与C-的例子" class="headerlink" title="——一个最简单的Lua与C++的例子"></a>——一个最简单的Lua与C++的例子</h4><p>很多人推荐脚本和引擎相结合，灵活又方便，但是以前没有这方面的经验，所以从头开始学习。</p>
 <p>脚本方面选择了Lua，因为用得比较广，而且据说很简单！</p>
 <p>开始之前要有心理准备，这东西，其实不简单！</p>
@@ -1001,7 +1056,7 @@
     
     <entry>
       <title><![CDATA[Cocos2d-x的几个注意点]]></title>
-      <url>/2013/03/08/some-points-in-cocos2d-x/</url>
+      <url>/deskangel.github.io/2013/03/08/some-points-in-cocos2d-x/</url>
       <content type="html"><![CDATA[<p>这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。</p>
 <p>Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span></div><div class="line">&#123;</div><div class="line">    CC_BREAK_IF(! CCLayer::init());</div><div class="line">    CCSprite* bomb1 = CCSprite::create(<span class="string">"CloseNormal.png"</span>);</div><div class="line">    addChild(bomb1,<span class="number">1</span>);</div><div class="line">&#125;<span class="keyword">while</span> (<span class="number">0</span>)</div></pre></td></tr></table></figure></p>
 <p>这里之所以要用<code>do...while</code>，仅仅只是为了使用CC_BREAK_IF这个宏。非但打乱了C++的语法，而且也是代码复杂化了。</p>
@@ -1027,7 +1082,7 @@
     
     <entry>
       <title><![CDATA[Dictionary Assignment Breaks the Iteration!]]></title>
-      <url>/2012/12/21/dictionary-assignment-issue/</url>
+      <url>/deskangel.github.io/2012/12/21/dictionary-assignment-issue/</url>
       <content type="html"><![CDATA[<p>Let’s check the following code first:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">dict[btn1] = false;</div><div class="line">dict[btn2] = false;</div><div class="line">dict[btn3] = false;</div><div class="line"></div><div class="line">for (var key:Object in dict)</div><div class="line">&#123;</div><div class="line">       dict[key] = true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>How many times do you think the loop would be entered in this case?</p>
 <p>NOT only 3!</p>
@@ -1051,7 +1106,7 @@
     
     <entry>
       <title><![CDATA[在flash builder中显示workspace路径]]></title>
-      <url>/2012/10/10/show-workspace-path-in-flashbuilder/</url>
+      <url>/deskangel.github.io/2012/10/10/show-workspace-path-in-flashbuilder/</url>
       <content type="html"><![CDATA[<p>默认的flash builder启动后没有显示workspace的信息，对于在多个workspace中切换的开发人员来说，非常不方便。</p>
 <p>flash builder是基于eclipse的，而在eclipse中有一个启动参数 <span style="color: #ff0000;">-showLocation</span> ，可以用来在标题栏中显示workspace的路径。</p>
 <p>对于windows，有几种在启动时候添加参数的方法，但是对windows 7来说，如果你使用pin功能把flash builder固定在任务栏上，那么最好使用在配置文件中增加启动参数的方法：</p>
@@ -1075,7 +1130,7 @@
     
     <entry>
       <title><![CDATA[OSX 下提取pkg包中的文件]]></title>
-      <url>/2012/09/23/extract-file-from-pkg-in-osx/</url>
+      <url>/deskangel.github.io/2012/09/23/extract-file-from-pkg-in-osx/</url>
       <content type="html"><![CDATA[<p>今天犯了个错误，本来想把几个文件夹复制到/usr/share/vim/vim73/目录下合并的，谁知osx下却是替换的操作（系统确实有替换的提示，但是windows下的目录，都是合并的操作:-(）——它真的替换了，结果原来的文件丢失了。</p>
 <p>系统是OSX 10.8，没有从安装盘装回软件的选项，只有自己动手。</p>
 <ol>
@@ -1111,7 +1166,7 @@
     
     <entry>
       <title><![CDATA[Python处理多个不同编码的文件]]></title>
-      <url>/2012/09/08/different-encoding-files-with-python/</url>
+      <url>/deskangel.github.io/2012/09/08/different-encoding-files-with-python/</url>
       <content type="html"><![CDATA[<p>当需要把多个不同编码的文件合并成一个的时候，unicode是一个很好的选择。但是如果把不同的编码转换成unicode，python并没有提供一个很好的方法。</p>
 <p>Python内部是使用unicode来编码，但要把不同的编码转换成unicode，首先需要知道需要转换的内容是什么编码的。这种设计用来处理转码特定的编码文件没有问题，但是要写一个通用的工具，将是不可能的任务。</p>
 <p>但是对于一些特殊的项目，还是可以做一些事情的。有一个检测文本编码类型的库可以借用：<a href="http://pypi.python.org/pypi/chardet" target="_blank" rel="external">chardet</a> 。</p>
@@ -1138,7 +1193,7 @@
     
     <entry>
       <title><![CDATA[pureMVC对项目并无益处]]></title>
-      <url>/2012/08/17/purmvc-useless/</url>
+      <url>/deskangel.github.io/2012/08/17/purmvc-useless/</url>
       <content type="html"><![CDATA[<ol>
 <li><p>首先，在稍大一点的项目中，pureMVC的消息传递会成为一个比较严重的瓶颈。</p>
 </li>
@@ -1167,7 +1222,7 @@
     
     <entry>
       <title><![CDATA[Flash builder项目多国化设置问题]]></title>
-      <url>/2012/05/30/international-language-setting-of-flashbuilder/</url>
+      <url>/deskangel.github.io/2012/05/30/international-language-setting-of-flashbuilder/</url>
       <content type="html"><![CDATA[<p>在配置多国化的时候，在ActionScript Compiler的Additional Compiler argument中是这样设置的：</p>
 <pre escaped="true" lang="php" line="1">-locale zh_CN</pre>
 其他都没有问题，但是ActionScript Build Path中的Output folder怎么都无法设置。
@@ -1192,7 +1247,7 @@
     
     <entry>
       <title><![CDATA[ADDED_TO_STAGE的触发时机]]></title>
-      <url>/2012/04/05/when-to-trigger-added-to-stage/</url>
+      <url>/deskangel.github.io/2012/04/05/when-to-trigger-added-to-stage/</url>
       <content type="html"><![CDATA[<p>Adobe的help文件说，这个event的触发时机是：</p>
 <blockquote>
 <p>The following methods trigger this event: DisplayObjectContainer.addChild(), DisplayObjectContainer.addChildAt().</p>
@@ -1223,7 +1278,7 @@
     
     <entry>
       <title><![CDATA[Breakpoint acts weirdly]]></title>
-      <url>/2012/02/24/breakpoint-acts-weirdly/</url>
+      <url>/deskangel.github.io/2012/02/24/breakpoint-acts-weirdly/</url>
       <content type="html"><![CDATA[<p>Encountered the break point issue in visual studio 2008, which says</p>
 <blockquote>
 <p>The breakpoint will not currently be hit. The source code is different from the original version<br>Or, the IDE complains nothing, but the step command jumping between lines.</p>
@@ -1250,7 +1305,7 @@
     
     <entry>
       <title><![CDATA[BitmapData内存测试]]></title>
-      <url>/2011/06/21/memory-test-of-bitmapdata/</url>
+      <url>/deskangel.github.io/2011/06/21/memory-test-of-bitmapdata/</url>
       <content type="html"><![CDATA[<p>测试平台<br>Windows 7 sp1 x64<br>Flash builder 4.5.1<br>IE 9.0 with flash player plug-in 10.3.181.26</p>
 <p>测试工具<br>Profiler</p>
 <p>测试内容</p>
@@ -1291,7 +1346,7 @@
     
     <entry>
       <title><![CDATA[AS3中置换滤镜的理解]]></title>
-      <url>/2011/06/16/understand-of-transform-filter-in-as3/</url>
+      <url>/deskangel.github.io/2011/06/16/understand-of-transform-filter-in-as3/</url>
       <content type="html"><![CDATA[<p><span style="font-size: small;"><span style="line-height: normal;">在ActionScription中，DisplacementMapFilter是一个非常强大的滤镜，很多的特效，比如火焰，波纹等都会使用到它。另一方面，它也比较多变，让初学者难以掌握它的功能。下面的分析从AS3中使用的公式开始。</span></span></p>
 <p><span style="font-size: small;"><span style="line-height: normal;">在<a href="http://help.adobe.com/zh_CN/FlashPlatform/reference/actionscript/3/flash/filters/DisplacementMapFilter.html?filter_flash=cs5&amp;filter_flashplayer=10.2&amp;filter_air=2.6#DisplacementMapFilter(" target="_blank" rel="external">Adobe的官方文档</a>)中，提到DisplacementMapFilter使用如下的公式：</span></span></p>
 <p><pre escaped="true">dstPixel[x, y] = srcPixel[x + ((componentX(x, y) - 128) <em> scaleX) / 256, y + ((componentY(x, y) - 128) </em> scaleY) / 256)]</pre><br>我们先来理解该公式。</p>
@@ -1341,7 +1396,7 @@
     
     <entry>
       <title><![CDATA[对三大桌面系统的一点看法]]></title>
-      <url>/2011/03/20/perspective-of-three-desktop-oses/</url>
+      <url>/deskangel.github.io/2011/03/20/perspective-of-three-desktop-oses/</url>
       <content type="html"><![CDATA[<p>Windows是最流行的桌面系统，虽然现在Apple如日中天，但是短期之内无法撼动windows的地位。不过不可否认的是，windows已经开始走向没落。其实苗头早在几年前就已经显现，只是win7的推出犹如一支强心剂，给垂垂老矣的windows带来新的活力。但是现在那怕win8推出，也达不到那样的效果了。越来越多的人开始在windows之外尝试其他的系统，并且不想再回头。</p>
 <p>Linux和OSX是流出的两大方向。几年以前，流出的方向是linux，现在多了一个选择。传奇的贵族式的osx比linux更具有吸引力。在软件行业，如果当年linux吸引的还主要是geek特质的对象，那么osx已经开始吸引普通的工程师。只要给他们机会，大部分人都乐意离开windows，投入osx或者linux的环抱。即使工作的关系在公司不得不使用windows，越来越多的工程师在家也安装了linux系统或是购买了安装osx的苹果电脑。我也是如此，要不是现在工作的需要必须绑定在windows上，我非常乐意去尝试全新的体验。但在家里，我还是购买了iMac并在笔记本上安装了ubuntu。</p>
 <p>开发人员的数量和素质决定一个平台的命运。如果他们离开，剩下的就只有没落！而关于开发者离开的原因，就我个人观察，完全不是因为windows不够友好。在使用过osx半年之后，我并不觉得它比windows更出色，除去因为历史原因导致的软件方面的匮乏不谈，就一些系统自身的操作，很多方面windows也是更方便的。方便友好并不能决定开发者的去留。linux是公认的不友好，但是依然有大批的开发者，虽然它也有自身的问题。</p>
@@ -1364,7 +1419,7 @@
     
     <entry>
       <title><![CDATA[关于“十三个球用天平称三次，找出其中一个质量不同的球”的解]]></title>
-      <url>/2011/03/07/algorithm-about-thirteen-balls/</url>
+      <url>/deskangel.github.io/2011/03/07/algorithm-about-thirteen-balls/</url>
       <content type="html"><![CDATA[<p>这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。</p>
 <ol>
 <li>把A组均分成两组：a组4个球，b组也是4个球。</li>
@@ -1419,7 +1474,7 @@
     
     <entry>
       <title><![CDATA[如何补全proxy switchy!的功能]]></title>
-      <url>/2011/02/08/proxy-switchy/</url>
+      <url>/deskangel.github.io/2011/02/08/proxy-switchy/</url>
       <content type="html"><![CDATA[<p><a href="https://chrome.google.com/webstore/detail/caehdcpeofiiigpdhbabniblemipncjj" target="_blank" rel="external">Proxy Switch!</a>是一个Google Chrome浏览器的插件，通过它可以方便的设置和切换代理（Auto Switch Mode）。但是，Proxy Switch!新建的规则只能使用shExpMatch函数，这导致了一些局限性。下面的揭示如何让其支持自动代理脚步的其他的函数，唯一的要求是要有一个web空间可以存放自动代理脚步。</p>
 <p>方法很简单，</p>
 <ol>
@@ -1447,7 +1502,7 @@
     
     <entry>
       <title><![CDATA['Go to work' and 'Get to work']]></title>
-      <url>/2011/01/07/Go-to-work-and-Get-to-work/</url>
+      <url>/deskangel.github.io/2011/01/07/Go-to-work-and-Get-to-work/</url>
       <content type="html"><![CDATA[<p>今天看New York Times一则关于防雪的报道，里面提到</p>
 <blockquote>
 <p>… and people could not get to work.</p>
@@ -1478,7 +1533,7 @@
     
     <entry>
       <title><![CDATA[New features in DaCalc v1.7.1.0]]></title>
-      <url>/2010/12/07/new-features-in-dacalc-v1-0-7-1/</url>
+      <url>/deskangel.github.io/2010/12/07/new-features-in-dacalc-v1-0-7-1/</url>
       <content type="html"><![CDATA[<p> The new version of DaCalc 1.7.1.0 comes with several new features.</p>
 <ol>
 <li>Automatically use the last result as the first operand if an operator is the first input in normal mode. For example, after calc an expression, <span style="color: #ff0000;">2+3</span>, we get <span style="color: #ff0000;">5</span> as the result. Now the expression box is empty and user press a + button directly, the last result <span style="color: #ff0000;">5</span> will be added as the first operand and the expression looks like: <span style="color: #ff0000;">5+</span>. If there is no last result, <span style="color: #ff0000;">0.0</span> will be added.</li>
@@ -1504,7 +1559,7 @@
     
     <entry>
       <title><![CDATA[用C++开发MYSQL应用]]></title>
-      <url>/2010/11/19/use-cpp-dev-mysql-app/</url>
+      <url>/deskangel.github.io/2010/11/19/use-cpp-dev-mysql-app/</url>
       <content type="html"><![CDATA[<p>简单的介绍如何用Visual Studio C++开发MYSQL的应用。为新手指明开发环境的准备和资源的位置。<br>首先是准备工作。需要下载三个开发库：</p>
 <ol>
 <li>去官方网站下载<a href="http://mysql.com/downloads/connector/cpp/" target="_blank" rel="external">mysql-connector/c++</a>。有多个版本，我下载的是mysql-connector-c++-noinstall-1.1.0-win32-vs2005.zip。connector-c++提供了两个lib，mysqlcppconn.lib和mysqlcppconn-static.lib，不幸的是最终运行的时候他们都需要libmysql.dll。</li>
@@ -1534,7 +1589,7 @@
     
     <entry>
       <title><![CDATA[The lights in Froyd Villainrom 1.5]]></title>
-      <url>/2010/11/11/the-lights-in-froyd-villainrom-1-5/</url>
+      <url>/deskangel.github.io/2010/11/11/the-lights-in-froyd-villainrom-1-5/</url>
       <content type="html"><![CDATA[<p>Froyd villainrom is a great rom. But if you don’t like the lights (the led blinking, the trackball light) you can replace the lights.hero.so file under the path <span style="color: #ff6600;">/system/lib/hw/</span> with the file from older versions. If you don’t have one, you can download from <a href="http://www.deskangel.com/download/lights.hero.so" title="lights.hero.so" target="_blank" rel="external">here</a>.</p>
 <p>You can do following steps in console to replace a file under /system/ folder if you have adb tools:</p>
 <pre>adb remount
@@ -1560,7 +1615,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Ads free version for DaysandDate and AdjBrightness]]></title>
-      <url>/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/</url>
+      <url>/deskangel.github.io/2010/10/21/ads-free-version-for-daysanddate-and-adjbrightness/</url>
       <content type="html"><![CDATA[<p>I just uploaded the ads free version of AdjBrightness to Android Market. If you don’t like to see ads on your application, you can try the ads free version. All permissions for Ads are also removed.</p>
 <p>Ads free version for DaysandDate has been Android Market for several weeks.</p>
 <p>If you won’t like to spend money on them, you can still use the ads versions. They are all full function versions.</p>
@@ -1583,7 +1638,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[error RC1106: invalid option: -ologo]]></title>
-      <url>/2010/08/30/error-rc1106-invalid-option-ologo/</url>
+      <url>/deskangel.github.io/2010/08/30/error-rc1106-invalid-option-ologo/</url>
       <content type="html"><![CDATA[<p>After switch to vs2010, if you encounter the error:</p>
 <p><pre>Error    1    error RC1106: invalid option: -ologo</pre><br>not only set the “<span style="color: #ff0000;">Suppress Startup Banner</span>“ to “No” in Properties-&gt;Resources, but also need to set the “<span style="color: #ff0000;">Enable Incremental Linking</span>“ to “No” in Properties-&gt;Linker.</p>
 ]]></content>
@@ -1605,7 +1660,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[使用wine在Mac上运行Win程序]]></title>
-      <url>/2010/07/20/wine-in-mac/</url>
+      <url>/deskangel.github.io/2010/07/20/wine-in-mac/</url>
       <content type="html"><![CDATA[<p>首先需要安装wine。具体方法参考<em>toyjack’s GeekTalks</em>的博文<a href="http://toyjack.net/install_wine_on_mac_os_x/" target="_blank" rel="external">Mac系统下安装Wine</a>。</p>
 <p>用wine运行程序，如果出现找不到mfc42.dll这样的错误，则需要用winetricks下载必要的文件。参考<a href="https://wiki.winehq.org/FAQ#My_application_says_some_DLL_or_font_is_missing._What_do_I_do.3F" target="_blank" rel="external">My application says some DLL or font is missing. What do I do?</a>以及<a href="https://wiki.winehq.org/Winetricks#Getting_winetricks" target="_blank" rel="external">Getting winetricks</a>。</p>
 <p>winetricks是一个脚本文件，下载后保存到用户目录（～），然后运行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod +x winetricks</div><div class="line">./winnetricks</div></pre></td></tr></table></figure></p>
@@ -1634,7 +1689,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Adjust brightness for Android devices]]></title>
-      <url>/2010/07/19/adjust-brightness-for-android-devices/</url>
+      <url>/deskangel.github.io/2010/07/19/adjust-brightness-for-android-devices/</url>
       <content type="html"><![CDATA[<p><a href="http://www.deskangel.com/adjbrightness/images/snap20100701_165318.png" target="_blank" rel="external"><img src="http://www.deskangel.com/adjbrightness/images/snap20100701_165318-200x300.png" alt="AdjBrightness main page" title="AdjBrightness"></a></p>
 <p>The settings for brightness of buttons and screen are very rough in Android devices, like in HTC Hero. But if your rom is <span style="color: #ff0000;">ROOTED</span>, you can download and install <a href="market://search?q=pname:com.deskangel.adjbrightness" target="_blank" rel="external">AdjBrightness</a>, which can adjust the brightness of the screen from the value 2 to 255.</p>
 <p>There are six predefined values in the main page, simply click one of them to set the brightness. If the predefined values cannot fit your request, just type the brightness value you want in the edit box and set it.</p>
@@ -1666,7 +1721,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Share DaysAndDate and get Ads removal code]]></title>
-      <url>/2010/07/08/share-daysanddate-and-get-ads-removal-code/</url>
+      <url>/deskangel.github.io/2010/07/08/share-daysanddate-and-get-ads-removal-code/</url>
       <content type="html"><![CDATA[<p>Long story short, everybody who recommended DaysAndDate or wrote reviews/shared experiences for it in <strong>three places</strong> in internet (blog, twitter, forum, etc.) will get an Ads removal code for DaysAndDate as a gift after they emailed the links of above places to <a href="mailto:william.xue@gmail.com?subject=Shared DaysAndDate" target="_blank" rel="external">william.xue@gmail.com</a>.</p>
 <p>If you like the application but hate the Ads, this is a chance to spread the application to world and get ride of the Ads from your device. Two birds with one stone. DO NOT WASTE IT!</p>
 <p>It is running from now to 11/30/2010.</p>
@@ -1693,7 +1748,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[波斯王子：遗忘之沙（WII）剧情]]></title>
-      <url>/2010/06/28/prince-of-persia-the-forgotten-sands-wii/</url>
+      <url>/deskangel.github.io/2010/06/28/prince-of-persia-the-forgotten-sands-wii/</url>
       <content type="html"><![CDATA[<p>波斯王子：遗忘之沙（WII）讲述的是一个王子与精灵的故事。</p>
 <p>精灵Zahra和她的族人曾经居住在森林中一个叫做lzdihar的王国，但是后来她的族人都被一个叫做Haoma的妖怪杀掉了。为了打败Haoma，她把自己卖给了王子，一个正在寻找可以让他领导的王国的勇士。</p>
 <p>他们穿过丛林，来到一块空地。在Zahra的引导下，王子亲吻了一座被施了魔法的雕像，由此获得了不死的能力。之后，lzdihar王国的入口出现在他的眼前。</p>
@@ -1725,7 +1780,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[给Android程序添加不同的广告平台]]></title>
-      <url>/2010/06/04/add-different-ads-in-android-app/</url>
+      <url>/deskangel.github.io/2010/06/04/add-different-ads-in-android-app/</url>
       <content type="html"><![CDATA[<p>本文假设已有一个广告，比如admob，然后添加另一广告，比如有米，用来在根据不同的语言自动调用不同的广告平台。</p>
 <ol>
 <li><p>在attrs.xml中追加一个declare-stylea，原有的属性不需要再定义。结果如下：</p>
@@ -1763,7 +1818,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[DaysAndDate 6.1.0.0 released]]></title>
-      <url>/2010/05/10/daysanddate-6-1-0-0-released/</url>
+      <url>/deskangel.github.io/2010/05/10/daysanddate-6-1-0-0-released/</url>
       <content type="html"><![CDATA[<p>The version 6.1.0.0 of DaysAndDate is released to Market (search ‘DeskAngel’ or ‘DaysAndDate’ to get it) just now. Now, it can</p>
 <ol>
 <li>Calculate days between two dates</li>
@@ -1793,7 +1848,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[DaCalc Support normal mode]]></title>
-      <url>/2010/05/06/dacalc-support-normal-mode/</url>
+      <url>/deskangel.github.io/2010/05/06/dacalc-support-normal-mode/</url>
       <content type="html"><![CDATA[<p><a href="http://blog.deskangel.com/wp-content/uploads/2010/05/snap20100506_103707.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/05/snap20100506_103707-200x300.png" alt="" title="snap20100506_103707"></a></p>
 <p><strong><span style="color: #ff0000;">Normal mode</span></strong> in DaCalc means DaCalc can work as a common calculator. User can input expression by the calculator panel instead of composing a formula at first, then load it. It saves much time in the scenario when users only want to do some simple calculations.</p>
 <p>The another mode in DaCalc is <span style="color: #ff0000;"><strong>Formula mode</strong></span>, which comes with the first release.</p>
@@ -1819,7 +1874,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Android下的ListView一般应用指南]]></title>
-      <url>/2010/04/27/listview-in-android/</url>
+      <url>/deskangel.github.io/2010/04/27/listview-in-android/</url>
       <content type="html"><![CDATA[<p>一，显示：<br>ListView的Layout需要两个xml。第一个xml，在其中添加ListView本身，把ListView添加到需要显示的位置；第二个xml，则是定义ListView需要显示的内容的Layout。</p>
 <p>定义ListView内容的Layout和一般的Layout一样，除了一些限制，比如<span style="color: #ff0000;">不要在里面添加EditText</span>之类带输入焦点的View。</p>
 <p>info_list.xml:</p>
@@ -1855,7 +1910,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Hero拍的一些照片]]></title>
-      <url>/2010/04/26/some-pictures-shot-by-hero/</url>
+      <url>/deskangel.github.io/2010/04/26/some-pictures-shot-by-hero/</url>
       <content type="html"><![CDATA[<p><a href="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0015.jpg" target="_blank" rel="external"><img src="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0015-200x300.jpg" alt="" title="IMAG0015"></a></p>
 <p><a href="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0023.jpg" target="_blank" rel="external"><img src="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0023-200x300.jpg" alt="" title="IMAG0023"></a></p>
 <p><a href="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0024.jpg" target="_blank" rel="external"><img src="http://www.deskangel.com/wordpress/wp-content/uploads/2010/04/IMAG0024-200x300.jpg" alt="" title="IMAG0024"></a></p>
@@ -1875,7 +1930,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[滚动到TextView底部]]></title>
-      <url>/2010/04/22/scroll-to-bottom-of-textview/</url>
+      <url>/deskangel.github.io/2010/04/22/scroll-to-bottom-of-textview/</url>
       <content type="html"><![CDATA[<p>在Android，一个单独的TextView是无法滚动的，需要放在一个ScrollView中。ScrollView提供了一系列的函数，其中fullScroll用来实现home和end键的功能，也就是滚动到顶部和底部。</p>
 <p>但是，如果在TextView的append后面马上调用fullScroll，会发现无法滚动到真正的底部，这是因为Android下很多（如果不是全部的话）函数都是基于消息的，用消息队列来保证同步，所以函数调用多数是异步操作的。当TextView调用了append会，并不等text显示出来，而是把text的添加到消息队列之后立刻返回，fullScroll被调用的时候，text可能还没有显示，自然无法滚动到正确的位置。</p>
 <p>解决的方法其实也很简单，使用post：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> ScrollView svResult = (ScrollView) findViewById(R.id.svResult);</div><div class="line">svResult.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    	    svResult.fullScroll(ScrollView.FOCUS_DOWN);</div><div class="line">    	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
@@ -1898,7 +1953,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Formulas for DaCalc]]></title>
-      <url>/2010/04/20/formulas-for-dacalc/</url>
+      <url>/deskangel.github.io/2010/04/20/formulas-for-dacalc/</url>
       <content type="html"><![CDATA[<p>How to use the following formulas:</p>
 <ol>
 <li>In DaCalc, composing window, write the expression (red part) to the edit box and save with the name of the formula (black bold part).</li>
@@ -1928,7 +1983,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[How to use DaCalc]]></title>
-      <url>/2010/04/16/how-to-use-dacalc/</url>
+      <url>/deskangel.github.io/2010/04/16/how-to-use-dacalc/</url>
       <content type="html"><![CDATA[<p><strong>DaCalc</strong> is an formula calculator running on Android mobile system. It can be used to calculate like tips, tax and so on. In the following session, I will show you how to use <em>DaCalc</em> to calculate tips in your Android mobile phone, like Hero.</p>
 <p>[caption id=”attachment_268” align=”alignright” width=”200” caption=”Figure 1 Main Window”]<a href="http://blog.deskangel.com/wp-content/uploads/2010/04/snap20100416_171755.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/04/snap20100416_171755-200x300.png" alt="Main Window" title="snap20100416_171755"></a>[/caption]</p>
 <p><strong>Session 1</strong>, use the pre-defined function:</p>
@@ -1970,7 +2025,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[/etc/init.d/*]]></title>
-      <url>/2010/04/09/etcinit-d/</url>
+      <url>/deskangel.github.io/2010/04/09/etcinit-d/</url>
       <content type="html"><![CDATA[<p>今天因为刷Villain 5.2遇到点问题，apps2sd开启后无法启动，原因是<span style="color: #ff6600;">/system/sd</span>无法自动挂载，所以研究了一下。最后发现这个rom中，busybox的命令被映射到了<span style="color: #ff6600;">/system/xbin/bb</span>下面，但是该路径不在<span style="color: #ff6600;">$PATH</span>中，导致很多命令找不到，<span style="color: #ff6600;">/etc/init.d/*</span>下的脚本无法正确执行。</p>
 <p>一开始以为只要在一个文件中添加</p>
 <p><span style="color: #ff0000;">export PATH=$PATH:/system/xbin/bb</span></p>
@@ -1999,7 +2054,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[EditText在ListView中内容被清空的问题]]></title>
-      <url>/2010/03/31/edittext-empty-issue-in-listview/</url>
+      <url>/deskangel.github.io/2010/03/31/edittext-empty-issue-in-listview/</url>
       <content type="html"><![CDATA[<p>遇到这个问题是在设计一个Android程序的Ui的时候，当把EditText放在ListView中之后，就遇到了两个问题：</p>
 <ol>
 <li>点击EditText，虽然弹出了软键盘，但是没有立刻获得输入焦点</li>
@@ -2026,7 +2081,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[个人开发者时代的回归]]></title>
-      <url>/2010/03/30/signle-developer-times-returned/</url>
+      <url>/deskangel.github.io/2010/03/30/signle-developer-times-returned/</url>
       <content type="html"><![CDATA[<p>iPhone和Android开创了一个新的时代，同时也是个人开发时代的回归。</p>
 <p>在Windows刚刚流行的那个年月，一个点子两个人，三四台电脑就可以开发出一个传奇的软件。而现在在桌面平台上开发一个软件，一两个人已经无法创造什么奇迹了。 美工，代码，文档，推广，维护等等各个环节都需要专业的人员来处理才能有所成绩。即使那样，等来的也可能是失败。各式各样的软件，都有一到两个开源的免费的替代版本。竞争激烈而盈利途径匮乏，个人开发者在其上的生存空间被逐渐挤压！</p>
 <p>以手机为主的个人移动平台上的开发，虽然已经起步很多年，但是直到Iphone出现之后，才引起开发者和厂商们的广泛注意。和桌面平台一样，赢得开发者才能赢得市场！Windows如果没有各式各样的开发者为它开发各式各样的应用，绝对不会有今天的成绩。而手机平台也是如此，哪个平台软件多，哪个平台就能胜出。</p>
@@ -2045,7 +2100,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[在google map 4.1下使用纵横]]></title>
-      <url>/2010/03/23/zongheng-in-google-map-4-1/</url>
+      <url>/deskangel.github.io/2010/03/23/zongheng-in-google-map-4-1/</url>
       <content type="html"><![CDATA[<p>在Android上，google更新了地图的版本，功能在不停的增加。但是在国内，无论从Market安装那个版本，都无法正常的使用纵横。原因是google map会检测区域，并把数据库中的“<span style="color: #ff0000;">maps_enable_friend_finder</span>”字段改写成“<span style="color: #ff0000;">0</span>”。</p>
 <p>网上提供了使用sqlite3修改该字段的方法，</p>
 <blockquote>
@@ -2073,7 +2128,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[在eclipse中添加一个library]]></title>
-      <url>/2010/03/16/add-lib-in-eclipse/</url>
+      <url>/deskangel.github.io/2010/03/16/add-lib-in-eclipse/</url>
       <content type="html"><![CDATA[<p>当我把一个Android工程目录从一台电脑拷贝到另一台电脑后，编译出来的程序提示找不到<span style="color: #ff0000;">com.admob.android.ads.AdView</span>这个类。</p>
 <p>经过摸索，终于得出了在eclipse中添加一个library的正确流程。如下：</p>
 <ol>
@@ -2102,7 +2157,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Opera mini 5 beta 2 for Android]]></title>
-      <url>/2010/03/11/opera-mini-5-beta-2-for-android/</url>
+      <url>/deskangel.github.io/2010/03/11/opera-mini-5-beta-2-for-android/</url>
       <content type="html"><![CDATA[<p>Opera终于放出了Android版本的<a href="http://m.opera.com/cn/next/en/Opera_Mini_5_Android_beta.apk?act=dl&amp;tag=mini5android" title="Opera mini 5" target="_blank" rel="external">Opera mini 5</a>。下载后简单测试了一下，发现了一些问题：</p>
 <p>[caption id=”attachment_230” align=”alignright” width=”200” caption=”opera:config”]<a href="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100311_214429.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100311_214429-200x300.png" alt="Configuration" title="opera:config"></a>[/caption]</p>
 <ol>
@@ -2127,7 +2182,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Android资源文件名]]></title>
-      <url>/2010/03/10/resource-name-in-android/</url>
+      <url>/deskangel.github.io/2010/03/10/resource-name-in-android/</url>
       <content type="html"><![CDATA[<p>今天在eclipse中创建了一个新的工程，在layout中添加了一个FileList.xml的文件，结果就报错了：</p>
 <p><span style="color: #ff0000;">res\layout\Filelist.xml: Invalid file name: must contain only [a-z0-9_.]</span></p>
 <p>这意思是只支持小写加数字，其他一概不认。唉，只有照做了。</p>
@@ -2151,7 +2206,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Google market alternative]]></title>
-      <url>/2010/03/10/google-market-alternative/</url>
+      <url>/deskangel.github.io/2010/03/10/google-market-alternative/</url>
       <content type="html"><![CDATA[<p>Google market is not supported in China and it is hard to publish android applications to it from China mainland, even if your application is a free version.</p>
 <p>I did some search and find some alternative sites which accept android applications.:</p>
 <p>SlideME (<a href="https://slideme.org/" title="https://slideme.org/" target="_blank" rel="external">https://slideme.org/</a> ), I uploaded my first android application <em>Days and date</em> to it yesterday.</p>
@@ -2175,7 +2230,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[十进制整数到字符串的转换]]></title>
-      <url>/2010/03/04/convert-dec-num-to-string/</url>
+      <url>/deskangel.github.io/2010/03/04/convert-dec-num-to-string/</url>
       <content type="html"><![CDATA[<p>今天被问到了这个问题，一下子卡壳，没有回答上来。</p>
 <p>十进制比如12345如何转换成字符串？基本思路是要把每一位整数单独提取出来。</p>
 <p><span style="color: #ff0000;">一万二千三百四十五</span>，如何提取每一位？其实也简单：</p>
@@ -2205,7 +2260,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Days and Date]]></title>
-      <url>/2010/03/02/days-and-date/</url>
+      <url>/deskangel.github.io/2010/03/02/days-and-date/</url>
       <content type="html"><![CDATA[<p><a href="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100302_172708.png" target="_blank" rel="external"><img src="http://blog.deskangel.com/wp-content/uploads/2010/03/snap20100302_172708.png" alt="" title="snap20100302_172708"></a><br>DaysandDate是我第一个Android程序，嗯，也是我第一个java程序。好吧，我承认这个界面有点简陋，也许等我找到一个美工之后才有可能改善。（如果你有好的设计并愿意合作，可以给我email: william.xue AT gmail.com）</p>
 <p>这个程序的功能是使用修正儒略日在两个日期和天数之间进行换算。直白一点就是计算：</p>
 <ol>
@@ -2234,7 +2289,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[DeskAngel convert path text to paste-able object]]></title>
-      <url>/2010/02/24/deskangel-convert-path-text-to-paste-able-object/</url>
+      <url>/deskangel.github.io/2010/02/24/deskangel-convert-path-text-to-paste-able-object/</url>
       <content type="html"><![CDATA[<p>From the DeskAngel version v2.2.2.66, two new features are introduced. You can see two new menu items in the shortcut menu:</p>
 <ol>
 <li><span style="color: #ff0000;">Path to pastable object</span></li>
@@ -2262,7 +2317,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Windows命令行窗口与Unicode]]></title>
-      <url>/2010/02/23/windows-cmd-and-unicode/</url>
+      <url>/deskangel.github.io/2010/02/23/windows-cmd-and-unicode/</url>
       <content type="html"><![CDATA[<p>一.</p>
 <p>还记得刚开始学习C语言的时候，最早接触的 runtime 函数，就是 printf，这应该是一个最基础的函数了。<br>但是这样的一个函数，即使在VC2005和Windows 7下面，对输出Unicode字符这样的任务，依然会给程序员带了麻烦。</p>
 <p>下面的代码是一个Unicode版本的测试程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wmain</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">wchar_t</span> **argv)</span></span></div><div class="line">&#123;</div><div class="line">    wprintf(<span class="string">L"测试"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -2323,7 +2378,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[如何设计类]]></title>
-      <url>/2010/02/20/how-to-design-class/</url>
+      <url>/deskangel.github.io/2010/02/20/how-to-design-class/</url>
       <content type="html"><![CDATA[<p>一.</p>
 <p>类是面向对象的基础。面向对象有三大特点：封装，继承和多态。</p>
 <p>我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。</p>
@@ -2373,7 +2428,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[SymbolLink for Speedcommander]]></title>
-      <url>/2010/02/09/symbollink-for-speedcommander/</url>
+      <url>/deskangel.github.io/2010/02/09/symbollink-for-speedcommander/</url>
       <content type="html"><![CDATA[<p><a href="http://www.speedproject.de/enu/speedcommander/" target="_blank" rel="external">Speedcommander</a> is a dual panel file manager.</p>
 <p>SymbolLink is a small win32 application to make <a href="http://www.speedproject.de/enu/speedcommander/" target="_blank" rel="external">Speedcommander</a> creating symbol link easier for vista and win7.<br>Usage:<br><code>&lt;span style=&quot;color: #ff6600;&quot;&gt;symbollink [source] link&lt;/span&gt;</code><br>If the ‘source’ is absent, it will delete the link.</p>
 <p>How to add into Speedcommander:</p>
@@ -2405,7 +2460,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Various Memory Terms]]></title>
-      <url>/2010/02/08/various-memory-terms/</url>
+      <url>/deskangel.github.io/2010/02/08/various-memory-terms/</url>
       <content type="html"><![CDATA[<p><strong>1. terms for memory</strong></p>
 <p><span style="color: #ff6600;">physical memory</span>: it is physical object which costed your money to<br>install it into your PC. the capacity depends on what you purchased.</p>
 <p><span style="color: #ff6600;">virtual memory</span>: it is not physical. it is not a file in operating<br>system. it only exists in logic. it is a conception. the size, a.k.a.,<br>address space, depends on your cpu architecture (x86, x64 or i64, etc.).</p>
@@ -2437,7 +2492,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Aero effect on win7 x64 with dual view]]></title>
-      <url>/2010/01/25/aero-effect-on-win7-x64-with-dual-view/</url>
+      <url>/deskangel.github.io/2010/01/25/aero-effect-on-win7-x64-with-dual-view/</url>
       <content type="html"><![CDATA[<p>Aero has been disabled for win7 x64 since it was installed on my pc. The graphic card is Nvidia Geforce 7300. I updated the driver to the latest one, but still no lucky.<br>There is only one error in windows event log:</p>
 <blockquote>
 <p>The Desktop Window Manager has encountered a fatal error (0x8007000e)</p>
@@ -2466,7 +2521,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[杭州，又一个斑马线附近]]></title>
-      <url>/2009/10/15/hangzhou-crash-again/</url>
+      <url>/deskangel.github.io/2009/10/15/hangzhou-crash-again/</url>
       <content type="html"><![CDATA[<p>晚上21：10分，在公交车上经过文三路丰潭路附近，一辆宝马停在路中间，前挡风玻璃布满裂纹，离车头半米左右，一辆公用自行车横倒在地，严重扭曲。前方两米左右，人行道的油漆在璀璨的灯光下泛着白光，嘲笑对生命的漠视，抑或，无所畏惧！</p>
 <div align="left"></div>
 
@@ -2484,7 +2539,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[[psp]极品飞车：变速]]></title>
-      <url>/2009/09/23/need-for-speed-shift/</url>
+      <url>/deskangel.github.io/2009/09/23/need-for-speed-shift/</url>
       <content type="html"><![CDATA[<p>在众多psp迷期待GT的时候，”变速”出现了。</p>
 <p>与游戏的容量相比，NFS-shift的可玩性却走了另一个极端。或许EA想借此告诉大家psp在其心目中的位置，同时也又一次向公众证明“盛名之下，其实难副“的道理。纵观这几年NFS这一游戏，不由得人猜测EA是欲图把这一道理背书成真理。这八个中文字，或许应该装裱一下贴在他们CEO的办公室，这样不用自己讲什么，来访者也会不住点头。</p>
 <p>断断续续玩了这个游戏几天，实在无法再坚持下去—也没有坚持的理由。不停的比赛、比赛、比赛，这已经让人感到乏味，还不得不忍受别扭的控制键，还不得不忍受每次重新开始时漫长的loading——从程序员的角度看，这实在是一个态度问题。</p>
@@ -2511,7 +2566,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Windows installer pops up option dialog]]></title>
-      <url>/2009/09/16/windows-installer-pops-up-option-dialog/</url>
+      <url>/deskangel.github.io/2009/09/16/windows-installer-pops-up-option-dialog/</url>
       <content type="html"><![CDATA[<p>When I was trying to install HTC sync in my windows xp sp3 system, the windows installer always popped up an dialog with following content inside:</p>
 <blockquote>
 <p>Windows ® Installer. V 4.5.6001.22159</p>
@@ -2546,7 +2601,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Ubuntu 9.04 安装ibus输入法]]></title>
-      <url>/2009/09/15/ubuntu-9-04-install-ibus-input-method/</url>
+      <url>/deskangel.github.io/2009/09/15/ubuntu-9-04-install-ibus-input-method/</url>
       <content type="html"><![CDATA[<ol>
 <li>按照<a href="https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。" target="_blank" rel="external">https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。</a></li>
 <li>选择ibus和ibus-pinyin安装。<br>sudo apt-get install ibus ibus-gtk ibus-pinyin</li>
@@ -2584,7 +2639,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Mainpage of DeskAngel.com has been constructed]]></title>
-      <url>/2009/07/20/mainpage-of-deskangel-com-has-been-constructed/</url>
+      <url>/deskangel.github.io/2009/07/20/mainpage-of-deskangel-com-has-been-constructed/</url>
       <content type="html"><![CDATA[<p>After <a href="http://www.deskangel.com" target="_blank" rel="external">deskangel.com</a> was setup, the mainpage had been absent for a long time and a simply redirecting to .\deskange\index.html instruction was added in the root index.html.</p>
 <p>Now, a main page had been setup just now. Although it is simple, the simpleness is what we are looking for!</p>
 <p>Pages for <a href="http://www.deskangel.com/deskangel" target="_blank" rel="external">deskange</a>, <a href="http://wsizer.deskangel.com" target="_blank" rel="external">wsizer</a> and <a href="http://oolauncher.deskangel.com" target="_blank" rel="external">oolauncher</a> is already there, and pages for others (minihex, minirun and capslock) will be accessible some days later.</p>
@@ -2602,7 +2657,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[[PSP] 白发魔女两个要点]]></title>
-      <url>/2009/06/24/two-points-of-bai-fa-mo-nv/</url>
+      <url>/deskangel.github.io/2009/06/24/two-points-of-bai-fa-mo-nv/</url>
       <content type="html"><![CDATA[<p>刚刚在psp上通关《白发魔女》，发现网上的攻略都没有提，但是有很多人都在问的两个问题。<br><strong>1. 在“塔司村”没有触发村长提及吟游诗人弹竖琴的吐鲁巴的事，也找不到吟游诗人弹竖琴的吐鲁巴。</strong><br>这时需要返回“达斯城”，在城堡的后面找到两个小孩，之后再去“塔司村”和村长对话，即可触发剧情。</p>
 <p><strong>2. 在最后依莎贝尔塔屋顶无路可走。</strong><br>这时需要返回塔的入口，先走右边的楼梯，打开通往中庭的大门。<br>然后回到第七层，把第七层的所有的怪都杀掉之后再进入屋顶，即可发现通路了。</p>
 <p>这款游戏，虽然战斗系统比较差，但是考虑到它的发布时间以及作为卡卡布三部曲的第一部，也不失为一款优秀的游戏。</p>
@@ -2627,7 +2682,7 @@ adb push ./lights.hero.so /system/lib/hw/</pre>]]></content>
     
     <entry>
       <title><![CDATA[Oolauncher is online!]]></title>
-      <url>/2009/06/24/oolauncher-is-online/</url>
+      <url>/deskangel.github.io/2009/06/24/oolauncher-is-online/</url>
       <content type="html"><![CDATA[<p>Oolauncher, launch applications one by one, is ready for downloading now!</p>
 <p>Oolauncher is an application launching management. It retrieve auto run applications from registry and start folders from following places:<br><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
@@ -2655,7 +2710,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Taskbar menu popped up on your icon?]]></title>
-      <url>/2009/06/04/taskbar-menu-popped-up-on-your-icon/</url>
+      <url>/deskangel.github.io/2009/06/04/taskbar-menu-popped-up-on-your-icon/</url>
       <content type="html"><![CDATA[<p>You created an icon in system notification area, and want it to responding your mouse click.Usually, you want your application’s menu can be popped up after you clicked on it, generally, right clicked on it.</p>
 <p>According to MSDN, you wrote down following codes,</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> WM_RBUTTONDOWN:</div><div class="line">&#123;</div><div class="line">...</div><div class="line">   SetForegroundWindow(hDlg);</div><div class="line"></div><div class="line">   <span class="comment">// Display the menu</span></div><div class="line">   TrackPopupMenu(   hSubMenu,</div><div class="line">                     TPM_RIGHTBUTTON,</div><div class="line">                     pt.x,</div><div class="line">                     pt.y,</div><div class="line">                     <span class="number">0</span>,</div><div class="line">                     hDlg,</div><div class="line">                     <span class="literal">NULL</span>);</div><div class="line"></div><div class="line">   PostMessage(hDlg, WM_NULL, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -2683,7 +2738,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[How to use Wsizer to rearrange the icons on taskbar]]></title>
-      <url>/2009/03/31/how-to-use-wsizer-to-rearrange-the-icons-on-taskbar/</url>
+      <url>/deskangel.github.io/2009/03/31/how-to-use-wsizer-to-rearrange-the-icons-on-taskbar/</url>
       <content type="html"><![CDATA[<p>It is a little hard to arrange the icons position of applications on taskbar. The icon of application created earlier will be put in left than the later ones. Without 3rd party tools, you can not change the position unless you close the application and reopen it.</p>
 <p>Wsizer is a tool which display the current window size and position, move/resize window by hotkeys, and as a bonus, it can also rearrange the position of the applicaitons.</p>
 <ol>
@@ -2713,7 +2768,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[使用OpenPGP和Psi进行加密通讯]]></title>
-      <url>/2009/03/24/psi-with-openpgp/</url>
+      <url>/deskangel.github.io/2009/03/24/psi-with-openpgp/</url>
       <content type="html"><![CDATA[<p>我们需要两个软件，</p>
 <ol>
 <li>psi，一个可以支持多种即时通信协议的开源软件。可以<a href="http://http://psi-im.org" title="psi-im" target="_blank" rel="external">&gt;&gt;点击这里&lt;&lt;</a>访问官方网站，下载最新版本。</li>
@@ -2768,7 +2823,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Calculate window size in Vista]]></title>
-      <url>/2009/03/18/calculate-window-size-in-vista/</url>
+      <url>/deskangel.github.io/2009/03/18/calculate-window-size-in-vista/</url>
       <content type="html"><![CDATA[<p>Usually, we use <code>GetWindowRect</code> to calculate windows size in windows. It works always right until vista comes.</p>
 <p>Under Vista, if you still use <code>GetWindowRect</code> to retrieve windows rectangle size, you can not always get the collect value.</p>
 <p>For some windows which can not be resized, the function return bigger size than it is.</p>
@@ -2794,7 +2849,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[正则表达式基本规则]]></title>
-      <url>/2009/02/26/base-rules-of-regular-expression/</url>
+      <url>/deskangel.github.io/2009/02/26/base-rules-of-regular-expression/</url>
       <content type="html"><![CDATA[<p>这里不介绍正则表达式的基本概念，而是对其规则进行一些整理。网上的分类大<br>多是按照类似的功能来划分，贪婪、非贪婪，前向，后向，乱七八糟的让人很混<br>乱。这里只列出最基本的15中规则。只要掌握这15条规则，认识这些“元字符”，<br>剩下的就是遇到具体的表达式进行具体的分析了。</p>
 <p>一.<br>‘’有两种情况，如果后面紧跟的为，<br>1.) 元字符，或我称之为“正则符”，如’^’，’’，’$’等等。此时，其代<br>表的意义为“取消后面紧跟的正则符的特殊含义”。<br>2.) 其他字符，则’’和其紧跟的另一字符组成“正则符”。如’r’，’t’等比<br>较通用。其他组合，各软件的实现或许会有细微的差别。</p>
 <p>二. <strong>[]</strong><br>含义是匹配中括号中的任意字符。</p>
@@ -2830,7 +2885,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Emacs的三种行滚动方式]]></title>
-      <url>/2009/02/20/three-scroll-methods-in-emacs/</url>
+      <url>/deskangel.github.io/2009/02/20/three-scroll-methods-in-emacs/</url>
       <content type="html"><![CDATA[<p>第一种，光标到达屏幕边缘触发滚动。这是Emacs默认的滚动方式。</p>
 <p>第二种，光标粘住某一行(stick the text line)，直到该行离开屏幕，光标停留在屏幕边缘。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> down)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-up</span> (<span class="name">or</span> n <span class="number">1</span>))))</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> up)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-down</span> (<span class="name">or</span> n <span class="number">1</span>))))</div></pre></td></tr></table></figure></p>
 <p>第三种，光标停留在屏幕上的某一行(stick the absolut line)，无论怎么滚动，光标都不会移动。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;; scroll functions</span></div><div class="line">(<span class="name">defun</span> hold-line-scroll-up()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-up</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">defun</span> hold-line-scroll-down()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-down</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">-1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-n"</span>) 'hold-line-scroll-up)</div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-p"</span>) 'hold-line-scroll-down)</div></pre></td></tr></table></figure></p>
@@ -2854,7 +2909,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Emacs的三种行滚动方式]]></title>
-      <url>/2009/02/20/three-scroll-methods-of-emacs/</url>
+      <url>/deskangel.github.io/2009/02/20/three-scroll-methods-of-emacs/</url>
       <content type="html"><![CDATA[<p>第一种，光标到达屏幕边缘触发滚动。这是Emacs默认的滚动方式。</p>
 <p>第二种，光标粘住某一行(stick the text line)，直到该行离开屏幕，光标停留在屏幕边缘。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> down)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-up</span> (<span class="name">or</span> n <span class="number">1</span>))))</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> up)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-down</span> (<span class="name">or</span> n <span class="number">1</span>))))</div></pre></td></tr></table></figure></p>
 <p>第三种，光标停留在屏幕上的某一行(stick the absolut line)，无论怎么滚动，光标都不会移动。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;; scroll functions</span></div><div class="line">(<span class="name">defun</span> hold-line-scroll-up()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-up</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">defun</span> hold-line-scroll-down()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-down</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">-1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-n"</span>) 'hold-line-scroll-up)</div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-p"</span>) 'hold-line-scroll-down)</div></pre></td></tr></table></figure></p>
@@ -2878,7 +2933,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Wsizer: 用键盘控制窗口]]></title>
-      <url>/2009/02/19/wsizer-control-window-by-keyboard/</url>
+      <url>/deskangel.github.io/2009/02/19/wsizer-control-window-by-keyboard/</url>
       <content type="html"><![CDATA[<p><strong>Wsizer</strong>是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和<a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a>一样，那些功能都来源于日常使用的积累。</p>
 <p>作为第一版，它包含三个部分的功能。</p>
 <p>第一个功能，<em><strong>最小化窗口到系统托盘区</strong></em>。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。<br>操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区。系统托盘区的图标是窗口的主图标。</p>
@@ -2907,7 +2962,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[如何在ntemacs下使用系统的输入法]]></title>
-      <url>/2009/02/06/use-system-input-method-in-ntemacs/</url>
+      <url>/deskangel.github.io/2009/02/06/use-system-input-method-in-ntemacs/</url>
       <content type="html"><![CDATA[<p>如果emacs可以正常显示中文，但是在用系统的输入法输入的时候，会变成乱码，那么可以试试在.emacs中加入：</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name">set-keyboard-coding-system</span> 'chinese-iso-8bit)</div></pre></td></tr></table></figure>]]></content>
       
@@ -2928,7 +2983,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[DeskAngel使用指南]]></title>
-      <url>/2009/02/04/usermanual-of-deskangel/</url>
+      <url>/deskangel.github.io/2009/02/04/usermanual-of-deskangel/</url>
       <content type="html"><![CDATA[<p>DeskAngel使用指南<br>（括号中为菜单中的名字，该功能可通过菜单开启或关闭）</p>
 <p>DeskAngel集成了很多有用的功能，是使用windows系统的人士日常</p>
 <p>办公不可或缺的一款工具。下面将详细描述一些主要的功能。</p>
@@ -2980,7 +3035,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[Wildcard search with source code (C language)]]></title>
-      <url>/2009/02/04/wildcard-search-with-source-code-c-language/</url>
+      <url>/deskangel.github.io/2009/02/04/wildcard-search-with-source-code-c-language/</url>
       <content type="html"><![CDATA[<p>Using recursive procedure to deal with the wildcard search. It is too easy to comment.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span></span></div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// b_full means the whole string matching</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">WildSearch</span><span class="params">(<span class="keyword">char</span> *psz_buf,</span></span></div><div class="line">                      <span class="keyword">int</span> n_buflen,</div><div class="line">                      <span class="keyword">char</span> *psz_sub,</div><div class="line">                      <span class="keyword">int</span> n_sublen,</div><div class="line">                      <span class="keyword">bool</span> b_full,</div><div class="line">                      <span class="keyword">char</span> sz_prechar)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (n_buflen == <span class="number">0</span> &amp;amp;&amp;amp; n_sublen != <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (n_sublen == <span class="number">1</span> &amp;amp;&amp;amp; psz_sub[<span class="number">0</span>] == <span class="string">'*'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n_buflen != <span class="number">0</span> &amp;amp;&amp;amp; n_sublen == <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (b_full)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (n_buflen == <span class="number">0</span> &amp;amp;&amp;amp; n_sublen == <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (psz_sub[<span class="number">0</span>] == <span class="string">'*'</span>)</div><div class="line">    &#123;</div><div class="line">        psz_sub++;</div><div class="line">        n_sublen--;</div><div class="line">        <span class="keyword">if</span> (n_sublen == <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> WildSearch(psz_buf, n_buflen, psz_sub, n_sublen, b_full, <span class="string">'*'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (psz_sub[<span class="number">0</span>] == <span class="string">'?'</span>)</div><div class="line">    &#123;</div><div class="line">        psz_buf++;</div><div class="line">        n_buflen--;</div><div class="line">        psz_sub++;</div><div class="line">        n_sublen--;</div><div class="line">        <span class="keyword">return</span> WildSearch(psz_buf, n_buflen, psz_sub, n_sublen, b_full, <span class="string">'?'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span> *psz_star_pos = <span class="built_in">strchr</span>(psz_sub, <span class="string">'*'</span>);</div><div class="line">        <span class="keyword">char</span> *psz_question_pos = <span class="built_in">strchr</span>(psz_sub, <span class="string">'?'</span>);</div><div class="line">        <span class="keyword">int</span> n_len_to_star = (psz_star_pos == <span class="literal">NULL</span>) ? (<span class="keyword">int</span>)<span class="built_in">strlen</span>(psz_sub) : (<span class="keyword">int</span>)(psz_star_pos - psz_sub);</div><div class="line">        <span class="keyword">int</span> n_len_to_question = (psz_question_pos == <span class="literal">NULL</span>) ? (<span class="keyword">int</span>)<span class="built_in">strlen</span>(psz_sub) : (<span class="keyword">int</span>)(psz_question_pos - psz_sub);</div><div class="line"></div><div class="line">        <span class="keyword">int</span> n_compare_len = n_len_to_question &amp;gt; n_len_to_star ? n_len_to_star : n_len_to_question;</div><div class="line">        <span class="keyword">if</span> (_strnicmp(psz_buf, psz_sub, n_compare_len) == <span class="number">0</span>)</div><div class="line">        <span class="comment">//if (psz_buf[0] == psz_sub[0])</span></div><div class="line">        &#123;</div><div class="line">            sz_prechar = psz_sub[<span class="number">0</span>];</div><div class="line">            psz_buf++;</div><div class="line">            n_buflen--;</div><div class="line">            psz_sub++;</div><div class="line">            n_sublen--;</div><div class="line">            <span class="keyword">return</span> WildSearch(psz_buf, n_buflen, psz_sub, n_sublen, b_full, sz_prechar);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (sz_prechar != <span class="string">'*'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            psz_buf++;</div><div class="line">            n_buflen--;</div><div class="line">            <span class="keyword">return</span> WildSearch(psz_buf, n_buflen, psz_sub, n_sublen, b_full, sz_prechar);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> sz_buf[] = <span class="string">"abcdefghijk"</span>;</div><div class="line">    <span class="keyword">char</span> sz_sub[] = <span class="string">"abc?e*fg?i?*k*"</span>;</div><div class="line">    <span class="comment">//char sz_sub[] = "ae";</span></div><div class="line"></div><div class="line">    <span class="keyword">bool</span> b_result = WildSearch(sz_buf, (<span class="keyword">int</span>)<span class="built_in">strlen</span>(sz_buf), sz_sub, (<span class="keyword">int</span>)<span class="built_in">strlen</span>(sz_sub), <span class="literal">false</span>, <span class="string">' '</span>);</div><div class="line"></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, b_result);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 ]]></content>
       
@@ -3003,7 +3058,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
     
     <entry>
       <title><![CDATA[DeskAngel, why I develop it]]></title>
-      <url>/2009/02/04/deskangel-why-i-develop-it/</url>
+      <url>/deskangel.github.io/2009/02/04/deskangel-why-i-develop-it/</url>
       <content type="html"><![CDATA[<p><a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a> is a desktop enhancement tool for windows operation system. In order to arrange my daily work and make the windows more fashion. I started to develop it on year 2002, under windows 2000 pro. It went through windows 2000, windows xp and now arrived at windows vista. Some features are dropped in the journey, but more are added.</p>
 <p>Under windows 2K, ‘connect to remote pc’ is one of my favorites. Because in our office, we should access data share pc, our assistant’s pc, my colleagues’ pc and etc. Sometimes we must delete the previous connection in order to fire a new connection request. It helped me much. But windows xp comes and, it can remember network accounts and passwords, the feature became outdated.</p>
 <p>Then, I have my first notebook, IBM thinkpad r40e. It has a full-size keyboard, but is lack of win key. I used to lock my system by ‘win+l’ hotkey when I left and won’t like to change it. IBM do provided a tool to map alt or control to win key, but the mapped key only pop up start menu. It could not be used as a modifier key. I also tried some other keymap tools, some of them can do the job, but they all need to restart the windows after mapped. So, I implemented the feature myself. I’m a programmer, huh!</p>

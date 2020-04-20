@@ -18,24 +18,24 @@
 
   
   
-    <link href="/favicon.png" rel="icon">
+    <link href="/deskangel.github.io/favicon.png" rel="icon">
   
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
   <![endif]-->
 
-  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
   
   <!-- analytics -->
   
@@ -53,30 +53,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
+       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/archives" title="All the articles.">
+			<a href="/deskangel.github.io/archives" title="All the articles.">
 			  <i class="fa fa-archive"></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/categories" title="All the categories.">
+			<a href="/deskangel.github.io/categories" title="All the categories.">
 			  <i class="fa fa-folder"></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/tags" title="All the tags.">
+			<a href="/deskangel.github.io/tags" title="All the tags.">
 			  <i class="fa fa-tags"></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/deskangel.github.io/about" title="About me.">
 			  <i class="fa fa-user"></i>About
 			</a>
 		  </li>
@@ -116,8 +116,67 @@
 	
 	<!-- display as entry -->	
 		<h3 class="title">
+			<div class="date"> 2009-02-20 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2009/02/20/three-scroll-methods-of-emacs/" >Emacs的三种行滚动方式</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p>第一种，光标到达屏幕边缘触发滚动。这是Emacs默认的滚动方式。</p>
+<p>第二种，光标粘住某一行(stick the text line)，直到该行离开屏幕，光标停留在屏幕边缘。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> down)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-up</span> (<span class="name">or</span> n <span class="number">1</span>))))</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span>  [(<span class="name">meta</span> up)] (<span class="name">lambda</span> (<span class="name">&amp;optional</span> n) (<span class="name">interactive</span> <span class="string">"p"</span>)</div><div class="line">                              (<span class="name">scroll-down</span> (<span class="name">or</span> n <span class="number">1</span>))))</div></pre></td></tr></table></figure></p>
+<p>第三种，光标停留在屏幕上的某一行(stick the absolut line)，无论怎么滚动，光标都不会移动。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;; scroll functions</span></div><div class="line">(<span class="name">defun</span> hold-line-scroll-up()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-up</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">defun</span> hold-line-scroll-down()</div><div class="line">  <span class="string">"Scroll the page with the cursor in the same line"</span></div><div class="line">  (<span class="name">interactive</span>)</div><div class="line">  <span class="comment">;; move the cursor also</span></div><div class="line">  (<span class="name">let</span> ((<span class="name">tmp</span> (<span class="name">current-column</span>)))</div><div class="line">    (<span class="name">scroll-down</span> <span class="number">1</span>)</div><div class="line">    (<span class="name">line-move-to-column</span> tmp)</div><div class="line">    (<span class="name">forward-line</span> <span class="number">-1</span>)</div><div class="line">    )</div><div class="line">  )</div><div class="line"></div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-n"</span>) 'hold-line-scroll-up)</div><div class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">"M-p"</span>) 'hold-line-scroll-down)</div></pre></td></tr></table></figure></p>
+<p>这三种方式，第一种太简单了。第二、三种各有优缺点，所以绑定到不同的按键组合。</p>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2009/02/20/three-scroll-methods-of-emacs/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2009-02-19 </div>
+			<div class="article-title"><a href="/deskangel.github.io/2009/02/19/wsizer-control-window-by-keyboard/" >Wsizer: 用键盘控制窗口</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<p><strong>Wsizer</strong>是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和<a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a>一样，那些功能都来源于日常使用的积累。</p>
+<p>作为第一版，它包含三个部分的功能。</p>
+<p>第一个功能，<em><strong>最小化窗口到系统托盘区</strong></em>。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。<br>操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区。系统托盘区的图标是窗口的主图标。</p>
+<p>第二个功能是<em><strong>显示窗口的大小和位置</strong></em>。当窗口在屏幕上移动的时候，Wsizer在该窗口的中间画出大小和位置信息。用户可以根据需要选择仅仅显示<br>大小、位置或是全部。通过该功能你可以观察到一些有趣的事情，比如在窗口最大化之后，窗口的左上角不是位于(0, 0)坐标。</p>
+<p>最后的功能是<em><strong>热键功能</strong></em>。通过预定义的热键，用户可以对当前窗口进行更多方便快捷的操作。<span style="color: #ff0000;">所有的热键都可以由用户自己更改</span>。<br>热键功能也可以分为三个部分：<br>1.) <em>改变窗口大小到预定义尺寸</em>。比如Wsizer默认提过3个预先定义的尺寸640x480;720x480;800x600，用户就可以通过快捷键’win+[‘和’win+]’<br>轻松控制窗口的大小。当窗口宽度小于640，按一下’win+[‘，窗口之间扩大到720x480；再按，扩大到800x600……；如果按’win+]’，窗口将缩<br>小到定义的大小。</p>
+<p>2.)<em> 改变窗口宽度或高度</em>。这个功能可以让用户单独控制窗口的宽度或是高度。预定于的快捷键为：<br>增加宽度：win+right<br>减少宽度：win+left<br>增加高度：win+down<br>减少高度：win+up</p>
+<p>3.) <em>改变窗口位置</em>。以上的功能仅仅只是对窗口尺寸的控制。通过Wsizer，用户还可以方便的移动窗口。手一会离开键盘去拿鼠标，一会又放下鼠标<br>去敲键盘是比较累人而且没有效率的。因为在用鼠标的时候不想按键盘，我在DeskAngel中加入了映射’Right Button + Left Button’到’Alt + Right<br>Button’的功能，方便控制取词软件；因为在用键盘的时候不想去按鼠标，我在Wsizer中加入了热键移动窗口的功能。预定义的快捷键为：<br>窗口往左移动：win+ctrl+left<br>窗口往右移动：win+ctrl+right<br>窗口往上移动：win+ctrl+up<br>窗口往下移动：win+ctrl+down</p>
+<p>如果你喜欢上述的功能，现在就可以下载试用：<a href="http://wsizer.deskangel.com/download.html" target="_blank" rel="external">http://wsizer.deskangel.com/download.html</a></p>
+<p>任何问题都可以发送邮件或是访问论坛。</p>
+
+	
+	</div>
+  <a type="button" href="/deskangel.github.io/2009/02/19/wsizer-control-window-by-keyboard/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
 			<div class="date"> 2009-02-06 </div>
-			<div class="article-title"><a href="/2009/02/06/use-system-input-method-in-ntemacs/" >如何在ntemacs下使用系统的输入法</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2009/02/06/use-system-input-method-in-ntemacs/" >如何在ntemacs下使用系统的输入法</a></div>						
 		</h3>
 	
 
@@ -130,7 +189,7 @@
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name">set-keyboard-coding-system</span> 'chinese-iso-8bit)</div></pre></td></tr></table></figure>
 	
 	</div>
-  <a type="button" href="/2009/02/06/use-system-input-method-in-ntemacs/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2009/02/06/use-system-input-method-in-ntemacs/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -141,7 +200,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2009-02-04 </div>
-			<div class="article-title"><a href="/2009/02/04/usermanual-of-deskangel/" >DeskAngel使用指南</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2009/02/04/usermanual-of-deskangel/" >DeskAngel使用指南</a></div>						
 		</h3>
 	
 
@@ -185,7 +244,7 @@
 
 	
 	</div>
-  <a type="button" href="/2009/02/04/usermanual-of-deskangel/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2009/02/04/usermanual-of-deskangel/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -196,7 +255,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2009-02-04 </div>
-			<div class="article-title"><a href="/2009/02/04/wildcard-search-with-source-code-c-language/" >Wildcard search with source code (C language)</a></div>						
+			<div class="article-title"><a href="/deskangel.github.io/2009/02/04/wildcard-search-with-source-code-c-language/" >Wildcard search with source code (C language)</a></div>						
 		</h3>
 	
 
@@ -209,39 +268,7 @@
 
 	
 	</div>
-  <a type="button" href="/2009/02/04/wildcard-search-with-source-code-c-language/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2009-02-04 </div>
-			<div class="article-title"><a href="/2009/02/04/deskangel-why-i-develop-it/" >DeskAngel, why I develop it</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p><a href="http://www.deskangel.com" title="DeskAngel" target="_blank" rel="external">DeskAngel</a> is a desktop enhancement tool for windows operation system. In order to arrange my daily work and make the windows more fashion. I started to develop it on year 2002, under windows 2000 pro. It went through windows 2000, windows xp and now arrived at windows vista. Some features are dropped in the journey, but more are added.</p>
-<p>Under windows 2K, ‘connect to remote pc’ is one of my favorites. Because in our office, we should access data share pc, our assistant’s pc, my colleagues’ pc and etc. Sometimes we must delete the previous connection in order to fire a new connection request. It helped me much. But windows xp comes and, it can remember network accounts and passwords, the feature became outdated.</p>
-<p>Then, I have my first notebook, IBM thinkpad r40e. It has a full-size keyboard, but is lack of win key. I used to lock my system by ‘win+l’ hotkey when I left and won’t like to change it. IBM do provided a tool to map alt or control to win key, but the mapped key only pop up start menu. It could not be used as a modifier key. I also tried some other keymap tools, some of them can do the job, but they all need to restart the windows after mapped. So, I implemented the feature myself. I’m a programmer, huh!</p>
-<p>Nowadays, my most loves are: ‘set window top most’, ‘maximize/restore by middle click’, ‘inactive document scroll’, ‘left+right-&gt;alt+right’ and ‘screen clipping’. ‘turn off monitor’ and ‘auto scroll’ are also very useful when I’m working on a desktop pc. Now, things become common and usual. Says, if you never knew it, never had it, and never used it, life won’t be different, but once you have it, you couldn’t live without it. DeskAngel is such a tool.</p>
-<p>Besides the features that make daily works easy, DeskAngel also offers some functions which make windows look a little cool and fashion. In the age of windows 2k, DeakAngel can make the text background of icons on desktop transparent, just like other softwares do. Windows xp can transparent it by itself, so that is another feature which was dropped by time. But that is not the only effect that DA can do.</p>
-<p>The operation system of windows 2k and laters provide a way to create a translucent window, DA can do it for every windows alread created on desktop. Linux can display only the title of a window, DA can do it. Linux display a cross-arrow cursor when you are moving a window, DA can do it. Windows 7 displays only icons on taskbar, DA can do it. Windows 7 can snap a window to the edges of screen, DA can do it too. :-) And one of the users want to hide the cursor when he is typing in non-microsoft applications, now it’s available.</p>
-<p>Until Now, DeskAngel has about 20 features and most of them can be disabled if you don’t like it. DA is totally free, and portable, without any advertisement, backdoor or something like that. After started, you can find it on the system notification area, aka system tray. It is running in background, silently. If you don’t like it, double click the icon to exit. If you like it, signle click or right click it and select ‘start with windows’.</p>
-<p>As it is a tool that I also use day by day, bugs will be fixed immediately and new features will be added quickly if they are useful, sometimes it will be updated frequently. No matter how many features will be added, small, simple and fast are the most important things I have considered.</p>
-<p>Feel free to <a href="http://www.deskangel.com/deskangel/download.html" target="_blank" rel="external">download</a> it and have a try. Any kind of <a href="mailto:william.xue@gmail.com?subject=[DeskAngel]" target="_blank" rel="external">feedback</a> are welcome.</p>
-
-	
-	</div>
-  <a type="button" href="/2009/02/04/deskangel-why-i-develop-it/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/deskangel.github.io/2009/02/04/wildcard-search-with-source-code-c-language/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -256,13 +283,13 @@
 <ul class="pagination">
 	 
 		
-    	<li class="prev"><a href="/page/17/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+    	<li class="prev"><a href="/deskangel.github.io/page/17/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
   		
 
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/deskangel.github.io/"><i class="fa fa-home"></i>Home</a></li>
 
 		
-          <li class="next disabled"><a>Next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		   <li class="next"> <a href="/deskangel.github.io/page/19/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
 	
 </ul>
@@ -294,19 +321,19 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Critique/">Critique<span>5</span></a></li>
 		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Information/">Information<span>8</span></a></li>
 		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/categories/News/">News<span>3</span></a></li>
 		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Programming/">Programming<span>38</span></a></li>
 		
-			<li><a href="/categories/Software/">Software<span>34</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
 		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Source/">Source<span>1</span></a></li>
 		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+			<li><a href="/deskangel.github.io/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
 		
 		</ul>
 	</div>
@@ -317,48 +344,48 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ibus/">ibus<span>1</span></a></li>
 		
-			<li><a href="/tags/wsizer/">wsizer<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/eos/">eos<span>1</span></a></li>
 		
-			<li><a href="/tags/osx/">osx<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/dafileserver/">dafileserver<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/flash-builder/">flash builder<span>2</span></a></li>
 		
-			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/git/">git<span>1</span></a></li>
 		
-			<li><a href="/tags/opensource/">opensource<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/psi/">psi<span>1</span></a></li>
 		
-			<li><a href="/tags/sftp/">sftp<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/deskangel/">deskangel<span>3</span></a></li>
 		
-			<li><a href="/tags/as3/">as3<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/console/">console<span>1</span></a></li>
 		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/phpStorm/">phpStorm<span>1</span></a></li>
 		
-			<li><a href="/tags/puremvc/">puremvc<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/emacs/">emacs<span>3</span></a></li>
 		
-			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
+			<li><a href="/deskangel.github.io/tags/charles/">charles<span>1</span></a></li>
 		
-			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
+			<li><a href="/deskangel.github.io/tags/symbolink/">symbolink<span>1</span></a></li>
 		
-			<li><a href="/tags/symbolink/">symbolink<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/linux/">linux<span>2</span></a></li>
 		
-			<li><a href="/tags/english/">english<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/ubuntu/">ubuntu<span>4</span></a></li>
 		
-			<li><a href="/tags/blockchain/">blockchain<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/react/">react<span>1</span></a></li>
 		
-			<li><a href="/tags/emacs/">emacs<span>3</span></a></li>
+			<li><a href="/deskangel.github.io/tags/opensource/">opensource<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu/">ubuntu<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/pomelo/">pomelo<span>1</span></a></li>
 		
-			<li><a href="/tags/egret/">egret<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/eclipse/">eclipse<span>1</span></a></li>
 		
-			<li><a href="/tags/proxy/">proxy<span>1</span></a></li>
+			<li><a href="/deskangel.github.io/tags/jenkins/">jenkins<span>1</span></a></li>
 		
-			<li><a href="/tags/daysanddate/">daysanddate<span>4</span></a></li>
+			<li><a href="/deskangel.github.io/tags/docker/">docker<span>3</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>65</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
@@ -371,23 +398,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+        <a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
       </li>
     
       <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+        <a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
       </li>
     
       <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+        <a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
       </li>
     
       <li>
-        <a href="/2016/07/30/React-with-Node-js-in-Webstorm/" ><i class="fa fa-file-o"></i>React with Node.js in Webst...</a>
+        <a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
       </li>
     
       <li>
-        <a href="/2016/04/18/Node-js-from-scratch/" ><i class="fa fa-file-o"></i>Node.js from scratch</a>
+        <a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
       </li>
     
   </ul>
@@ -406,7 +433,7 @@
   </div>
   <div class="container-narrow">
   <footer> <p>
-  &copy; 2018 William Hsueh
+  &copy; 2020 William Hsueh
   
       with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
 </p> </footer>
@@ -419,15 +446,15 @@
   <span>▲</span> 
 </a>
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
+<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/deskangel.github.io/js/gallery.js"></script>
+<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
+<script src="/deskangel.github.io/js/main.js"></script>
+<script src="/deskangel.github.io/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -441,7 +468,7 @@
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/" + search_path;
+	 var path = "/deskangel.github.io/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
