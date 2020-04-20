@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DaFileShare 开发笔记 | DeskAngel</title>
+  <meta name="author" content="William Hsueh">
+  
+  <meta name="description" content="一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。
+DaFileShare 的代码很简单，分成两个部分：
+
+Command line 的 ht">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="DaFileShare 开发笔记"/>
+  <meta property="og:site_name" content="DeskAngel"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/deskangel.github.io/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/deskangel.github.io/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/deskangel.github.io/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/deskangel.github.io/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/deskangel.github.io/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> DaFileShare 开发笔记</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。</p>
+<p>DaFileShare 的代码很简单，分成两个部分：</p>
+<ul>
+<li>Command line 的 http server 提供文件分享功能</li>
+<li>Mac App 对其进行封装，提供拖放支持</li>
+</ul>
+<p>开发 DaFileShare 之前没有做过 Mac App 的开发，也没有接触过 Swift，一切都是新学，所以记一下Mac App的开发过程，以及遇到的问题，至于 Command line 部分，没有什么好讲的。</p>
+<p>第一个遇到的问题就是<code>拖放</code>。</p>
+<h3 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h3><p>Macos 的拖放是通过剪切板实现的，首先App需要注册拖放的类型。第一个纠结的问题是：在哪里注册？</p>
+<p>参考了网上的文章和 Apple 的开发文档，NSView 提供了拖放的支持，但是还需要进行一些处理。经过测试，<code>awakFromNib</code> 是一个很好的入口，哪怕用的是<code>StoryBoard</code>，一样会进入这个函数。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">awakeFromNib</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.awakeFromNib()</div><div class="line">    <span class="keyword">self</span>.registerForDraggedTypes([<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为新手的原因，不知道如何把 NSView 类和 StoryBoard，Google 了很久也没有任何发现，直到后来看到 <code>identity inspector</code> 下的 <code>Custom Class</code>，尝试着把 StoryBoard 中的 view 的类改为自己的类才算成功。</p>
+<h4 id="获取拖放的数据"><a href="#获取拖放的数据" class="headerlink" title="获取拖放的数据"></a>获取拖放的数据</h4><p>可能是因为 Swift 的快速发展，网上一些文章已经过时，获取剪切板数据的方法在 Xcode 11.4.1 下已经失效了。下面是可以工作的代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">performDragOperation</span><span class="params">(<span class="number">_</span> sender: NSDraggingInfo)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> pboard = sender.draggingPasteboard</div><div class="line">    <span class="keyword">let</span> dragTypes = pboard.types! <span class="keyword">as</span> <span class="type">NSArray</span></div><div class="line">    <span class="keyword">if</span> dragTypes.<span class="built_in">contains</span>(<span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>.fileURL) &#123;</div><div class="line">        <span class="keyword">let</span> files = pboard.propertyList(forType: <span class="type">NSPasteboard</span>.<span class="type">PasteboardType</span>(rawValue: <span class="string">"NSFilenamesPboardType"</span>)) <span class="keyword">as</span>! [<span class="type">String</span>]</div><div class="line">        <span class="keyword">let</span> numberOfFiles = files.<span class="built_in">count</span></div><div class="line">        <span class="keyword">if</span> numberOfFiles &gt; <span class="number">0</span> &#123;</div><div class="line">            <span class="keyword">let</span> filePath = files[<span class="number">0</span>] <span class="keyword">as</span> <span class="type">String</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> delegate = <span class="keyword">self</span>.delegate &#123;</div><div class="line">                <span class="type">NSLog</span>(<span class="string">"file path \(filePath)"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="关闭"><a href="#关闭" class="headerlink" title="关闭"></a>关闭</h3><p>第二个遇到的大问题是关闭：view 的关闭，窗口的关闭，App 的关闭。<br>由于想在退出 App 的时候进行一些处理，特别是 Command line 的 http server 进程的关闭，结果就遇到问题了。</p>
+<h4 id="同步关闭"><a href="#同步关闭" class="headerlink" title="同步关闭"></a>同步关闭</h4><p>首先，点击窗口上的关闭按钮后，只是关闭了窗口，但是 App 没有退出。再次点击 Dock 上的 App 图标，也没有像其他应用一样再次打开窗口，而是没有任何反应。<br>因为我不需要再打开窗口，只需要同步关闭，这个比较好处理，在 <code>AppDelegate</code> 中加一个函数即可：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationShouldTerminateAfterLastWindowClosed</span><span class="params">(<span class="number">_</span> sender: NSApplication)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="不同的关闭方式"><a href="#不同的关闭方式" class="headerlink" title="不同的关闭方式"></a>不同的关闭方式</h4><p>然后，只需要找个地方同一处理关闭事件就好了吧？——然而并不是！<br>正常的关闭方式有三种：关闭按钮，菜单Quit，Cmd+Q。三种方式，三个表现形式！！</p>
+<hr>
+<h5 id="关闭按钮"><a href="#关闭按钮" class="headerlink" title="关闭按钮"></a>关闭按钮</h5><p>窗口上的关闭按钮可能是最正常的方式了。点击后，<code>ViewController</code> 的 <code>viewDidDisappear</code> 被调用，但是如果你在 <code>AppDelegate</code> 有写<br><code>applicationShouldTerminate</code> 函数，你会发现这个函数关闭没有调用到。</p>
+<h5 id="菜单-Quit"><a href="#菜单-Quit" class="headerlink" title="菜单 Quit"></a>菜单 Quit</h5><p>通过菜单——不管是 Dock 上的菜单还是菜单栏上——的Quit，<code>applicationShouldTerminate</code> 被调用到了，但是，<code>viewDidDisappear</code> 没有调用。</p>
+<h5 id="Cmd-Q"><a href="#Cmd-Q" class="headerlink" title="Cmd+Q"></a>Cmd+Q</h5><p>一句话，什么都不调用！！</p>
+<hr>
+<p>通过查阅资料，是因为在”macOS 10.6”中引入了一个叫做<code>Sudden Termination</code>的机制来快速关闭 App。由于刚开始接触 macos 开发，不想一开始就钻研太深，还是尽早把 App 实现才是正事，所以只看了如何关闭这个机制。没错，这个<code>Sudden Termination</code>可以关闭，只需要一行代码：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至此，这三种关闭方式都会调用到<code>applicationShouldTerminate</code>和<code>viewDidDisappear</code>，选一个地方处理就可以。我是在<code>viewDidDisappear</code>中进行处理，因为主要的逻辑代码在<code>ViewController</code>中。</p>
+<h5 id="异常关闭"><a href="#异常关闭" class="headerlink" title="异常关闭"></a>异常关闭</h5><p>异常关闭有两种：一种是程序出现 Exception 导致退出的，一种是被 kill 掉。</p>
+<p>根据 Windows 上的经验，第一种应该有一个全局处理比如“unCaughtException” 这样的函数来处理，但是我没有尝试；第二种应该是需要捕获 signal 来处理，我尝试了但是没有成功，于是为了省事，把 kill signal屏蔽掉了：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationDidFinishLaunching</span><span class="params">(<span class="number">_</span> aNotification: Notification)</span></span> &#123;</div><div class="line">    <span class="comment">// Insert code here to initialize your application</span></div><div class="line">    <span class="type">ProcessInfo</span>.processInfo.disableSuddenTermination()</div><div class="line"></div><div class="line">    signal(<span class="type">SIGTERM</span>, <span class="type">SIG_IGN</span>) <span class="comment">// ignore the termination signal</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>Xcode 11.4.1，Swift 5，macos 10.15.4</p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>你可以下载 <a href="https://github.com/deskangel/deskangel.github.io/releases/download/19042020/DaFileShare.app.zip" target="_blank" rel="external">DaFileShare</a></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+        
+
+        <li><a href="/deskangel.github.io/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-04-20 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/deskangel.github.io/tags/dafileserver/">dafileserver<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2020 William Hsueh
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/deskangel.github.io/js/gallery.js"></script>
+<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
+<script src="/deskangel.github.io/js/main.js"></script>
+<script src="/deskangel.github.io/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/deskangel.github.io/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
