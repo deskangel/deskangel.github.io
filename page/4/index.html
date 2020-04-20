@@ -18,24 +18,24 @@
 
   
   
-    <link href="/deskangel.github.io/favicon.png" rel="icon">
+    <link href="/favicon.png" rel="icon">
   
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/deskangel.github.io/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/deskangel.github.io/css/comment.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
   <![endif]-->
 
-  <script src="/deskangel.github.io/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/jquery-2.0.3.min.js"></script>
   
   <!-- analytics -->
   
@@ -53,30 +53,30 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-       <a class="navbar-brand" href="/deskangel.github.io/">DeskAngel</a>
+       <a class="navbar-brand" href="/">DeskAngel</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/deskangel.github.io/archives" title="All the articles.">
+			<a href="/archives" title="All the articles.">
 			  <i class="fa fa-archive"></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/deskangel.github.io/categories" title="All the categories.">
+			<a href="/categories" title="All the categories.">
 			  <i class="fa fa-folder"></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/deskangel.github.io/tags" title="All the tags.">
+			<a href="/tags" title="All the tags.">
 			  <i class="fa fa-tags"></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/deskangel.github.io/about" title="About me.">
+			<a href="/about" title="About me.">
 			  <i class="fa fa-user"></i>About
 			</a>
 		  </li>
@@ -117,7 +117,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2014-11-29 </div>
-			<div class="article-title"><a href="/deskangel.github.io/2014/11/29/cocostudio-create-listview-item/" >使用 Cocostudio 创建 listview item</a></div>						
+			<div class="article-title"><a href="/2014/11/29/cocostudio-create-listview-item/" >使用 Cocostudio 创建 listview item</a></div>						
 		</h3>
 	
 
@@ -138,7 +138,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> LISTVIEW_WIDTH = <span class="number">340</span></div><div class="line"><span class="keyword">local</span> LISTVIEW_HEIGHT = <span class="number">405</span></div><div class="line"><span class="keyword">local</span> listView = ccui.ListView:<span class="built_in">create</span>()</div><div class="line"><span class="comment">-- set list view ex direction</span></div><div class="line">listView:setDirection(ccui.ScrollViewDir.vertical)</div><div class="line">listView:setBounceEnabled(<span class="literal">true</span>)</div><div class="line"><span class="comment">-- listView:setBackGroundImage("hall/di.png")</span></div><div class="line"><span class="comment">-- listView:setBackGroundImageScale9Enabled(true)</span></div><div class="line">listView:setContentSize(cc.size(LISTVIEW_WIDTH, LISTVIEW_HEIGHT))</div><div class="line">listView:setAnchorPoint(cc.p(<span class="number">0</span>, <span class="number">0</span>))</div><div class="line">listView:setPosition(cc.p(<span class="number">10</span>, <span class="number">12</span>))</div><div class="line">listView:addEventListener(listViewEvent)</div><div class="line"><span class="comment">-- SCISSOR</span></div><div class="line">listView:setClippingType(<span class="number">1</span>)</div><div class="line">parent:addChild(listView)</div><div class="line"></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">createDefaultListItem</span><span class="params">()</span></span></div><div class="line"><span class="keyword">local</span> leaderboardItemLayer =                 cc.CSLoader:createNode(<span class="string">"hall/LeaderboardItem.csb"</span>)</div><div class="line"><span class="comment">-- retrieve the widget. MUST be a widget</span></div><div class="line"><span class="keyword">local</span> listItemRoot = leaderboardItemLayer:getChildByTag(<span class="number">2001</span>)</div><div class="line">listItemRoot:removeFromParent()</div><div class="line"></div><div class="line"><span class="keyword">local</span> listItemRootSize = listItemRoot:getContentSize()</div><div class="line">listItemRoot:setPosition(cc.p(LISTVIEW_WIDTH / <span class="number">2.0</span>, listItemRootSize.height / <span class="number">2.0</span>))</div><div class="line"></div><div class="line"><span class="keyword">local</span> default_item = ccui.Layout:<span class="built_in">create</span>()</div><div class="line">default_item:setTouchEnabled(<span class="literal">true</span>)</div><div class="line">default_item:setContentSize(listItemRootSize)</div><div class="line">default_item:addChild(listItemRoot)</div><div class="line"></div><div class="line"><span class="keyword">return</span> default_item</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> default_item = createDefaultListItem()</div><div class="line">listView:setItemModel(default_item)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">100</span> <span class="keyword">do</span></div><div class="line">listView:pushBackDefaultItem()</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">-- set all items layout gravity</span></div><div class="line">listView:setGravity(ccui.ListViewGravity.centerVertical)</div><div class="line"></div><div class="line"><span class="comment">--set items margin</span></div><div class="line">listView:setItemsMargin(<span class="number">2.0</span>)</div></pre></td></tr></table></figure>
 	
 	</div>
-  <a type="button" href="/deskangel.github.io/2014/11/29/cocostudio-create-listview-item/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2014/11/29/cocostudio-create-listview-item/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -149,7 +149,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2014-07-04 </div>
-			<div class="article-title"><a href="/deskangel.github.io/2014/07/04/common-regular-expression-signs/" >常用正则表达式符号</a></div>						
+			<div class="article-title"><a href="/2014/07/04/common-regular-expression-signs/" >常用正则表达式符号</a></div>						
 		</h3>
 	
 
@@ -298,7 +298,7 @@
 
 	
 	</div>
-  <a type="button" href="/deskangel.github.io/2014/07/04/common-regular-expression-signs/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2014/07/04/common-regular-expression-signs/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -309,7 +309,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2013-09-26 </div>
-			<div class="article-title"><a href="/deskangel.github.io/2013/09/26/Keyboard-backlight-controller-Open-Source/" >&#39;Keyboard backlight controller&#39; Open Source</a></div>						
+			<div class="article-title"><a href="/2013/09/26/Keyboard-backlight-controller-Open-Source/" >&#39;Keyboard backlight controller&#39; Open Source</a></div>						
 		</h3>
 	
 
@@ -323,7 +323,7 @@
 
 	
 	</div>
-  <a type="button" href="/deskangel.github.io/2013/09/26/Keyboard-backlight-controller-Open-Source/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2013/09/26/Keyboard-backlight-controller-Open-Source/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -334,7 +334,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2013-05-21 </div>
-			<div class="article-title"><a href="/deskangel.github.io/2013/05/21/tolua++-namespace-issue/" >tolua++:namespace导致的问题</a></div>						
+			<div class="article-title"><a href="/2013/05/21/tolua++-namespace-issue/" >tolua++:namespace导致的问题</a></div>						
 		</h3>
 	
 
@@ -355,7 +355,7 @@
 
 	
 	</div>
-  <a type="button" href="/deskangel.github.io/2013/05/21/tolua++-namespace-issue/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2013/05/21/tolua++-namespace-issue/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -366,7 +366,7 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2013-04-19 </div>
-			<div class="article-title"><a href="/deskangel.github.io/2013/04/19/pointer-vector-initialization/" >指针vector初始化</a></div>						
+			<div class="article-title"><a href="/2013/04/19/pointer-vector-initialization/" >指针vector初始化</a></div>						
 		</h3>
 	
 
@@ -381,7 +381,7 @@
 
 	
 	</div>
-  <a type="button" href="/deskangel.github.io/2013/04/19/pointer-vector-initialization/#more" class="btn btn-default more">Read More</a>
+  <a type="button" href="/2013/04/19/pointer-vector-initialization/#more" class="btn btn-default more">Read More</a>
 </div>
 
            
@@ -396,13 +396,13 @@
 <ul class="pagination">
 	 
 		
-    	<li class="prev"><a href="/deskangel.github.io/page/3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
+    	<li class="prev"><a href="/page/3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
   		
 
-        <li><a href="/deskangel.github.io/"><i class="fa fa-home"></i>Home</a></li>
+        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
 
 		
-		   <li class="next"> <a href="/deskangel.github.io/page/5/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
+		   <li class="next"> <a href="/page/5/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
 	
 </ul>
@@ -434,19 +434,19 @@
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/deskangel.github.io/categories/Critique/">Critique<span>5</span></a></li>
+			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/Information/">Information<span>8</span></a></li>
+			<li><a href="/categories/Information/">Information<span>8</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/News/">News<span>3</span></a></li>
+			<li><a href="/categories/News/">News<span>3</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/Programming/">Programming<span>38</span></a></li>
+			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/Software/">Software<span>35</span></a></li>
+			<li><a href="/categories/Software/">Software<span>35</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/Source/">Source<span>1</span></a></li>
+			<li><a href="/categories/Source/">Source<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
+			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
 		
 		</ul>
 	</div>
@@ -457,45 +457,45 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/deskangel.github.io/tags/linux/">linux<span>2</span></a></li>
+			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/emacs/">emacs<span>3</span></a></li>
+			<li><a href="/tags/phpStorm/">phpStorm<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/react/">react<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>2</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/java/">java<span>1</span></a></li>
+			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/osx/">osx<span>4</span></a></li>
+			<li><a href="/tags/vs/">vs<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/jenkins/">jenkins<span>1</span></a></li>
+			<li><a href="/tags/console/">console<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/eclipse/">eclipse<span>1</span></a></li>
+			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/docker/">docker<span>3</span></a></li>
+			<li><a href="/tags/docker/">docker<span>3</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
+			<li><a href="/tags/regular-expression/">regular expression<span>2</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/pkg/">pkg<span>1</span></a></li>
+			<li><a href="/tags/speedcommander/">speedcommander<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/c-c/">c/c++<span>6</span></a></li>
+			<li><a href="/tags/dacalc/">dacalc<span>4</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/busybox/">busybox<span>1</span></a></li>
+			<li><a href="/tags/egret/">egret<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/console/">console<span>1</span></a></li>
+			<li><a href="/tags/php/">php<span>2</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/openpgp/">openpgp<span>1</span></a></li>
+			<li><a href="/tags/ibus/">ibus<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/game/">game<span>3</span></a></li>
+			<li><a href="/tags/charles/">charles<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/cocostudio/">cocostudio<span>1</span></a></li>
+			<li><a href="/tags/wine/">wine<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/speedcommander/">speedcommander<span>1</span></a></li>
+			<li><a href="/tags/symbolink/">symbolink<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/node-js/">node.js<span>2</span></a></li>
+			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/sftp/">sftp<span>1</span></a></li>
+			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
 		
-			<li><a href="/deskangel.github.io/tags/english/">english<span>1</span></a></li>
+			<li><a href="/tags/react/">react<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>66</span></a></li>
@@ -511,23 +511,23 @@
   <ul class="entry list-unstyled">
     
       <li>
-        <a href="/deskangel.github.io/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
+        <a href="/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
       </li>
     
       <li>
-        <a href="/deskangel.github.io/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
+        <a href="/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
       </li>
     
       <li>
-        <a href="/deskangel.github.io/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
       </li>
     
       <li>
-        <a href="/deskangel.github.io/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
       </li>
     
       <li>
-        <a href="/deskangel.github.io/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
       </li>
     
   </ul>
@@ -559,15 +559,15 @@
   <span>▲</span> 
 </a>
 
-<script src="/deskangel.github.io/js/jquery.imagesloaded.min.js"></script>
-<script src="/deskangel.github.io/js/gallery.js"></script>
-<script src="/deskangel.github.io/js/bootstrap.min.js"></script>
-<script src="/deskangel.github.io/js/main.js"></script>
-<script src="/deskangel.github.io/js/search.js"></script> 
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/deskangel.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/deskangel.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -581,7 +581,7 @@
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/deskangel.github.io/" + search_path;
+	 var path = "/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
