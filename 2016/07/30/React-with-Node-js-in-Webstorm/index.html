@@ -1,149 +1,165 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=cn>
 <head>
-  <meta charset="utf-8">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="软件环境：    软件 版本    OSX 10.11.6   WebStorm 2016.2   Node.js 6.3.1   React 15.3.1   Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用淘宝的镜像。 安装 express12345cd reactStudynpm install --reg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React with Node.js in Webstorm">
+<meta property="og:url" content="https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="软件环境：    软件 版本    OSX 10.11.6   WebStorm 2016.2   Node.js 6.3.1   React 15.3.1   Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用淘宝的镜像。 安装 express12345cd reactStudynpm install --reg">
+<meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2016-07-30T13:05:28.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="node.js">
+<meta property="article:tag" content="webstorm">
+<meta property="article:tag" content="react">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>React with Node.js in Webstorm</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/09/30/ledongli-login-issue-workaround/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/04/18/Node-js-from-scratch/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&text=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&is_video=false&description=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=React with Node.js in Webstorm&body=Check out this article: https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&name=React with Node.js in Webstorm&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&t=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-express"><span class="toc-number">1.</span> <span class="toc-text">安装 express</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-react"><span class="toc-number">2.</span> <span class="toc-text">安装 react</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">3.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置babel"><span class="toc-number">4.</span> <span class="toc-text">配置babel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">5.</span> <span class="toc-text">结束.</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        React with Node.js in Webstorm
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-07-30T13:05:28.000Z" itemprop="datePublished">2016-07-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/node-js/" rel="tag">node.js</a>, <a class="tag-link" href="/tags/react/" rel="tag">react</a>, <a class="tag-link" href="/tags/webstorm/" rel="tag">webstorm</a>
+    </div>
+
+
+    </div>
+  </header>
   
-  <title>React with Node.js in Webstorm | DeskAngel</title>
-  <meta name="author" content="William Hsueh">
-  
-  <meta name="description" content="软件环境：
 
-
-
-软件
-版本
-
-
-
-
-OSX
-10.11.6
-
-
-WebStorm
-2016.2
-
-
-Node.js
-6.3.1
-
-
-React
-15.3.1
-
-
-
-Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="React with Node.js in Webstorm"/>
-  <meta property="og:site_name" content="DeskAngel"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 
-
-
-	
-		<div class="page-header ">		
-			<h1 class="title "> React with Node.js in Webstorm</h1>
-		</div>		
-	
-
-
-
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-	<div class="mypage">		
-	  		
-
-	  <p>软件环境：</p>
+  <div class="content" itemprop="articleBody">
+    <p>软件环境：</p>
 <table>
 <thead>
 <tr>
@@ -151,8 +167,7 @@ Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 
 <th>版本</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>OSX</td>
 <td>10.11.6</td>
 </tr>
@@ -168,201 +183,159 @@ Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 
 <td>React</td>
 <td>15.3.1</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用淘宝的镜像。</p>
-<h3 id="安装-express"><a href="#安装-express" class="headerlink" title="安装 express"></a>安装 express</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org -g express-generator</div><div class="line">express -e -css sass reactStudy</div><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装 react"></a>安装 react</h3><p>安装 react、react-dom、babel、browserify、watchify 等模块。package.json 文件的内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"taskmgr"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"start"</span>: <span class="string">"node ./bin/www"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"babel-cli"</span>: <span class="string">"^6.11.4"</span>,</div><div class="line">    <span class="attr">"babel-preset-es2015"</span>: <span class="string">"^6.9.0"</span>,</div><div class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.11.1"</span>,</div><div class="line">    <span class="attr">"babelify"</span>: <span class="string">"^7.3.0"</span>,</div><div class="line">    <span class="attr">"body-parser"</span>: <span class="string">"~1.15.1"</span>,</div><div class="line">    <span class="attr">"cookie-parser"</span>: <span class="string">"~1.4.3"</span>,</div><div class="line">    <span class="attr">"debug"</span>: <span class="string">"~2.2.0"</span>,</div><div class="line">    <span class="attr">"ejs"</span>: <span class="string">"~2.4.1"</span>,</div><div class="line">    <span class="attr">"express"</span>: <span class="string">"~4.13.4"</span>,</div><div class="line">    <span class="attr">"express-session"</span>: <span class="string">"^1.14.0"</span>,</div><div class="line">    <span class="attr">"morgan"</span>: <span class="string">"~1.7.0"</span>,</div><div class="line">    <span class="attr">"mysql"</span>: <span class="string">"^2.11.1"</span>,</div><div class="line">    <span class="attr">"node-sass-middleware"</span>: <span class="string">"0.8.0"</span>,</div><div class="line">    <span class="attr">"passport"</span>: <span class="string">"^0.3.2"</span>,</div><div class="line">    <span class="attr">"react"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"serve-favicon"</span>: <span class="string">"~2.3.0"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">    <span class="attr">"browserify"</span>: <span class="string">"^13.1.0"</span>,</div><div class="line">    <span class="attr">"watchify"</span>: <span class="string">"^3.7.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><p>在 views 目录下创建一个文件作为主文件：main.js。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> Main = React.createClass(&#123;</div><div class="line"></div><div class="line">    <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello william&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Main /&gt;,</div><div class="line">    document.getElementById('content')</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>也可以使用 ES2015的方式来写：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello World!&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(&lt;App/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</div></pre></td></tr></table></figure></p>
+<h3 id="安装-express"><a href="#安装-express" class="headerlink" title="安装 express"></a>安装 express</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> reactStudy</span><br><span class="line">npm install --registry=https://registry.npm.taobao.org -g express-generator</span><br><span class="line">express -e -css sass reactStudy</span><br><span class="line"><span class="built_in">cd</span> reactStudy</span><br><span class="line">npm install --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装 react"></a>安装 react</h3><p>安装 react、react-dom、babel、browserify、watchify 等模块。package.json 文件的内容如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"taskmgr"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"node ./bin/www"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel-cli"</span>: <span class="string">"^6.11.4"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-es2015"</span>: <span class="string">"^6.9.0"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.11.1"</span>,</span><br><span class="line">    <span class="attr">"babelify"</span>: <span class="string">"^7.3.0"</span>,</span><br><span class="line">    <span class="attr">"body-parser"</span>: <span class="string">"~1.15.1"</span>,</span><br><span class="line">    <span class="attr">"cookie-parser"</span>: <span class="string">"~1.4.3"</span>,</span><br><span class="line">    <span class="attr">"debug"</span>: <span class="string">"~2.2.0"</span>,</span><br><span class="line">    <span class="attr">"ejs"</span>: <span class="string">"~2.4.1"</span>,</span><br><span class="line">    <span class="attr">"express"</span>: <span class="string">"~4.13.4"</span>,</span><br><span class="line">    <span class="attr">"express-session"</span>: <span class="string">"^1.14.0"</span>,</span><br><span class="line">    <span class="attr">"morgan"</span>: <span class="string">"~1.7.0"</span>,</span><br><span class="line">    <span class="attr">"mysql"</span>: <span class="string">"^2.11.1"</span>,</span><br><span class="line">    <span class="attr">"node-sass-middleware"</span>: <span class="string">"0.8.0"</span>,</span><br><span class="line">    <span class="attr">"passport"</span>: <span class="string">"^0.3.2"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^15.3.0"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^15.3.0"</span>,</span><br><span class="line">    <span class="attr">"serve-favicon"</span>: <span class="string">"~2.3.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"browserify"</span>: <span class="string">"^13.1.0"</span>,</span><br><span class="line">    <span class="attr">"watchify"</span>: <span class="string">"^3.7.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><p>在 views 目录下创建一个文件作为主文件：main.js。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</span><br><span class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Main = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello william<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Main /&gt;,</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>也可以使用 ES2015的方式来写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span></span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</span><br></pre></td></tr></table></figure>
+
 <h3 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h3><p>在<strong>WebStorm-&gt;Preferences…-&gt;Tools-&gt;File Watchers</strong>下添加Babel。以下字段需要注意修改：</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Value</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td>Babel</td>
-<td>这里不要修改，不然还会提示添加 Babel Watcher</td>
-</tr>
-<tr>
-<td>File type</td>
-<td>javascript</td>
-<td>也可以选其他类型，只要和你自己的文件匹配</td>
-</tr>
-<tr>
-<td>Program</td>
-<td>$ProjectFileDir$/node_modules/browserify/bin/cmd.js</td>
-<td></td>
-</tr>
-<tr>
-<td>Arguments</td>
-<td>-t [ babelify –presets [ es2015 react ] ] ./views/main.js -o public/javascripts/index.bundle.js</td>
-<td>如果要调试，需要加上 -d 参数</td>
-</tr>
-</tbody>
-</table>
-<p>在<code>index.ejs</code>文件的下方添加<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>最后的效果：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Field | Value | 说明<br>—|—<br>Name | Babel | 这里不要修改，不然还会提示添加 Babel Watcher<br>File type | javascript | 也可以选其他类型，只要和你自己的文件匹配<br>Program | $ProjectFileDir$/node_modules/browserify/bin/cmd.js |<br>Arguments | -t [ babelify –presets [ es2015 react ] ] ./views/main.js -o public/javascripts/index.bundle.js | 如果要调试，需要加上 -d 参数</p>
+<p>在<code>index.ejs</code>文件的下方添加</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最后的效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>因为对 Babel 和 browserify 不熟悉，所以这一段是花时间最多的地方。开始的时候因为用了 jsx 扩展名，在文件头的注释中有<code>@jsx</code>，render 函数翻译出来的代码会带上 <code>file</code> 函数而不是<code>React.createElement</code>，导致错误。后来重启 WebStorm 就好了。</p>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束."></a>结束.</h3>	  
-	</div>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束."></a>结束.</h3>
+  </div>
+</article>
 
-	<div>
-  	<center>
-	<div class="pagination">
-<ul class="pagination">
-	 
-				
-    	<li class="prev"><a href="/2016/09/30/ledongli-login-issue-workaround/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
-  		
 
-        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
-		
-		   <li class="next"><a href="/2016/04/18/Node-js-from-scratch/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
-	
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-express"><span class="toc-number">1.</span> <span class="toc-text">安装 express</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-react"><span class="toc-number">2.</span> <span class="toc-text">安装 react</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文件"><span class="toc-number">3.</span> <span class="toc-text">创建文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置babel"><span class="toc-number">4.</span> <span class="toc-text">配置babel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">5.</span> <span class="toc-text">结束.</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&text=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&is_video=false&description=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=React with Node.js in Webstorm&body=Check out this article: https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&title=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&name=React with Node.js in Webstorm&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/&t=React with Node.js in Webstorm" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
 </div>
 
-    </center>
-	</div>
-
-    <!-- share -->
-    
         
-    <div class="bdsharebuttonbox">
-        <a href="#" class="bds_more" data-cmd="more"></a>
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
-        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
-        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-    </div>
-    <script>
-        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
-        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-    </script>
-
-
-        
-
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-	
-	<!-- comment -->
-	
-<section id="comment">
-  <h2 class="title">Comments</h2>
-  
-</section>
-
-
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
-
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2016-07-30 
-	</div>
-	
-
-	<!-- categories -->
     
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
-  </li>
-
-    </ul>
-	</div>
-	
-
-	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/node-js/">node.js<span>2</span></a></li> <li><a href="/tags/webstorm/">webstorm<span>2</span></a></li> <li><a href="/tags/react/">react<span>1</span></a></li>
-    </ul>
-	</div>
-	
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
-		
-
-</div><!-- row -->
-
-
-
-	</div>
+    2016-2020
+    William Hsueh
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 William Hsueh
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-</div> <!-- container-narrow -->
-  
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
 <script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
 
+<!-- search -->
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Disqus Comments -->
 
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
 
 </body>
-   </html>
+</html>

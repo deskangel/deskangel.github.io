@@ -1,287 +1,303 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=cn>
 <head>
-  <meta charset="utf-8">
-  
-  <title>custom-eui-control-in-egret | DeskAngel</title>
-  <meta name="author" content="William Hsueh">
-  
-  <meta name="description" content="如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。
-
-创建一个 exml 文件，用来定义控件的显示元素，这里要注意的classname 的设置，比如设置成 game.CustomButton。game 为模块名（文档上也称呼为命名">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="custom-eui-control-in-egret"/>
-  <meta property="og:site_name" content="DeskAngel"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 
-
-
-	
-		<div class="page-header ">		
-			<h1 class="title "> custom-eui-control-in-egret</h1>
-		</div>		
-	
-
-
-
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-	<div class="mypage">		
-	  		
-
-	  <p>如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。</p>
-<ol>
-<li>创建一个 exml 文件，用来定义控件的显示元素，这里要注意的<code>classname</code> 的设置，比如设置成 <code>game.CustomButton</code>。game 为模块名（文档上也称呼为命名空间），后面需要用到。</li>
-<li><p>创建一个 ts 文件，用来处理控件的逻辑。这个 ts 文件里面需要有模块，比如：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">module</span> game &#123;</div><div class="line"></div><div class="line">    <span class="keyword">export</span> <span class="keyword">class</span> CustomButton <span class="keyword">extends</span> eui.Button &#123;</div><div class="line">        <span class="keyword">public</span> rtQuality: eui.Rect;</div><div class="line"></div><div class="line">        <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</div><div class="line">            <span class="keyword">super</span>();</div><div class="line"></div><div class="line">            <span class="keyword">this</span>.skinName = <span class="string">"resource/skins/custom/EquipButtonSkin.exml"</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">set</span> quality(color: <span class="built_in">number</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.rtQuality) &#123;</div><div class="line">                <span class="keyword">this</span>.rtQuality.strokeColor = color;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> label = <span class="keyword">this</span>.labelDisplay <span class="keyword">as</span> eui.Label;</div><div class="line">            label.textColor = color;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">public</span> <span class="keyword">get</span> quality(): <span class="built_in">number</span> &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.rtQuality) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.rtQuality.strokeColor;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="number">0x444444</span>;</div><div class="line">        &#125;      </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>在其他皮肤中使用的时候，可以从组件列表（COMPONENT/Custom)中直接拖动控件来使用，在 wing 4.03 版本中需要修改一下<code>Category Properties</code>中的 Skin，这应该是 wing 的一个 bug。</p>
-</li>
-<li>看一下 exml 的 Source，会发现添加了两个东西。一个是根节点的 <code>&lt;e:Skin ......... xmlns:game=&quot;game.*&quot; &gt;</code>；另一个是添加的控件的 tag 是 <code>&lt;game:CustomButton .....&gt;</code><br>关于这一点，可以<a href="http://developer.egret.com/cn/github/egret-docs/extension/EUI/advancedSkills/useComponents/index.html" target="_blank" rel="external">参考文档</a>。</li>
-<li>在 ts 文件中使用的时候和普通的按钮一样，只是类型需要设置成 <code>game.CustomButton</code>。 </li>
-</ol>
-	  
-	</div>
-
-	<div>
-  	<center>
-	<div class="pagination">
-<ul class="pagination">
-	 
-				
-    	<li class="prev"><a href="/2018/03/31/build-eos-on-ubuntu-16-04/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
-  		
-
-        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
-
-		
-		   <li class="next"><a href="/2016/09/30/ledongli-login-issue-workaround/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。  创建一个 exml 文件，用来定义控件的显示元素，这里要注意的classname 的设置，比如设置成 game.CustomButton。game 为模块名（文档上也称呼为命名空间），后面需要用到。 创建一个 ts 文件，用来处理控件的逻辑。这个 ts 文件里面需要有模块，比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="custom-eui-control-in-egret">
+<meta property="og:url" content="https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。  创建一个 exml 文件，用来定义控件的显示元素，这里要注意的classname 的设置，比如设置成 game.CustomButton。game 为模块名（文档上也称呼为命名空间），后面需要用到。 创建一个 ts 文件，用来处理控件的逻辑。这个 ts 文件里面需要有模块，比">
+<meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2017-09-21T13:43:53.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.959Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="egret">
+<meta name="twitter:card" content="summary">
+    
+    
         
-	
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>custom-eui-control-in-egret</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/31/build-eos-on-ubuntu-16-04/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/09/30/ledongli-login-issue-workaround/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&text=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&is_video=false&description=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=custom-eui-control-in-egret&body=Check out this article: https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&name=custom-eui-control-in-egret&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&t=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
 </div>
 
-    </center>
-	</div>
-
-    <!-- share -->
     
+    <div class="content index py4">
         
-    <div class="bdsharebuttonbox">
-        <a href="#" class="bds_more" data-cmd="more"></a>
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
-        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
-        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        custom-eui-control-in-egret
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-21T13:43:53.000Z" itemprop="datePublished">2017-09-21</time>
+        
+      
     </div>
-    <script>
-        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
-        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-    </script>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/egret/" rel="tag">egret</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。</p>
+<ol>
+<li>创建一个 exml 文件，用来定义控件的显示元素，这里要注意的<code>classname</code> 的设置，比如设置成 <code>game.CustomButton</code>。game 为模块名（文档上也称呼为命名空间），后面需要用到。</li>
+<li>创建一个 ts 文件，用来处理控件的逻辑。这个 ts 文件里面需要有模块，比如：<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> game &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">class</span> CustomButton <span class="keyword">extends</span> eui.Button &#123;</span><br><span class="line">        <span class="keyword">public</span> rtQuality: eui.Rect;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.skinName = <span class="string">"resource/skins/custom/EquipButtonSkin.exml"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">set</span> quality(color: <span class="built_in">number</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.rtQuality) &#123;</span><br><span class="line">                <span class="keyword">this</span>.rtQuality.strokeColor = color;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> label = <span class="keyword">this</span>.labelDisplay <span class="keyword">as</span> eui.Label;</span><br><span class="line">            label.textColor = color;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">get</span> quality(): <span class="built_in">number</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.rtQuality) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.rtQuality.strokeColor;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0x444444</span>;</span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在其他皮肤中使用的时候，可以从组件列表（COMPONENT/Custom)中直接拖动控件来使用，在 wing 4.03 版本中需要修改一下<code>Category Properties</code>中的 Skin，这应该是 wing 的一个 bug。</li>
+<li>看一下 exml 的 Source，会发现添加了两个东西。一个是根节点的 <code>&lt;e:Skin ......... xmlns:game=&quot;game.*&quot; &gt;</code>；另一个是添加的控件的 tag 是 <code>&lt;game:CustomButton .....&gt;</code><br>关于这一点，可以<a href="http://developer.egret.com/cn/github/egret-docs/extension/EUI/advancedSkills/useComponents/index.html" target="_blank" rel="noopener">参考文档</a>。</li>
+<li>在 ts 文件中使用的时候和普通的按钮一样，只是类型需要设置成 <code>game.CustomButton</code>。 </li>
+</ol>
+
+  </div>
+</article>
+
 
 
         
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-    
-	
-	<!-- comment -->
-	
-<section id="comment">
-  <h2 class="title">Comments</h2>
-  
-</section>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      
+    </div>
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&text=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&is_video=false&description=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=custom-eui-control-in-egret&body=Check out this article: https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&title=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&name=custom-eui-control-in-egret&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/&t=custom-eui-control-in-egret" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2017-09-21 
-	</div>
-	
+    </div>
 
-	<!-- categories -->
-    
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
-  </li>
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
 
-    </ul>
-	</div>
-	
-
-	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/egret/">egret<span>1</span></a></li>
-    </ul>
-	</div>
-	
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
-		
-
-</div><!-- row -->
-
-
-
-	</div>
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 William Hsueh
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-</div> <!-- container-narrow -->
-  
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
 <script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
 
+<!-- search -->
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Disqus Comments -->
 
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
 
 </body>
-   </html>
+</html>

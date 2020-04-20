@@ -1,128 +1,163 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=cn>
 <head>
-  <meta charset="utf-8">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="测试平台Windows 7 sp1 x64Flash builder 4.5.1IE 9.0 with flash player plug-in 10.3.181.26 测试工具Profiler 测试内容  removeChild调用是否必要 BitmapData的dispose调用是否必要 Bitmap和BitmapData的对象是否需要设置为null BitmapData对象赋值语句的影响">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BitmapData内存测试">
+<meta property="og:url" content="https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="测试平台Windows 7 sp1 x64Flash builder 4.5.1IE 9.0 with flash player plug-in 10.3.181.26 测试工具Profiler 测试内容  removeChild调用是否必要 BitmapData的dispose调用是否必要 Bitmap和BitmapData的对象是否需要设置为null BitmapData对象赋值语句的影响">
+<meta property="og:locale" content="cn">
+<meta property="article:published_time" content="2011-06-21T12:45:50.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="as3">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>BitmapData内存测试</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2012/02/24/breakpoint-acts-weirdly/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2011/06/16/understand-of-transform-filter-in-as3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&text=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&is_video=false&description=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BitmapData内存测试&body=Check out this article: https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&name=BitmapData内存测试&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&t=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        BitmapData内存测试
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2011-06-21T12:45:50.000Z" itemprop="datePublished">2011-06-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/as3/" rel="tag">as3</a>
+    </div>
+
+
+    </div>
+  </header>
   
-  <title>BitmapData内存测试 | DeskAngel</title>
-  <meta name="author" content="William Hsueh">
-  
-  <meta name="description" content="测试平台Windows 7 sp1 x64Flash builder 4.5.1IE 9.0 with flash player plug-in 10.3.181.26
-测试工具Profiler
-测试内容
 
-removeChild调用是否必要
-BitmapData的dispose调用是否必要
-Bit">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="BitmapData内存测试"/>
-  <meta property="og:site_name" content="DeskAngel"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 
-
-
-	
-		<div class="page-header ">		
-			<h1 class="title "> BitmapData内存测试</h1>
-		</div>		
-	
-
-
-
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-	<div class="mypage">		
-	  		
-
-	  <p>测试平台<br>Windows 7 sp1 x64<br>Flash builder 4.5.1<br>IE 9.0 with flash player plug-in 10.3.181.26</p>
+  <div class="content" itemprop="articleBody">
+    <p>测试平台<br>Windows 7 sp1 x64<br>Flash builder 4.5.1<br>IE 9.0 with flash player plug-in 10.3.181.26</p>
 <p>测试工具<br>Profiler</p>
 <p>测试内容</p>
 <ol>
@@ -133,169 +168,154 @@ Bit">
 </ol>
 <p>测试结果</p>
 <ol>
-<li>removeChild必须调用</li>
-<li>dispose并非必要，只需要把其对象设置为null</li>
-<li>需要释放任然在作用域中的对象，需要设置其为null</li>
+<li><p>removeChild必须调用</p>
+</li>
+<li><p>dispose并非必要，只需要把其对象设置为null</p>
+</li>
+<li><p>需要释放任然在作用域中的对象，需要设置其为null</p>
+</li>
 <li><p>只是增加了引用，所以两个对象的数据是一样的。<br>结论</p>
 </li>
 <li><p>不需要的显示对象需要及时调用removeChild删除</p>
 </li>
-<li>不再需要的对象应该手动设为null</li>
-<li>如果容器对象没有设置为null，即使调用了removeChild，其元素也不会被释放<br>测试代码</li>
+<li><p>不再需要的对象应该手动设为null</p>
+</li>
+<li><p>如果容器对象没有设置为null，即使调用了removeChild，其元素也不会被释放<br>测试代码</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">package</div><div class="line">&#123;</div><div class="line">	import flash.display.Bitmap;</div><div class="line">	import flash.display.BitmapData;</div><div class="line">	import flash.display.BitmapDataChannel;</div><div class="line">	import flash.display.Sprite;</div><div class="line">	import flash.events.Event;</div><div class="line">	import flash.events.MouseEvent;</div><div class="line">	import flash.system.System;</div><div class="line"></div><div class="line">	public class memtest extends Sprite</div><div class="line">	&#123;</div><div class="line"></div><div class="line">		private var bmp:Bitmap;</div><div class="line">		private var mouseDown:Boolean;</div><div class="line">		private var bmpData:BitmapData;</div><div class="line">		private var bitmap:Bitmap;</div><div class="line">		private var memory:uint;</div><div class="line"></div><div class="line">		public function memtest()</div><div class="line">		&#123;</div><div class="line">			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);</div><div class="line">			stage.addEventListener(Event.ENTER_FRAME, onFrame);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		private function onFrame(event:Event):void</div><div class="line">		&#123;</div><div class="line">			if (bmpData != null &amp;amp;&amp;amp; bmp != null)</div><div class="line">			&#123;</div><div class="line">				var seed:Number = Math.floor(Math.random() * 10);</div><div class="line">				var channels:uint = BitmapDataChannel.GREEN | BitmapDataChannel.BLUE;</div><div class="line">				bmpData.perlinNoise(100, 100, 6, seed, false, true, channels, false, null);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		private function onMouseDown(event:MouseEvent):void</div><div class="line">		&#123;</div><div class="line">			memory = System.totalMemory;</div><div class="line"></div><div class="line">			if (!mouseDown)</div><div class="line">			&#123;</div><div class="line">				bmpData = new BitmapData(200, 200, false, 0x00CCCCCC);</div><div class="line">				bmp = new Bitmap(bmpData);</div><div class="line">				addChild(bmp);</div><div class="line"></div><div class="line">				var bmpDataCloned:BitmapData = bmpData;</div><div class="line">				bitmap = new Bitmap(bmpDataCloned);</div><div class="line">				bitmap.x = 300;</div><div class="line">				addChild(bitmap);</div><div class="line"></div><div class="line">				mouseDown = true;</div><div class="line">			&#125;</div><div class="line">			else</div><div class="line">			&#123;</div><div class="line">				removeChild(bmp);</div><div class="line">				bmp.bitmapData.dispose();</div><div class="line">//				bmpData.dispose();</div><div class="line">//				bmpData = null;</div><div class="line">				bmp = null;</div><div class="line"></div><div class="line">				removeChild(bitmap);</div><div class="line">//				bitmap.bitmapData.dispose();</div><div class="line">				bitmap = null;</div><div class="line"></div><div class="line">				mouseDown = false; </div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>	  
-	</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">package</span><br><span class="line">&#123;</span><br><span class="line">	import flash.display.Bitmap;</span><br><span class="line">	import flash.display.BitmapData;</span><br><span class="line">	import flash.display.BitmapDataChannel;</span><br><span class="line">	import flash.display.Sprite;</span><br><span class="line">	import flash.events.Event;</span><br><span class="line">	import flash.events.MouseEvent;</span><br><span class="line">	import flash.system.System;</span><br><span class="line"></span><br><span class="line">	public class memtest extends Sprite</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		private var bmp:Bitmap;</span><br><span class="line">		private var mouseDown:Boolean;</span><br><span class="line">		private var bmpData:BitmapData;</span><br><span class="line">		private var bitmap:Bitmap;</span><br><span class="line">		private var memory:uint;</span><br><span class="line"></span><br><span class="line">		public function memtest()</span><br><span class="line">		&#123;</span><br><span class="line">			stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);</span><br><span class="line">			stage.addEventListener(Event.ENTER_FRAME, onFrame);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		private function onFrame(event:Event):void</span><br><span class="line">		&#123;</span><br><span class="line">			if (bmpData !&#x3D; null &amp;&amp; bmp !&#x3D; null)</span><br><span class="line">			&#123;</span><br><span class="line">				var seed:Number &#x3D; Math.floor(Math.random() * 10);</span><br><span class="line">				var channels:uint &#x3D; BitmapDataChannel.GREEN | BitmapDataChannel.BLUE;</span><br><span class="line">				bmpData.perlinNoise(100, 100, 6, seed, false, true, channels, false, null);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		private function onMouseDown(event:MouseEvent):void</span><br><span class="line">		&#123;</span><br><span class="line">			memory &#x3D; System.totalMemory;</span><br><span class="line"></span><br><span class="line">			if (!mouseDown)</span><br><span class="line">			&#123;</span><br><span class="line">				bmpData &#x3D; new BitmapData(200, 200, false, 0x00CCCCCC);</span><br><span class="line">				bmp &#x3D; new Bitmap(bmpData);</span><br><span class="line">				addChild(bmp);</span><br><span class="line"></span><br><span class="line">				var bmpDataCloned:BitmapData &#x3D; bmpData;</span><br><span class="line">				bitmap &#x3D; new Bitmap(bmpDataCloned);</span><br><span class="line">				bitmap.x &#x3D; 300;</span><br><span class="line">				addChild(bitmap);</span><br><span class="line"></span><br><span class="line">				mouseDown &#x3D; true;</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">				removeChild(bmp);</span><br><span class="line">				bmp.bitmapData.dispose();</span><br><span class="line">&#x2F;&#x2F;				bmpData.dispose();</span><br><span class="line">&#x2F;&#x2F;				bmpData &#x3D; null;</span><br><span class="line">				bmp &#x3D; null;</span><br><span class="line"></span><br><span class="line">				removeChild(bitmap);</span><br><span class="line">&#x2F;&#x2F;				bitmap.bitmapData.dispose();</span><br><span class="line">				bitmap &#x3D; null;</span><br><span class="line"></span><br><span class="line">				mouseDown &#x3D; false; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
 
-	<div>
-  	<center>
-	<div class="pagination">
-<ul class="pagination">
-	 
-				
-    	<li class="prev"><a href="/2012/02/24/breakpoint-acts-weirdly/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
-  		
 
-        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
-		
-		   <li class="next"><a href="/2011/06/16/understand-of-transform-filter-in-as3/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
-	
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&text=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&is_video=false&description=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BitmapData内存测试&body=Check out this article: https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&title=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&name=BitmapData内存测试&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2011/06/21/memory-test-of-bitmapdata/&t=BitmapData内存测试" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
 </div>
 
-    </center>
-	</div>
-
-    <!-- share -->
-    
         
-    <div class="bdsharebuttonbox">
-        <a href="#" class="bds_more" data-cmd="more"></a>
-        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
-        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
-        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-    </div>
-    <script>
-        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
-        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-    </script>
-
-
-        
-
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-	
-	<!-- comment -->
-	
-<section id="comment">
-  <h2 class="title">Comments</h2>
-  
-</section>
-
-
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
-
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2011-06-21 
-	</div>
-	
-
-	<!-- categories -->
     
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/Programming/">Programming<span>38</span></a></li>
-  </li>
-
-    </ul>
-	</div>
-	
-
-	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/as3/">as3<span>4</span></a></li>
-    </ul>
-	</div>
-	
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
-		
-
-</div><!-- row -->
-
-
-
-	</div>
+    2016-2020
+    William Hsueh
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 William Hsueh
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-</div> <!-- container-narrow -->
-  
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
 <script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
 
+<!-- search -->
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Disqus Comments -->
 
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
 
 </body>
-   </html>
+</html>

@@ -1,564 +1,309 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=cn>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Page 2 | DeskAngel</title>
-  <meta name="author" content="William Hsueh">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  
-  <meta property="og:site_name" content="DeskAngel"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 <div class="page-header ">
-  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
-</div>
-
-<div class="row page">
-
-	
-	<div class="col-md-9">
-	
-
-		<div class="slogan">
-      <i class="fa fa-heart"></i>
-      dig deeper, do different
-</div>    
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-        <!-- render top articles firstly -->
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+<meta property="og:title" content="DeskAngel">
+<meta property="og:url" content="https://blog.deskangel.com/page/2/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:locale" content="cn">
+<meta property="article:author" content="William Hsueh">
+<meta name="twitter:card" content="summary">
+    
+    
         
-        <!-- render other articles -->
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
         
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-07-30 </div>
-			<div class="article-title"><a href="/2016/07/30/React-with-Node-js-in-Webstorm/" >React with Node.js in Webstorm</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>软件环境：</p>
-<table>
-<thead>
-<tr>
-<th>软件</th>
-<th>版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OSX</td>
-<td>10.11.6</td>
-</tr>
-<tr>
-<td>WebStorm</td>
-<td>2016.2</td>
-</tr>
-<tr>
-<td>Node.js</td>
-<td>6.3.1</td>
-</tr>
-<tr>
-<td>React</td>
-<td>15.3.1</td>
-</tr>
-</tbody>
-</table>
-<p>Node.js 是通过 nvm 安装的最新版本。国内的网络环境，想通过 WebStorm 直接创建工程是做不到的，只能通过命令行，使用淘宝的镜像。</p>
-<h3 id="安装-express"><a href="#安装-express" class="headerlink" title="安装 express"></a>安装 express</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org -g express-generator</div><div class="line">express -e -css sass reactStudy</div><div class="line"><span class="built_in">cd</span> reactStudy</div><div class="line">npm install --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装 react"></a>安装 react</h3><p>安装 react、react-dom、babel、browserify、watchify 等模块。package.json 文件的内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"taskmgr"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"start"</span>: <span class="string">"node ./bin/www"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    <span class="attr">"babel-cli"</span>: <span class="string">"^6.11.4"</span>,</div><div class="line">    <span class="attr">"babel-preset-es2015"</span>: <span class="string">"^6.9.0"</span>,</div><div class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.11.1"</span>,</div><div class="line">    <span class="attr">"babelify"</span>: <span class="string">"^7.3.0"</span>,</div><div class="line">    <span class="attr">"body-parser"</span>: <span class="string">"~1.15.1"</span>,</div><div class="line">    <span class="attr">"cookie-parser"</span>: <span class="string">"~1.4.3"</span>,</div><div class="line">    <span class="attr">"debug"</span>: <span class="string">"~2.2.0"</span>,</div><div class="line">    <span class="attr">"ejs"</span>: <span class="string">"~2.4.1"</span>,</div><div class="line">    <span class="attr">"express"</span>: <span class="string">"~4.13.4"</span>,</div><div class="line">    <span class="attr">"express-session"</span>: <span class="string">"^1.14.0"</span>,</div><div class="line">    <span class="attr">"morgan"</span>: <span class="string">"~1.7.0"</span>,</div><div class="line">    <span class="attr">"mysql"</span>: <span class="string">"^2.11.1"</span>,</div><div class="line">    <span class="attr">"node-sass-middleware"</span>: <span class="string">"0.8.0"</span>,</div><div class="line">    <span class="attr">"passport"</span>: <span class="string">"^0.3.2"</span>,</div><div class="line">    <span class="attr">"react"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^15.3.0"</span>,</div><div class="line">    <span class="attr">"serve-favicon"</span>: <span class="string">"~2.3.0"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">    <span class="attr">"browserify"</span>: <span class="string">"^13.1.0"</span>,</div><div class="line">    <span class="attr">"watchify"</span>: <span class="string">"^3.7.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="创建文件"><a href="#创建文件" class="headerlink" title="创建文件"></a>创建文件</h3><p>在 views 目录下创建一个文件作为主文件：main.js。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"><span class="keyword">var</span> ReactDOM = <span class="built_in">require</span>(<span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> Main = React.createClass(&#123;</div><div class="line"></div><div class="line">    <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello william&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Main /&gt;,</div><div class="line">    document.getElementById('content')</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<p>也可以使用 ES2015的方式来写：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">        <span class="keyword">super</span>(props)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;Hello World!&lt;/div&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(&lt;App/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</div></pre></td></tr></table></figure></p>
-<h3 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h3><p>在<strong>WebStorm-&gt;Preferences…-&gt;Tools-&gt;File Watchers</strong>下添加Babel。以下字段需要注意修改：</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Value</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td>Babel</td>
-<td>这里不要修改，不然还会提示添加 Babel Watcher</td>
-</tr>
-<tr>
-<td>File type</td>
-<td>javascript</td>
-<td>也可以选其他类型，只要和你自己的文件匹配</td>
-</tr>
-<tr>
-<td>Program</td>
-<td>$ProjectFileDir$/node_modules/browserify/bin/cmd.js</td>
-<td></td>
-</tr>
-<tr>
-<td>Arguments</td>
-<td>-t [ babelify –presets [ es2015 react ] ] ./views/main.js -o public/javascripts/index.bundle.js</td>
-<td>如果要调试，需要加上 -d 参数</td>
-</tr>
-</tbody>
-</table>
-<p>在<code>index.ejs</code>文件的下方添加<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>最后的效果：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/javascripts/index.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>因为对 Babel 和 browserify 不熟悉，所以这一段是花时间最多的地方。开始的时候因为用了 jsx 扩展名，在文件头的注释中有<code>@jsx</code>，render 函数翻译出来的代码会带上 <code>file</code> 函数而不是<code>React.createElement</code>，导致错误。后来重启 WebStorm 就好了。</p>
-<h3 id="结束"><a href="#结束" class="headerlink" title="结束."></a>结束.</h3>
-	
-	</div>
-  <a type="button" href="/2016/07/30/React-with-Node-js-in-Webstorm/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2016-04-18 </div>
-			<div class="article-title"><a href="/2016/04/18/Node-js-from-scratch/" >Node.js from scratch</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>使用 webstorm，从创建一个空白的工程开始构建一个 Node.js 的websocket服务器。</p>
-<ol>
-<li>创建空白工程</li>
-<li>添加一个 js 文件，比如 main.js</li>
-<li>添加一个 package.json 文件</li>
-<li>在控制台中进入工程的根目录，使用命令<code>npm install --save ws</code>添加websocket模块。使用<code>--save</code>参数会把模块的依赖直接添加到 package.json 文件中。</li>
-<li>编辑webstorm 的 Run/Debug配置，新建一个 Node.js 的配置，在 <code>JavaScript file:</code>这一栏里面写上<code>main.js</code>。</li>
-<li>在 main.js 中填入如下代码：</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> WebSocketServer = <span class="built_in">require</span>(<span class="string">'ws'</span>).Server;</div><div class="line"><span class="keyword">var</span> wss = <span class="keyword">new</span> WebSocketServer(&#123;<span class="attr">port</span>: <span class="number">8280</span>&#125;);</div><div class="line"></div><div class="line">wss.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> <span class="title">connection</span>(<span class="params">ws</span>) </span>&#123;</div><div class="line">   ws.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="title">incoming</span>(<span class="params">message</span>) </span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'received: %s'</span>, message);</div><div class="line">   &#125;);</div><div class="line"></div><div class="line">    ws.send(<span class="string">'something'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>至此，一个服务器就搭建好了。</p>
-<p>注意点：<br>在 webstorm 中，可能会提示<code>Unresolved function or method require()</code>，这是因为没有开启<code>Node.js Core library</code>。在 webstorm 的<code>Preferences-&gt;Languages &amp; Frameworks-&gt;Node.js and NPM</code>下开启就可以了。</p>
-
-	
-	</div>
-  <a type="button" href="/2016/04/18/Node-js-from-scratch/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-09-20 </div>
-			<div class="article-title"><a href="/2015/09/20/phpstorm-remote-debug-with-xdebug/" >phpStorm remote debug with xdebug</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>因为使用了 docker 进行了环境隔离，所以需要对 phpStorm 进行远程调试的配置。</p>
-<p>网上有一些教程，不是太复杂就是已经过时。经过摸索，一下是完整的配置流程。</p>
-<p>版本： ubuntu 14.04 LTS, phpStorm 9, php5-fpm</p>
-<p>首先是服务器端的设置：</p>
-<ol>
-<li><p>安装xdebug </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install php5-xdebug</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 xdebug </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/php5/fpm/conf.d/20-xdebug.ini</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>加入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">zend_extension=xdebug.so</div><div class="line">xdebug.remote_mode=&quot;req&quot;</div><div class="line">xdebug.idekey=&quot;PHPSTORM&quot;</div><div class="line">xdebug.remote_enable=1</div><div class="line">xdebug.remote_connect_back=1</div></pre></td></tr></table></figure></p>
-<p>上面的设置也可以直接放在 php.ini 中。</p>
-<p>接下来进行客户端的设置：</p>
-<ol>
-<li>点击phpStorm菜单<code>Run -&gt; Start Listening for PHP Debug Connections</code></li>
-<li>设置断点</li>
-<li>安装 xdebug-helper  Chrome 浏览器插件</li>
-<li>打开要调试的网页，激活地址栏的 xdebug-helper</li>
-<li>如果一切都设置正确，在 phpStorm 会弹出对话框进行文件映射等设置。</li>
-</ol>
-<p>这样就可以了。</p>
-<p>PS：<br>如果在 phpStorm 中创建 Remote debug 配置，也是可以收到 debug 断点的。</p>
-<p>如果是apache2，xdebug 的默认配置文件会出现在 <code>/etc/php5modes-available/xdebug.ini</code></p>
-<p><strong>UPDATE</strong><br>如果web 服务器是在<code>Docker for Mac</code>下使用的话，<code>xdebug.remote_connect_back=1</code>会不起作用，因为这里的 docker container 接受到的 ip 都是来自<code>172.17.0.1</code>，所以需要显式的指定 ip 和端口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">zend_extension=xdebug.so</div><div class="line">xdebug.remote_mode=&quot;req&quot;</div><div class="line">xdebug.idekey=&quot;PHPSTORM&quot;</div><div class="line">xdebug.remote_enable=1</div><div class="line">xdebug.remote_host=&quot;192.168.1.22&quot;</div><div class="line">xdebug.remote_port=9000</div><div class="line">xdebug.remote_connect_back=0</div></pre></td></tr></table></figure></p>
-<p>这里的嗯<code>Docker for Mac</code>的版本是 v1.12，之后是否会修复这个问题，不得而知。<br>————2016.08.21</p>
-
-	
-	</div>
-  <a type="button" href="/2015/09/20/phpstorm-remote-debug-with-xdebug/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-09-13 </div>
-			<div class="article-title"><a href="/2015/09/13/osx-virtualbox-shared-folder-permission-issue/" >搞定 osx 下 virtualbox 中的 docker container 访问共享文件夹的权限问题</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>案例是这样的：</p>
-<ul>
-<li>有一台 osx 系统</li>
-<li>安装了 virtualbox 虚拟机</li>
-<li>在虚拟机里面装 Linux</li>
-<li>在 Linux 里面装了 docker</li>
-<li>用 docker 装了 Ubuntu 的 image</li>
-<li>在 Ubuntu 的 container 中装了 nginx</li>
-</ul>
-<p>现在把OSX 下的一个 web 开发文件夹共享给 virtualbox下的 Linux，然后在通过 docker 映射到 container 下，nginx 的 root 目录指向这个文件夹，提供 web 服务。</p>
-<p>但是问题来了，nginx 会报错说“permission denied”。在 container 下可以很明显的看到，共享文件夹中的内容是存放在了<code>999</code>这个 group 中。</p>
-<p>分析一下原因，根源在于 virtualbox 从某一个版本开始，无法修改 osx 共享目录的权限了。可以看到，在 virtualbox 下的 Linux 中，共享文件夹的权限在一个叫做<code>vboxsf</code>的 group 下面。</p>
-<p>以下是解决方法：</p>
-<ul>
-<li>在 container 下创建一个叫做<code>vboxsf</code>的 group： <code>groupadd vboxsf</code></li>
-<li>修改这个 group 的 id 为999：<code>vim /etc/group</code></li>
-<li>把 www-data 这个用户加入到<code>vboxsf</code>中：<code>usermod -a -G vboxsf www-data</code></li>
-<li>重启 nginx：<code>service nginx restart</code></li>
-</ul>
-
-	
-	</div>
-  <a type="button" href="/2015/09/13/osx-virtualbox-shared-folder-permission-issue/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2015-06-06 </div>
-			<div class="article-title"><a href="/2015/06/06/java-compress-javascript-uncompress/" >java压缩，javascript 解压缩总结</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>这里描述如何在 client 端使用 javascript 处理通过 ajax 调用返回的压缩数据。服务器端使用java 的<code>DeflaterOutputStream</code>来进行数据的压缩。</p>
-<p>最早尝试使用<code>jquery</code>的<code>$.ajax</code>方法来做 ajax 调用，但是其返回的数据都是字符串类型的，部分字节被强制转换了，导致这部分数据无法正确的解码。</p>
-<p><em>如果仔细观察，浏览器的开发者模式中<code>Response</code>页面得到的数据格式是正常的，但是在 <code>success: function (data)</code>中数据是不正确的。</em></p>
-<h4 id="接收字节流而不是字符串"><a href="#接收字节流而不是字符串" class="headerlink" title="接收字节流而不是字符串"></a>接收字节流而不是字符串</h4><p>所以，如果需要 ajax 能够接收字节流而仅仅是字符串，需要使用 <code>XMLHttpRequest</code>自己来实现，v1和 v2都可以，下面给出的代码使用 v2的特性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxRequest</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    request.open(data.type, data.url, <span class="literal">true</span>);</div><div class="line">    request.responseType = <span class="string">"arraybuffer"</span>;</div><div class="line">    request.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded; charset=UTF-8"</span>);</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.success) &#123;</div><div class="line">            data.success(request.response);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    request.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (data.error) &#123;</div><div class="line">            data.error(request.response);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    request.send(data.data);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用的代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> szActionUrl = http_host + path;</div><div class="line"><span class="keyword">var</span> content = <span class="string">"userName="</span> + userName + <span class="string">"&amp;password="</span> + password;</div><div class="line">ajaxRequest(&#123;</div><div class="line">    <span class="attr">url</span>: szActionUrl,</div><div class="line">    <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">    <span class="attr">data</span>: content,</div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"success"</span>);</div><div class="line">        decodeToJson(data);</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"failed"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h4 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h4><p>解压缩使用的是 <a href="https://github.com/imaya/zlib.js" target="_blank" rel="external">zlib</a>，在使用前先加入引用：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">"JavaScript"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"zlip/inflate.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>javascript 的代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">uintToString</span>(<span class="params">uintArray</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> encodedString = <span class="built_in">String</span>.fromCharCode.apply(<span class="literal">null</span>, uintArray);</div><div class="line">    <span class="keyword">var</span> decodedString = <span class="built_in">decodeURIComponent</span>(<span class="built_in">escape</span>(encodedString));</div><div class="line">    <span class="keyword">return</span> decodedString;</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">decodeToJson</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> uintArray = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> inflate = <span class="keyword">new</span> Zlib.Inflate(uintArray);</div><div class="line">    <span class="keyword">var</span> plainArray = inflate.decompress();</div><div class="line"></div><div class="line">    <span class="keyword">var</span> s = uintToString(plainArray);</div><div class="line">    <span class="built_in">console</span>.log(s);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> result = <span class="built_in">JSON</span>.parse(s);</div><div class="line">    <span class="keyword">return</span> result;      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其中的<code>uintToString</code>是用来把 <code>Uint8Array</code>转换成字符串，<code>decodeURIComponent</code>可以正确的处理 utf-8编码的字符。</p>
-
-	
-	</div>
-  <a type="button" href="/2015/06/06/java-compress-javascript-uncompress/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
-<ul class="pagination">
-	 
-		
-    	<li class="prev"><a href="/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
-  		
-
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-
-		
-		   <li class="next"> <a href="/page/3/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
-	
-</ul>
-</div>
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>DeskAngel</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  		</center>
-		</div>
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
 
-		
-		
-	</div> <!-- col-md-9 -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
 
-	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
+<body class="max-width mx-auto px3 ltr">
+    
+    <div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>DeskAngel</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/about/">About</a></li>
+       
+        <li><a href="/archives/">Writing</a></li>
+       
+        <li><a href="/projects_url">Projects</a></li>
+      
+    </ul>
   </div>
+</header>
 
+        
+        <section id="about">
+  
+  
+    <p>
+      Find me on
+      
+      
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="http://github.com/probberechts/cactus-dark">
+            <i class="fab fa-github"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-twitter"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-facebook"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-linkedin"></i><!--
+      ---></a><!--
+    ---><!--
+    ---> and 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="mailto:name@email.com">
+            <i class="fas fa-envelope"></i><!--
+      ---></a><!--
+      ---><!--
+    --->.
+        
+      
+    </p>
+  
+</section>
 
-		
-			
-	<div class="widget">
-		<h4>Categories</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
-		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
-		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
-		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
-		
-			<li><a href="/categories/Software/">Software<span>35</span></a></li>
-		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
-		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
-		
-		</ul>
-	</div>
-
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/jenkins/">jenkins<span>1</span></a></li>
-		
-			<li><a href="/tags/wine/">wine<span>1</span></a></li>
-		
-			<li><a href="/tags/phpStorm/">phpStorm<span>1</span></a></li>
-		
-			<li><a href="/tags/sftp/">sftp<span>1</span></a></li>
-		
-			<li><a href="/tags/dual-view/">dual view<span>1</span></a></li>
-		
-			<li><a href="/tags/eos/">eos<span>1</span></a></li>
-		
-			<li><a href="/tags/tolua/">tolua++<span>2</span></a></li>
-		
-			<li><a href="/tags/psp/">psp<span>2</span></a></li>
-		
-			<li><a href="/tags/openpgp/">openpgp<span>1</span></a></li>
-		
-			<li><a href="/tags/deskangel/">deskangel<span>3</span></a></li>
-		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
-		
-			<li><a href="/tags/opensource/">opensource<span>1</span></a></li>
-		
-			<li><a href="/tags/daysanddate/">daysanddate<span>4</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>2</span></a></li>
-		
-			<li><a href="/tags/game/">game<span>3</span></a></li>
-		
-			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
-		
-			<li><a href="/tags/cocostudio/">cocostudio<span>1</span></a></li>
-		
-			<li><a href="/tags/webstorm/">webstorm<span>2</span></a></li>
-		
-			<li><a href="/tags/vs/">vs<span>1</span></a></li>
-		
-			<li><a href="/tags/javascript/">javascript<span>1</span></a></li>
-		
-		
-		   <li><a href="/tags">...<span>66</span></a></li>
-		 
-		</ul>
-	</div>
-
-
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
+<section id="writing">
+  <span class="h1"><a href="/archives">Writing</a></span>
+  
+  <ul class="post-list">
     
-      <li>
-        <a href="/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
+    
+      
+    
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2020-04-20T06:06:16.000Z" itemprop="datePublished">2020-04-20</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2020/04/20/dafileserver-dev-notes/">DaFileShare 开发笔记</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2018-10-24T13:45:48.000Z" itemprop="datePublished">2018-10-24</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2018/10/24/vsc-with-gdb-remote/">vsc-with-gdb-remote</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2018-03-31T11:55:07.000Z" itemprop="datePublished">2018-03-31</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2018/03/31/build-eos-on-ubuntu-16-04/">Build EOS on ubuntu 16.04</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2017-09-21T13:43:53.000Z" itemprop="datePublished">2017-09-21</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2017/09/21/custom-eui-control-in-egret/">custom-eui-control-in-egret</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-09-30T16:58:41.000Z" itemprop="datePublished">2016-09-30</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/09/30/ledongli-login-issue-workaround/">乐动力“网络不给力”问题的处理</a>
+    
+
+
+</span>
       </li>
     
   </ul>
-</div>
-
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
-	
-	
-</div> <!-- row-fluid -->
+  
+</section>
 
 
-	</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 William Hsueh
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-</div> <!-- container-narrow -->
-  
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+
 <script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
 
+<!-- search -->
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Disqus Comments -->
 
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
 
 </body>
-   </html>
+</html>

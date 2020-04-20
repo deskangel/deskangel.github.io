@@ -1,589 +1,309 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=cn>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Page 4 | DeskAngel</title>
-  <meta name="author" content="William Hsueh">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  
-  <meta property="og:site_name" content="DeskAngel"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  
-  
-    <link href="/favicon.png" rel="icon">
-  
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/themes/slate.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
-  <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
-  <![endif]-->
-
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  
-  <!-- analytics -->
-  
-
-
-
-</head>
-
- <body>  
-  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="/">DeskAngel</a>
-      <div class="collapse navbar-collapse nav-menu">
-		<ul class="nav navbar-nav">
-		  
-		  <li>
-			<a href="/archives" title="All the articles.">
-			  <i class="fa fa-archive"></i>Archives
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/categories" title="All the categories.">
-			  <i class="fa fa-folder"></i>Categories
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/tags" title="All the tags.">
-			  <i class="fa fa-tags"></i>Tags
-			</a>
-		  </li>
-		  
-		  <li>
-			<a href="/about" title="About me.">
-			  <i class="fa fa-user"></i>About
-			</a>
-		  </li>
-		  
-		</ul>
-      </div>
-    </div> <!-- container -->
-</nav>
-<div class="clearfix"></div>
-
-  <div class="container">
-  	<div class="content">
-    	 <div class="page-header ">
-  <h1 class="title ">DIG DEEPER, DO DIFFERENT</h1>
-</div>
-
-<div class="row page">
-
-	
-	<div class="col-md-9">
-	
-
-		<div class="slogan">
-      <i class="fa fa-heart"></i>
-      dig deeper, do different
-</div>    
-		<div id="top_search"></div>
-		<div class="mypage">
-		
-		<!-- title and entry -->
-        <!-- render top articles firstly -->
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+<meta property="og:title" content="DeskAngel">
+<meta property="og:url" content="https://blog.deskangel.com/page/4/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:locale" content="cn">
+<meta property="article:author" content="William Hsueh">
+<meta name="twitter:card" content="summary">
+    
+    
         
-        <!-- render other articles -->
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
         
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2014-11-29 </div>
-			<div class="article-title"><a href="/2014/11/29/cocostudio-create-listview-item/" >使用 Cocostudio 创建 listview item</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>为了快速开发一个小游戏，使用了 Cocostudio 2.0 作为 UI 编辑器。其实 Cocostudio 的功能比较弱，特别是针对稍微复杂一点的控件（Widget），无法做到所见即所得，不得不写一些代码。</p>
-<p>游戏中用到了一个 listview，但是 Cocostudio2.0中没有 listview，所以只能写代码实现，这个是没有办法的。好在一个 listview 本身还是比较简单的，但是 listview 中的 item 可以很复杂，是否有办法简化呢？</p>
-<p>尝试了很久之后，还真找到了一个迂回的方法，即：</p>
-<ul>
-<li>在 Cocostudio 中创建一个新的 Layer</li>
-<li>在 Layer 上编辑所需要的 item</li>
-</ul>
-<p>这本来是一件比较简单的事情，但是问题在于 listview 的 item 只能是 widget，而 Cocostudio 2.0中 widget 有限，所以，尽量用 button 拼凑吧！</p>
-<p>放出 listview 和 listitem 的 lua 代码：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> LISTVIEW_WIDTH = <span class="number">340</span></div><div class="line"><span class="keyword">local</span> LISTVIEW_HEIGHT = <span class="number">405</span></div><div class="line"><span class="keyword">local</span> listView = ccui.ListView:<span class="built_in">create</span>()</div><div class="line"><span class="comment">-- set list view ex direction</span></div><div class="line">listView:setDirection(ccui.ScrollViewDir.vertical)</div><div class="line">listView:setBounceEnabled(<span class="literal">true</span>)</div><div class="line"><span class="comment">-- listView:setBackGroundImage("hall/di.png")</span></div><div class="line"><span class="comment">-- listView:setBackGroundImageScale9Enabled(true)</span></div><div class="line">listView:setContentSize(cc.size(LISTVIEW_WIDTH, LISTVIEW_HEIGHT))</div><div class="line">listView:setAnchorPoint(cc.p(<span class="number">0</span>, <span class="number">0</span>))</div><div class="line">listView:setPosition(cc.p(<span class="number">10</span>, <span class="number">12</span>))</div><div class="line">listView:addEventListener(listViewEvent)</div><div class="line"><span class="comment">-- SCISSOR</span></div><div class="line">listView:setClippingType(<span class="number">1</span>)</div><div class="line">parent:addChild(listView)</div><div class="line"></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">createDefaultListItem</span><span class="params">()</span></span></div><div class="line"><span class="keyword">local</span> leaderboardItemLayer =                 cc.CSLoader:createNode(<span class="string">"hall/LeaderboardItem.csb"</span>)</div><div class="line"><span class="comment">-- retrieve the widget. MUST be a widget</span></div><div class="line"><span class="keyword">local</span> listItemRoot = leaderboardItemLayer:getChildByTag(<span class="number">2001</span>)</div><div class="line">listItemRoot:removeFromParent()</div><div class="line"></div><div class="line"><span class="keyword">local</span> listItemRootSize = listItemRoot:getContentSize()</div><div class="line">listItemRoot:setPosition(cc.p(LISTVIEW_WIDTH / <span class="number">2.0</span>, listItemRootSize.height / <span class="number">2.0</span>))</div><div class="line"></div><div class="line"><span class="keyword">local</span> default_item = ccui.Layout:<span class="built_in">create</span>()</div><div class="line">default_item:setTouchEnabled(<span class="literal">true</span>)</div><div class="line">default_item:setContentSize(listItemRootSize)</div><div class="line">default_item:addChild(listItemRoot)</div><div class="line"></div><div class="line"><span class="keyword">return</span> default_item</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">local</span> default_item = createDefaultListItem()</div><div class="line">listView:setItemModel(default_item)</div><div class="line"></div><div class="line"><span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">100</span> <span class="keyword">do</span></div><div class="line">listView:pushBackDefaultItem()</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">-- set all items layout gravity</span></div><div class="line">listView:setGravity(ccui.ListViewGravity.centerVertical)</div><div class="line"></div><div class="line"><span class="comment">--set items margin</span></div><div class="line">listView:setItemsMargin(<span class="number">2.0</span>)</div></pre></td></tr></table></figure>
-	
-	</div>
-  <a type="button" href="/2014/11/29/cocostudio-create-listview-item/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2014-07-04 </div>
-			<div class="article-title"><a href="/2014/07/04/common-regular-expression-signs/" >常用正则表达式符号</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<h4 id="转意符号"><a href="#转意符号" class="headerlink" title="转意符号"></a>转意符号</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\  %</td>
-<td>改变下一个字符的属性，让普通字符包含特殊含义或者相反</td>
-</tr>
-</tbody>
-</table>
-<h4 id="字符匹配模式"><a href="#字符匹配模式" class="headerlink" title="字符匹配模式"></a>字符匹配模式</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>.</td>
-<td>匹配除「\n」之外的任何单个字符。</td>
-</tr>
-<tr>
-<td>x\</td>
-<td>y</td>
-<td>匹配x或y</td>
-</tr>
-<tr>
-<td>[xyz]</td>
-<td>匹配所包含的任意一个字符</td>
-</tr>
-<tr>
-<td>[^xyz]</td>
-<td>匹配未列出的任意字符</td>
-</tr>
-<tr>
-<td>[a-z]</td>
-<td>字符范围。匹配指定范围内的任意字符。</td>
-</tr>
-<tr>
-<td>[^a-z]</td>
-<td>匹配任何不在指定范围内的任意字符</td>
-</tr>
-<tr>
-<td>…..</td>
-<td>其他特殊的 patterns</td>
-</tr>
-</tbody>
-</table>
-<h4 id="数量限定"><a href="#数量限定" class="headerlink" title="数量限定"></a>数量限定</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*</td>
-<td>匹配前面的子表达式零次或多次</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配前面的子表达式一次或多次。</td>
-</tr>
-<tr>
-<td>?</td>
-<td>匹配前面的子表达式零次或一次。</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>匹配确定的n次。</td>
-</tr>
-<tr>
-<td>{n,}</td>
-<td>至少匹配n次</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>最少匹配n次且最多匹配m次</td>
-</tr>
-</tbody>
-</table>
-<h4 id="贪婪模式取消"><a href="#贪婪模式取消" class="headerlink" title="贪婪模式取消"></a>贪婪模式取消</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>?</td>
-<td>当该字符紧跟在任何一个其他限制符（*,+,?，{n}，{n,}，{n,m}）后面时，匹配模式是非贪婪的</td>
-</tr>
-</tbody>
-</table>
-<h4 id="控制字符"><a href="#控制字符" class="headerlink" title="控制字符"></a>控制字符</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>^</td>
-<td>匹配输入字符串的开始位置</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配输入字符串的结束位置</td>
-</tr>
-</tbody>
-</table>
-<h4 id="分组模式"><a href="#分组模式" class="headerlink" title="分组模式"></a>分组模式</h4><table>
-<thead>
-<tr>
-<th>pattern</th>
-<th>meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>(xyz)</td>
-<td>分组</td>
-</tr>
-<tr>
-<td>\n</td>
-<td>对分组的引用</td>
-</tr>
-</tbody>
-</table>
-
-	
-	</div>
-  <a type="button" href="/2014/07/04/common-regular-expression-signs/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2013-09-26 </div>
-			<div class="article-title"><a href="/2013/09/26/Keyboard-backlight-controller-Open-Source/" >&#39;Keyboard backlight controller&#39; Open Source</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>All the source code have been put into github:<a href="https://github.com/fantastxmw/kbLight" target="_blank" rel="external">https://github.com/fantastxmw/kbLight</a></p>
-<p>Hope you would like it!</p>
-
-	
-	</div>
-  <a type="button" href="/2013/09/26/Keyboard-backlight-controller-Open-Source/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2013-05-21 </div>
-			<div class="article-title"><a href="/2013/05/21/tolua++-namespace-issue/" >tolua++:namespace导致的问题</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>在用 <code>cocos2d-x</code> 的时候，可以把自己的类和 <code>cocos2d-x</code> 的类混在一起，即简单的把自己需要导出的类放到 <code>cocos2d</code>的 pkg 文件中。</p>
-<p>网上也有推荐这样的做法，但是这样虽然简单，却让人难以接受。</p>
-<p>我选择了比较麻烦的一种，就是自己重新定义 pkg 文件，并且导出了一个独立的cpp文件。摸过一些简单的坑之后，还算比较顺利，只是在pkg文件中没有注意处理 <code>cocos2d</code> 的 <code>namespace</code>，导致了在lua脚本中，自定义类中获得的比如 <code>CCNode</code> 之类的对象后无法访问其成员函数而已。</p>
-<p>具体的原因，因为在cocos2d-x的pkg中，它是删除了namespace的，所以tolua++生成的代码是这样的：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tolua_usertype(tolua_S,<span class="string">"CCNode"</span>);</div></pre></td></tr></table></figure>
-<p>而在我的pkg文件中，由于没有处理namespace，生成的代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tolua_usertype(tolua_S,<span class="string">"cocos::CCNode"</span>);</div></pre></td></tr></table></figure>
-<p>这就导致了同一个类在lua脚本中被认为是两个不同的对象。</p>
-<p>解决的方法很简单，去掉namespace即可。</p>
-
-	
-	</div>
-  <a type="button" href="/2013/05/21/tolua++-namespace-issue/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-           
-			  
-	
-	<!-- display as entry -->	
-		<h3 class="title">
-			<div class="date"> 2013-04-19 </div>
-			<div class="article-title"><a href="/2013/04/19/pointer-vector-initialization/" >指针vector初始化</a></div>						
-		</h3>
-	
-
-
-			  <div class="entry">
-  <div class="row">
-	
-	
-		<p>C++中，在申明的时候初始化一个vector的时候可以指明vector的大小和默认值。但是如果用NULL来初始化指针的时候，会遇到问题。</p>
-<p><pre class="lang:c++ decode:true ">class A;<br>vector&lt;A <em>&gt; vtTest&lt;2, NULL&gt;;</em></pre><br>在XCode中报错：说不能把int型赋值给A。原因就是NULL本身是不带具体的类型的，默认会被认为是一个int类型。</p>
-<p>所以，解决的方法就是类型强制转换。</p>
-
-	
-	</div>
-  <a type="button" href="/2013/04/19/pointer-vector-initialization/#more" class="btn btn-default more">Read More</a>
-</div>
-
-           
-		
-
-		</div>
-
-		<!-- pagination -->
-		<div>
-  		<center>
-		<div class="pagination">
-<ul class="pagination">
-	 
-		
-    	<li class="prev"><a href="/page/3/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i> Prev</a></li>
-  		
-
-        <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-
-		
-		   <li class="next"> <a href="/page/5/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a> </li>          
         
-	
-</ul>
-</div>
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>DeskAngel</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  		</center>
-		</div>
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
 
-		
-		
-	</div> <!-- col-md-9 -->
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
 
-	
-		<div class="col-md-3">
-	<div id="sidebar">
-	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
+<body class="max-width mx-auto px3 ltr">
+    
+    <div class="content index py4">
+        
+          <header id="header">
+  <a href="/">
+  
+    
+      <div id="logo" style="background-image: url(/images/logo.png);"></div>
+    
+  
+    <div id="title">
+      <h1>DeskAngel</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#"><i class="fas fa-bars fa-2x"></i></a>
+      </li>
+       
+        <li><a href="/">Home</a></li>
+       
+        <li><a href="/about/">About</a></li>
+       
+        <li><a href="/archives/">Writing</a></li>
+       
+        <li><a href="/projects_url">Projects</a></li>
+      
+    </ul>
   </div>
+</header>
 
+        
+        <section id="about">
+  
+  
+    <p>
+      Find me on
+      
+      
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="http://github.com/probberechts/cactus-dark">
+            <i class="fab fa-github"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-twitter"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-facebook"></i><!--
+      ---></a><!--
+    ---><!--
+    --->, 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="/">
+            <i class="fab fa-linkedin"></i><!--
+      ---></a><!--
+    ---><!--
+    ---> and 
+        
+      
+        
+          <a class="icon" target="_blank" rel="noopener" href="mailto:name@email.com">
+            <i class="fas fa-envelope"></i><!--
+      ---></a><!--
+      ---><!--
+    --->.
+        
+      
+    </p>
+  
+</section>
 
-		
-			
-	<div class="widget">
-		<h4>Categories</h4>
-		<ul class="tag_box inline list-unstyled">
-		
-			<li><a href="/categories/Critique/">Critique<span>5</span></a></li>
-		
-			<li><a href="/categories/Information/">Information<span>8</span></a></li>
-		
-			<li><a href="/categories/News/">News<span>3</span></a></li>
-		
-			<li><a href="/categories/Programming/">Programming<span>38</span></a></li>
-		
-			<li><a href="/categories/Software/">Software<span>35</span></a></li>
-		
-			<li><a href="/categories/Source/">Source<span>1</span></a></li>
-		
-			<li><a href="/categories/Uncategorized/">Uncategorized<span>0</span></a></li>
-		
-		</ul>
-	</div>
-
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/c-c/">c/c++<span>6</span></a></li>
-		
-			<li><a href="/tags/phpStorm/">phpStorm<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>2</span></a></li>
-		
-			<li><a href="/tags/pomelo/">pomelo<span>1</span></a></li>
-		
-			<li><a href="/tags/vs/">vs<span>1</span></a></li>
-		
-			<li><a href="/tags/console/">console<span>1</span></a></li>
-		
-			<li><a href="/tags/cocos2d/">cocos2d<span>2</span></a></li>
-		
-			<li><a href="/tags/docker/">docker<span>3</span></a></li>
-		
-			<li><a href="/tags/regular-expression/">regular expression<span>2</span></a></li>
-		
-			<li><a href="/tags/speedcommander/">speedcommander<span>1</span></a></li>
-		
-			<li><a href="/tags/dacalc/">dacalc<span>4</span></a></li>
-		
-			<li><a href="/tags/egret/">egret<span>1</span></a></li>
-		
-			<li><a href="/tags/php/">php<span>2</span></a></li>
-		
-			<li><a href="/tags/ibus/">ibus<span>1</span></a></li>
-		
-			<li><a href="/tags/charles/">charles<span>1</span></a></li>
-		
-			<li><a href="/tags/wine/">wine<span>1</span></a></li>
-		
-			<li><a href="/tags/symbolink/">symbolink<span>1</span></a></li>
-		
-			<li><a href="/tags/unicode/">unicode<span>1</span></a></li>
-		
-			<li><a href="/tags/quick-cocos2d/">quick cocos2d<span>1</span></a></li>
-		
-			<li><a href="/tags/react/">react<span>1</span></a></li>
-		
-		
-		   <li><a href="/tags">...<span>66</span></a></li>
-		 
-		</ul>
-	</div>
-
-
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
+<section id="writing">
+  <span class="h1"><a href="/archives">Writing</a></span>
+  
+  <ul class="post-list">
     
-      <li>
-        <a href="/2020/04/20/dafileserver-dev-notes/" ><i class="fa fa-file-o"></i>DaFileShare 开发笔记</a>
+    
+      
+    
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2020-04-20T06:06:16.000Z" itemprop="datePublished">2020-04-20</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2020/04/20/dafileserver-dev-notes/">DaFileShare 开发笔记</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2018/10/24/vsc-with-gdb-remote/" ><i class="fa fa-file-o"></i>vsc-with-gdb-remote</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2018-10-24T13:45:48.000Z" itemprop="datePublished">2018-10-24</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2018/10/24/vsc-with-gdb-remote/">vsc-with-gdb-remote</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2018/03/31/build-eos-on-ubuntu-16-04/" ><i class="fa fa-file-o"></i>Build EOS on ubuntu 16.04</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2018-03-31T11:55:07.000Z" itemprop="datePublished">2018-03-31</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2018/03/31/build-eos-on-ubuntu-16-04/">Build EOS on ubuntu 16.04</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2017/09/21/custom-eui-control-in-egret/" ><i class="fa fa-file-o"></i>custom-eui-control-in-egret</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2017-09-21T13:43:53.000Z" itemprop="datePublished">2017-09-21</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2017/09/21/custom-eui-control-in-egret/">custom-eui-control-in-egret</a>
+    
+
+
+</span>
       </li>
     
-      <li>
-        <a href="/2016/09/30/ledongli-login-issue-workaround/" ><i class="fa fa-file-o"></i>乐动力“网络不给力”问题的处理</a>
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2016-09-30T16:58:41.000Z" itemprop="datePublished">2016-09-30</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2016/09/30/ledongli-login-issue-workaround/">乐动力“网络不给力”问题的处理</a>
+    
+
+
+</span>
       </li>
     
   </ul>
-</div>
-
-		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
-
-	
-	
-</div> <!-- row-fluid -->
+  
+</section>
 
 
-	</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
   </div>
-  <div class="container-narrow">
-  <footer> <p>
-  &copy; 2020 William Hsueh
-  
-      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
-</p> </footer>
-</div> <!-- container-narrow -->
-  
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 
-  
-<a id="gotop" href="#">   
-  <span>▲</span> 
-</a>
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+
 <script src="/js/main.js"></script>
-<script src="/js/search.js"></script> 
 
+<!-- search -->
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Disqus Comments -->
 
-   <script type="text/javascript">      
-     var search_path = "search.xml";
-	 if (search_path.length == 0) {
-	 	search_path = "search.xml";
-	 }
-	 var path = "/" + search_path;
-     searchFunc(path, 'local-search-input', 'local-search-result');
-   </script>
 
 </body>
-   </html>
+</html>
