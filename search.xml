@@ -8,7 +8,7 @@
       <link href="/2020/04/26/dafileshare-macos-version-how-to/"/>
       <url>/2020/04/26/dafileshare-macos-version-how-to/</url>
       
-        <content type="html"><![CDATA[<p>DaFileShare 主要用来在电脑和手机之间进行文件分享。手机端无需下载任何软件，通过浏览器就可以接收文件。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>启动 App</p><p><img src="/images/dfs_empty.png" alt="启动后.png"></p><p>把需要分享的文件拖动到窗口中，App 会生成分享的链接和二维码。</p><p><img src="/images/dfs_sharing.png" alt="42419761.png"></p><p>复制链接，发送给接收的人员即可下载。如果手机浏览器支持扫描二维码，也可以直接扫描二维码进行下载。</p>]]></content>
+        <content type="html"><![CDATA[<p>DaFileShare 主要用来在电脑和手机之间进行文件分享。手机端无需下载任何软件，通过浏览器就可以接收文件。</p><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>启动 App</p><p><img src="/images/dfs_empty.png" alt="启动后.png"></p><p>把需要分享的文件拖动到窗口中，App 会生成分享的链接和二维码。</p><p><img src="/images/dfs_sharing.png" alt="42419761.png"></p><p>复制链接，发送给接收的人员即可下载。如果手机浏览器支持扫描二维码，也可以直接扫描二维码进行下载。</p><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>你可以下载 <a href="https://github.com/deskangel/DaFileShare/releases/download/v1.1/DaFileShare.app.zip" target="_blank" rel="noopener">DaFileShare</a></p>]]></content>
       
       
       <categories>
