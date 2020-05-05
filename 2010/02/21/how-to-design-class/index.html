@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一. 类是面向对象的基础。面向对象有三大特点：封装，继承和多态。 我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。 无论Java还是C++，只要讲解面向对象，都会有一些例子用来说明什么是封装，继承和多态。 大部分都会用shape来举例。 shape作为抽象的基类，circle，square和triangle继承自shape。shape会有个draw的函数，多半还是个虚函数。 这样的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何设计类">
+<meta property="og:url" content="https://blog.deskangel.com/2010/02/21/how-to-design-class/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="一. 类是面向对象的基础。面向对象有三大特点：封装，继承和多态。 我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。 无论Java还是C++，只要讲解面向对象，都会有一些例子用来说明什么是封装，继承和多态。 大部分都会用shape来举例。 shape作为抽象的基类，circle，square和triangle继承自shape。shape会有个draw的函数，多半还是个虚函数。 这样的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2010-02-20T17:47:35.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:author" content="William Hsueh">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>如何设计类</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2010/02/24/windows-cmd-and-unicode/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2010/02/09/symbollink-for-speedcommander/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2010/02/21/how-to-design-class/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&text=如何设计类" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&is_video=false&description=如何设计类" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何设计类&body=Check out this article: https://blog.deskangel.com/2010/02/21/how-to-design-class/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&name=如何设计类&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2010/02/21/how-to-design-class/&t=如何设计类" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        如何设计类
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2010-02-20T17:47:35.000Z" itemprop="datePublished">2010-02-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>一.</p>
+<p>类是面向对象的基础。面向对象有三大特点：封装，继承和多态。</p>
+<p>我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。</p>
+<p>无论Java还是C++，只要讲解面向对象，都会有一些例子用来说明什么是封装，继承和多态。</p>
+<p>大部分都会用shape来举例。</p>
+<p>shape作为抽象的基类，circle，square和triangle继承自shape。shape会有个draw的函数，多半还是个虚函数。</p>
+<p>这样的例子对初学者来说也是简单易懂的，很能说明白面向对象是什么。</p>
+<p>但这却是一个非常糟糕的开端，就像小时候父母告诉你是从胳肢窝里出来的一样，从一开始就给了你一个错误的概念。</p>
+<p>二.</p>
+<p>面向对象的产生，不仅仅是为了解决问题，还应该要站在待解决问题的角度来描述问题，从而让问题本身更容易被理解和解决。</p>
+<p>换个说法，就是我们应该如实的描述问题，不夸张不过分。</p>
+<p>什么是夸张？你从胳肢窝里出来就是夸张。shape有个draw的函数，也是夸张。你见过一个会draw自己的shape？</p>
+<p>有人认为这无伤大雅，把draw放在shape中，能更简洁的解决问题。</p>
+<p>但我们应该从一开始就建立一个正确的概念。</p>
+<p>三.</p>
+<p>然而把draw放在shape中并不能简洁的解决问题。</p>
+<p>我们需要在真实的环境中使用这些类，比如Microsoft Windows。我们使用GDI来画这些shape。我们需要一个DC。</p>
+<p>怎么表示？在shape中聚合一个HDC，还是把HDC作为参数传递给draw？（应该没有人会让shape从DC继承吧？）</p>
+<p>我们还需要一个画笔，来表达这个shape的其他属性，比如颜色，粗细等。</p>
+<p>我们还需要知道位置，这个shape在DC上的位置。</p>
+<p>问题开始变得复杂了，shape类以及它的子类与GDI对象耦合在一起。</p>
+<p>四.</p>
+<p>shape类以及它的子类本应该是独立的。</p>
+<p>cycle在在Windows下是cycle，在Linux下也应该是cycle，不管有没有GDI对象。</p>
+<p>问题出在什么地方？</p>
+<p>在这个例子中显而易见：只有在真正开始draw的时候，才需要GDI对象，而shape本身，并不能做draw这件事情。</p>
+<p>把一件不能做的事情，或是不适合做的事情硬塞给对象来实现，迟早是会出问题的。</p>
+<p>最糟糕的不是我们发现不了问题，而恰恰是问题迟早会被发现。</p>
+<p>五.</p>
+<p>如何从一开始就避免这样的情况，而不是在第二次的时候才做正确？</p>
+<p>我们如何才能够设计出一个正确的类？或者更确切的说，如何才能够正确的设计出一个类？</p>
+<p>从一开始就如实的描述问题，不夸张不过分。不给它不拥有的属性，更不给它不应该有的父类。</p>
+<p>这是最基本的设计原则。</p>
+<p>六.</p>
+<p>对于设计现实中不存在对应的类，同样需要如实描述——如实描述想法，设计。不要想的是孙悟空，出来的却是二郎神。</p>
+<p>计算机只识别0和1，这是个讲究精确的行业。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2010/02/21/how-to-design-class/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&text=如何设计类" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&is_video=false&description=如何设计类" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何设计类&body=Check out this article: https://blog.deskangel.com/2010/02/21/how-to-design-class/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&title=如何设计类" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2010/02/21/how-to-design-class/&name=如何设计类&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2010/02/21/how-to-design-class/&t=如何设计类" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-164531936-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Wsizer是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和DeskAngel一样，那些功能都来源于日常使用的积累。 作为第一版，它包含三个部分的功能。 第一个功能，_最小化窗口到系统托盘区_。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wsizer: 用键盘控制窗口">
+<meta property="og:url" content="https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="Wsizer是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和DeskAngel一样，那些功能都来源于日常使用的积累。 作为第一版，它包含三个部分的功能。 第一个功能，_最小化窗口到系统托盘区_。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2009-02-19T22:24:39.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="wsizer">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Wsizer: 用键盘控制窗口</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2009/02/21/three-scroll-methods-in-emacs/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2009/02/07/use-system-input-method-in-ntemacs/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&text=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&is_video=false&description=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Wsizer: 用键盘控制窗口&body=Check out this article: https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&name=Wsizer: 用键盘控制窗口&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&t=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Wsizer: 用键盘控制窗口
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2009-02-19T22:24:39.000Z" itemprop="datePublished">2009-02-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Software/">Software</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/wsizer/" rel="tag">wsizer</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>Wsizer</strong>是一个我刚刚开发完成的软件。它拥有我很喜欢的一些功能。和<a href="http://www.deskangel.com" target="_blank" rel="noopener" title="DeskAngel">DeskAngel</a>一样，那些功能都来源于日常使用的积累。</p>
+<p>作为第一版，它包含三个部分的功能。</p>
+<p>第一个功能，_<strong>最小化窗口到系统托盘区</strong>_。这个功能同样也包含在DeskAngel中，但是Wsizer取消了让用户感到疑惑的预定义的列表。<br>操作也和DA中的一样简单，按下’Alt’键，然后最小化窗口，窗口就会从任务栏上消失，改为出现在系统托盘区。系统托盘区的图标是窗口的主图标。</p>
+<p>第二个功能是_<strong>显示窗口的大小和位置</strong>_。当窗口在屏幕上移动的时候，Wsizer在该窗口的中间画出大小和位置信息。用户可以根据需要选择仅仅显示<br>大小、位置或是全部。通过该功能你可以观察到一些有趣的事情，比如在窗口最大化之后，窗口的左上角不是位于(0, 0)坐标。</p>
+<p>最后的功能是_<strong>热键功能</strong>_。通过预定义的热键，用户可以对当前窗口进行更多方便快捷的操作。<span style="color: #ff0000;">所有的热键都可以由用户自己更改</span>。<br>热键功能也可以分为三个部分：<br>1.) _改变窗口大小到预定义尺寸_。比如Wsizer默认提过3个预先定义的尺寸640x480;720x480;800x600，用户就可以通过快捷键’win+[‘和’win+]’<br>轻松控制窗口的大小。当窗口宽度小于640，按一下’win+[‘，窗口之间扩大到720x480；再按，扩大到800x600……；如果按’win+]’，窗口将缩<br>小到定义的大小。</p>
+<p>2.)_ 改变窗口宽度或高度_。这个功能可以让用户单独控制窗口的宽度或是高度。预定于的快捷键为：<br>增加宽度：win+right<br>减少宽度：win+left<br>增加高度：win+down<br>减少高度：win+up</p>
+<p>3.) _改变窗口位置_。以上的功能仅仅只是对窗口尺寸的控制。通过Wsizer，用户还可以方便的移动窗口。手一会离开键盘去拿鼠标，一会又放下鼠标<br>去敲键盘是比较累人而且没有效率的。因为在用鼠标的时候不想按键盘，我在DeskAngel中加入了映射’Right Button + Left Button’到’Alt + Right<br>Button’的功能，方便控制取词软件；因为在用键盘的时候不想去按鼠标，我在Wsizer中加入了热键移动窗口的功能。预定义的快捷键为：<br>窗口往左移动：win+ctrl+left<br>窗口往右移动：win+ctrl+right<br>窗口往上移动：win+ctrl+up<br>窗口往下移动：win+ctrl+down</p>
+<p>如果你喜欢上述的功能，现在就可以下载试用：<a href="http://wsizer.deskangel.com/download.html" target="_blank" rel="noopener">http://wsizer.deskangel.com/download.html</a></p>
+<p>任何问题都可以发送邮件或是访问论坛。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&text=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&is_video=false&description=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Wsizer: 用键盘控制窗口&body=Check out this article: https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&title=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&name=Wsizer: 用键盘控制窗口&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/02/20/wsizer-control-window-by-keyboard/&t=Wsizer: 用键盘控制窗口" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-164531936-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
