@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="简单的介绍如何用Visual Studio C++开发MYSQL的应用。为新手指明开发环境的准备和资源的位置。首先是准备工作。需要下载三个开发库：  去官方网站下载mysql-connector&#x2F;c++。有多个版本，我下载的是mysql-connector-c++-noinstall-1.1.0-win32-vs2005.zip。connector-c++提供了两个lib，mysqlcppconn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用C++开发MYSQL应用">
+<meta property="og:url" content="https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="简单的介绍如何用Visual Studio C++开发MYSQL的应用。为新手指明开发环境的准备和资源的位置。首先是准备工作。需要下载三个开发库：  去官方网站下载mysql-connector&#x2F;c++。有多个版本，我下载的是mysql-connector-c++-noinstall-1.1.0-win32-vs2005.zip。connector-c++提供了两个lib，mysqlcppconn">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2010-11-19T17:59:27.000Z">
+<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="c&#x2F;c++">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>用C++开发MYSQL应用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/rss2.xml" title="DeskAngel" type="application/rss+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/37dc39ae3909" target="_blank" rel="noopener">\&gt;\&gt;简书</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2010/12/08/new-features-in-dacalc-v1-0-7-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2010/11/12/the-lights-in-froyd-villainrom-1-5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&text=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&is_video=false&description=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用C++开发MYSQL应用&body=Check out this article: https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&name=用C++开发MYSQL应用&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&t=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        用C++开发MYSQL应用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2010-11-19T17:59:27.000Z" itemprop="datePublished">2010-11-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/c-c/" rel="tag">c/c++</a>, <a class="tag-link" href="/tags/mysql/" rel="tag">mysql</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>简单的介绍如何用Visual Studio C++开发MYSQL的应用。为新手指明开发环境的准备和资源的位置。<br>首先是准备工作。需要下载三个开发库：</p>
+<ol>
+<li>去官方网站下载<a href="http://mysql.com/downloads/connector/cpp/" target="_blank" rel="noopener">mysql-connector/c++</a>。有多个版本，我下载的是mysql-connector-c++-noinstall-1.1.0-win32-vs2005.zip。connector-c++提供了两个lib，mysqlcppconn.lib和mysqlcppconn-static.lib，不幸的是最终运行的时候他们都需要libmysql.dll。</li>
+<li>所以还需要下载<a href="http://mysql.com/downloads/connector/c/" target="_blank" rel="noopener">connector/c</a>。同样有多个版本可以选择，我下载的是mysql-connector-c-noinstall-6.0.2-win32-vs2005.zip。把两个压缩包解压到同一个地方，开发包就准备好了，但是准备工作还没有完成。</li>
+<li>你还需要下载<a href="http://www.boost.org/" target="_blank" rel="noopener">boost</a>库才可以编译程序，因为新的版本的connector中使用了boost。<br>然后是工程的配置， 主要是选择哪个lib。我选择使用mysqlcppconn.lib+libmysql.lib。其他的组合在visual studio 2010下都会有很多链接错误。相信所有的错误都是可以通过配置解决的，具体策略视需求而定。</li>
+</ol>
+<p>最后，mysql网站提供了一些<a href="http://dev.mysql.com/doc/refman/5.1/en/connector-cpp.html" target="_blank" rel="noopener">manual</a>和<a href="http://dev.mysql.com/doc/refman/5.1/en/connector-cpp-getting-started-examples.html" target="_blank" rel="noopener">example</a>。</p>
+<p>下面是一个简单的例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysql_connection.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mysql_driver.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_HOST <span class="meta-string">"xxx"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_USER <span class="meta-string">"xxxxx"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_PASS <span class="meta-string">"xxxxxx"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_DB <span class="meta-string">"xxxxxx"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">url</span><span class="params">(argc &gt;= <span class="number">2</span> ? argv[<span class="number">1</span>] : EXAMPLE_HOST)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">user</span><span class="params">(argc &gt;= <span class="number">3</span> ? argv[<span class="number">2</span>] : EXAMPLE_USER)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">pass</span><span class="params">(argc &gt;= <span class="number">4</span> ? argv[<span class="number">3</span>] : EXAMPLE_PASS)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="built_in">string</span> <span class="title">database</span><span class="params">(argc &gt;= <span class="number">5</span> ? argv[<span class="number">4</span>] : EXAMPLE_DB)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt; &lt; <span class="string">"Connecting to MYSQL server..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        sql::mysql::MySQL_Driver *driver;</span><br><span class="line">        sql::Connection *con;</span><br><span class="line"></span><br><span class="line">        driver = sql::mysql::get_driver_instance();</span><br><span class="line">        con = driver-&gt;connect(EXAMPLE_HOST, EXAMPLE_USER, EXAMPLE_PASS);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt; &lt; <span class="string">"Done! Querying..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        sql::Statement *stmt;</span><br><span class="line">        stmt = con-&gt;createStatement();</span><br><span class="line">        stmt-&gt;execute(<span class="string">"USE "</span> EXAMPLE_DB);</span><br><span class="line">        <span class="comment">//stmt-&gt;execute("DROP TABLE IF EXISTS test");</span></span><br><span class="line">        <span class="comment">//stmt-&gt;execute("SELECT * FROM `test` LIMIT 0, 30 ");</span></span><br><span class="line"></span><br><span class="line">        sql::ResultSet  *res;</span><br><span class="line">        res = stmt-&gt;executeQuery(<span class="string">"SELECT * FROM test LIMIT 0, 30 "</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span> &lt; &lt; <span class="string">"Done! Printing..."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (res-&gt;next()) &#123;</span><br><span class="line">            <span class="comment">//// You can use either numeric offsets...</span></span><br><span class="line">            <span class="comment">//cout &lt; &lt; "id = " &lt;&lt; res-&gt;getInt(1); // getInt(1) returns the first column</span></span><br><span class="line">            <span class="comment">// ... or column names for accessing results.</span></span><br><span class="line">            <span class="comment">// The latter is recommended.</span></span><br><span class="line">            <span class="built_in">cout</span> &lt; &lt; <span class="string">"Project: "</span> &lt;&lt; res-&gt;getString(<span class="string">"project"</span>) &lt; &lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Deadline:"</span> &lt;&lt; res-&gt;getString(<span class="string">"deadline"</span>) &lt; &lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Price:   "</span> &lt;&lt; res-&gt;getString(<span class="string">"price"</span>) &lt; &lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"People:  "</span> &lt;&lt; res-&gt;getString(<span class="string">"people"</span>) &lt; &lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">delete</span> res;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">delete</span> stmt;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">delete</span> con;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (sql::SQLException &amp;e) &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">          The MySQL Connector/C++ throws three different exceptions:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">          - sql::MethodNotImplementedException (derived from sql::SQLException)</span></span><br><span class="line"><span class="comment">          - sql::InvalidArgumentException (derived from sql::SQLException)</span></span><br><span class="line"><span class="comment">          - sql::SQLException (derived from std::runtime_error)</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"# ERR: SQLException in "</span> &lt;&lt; __FILE__;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; __FUNCTION__ &lt;&lt; <span class="string">") on line "</span> &lt;&lt; __LINE__ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">/* Use what() (derived from std::runtime_error) to fetch the error message */</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"# ERR: "</span> &lt;&lt; e.what();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">" (MySQL error code: "</span> &lt;&lt; e.getErrorCode();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">", SQLState: "</span> &lt;&lt; e.getSQLState() &lt;&lt; <span class="string">" )"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Done."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/37dc39ae3909" target="_blank" rel="noopener">\&gt;\&gt;简书</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&text=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&is_video=false&description=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用C++开发MYSQL应用&body=Check out this article: https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&title=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&name=用C++开发MYSQL应用&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2010/11/20/use-cpp-dev-mysql-app/&t=用C++开发MYSQL应用" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="https://www.jianshu.com/u/37dc39ae3909" target="_blank" rel="noopener">\&gt;\&gt;简书</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-164531936-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
