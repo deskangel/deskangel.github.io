@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>DeskAngel</title>
+    <link>https://blog.deskangel.com/</link>
+    
+    <image>
+      <url>https://blog.deskangel.com/icon.png</url>
+      <title>DeskAngel</title>
+      <link>https://blog.deskangel.com/</link>
+    </image>
+    
+    <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Tue, 05 May 2020 23:30:30 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>开发机访问Android模拟器网络</title>
+      <link>https://blog.deskangel.com/2020/05/06/android-simulator-network-service/</link>
+      <guid>https://blog.deskangel.com/2020/05/06/android-simulator-network-service/</guid>
+      <pubDate>Tue, 05 May 2020 23:28:57 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;模拟器网络&quot;&gt;&lt;a href=&quot;#模拟器网络&quot; class=&quot;headerlink&quot; title=&quot;模拟器网络&quot;&gt;&lt;/a&gt;模拟器网络&lt;/h3&gt;&lt;p&gt;这里说的模拟器，是 Google
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/06/android-simulator-network-service/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>build ubuntu 18.04 kernel</title>
+      <link>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/</link>
+      <guid>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/</guid>
+      <pubDate>Tue, 05 May 2020 02:50:19 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;虽然是在 Ubuntu 18.04 上的实验，但是其他版本应该也适用。&lt;/p&gt;
+&lt;h3 id=&quot;安装环境&quot;&gt;&lt;a href=&quot;#安装环境&quot; class=&quot;headerlink&quot; title=&quot;安装环境&quot;&gt;&lt;/a&gt;安装环境&lt;/h3&gt;&lt;h4
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>ubuntu 18.04 desktop不接显示器开启 vnc 服务</title>
+      <link>https://blog.deskangel.com/2020/05/02/vino-on-headless-ubuntu-desktop/</link>
+      <guid>https://blog.deskangel.com/2020/05/02/vino-on-headless-ubuntu-desktop/</guid>
+      <pubDate>Sat, 02 May 2020 12:07:08 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;Ubuntu 下如果没有接入显示器，vnc 会无法正常工作，所以需要做一些额外的操作来处理。&lt;/p&gt;
+&lt;h3 id=&quot;配置-vino&quot;&gt;&lt;a href=&quot;#配置-vino&quot; class=&quot;headerlink&quot; title=&quot;配置 vino&quot;&gt;&lt;/a&gt;配置
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/02/vino-on-headless-ubuntu-desktop/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>DaFileShare macos 版本介绍</title>
+      <link>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/</link>
+      <guid>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/</guid>
+      <pubDate>Sun, 26 Apr 2020 11:47:25 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;DaFileShare 主要用来在电脑和手机之间进行文件分享。手机端无需下载任何软件，通过浏览器就可以接收文件。&lt;/p&gt;
+&lt;h1 id=&quot;使用&quot;&gt;&lt;a href=&quot;#使用&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h1&gt;&lt;p&gt;启动
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>私人日记 P.Diary</title>
+      <link>https://blog.deskangel.com/2020/04/25/p-diary/</link>
+      <guid>https://blog.deskangel.com/2020/04/25/p-diary/</guid>
+      <pubDate>Sat, 25 Apr 2020 02:41:21 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;P.Diary就是 Personal Diary 的意思。&lt;/p&gt;
+&lt;p&gt;之前用 iPhone 的时候，记点私人的感悟什么的，都用的是 Momento，但是换到 Android
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/04/25/p-diary/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>DaFileShare 开发笔记</title>
+      <link>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/</link>
+      <guid>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/</guid>
+      <pubDate>Mon, 20 Apr 2020 06:06:16 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。&lt;/p&gt;
+&lt;p&gt;DaFileShare
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Build EOS on ubuntu 16.04</title>
+      <link>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/</link>
+      <guid>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/</guid>
+      <pubDate>Sat, 31 Mar 2018 11:55:07 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;为了和官方测试链对接，选择的是&lt;code&gt;dawn-2.x&lt;/code&gt;分支。官方推荐的是在&lt;code&gt;Ubuntu 16.10&lt;/code&gt;上面编译，但是我只有16.04，想来应该是差不多的。&lt;/p&gt;
+&lt;p&gt;参考&lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>custom-eui-control-in-egret</title>
+      <link>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/</link>
+      <guid>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/</guid>
+      <pubDate>Thu, 21 Sep 2017 13:43:53 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个 exml 文件，用来定义控件的显示元素，这里要注意的&lt;code&gt;classname&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>乐动力“网络不给力”问题的处理</title>
+      <link>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/</link>
+      <guid>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/</guid>
+      <pubDate>Fri, 30 Sep 2016 16:58:41 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;MX5上的乐动力 App 很早以前就不能登录了，各种途径都是提示“网络不给力”，等了大半年看他们是否会修正这个问题，但是每次版本更新后都试了，问题依旧存在。而且，无论是官网还是
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>React with Node.js in Webstorm</title>
+      <link>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/</link>
+      <guid>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/</guid>
+      <pubDate>Sat, 30 Jul 2016 13:05:28 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;软件环境：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;软件&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;OSX&lt;/td&gt;
+&lt;td&gt;10.11.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;WebStorm&lt;/
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Node.js from scratch</title>
+      <link>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/</link>
+      <guid>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/</guid>
+      <pubDate>Mon, 18 Apr 2016 08:48:55 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;使用 webstorm，从创建一个空白的工程开始构建一个 Node.js 的websocket服务器。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建空白工程&lt;/li&gt;
+&lt;li&gt;添加一个 js 文件，比如 main.js&lt;/li&gt;
+&lt;li&gt;添加一个 package.json
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>phpStorm remote debug with xdebug</title>
+      <link>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/</link>
+      <guid>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/</guid>
+      <pubDate>Sun, 20 Sep 2015 13:54:45 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;因为使用了 docker 进行了环境隔离，所以需要对 phpStorm 进行远程调试的配置。&lt;/p&gt;
+&lt;p&gt;网上有一些教程，不是太复杂就是已经过时。经过摸索，一下是完整的配置流程。&lt;/p&gt;
+&lt;p&gt;版本： ubuntu 14.04 LTS, phpStorm 9,
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>搞定 osx 下 virtualbox 中的 docker container 访问共享文件夹的权限问题</title>
+      <link>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</link>
+      <guid>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</guid>
+      <pubDate>Sun, 13 Sep 2015 13:22:23 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;案例是这样的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有一台 osx 系统&lt;/li&gt;
+&lt;li&gt;安装了 virtualbox 虚拟机&lt;/li&gt;
+&lt;li&gt;在虚拟机里面装 Linux&lt;/li&gt;
+&lt;li&gt;在 Linux 里面装了 docker&lt;/li&gt;
+&lt;li&gt;用 docker 装了
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>java压缩，javascript 解压缩总结</title>
+      <link>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/</link>
+      <guid>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/</guid>
+      <pubDate>Sat, 06 Jun 2015 09:05:30 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;这里描述如何在 client 端使用 javascript 处理通过 ajax 调用返回的压缩数据。服务器端使用java
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>sftp用户创建与设置</title>
+      <link>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/</link>
+      <guid>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/</guid>
+      <pubDate>Wed, 29 Apr 2015 10:19:16 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;环境：ubuntu server 14.04&lt;br&gt;目的：用户只能通过 sftp 访问指定目录，并且不能登录 shell&lt;/p&gt;
+&lt;p&gt;网上有很多这方面的介绍，最有价值的是&lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>docker之程序员系列 （一）</title>
+      <link>https://blog.deskangel.com/2015/04/23/docker-for-programmer/</link>
+      <guid>https://blog.deskangel.com/2015/04/23/docker-for-programmer/</guid>
+      <pubDate>Wed, 22 Apr 2015 18:47:57 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;&lt;em&gt;因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&quot;OSX-下的选择&quot;&gt;&lt;a href=&quot;#OSX-下的选择&quot; class=&quot;headerlink&quot; title=&quot;OSX
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/04/23/docker-for-programmer/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>blog 从 Dreamhost 搬到了 Linode</title>
+      <link>https://blog.deskangel.com/2015/04/18/Blog-moved/</link>
+      <guid>https://blog.deskangel.com/2015/04/18/Blog-moved/</guid>
+      <pubDate>Sat, 18 Apr 2015 12:03:51 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;Dreamhost 从国内访问越来越差，速度慢不说，有时候还连不上。&lt;/p&gt;
+&lt;p&gt;除此之外，每月$8.5的共享服务器在价格方面也完全没有优势，没有 root
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/04/18/Blog-moved/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Pomelo开发环境搭建之 Docker</title>
+      <link>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/</link>
+      <guid>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/</guid>
+      <pubDate>Sun, 01 Feb 2015 13:15:50 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;因为不想把当前的 osx 的环境弄得更复杂以及想实战一下docker，所以选择了在docker下搭建pomelo 的开发环境，大致的过程如下：&lt;/p&gt;
+&lt;h4 id=&quot;一-安装&quot;&gt;&lt;a href=&quot;#一-安装&quot; class=&quot;headerlink&quot; title=&quot;一.
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Quick-cocos2d-x 接入 protobuf</title>
+      <link>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/</link>
+      <guid>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/</guid>
+      <pubDate>Wed, 10 Dec 2014 16:53:17 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;ol&gt;
+&lt;li&gt;下载云风的 pbc：&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>使用 Cocostudio 创建 listview item</title>
+      <link>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/</link>
+      <guid>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/</guid>
+      <pubDate>Sat, 29 Nov 2014 22:20:46 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;为了快速开发一个小游戏，使用了 Cocostudio 2.0 作为 UI 编辑器。其实 Cocostudio 的功能比较弱，特别是针对稍微复杂一点的控件（Widget），无法做到所见即所得，不得不写一些代码。&lt;/p&gt;
+&lt;p&gt;游戏中用到了一个 listview，但是
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/#disqus_thread</comments>
+    </item>
+    
+  </channel>
+</rss>
