@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Ubuntu 下安装 clang</title>
+      <link href="/2020/05/13/install-clang-on-ubuntu/"/>
+      <url>/2020/05/13/install-clang-on-ubuntu/</url>
+      
+        <content type="html"><![CDATA[<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Ubuntu 20.04<br>clang 10</p><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>Ubuntu 20.04下直接装不行，<code>sudo apt install clang</code> 会提依赖问题。</p><p>为了找到问题所在，使用apt 把依赖的包都放到命令上，比如第一个提示的是 <code>clang-10</code> blabla，那么：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install clang clang-10</span><br></pre></td></tr></table></figure><p>这时会提示一堆库依赖问题，选一个放到<code>clang-10</code>后面继续回车，一路下去，最后提示<code>libllvm10</code>找不到。</p><p>这就很明确了，没有安装来源嘛————原本以为这种程序ubuntu的官方源中都应该有的。</p><p>既然这样，到<a href="https://apt.llvm.org/" target="_blank" rel="noopener">llvm网站</a>，按照指示添加源至<code>/etc/apt/sources.list</code>。因为是Ubuntu 20.04，所以添加focal的部分就可以了：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># i386 not available</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal main</span><br><span class="line"># 9</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-9 main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-9 main</span><br><span class="line"># 10</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-10 main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-10 main</span><br></pre></td></tr></table></figure><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>我们选择装稳定版（stable branch）：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先添加key</span></span><br><span class="line">wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装clang最新的稳定版本</span></span><br><span class="line">apt-get install clang-10 lldb-10 lld-10</span><br></pre></td></tr></table></figure><p>如果没有指定版本，会安装clang-11，这个还是开发版。</p><p>安装完成后，默认的命令是<code>clang-10</code>和<code>clang++-10</code>，需要使用<code>update-alternatives</code>来设置成<code>clang</code>和<code>clang++</code>：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 1 --slave /usr/bin/clang++ clang++ /usr/bin/clang++-10</span><br></pre></td></tr></table></figure><p>设置完成后就可以使用<code>clang</code>和<code>clang++</code>命令了：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">～/ clang++ --version</span><br></pre></td></tr></table></figure><p>输出：</p><blockquote><p>clang version 10.0.1-++20200507115421+eaae6dfc545-1<del>exp1</del>20200507220021.33<br>Target: x86_64-pc-linux-gnu<br>Thread model: posix<br>InstalledDir: /usr/bin</p></blockquote><p>至此，ubuntu下clang 就安装完成了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> clang </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>开发机访问Android模拟器网络</title>
       <link href="/2020/05/06/android-simulator-network-service/"/>
       <url>/2020/05/06/android-simulator-network-service/</url>

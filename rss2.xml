@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 05 May 2020 23:30:30 GMT</pubDate>
+    <pubDate>Wed, 13 May 2020 15:28:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 下安装 clang</title>
+      <link>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/</link>
+      <guid>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/</guid>
+      <pubDate>Wed, 13 May 2020 15:24:56 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;版本&quot;&gt;&lt;a href=&quot;#版本&quot; class=&quot;headerlink&quot; title=&quot;版本&quot;&gt;&lt;/a&gt;版本&lt;/h3&gt;&lt;p&gt;Ubuntu 20.04&lt;br&gt;clang 10&lt;/p&gt;
+&lt;h3 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>开发机访问Android模拟器网络</title>
@@ -453,28 +475,6 @@
       
       
       <comments>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>使用 Cocostudio 创建 listview item</title>
-      <link>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/</link>
-      <guid>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/</guid>
-      <pubDate>Sat, 29 Nov 2014 22:20:46 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;为了快速开发一个小游戏，使用了 Cocostudio 2.0 作为 UI 编辑器。其实 Cocostudio 的功能比较弱，特别是针对稍微复杂一点的控件（Widget），无法做到所见即所得，不得不写一些代码。&lt;/p&gt;
-&lt;p&gt;游戏中用到了一个 listview，但是
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2014/11/30/cocostudio-create-listview-item/#disqus_thread</comments>
     </item>
     
   </channel>
