@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Ubuntu 20.04 调优</title>
+      <link href="/2020/05/14/ubuntu-2004-tweak-for-macos-users/"/>
+      <url>/2020/05/14/ubuntu-2004-tweak-for-macos-users/</url>
+      
+        <content type="html"><![CDATA[<h2 id="macos转换到Ubuntu必做的调整"><a href="#macos转换到Ubuntu必做的调整" class="headerlink" title="macos转换到Ubuntu必做的调整"></a>macos转换到Ubuntu必做的调整</h2><p>Ubuntu 20.04 虽然已经很不错了，但是安装完后还是需要进行一些设置并且安装一些软件，这样才可以更好用。</p><h3 id="使用厂商驱动"><a href="#使用厂商驱动" class="headerlink" title="使用厂商驱动"></a>使用厂商驱动</h3><p>Ubuntu自带了很多设备的驱动，但是因为版权的问题，它默认安装的都是开源的版本，而不是厂商自己的驱动。开源的驱动虽然也能用，但是可能会遇到一些问题，这时候就需要使用厂商自己的专利驱动了。</p><p>Ubuntu 20.04中使用所谓的专利驱动非常方便，打开 <code>Software &amp; Updates</code> 工具，切换到<code>Additional Drivers</code>，会列出来能用的专利驱动，直接切换就可以了。切换后可能会没有提示重启系统，保险起见还是需要重启一下。</p><h3 id="安装Tweak工具"><a href="#安装Tweak工具" class="headerlink" title="安装Tweak工具"></a>安装Tweak工具</h3><p>如果说上面的驱动没有遇到问题不必要更换，那么gnome的tweak工具几乎是必装的，即使不准备使用第三方主题，调整一些设置也是需要用到的。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure><p>如果要装主题，还需要另外的工具和库，这个就根据需要自行安装了。</p><p>安装了tweak工具后，第一个操作是开启<code>Emacs Input</code>，可惜在Ubuntu 20.04上没有什么效果（好像只有在Chrome中有点效）。第二个是把关闭按钮等移到左边，即设置<code>Window Titlebars-&gt;Placement</code>。</p><h3 id="Preview工具"><a href="#Preview工具" class="headerlink" title="Preview工具"></a>Preview工具</h3><p>就像用惯Windows的人会无意识的点击右键刷新桌面，使用惯macos后会无意识的按空格键进行预览，所以预览工具是必须得装的。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install gnome-sushi</span><br></pre></td></tr></table></figure><p>装完后不需要任何配置（我没找到），在Files文件管理器里面选择文件后直接按空格就可以预览了，效果让人满意。</p><h3 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h3><p>Code （或者叫vscode）一定不要装软件商店里面的，也就是snap的版本，去<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">官网</a>下载对应的版本。snap的版本 <code>ctrl+shift+e</code>这个键绑定无法修改。这个键是emoji的快捷键，但是如果是snap版本的vscode，即使通过<code>ibus-setup</code>删除掉这个快捷键，vscode里面这个键还是生效的。</p><p>另一个问题是snap版本的vscode可能会有些程序识别不到，比如<code>flutter doctor</code>。</p><p>所以，换成官网的版本就好了，而且所有的设置都会保留，放心地在软件商店里删除然后去官网下载deb包重装吧。</p><hr><p>颇为遗憾的是还没有找到有效修改快捷键的方法，不能使用macos的键绑定方案。macos的键绑定其实主要就是emacs的方案，但是tweak中的设置在大部分的程序中都不起效果，可能需要进行更深层次的挖掘才行，这个就留到以后了，现在先开工干活！:-)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> macos </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 下安装 clang</title>
       <link href="/2020/05/13/install-clang-on-ubuntu/"/>
       <url>/2020/05/13/install-clang-on-ubuntu/</url>

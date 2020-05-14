@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 13 May 2020 15:28:09 GMT</pubDate>
+    <pubDate>Thu, 14 May 2020 07:54:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 20.04 调优</title>
+      <link>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</link>
+      <guid>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</guid>
+      <pubDate>Thu, 14 May 2020 07:36:35 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h2 id=&quot;macos转换到Ubuntu必做的调整&quot;&gt;&lt;a href=&quot;#macos转换到Ubuntu必做的调整&quot; class=&quot;headerlink&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 下安装 clang</title>
@@ -453,28 +474,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Quick-cocos2d-x 接入 protobuf</title>
-      <link>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/</link>
-      <guid>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/</guid>
-      <pubDate>Wed, 10 Dec 2014 16:53:17 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;ol&gt;
-&lt;li&gt;下载云风的 pbc：&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2014/12/11/quick-cocos2d-x-with-protobuf/#disqus_thread</comments>
     </item>
     
   </channel>
