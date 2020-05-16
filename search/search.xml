@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>GLFW 学习笔记 （一）</title>
+      <link href="/2020/05/16/GLFW-study-notes-1/"/>
+      <url>/2020/05/16/GLFW-study-notes-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul><li>Ubuntu 20.04桌面版</li></ul><h3 id="安装开发包"><a href="#安装开发包" class="headerlink" title="安装开发包"></a>安装开发包</h3><p>首先需要安装的是glfw库和头文件，我使用的还是X，所以使用下面的命令就可以了：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install libglfw3-dev</span><br></pre></td></tr></table></figure><p>如果是<code>wayland</code>，那么可以安装<code>libglfw3-wayland</code>。其他的包可以按需安装，要查看有哪些glfw相关的包，可以使用apt的search命令：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt search glfw</span><br></pre></td></tr></table></figure><ul><li>输出结果就不列了，在自己的系统中试一下就知道，或者去<a href="https://packages.ubuntu.com/search?suite=focal&keywords=glfw" target="_blank" rel="noopener">Ubuntu packages</a>网站查找。*</li></ul><h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><p>照着<a href="https://www.glfw.org/documentation.html" target="_blank" rel="noopener">GLFW 官网</a>的例子在 <strong>vscode</strong> 里面照抄一遍。因为上面已经把需要的头文件都安装好了，应该不会有任何的错误提示。</p><p>代码中使用了<code>GLFW/glfw3.h</code>，就不需要自己再 include OpenGL的头文件了，也不需要保护平台相关的头文件如 <code>windows.h</code>。</p><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    GLFWwindow* window;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!glfwInit()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    window = glfwCreateWindow(<span class="number">640</span>, <span class="number">480</span>, <span class="string">"Hello World"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (!window) &#123;</span><br><span class="line">        glfwTerminate();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    glfwMakeContextCurrent(window);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">    &#123;</span><br><span class="line">        glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">        glfwSwapBuffers(window);</span><br><span class="line"></span><br><span class="line">        glfwPollEvents();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="编译和链接"><a href="#编译和链接" class="headerlink" title="编译和链接"></a>编译和链接</h3><p>一般来说，这是设置开发环境最有挑战的一步，如果走得不顺，前面的可能都要推翻重来，比如开发包安装得不对，库版本和代码不一致。所以从零开始的时候，最好照着做一遍。有时候做事，看着浪费时间，超近路往往欲速则不达。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cc $(pkg-config --cflags glfw3 gl) -o <span class="built_in">test</span> main.c $(pkg-config --static --libs glfw3 gl)</span><br></pre></td></tr></table></figure><p>上面的命令会把 main.c 文件编译成文件名为 test 的程序。</p><p>cc 我系统中设置的就是gcc：</p><blockquote><p><code>$ ll /usr/bin/cc</code><br>rwxrwxrwx 1 root root 20 5月  12 17:05 /usr/bin/cc -&gt; /etc/alternatives/cc<br><code>$ ll /etc/alternatives/cc</code><br>lrwxrwxrwx 1 root root 12 5月  12 17:05 /etc/alternatives/cc -&gt; /usr/bin/gcc<br><code>$ gcc --version</code><br>gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0<br>Copyright (C) 2019 Free Software Foundation, Inc.<br>This is free software; see the source for copying conditions.  There is NO<br>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p></blockquote><pre><code>### 效果![Screenshot from 2020-05-16 16-34-20.png](:storage/e719c7e6-adaa-4e23-9d62-10c736caf51e/c256ebee.png)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> glfw </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 20.04 调优</title>
       <link href="/2020/05/14/ubuntu-2004-tweak-for-macos-users/"/>
       <url>/2020/05/14/ubuntu-2004-tweak-for-macos-users/</url>

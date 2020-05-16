@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 14 May 2020 07:54:07 GMT</pubDate>
+    <pubDate>Sat, 16 May 2020 09:10:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>GLFW 学习笔记 （一）</title>
+      <link>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/</link>
+      <guid>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/</guid>
+      <pubDate>Sat, 16 May 2020 09:05:31 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h2 id=&quot;从零开始&quot;&gt;&lt;a href=&quot;#从零开始&quot; class=&quot;headerlink&quot; title=&quot;从零开始&quot;&gt;&lt;/a&gt;从零开始&lt;/h2&gt;&lt;h3 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 20.04 调优</title>
@@ -452,28 +473,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/04/18/Blog-moved/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Pomelo开发环境搭建之 Docker</title>
-      <link>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/</link>
-      <guid>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/</guid>
-      <pubDate>Sun, 01 Feb 2015 13:15:50 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;因为不想把当前的 osx 的环境弄得更复杂以及想实战一下docker，所以选择了在docker下搭建pomelo 的开发环境，大致的过程如下：&lt;/p&gt;
-&lt;h4 id=&quot;一-安装&quot;&gt;&lt;a href=&quot;#一-安装&quot; class=&quot;headerlink&quot; title=&quot;一.
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/02/01/pomelo-dev-env-with-docker/#disqus_thread</comments>
     </item>
     
   </channel>
