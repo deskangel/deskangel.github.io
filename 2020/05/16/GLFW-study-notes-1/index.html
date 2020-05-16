@@ -13,12 +13,14 @@
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="从零开始环境 Ubuntu 20.04桌面版  安装开发包首先需要安装的是glfw库和头文件，我使用的还是X，所以使用下面的命令就可以了： sudo apt install libglfw3-dev 如果是wayland，那么可以安装libglfw3-wayland。其他的包可以按需安装，要查看有哪些glfw相关的包，可以使用apt的search命令： apt search glfw  输出结果就">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.deskangel.com/images/glfw_first_window.png">
 <meta property="article:published_time" content="2020-05-16T09:05:31.000Z">
-<meta property="article:modified_time" content="2020-05-16T09:17:49.790Z">
+<meta property="article:modified_time" content="2020-05-16T09:23:18.698Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="Ubuntu">
 <meta property="article:tag" content="glfw">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.deskangel.com/images/glfw_first_window.png">
     
     
         
@@ -114,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从零开始"><span class="toc-number">1.</span> <span class="toc-text">从零开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装开发包"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装开发包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试代码"><span class="toc-number">1.0.3.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译和链接"><span class="toc-number">1.0.4.</span> <span class="toc-text">编译和链接</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从零开始"><span class="toc-number">1.</span> <span class="toc-text">从零开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装开发包"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装开发包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试代码"><span class="toc-number">1.0.3.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译和链接"><span class="toc-number">1.0.4.</span> <span class="toc-text">编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果"><span class="toc-number">1.0.5.</span> <span class="toc-text">效果</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -181,12 +183,10 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cc $(pkg-config --cflags glfw3 gl) -o <span class="built_in">test</span> main.c $(pkg-config --static --libs glfw3 gl)</span><br></pre></td></tr></table></figure>
 <p>上面的命令会把 main.c 文件编译成文件名为 test 的程序。</p>
 <p>cc 我系统中设置的就是gcc：</p>
-<blockquote>
-<p><code>$ ll /usr/bin/cc</code><br>rwxrwxrwx 1 root root 20 5月  12 17:05 /usr/bin/cc -&gt; /etc/alternatives/cc<br><code>$ ll /etc/alternatives/cc</code><br>lrwxrwxrwx 1 root root 12 5月  12 17:05 /etc/alternatives/cc -&gt; /usr/bin/gcc<br><code>$ gcc --version</code><br>gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0<br>Copyright (C) 2019 Free Software Foundation, Inc.<br>This is free software; see the source for copying conditions.  There is NO<br>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
-</blockquote>
-<pre><code>
-### 效果
-![glfw first window](/images/glfw_first_window.png)</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ll /usr/bin/cc</span><br><span class="line">rwxrwxrwx 1 root root 20 5月  12 17:05 /usr/bin/cc -&gt; /etc/alternatives/cc</span><br><span class="line">$ ll /etc/alternatives/cc</span><br><span class="line">lrwxrwxrwx 1 root root 12 5月  12 17:05 /etc/alternatives/cc -&gt; /usr/bin/gcc</span><br><span class="line">$ gcc --version</span><br><span class="line">gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0</span><br><span class="line">Copyright (C) 2019 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the <span class="built_in">source</span> <span class="keyword">for</span> copying conditions.  There is NO</span><br><span class="line">warranty; not even <span class="keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span><br></pre></td></tr></table></figure>
+
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="/images/glfw_first_window.png" alt="glfw_first_window"></p>
+
   </div>
 </article>
 
@@ -217,7 +217,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从零开始"><span class="toc-number">1.</span> <span class="toc-text">从零开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装开发包"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装开发包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试代码"><span class="toc-number">1.0.3.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译和链接"><span class="toc-number">1.0.4.</span> <span class="toc-text">编译和链接</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从零开始"><span class="toc-number">1.</span> <span class="toc-text">从零开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境"><span class="toc-number">1.0.1.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装开发包"><span class="toc-number">1.0.2.</span> <span class="toc-text">安装开发包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试代码"><span class="toc-number">1.0.3.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译和链接"><span class="toc-number">1.0.4.</span> <span class="toc-text">编译和链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果"><span class="toc-number">1.0.5.</span> <span class="toc-text">效果</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
