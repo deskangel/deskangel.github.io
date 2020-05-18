@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 16 May 2020 09:23:18 GMT</pubDate>
+    <pubDate>Mon, 18 May 2020 06:43:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 20.04 调优 （二）</title>
+      <link>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/</link>
+      <guid>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/</guid>
+      <pubDate>Mon, 18 May 2020 06:38:27 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h1 id=&quot;macos转换到Ubuntu必做的调整&quot;&gt;&lt;a href=&quot;#macos转换到Ubuntu必做的调整&quot; class=&quot;headerlink&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>GLFW 学习笔记 （一）</title>
@@ -40,7 +61,7 @@
     </item>
     
     <item>
-      <title>Ubuntu 20.04 调优</title>
+      <title>Ubuntu 20.04 调优 (一)</title>
       <link>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</link>
       <guid>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</guid>
       <pubDate>Thu, 14 May 2020 07:36:35 GMT</pubDate>
@@ -451,28 +472,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/04/23/docker-for-programmer/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>blog 从 Dreamhost 搬到了 Linode</title>
-      <link>https://blog.deskangel.com/2015/04/18/Blog-moved/</link>
-      <guid>https://blog.deskangel.com/2015/04/18/Blog-moved/</guid>
-      <pubDate>Sat, 18 Apr 2015 12:03:51 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;Dreamhost 从国内访问越来越差，速度慢不说，有时候还连不上。&lt;/p&gt;
-&lt;p&gt;除此之外，每月$8.5的共享服务器在价格方面也完全没有优势，没有 root
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/04/18/Blog-moved/#disqus_thread</comments>
     </item>
     
   </channel>
