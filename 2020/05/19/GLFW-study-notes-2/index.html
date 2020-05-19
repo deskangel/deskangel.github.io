@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Load 库 这几篇不会讲OpenGL和GLFW的原理性的东西，只是开发环境的建立。万事开头难，编程学习的开头就是开发环境，有了开发环境后，其他就可以自己摸索了。*  这一篇引入了GLAD这个加载库。 GLAD and GLEW因为OpenGL只是一个标准，具体的实现是由驱动厂商来完成的，针对不同的显卡，有很多不同版本的OpenGL驱动，大多数函数的地址做不到一成不变，需要在运行的时候去查询。而具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GLFW 学习笔记 （二）">
+<meta property="og:url" content="https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="Load 库 这几篇不会讲OpenGL和GLFW的原理性的东西，只是开发环境的建立。万事开头难，编程学习的开头就是开发环境，有了开发环境后，其他就可以自己摸索了。*  这一篇引入了GLAD这个加载库。 GLAD and GLEW因为OpenGL只是一个标准，具体的实现是由驱动厂商来完成的，针对不同的显卡，有很多不同版本的OpenGL驱动，大多数函数的地址做不到一成不变，需要在运行的时候去查询。而具">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.deskangel.com/images/glad_settings.png">
+<meta property="article:published_time" content="2020-05-19T02:25:34.000Z">
+<meta property="article:modified_time" content="2020-05-19T02:31:21.579Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="glfw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.deskangel.com/images/glad_settings.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>GLFW 学习笔记 （二）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/rss2.xml" title="DeskAngel" type="application/rss+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&text=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&is_video=false&description=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GLFW 学习笔记 （二）&body=Check out this article: https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&name=GLFW 学习笔记 （二）&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&t=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Load-库"><span class="toc-number">1.</span> <span class="toc-text">Load 库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GLAD-and-GLEW"><span class="toc-number">1.0.1.</span> <span class="toc-text">GLAD and GLEW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载GLAD"><span class="toc-number">1.0.2.</span> <span class="toc-text">下载GLAD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码和编译"><span class="toc-number">1.0.3.</span> <span class="toc-text">实例代码和编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glad-的作用s"><span class="toc-number">1.0.4.</span> <span class="toc-text">glad 的作用s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考："><span class="toc-number">1.0.5.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GLFW 学习笔记 （二）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">DeskAngel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-05-19T02:25:34.000Z" itemprop="datePublished">2020-05-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a>, <a class="tag-link" href="/tags/glfw/" rel="tag">glfw</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Load-库"><a href="#Load-库" class="headerlink" title="Load 库"></a>Load 库</h1><ul>
+<li>这几篇不会讲OpenGL和GLFW的原理性的东西，只是开发环境的建立。万事开头难，编程学习的开头就是开发环境，有了开发环境后，其他就可以自己摸索了。*</li>
+</ul>
+<p>这一篇引入了GLAD这个加载库。</p>
+<h3 id="GLAD-and-GLEW"><a href="#GLAD-and-GLEW" class="headerlink" title="GLAD and GLEW"></a>GLAD and GLEW</h3><p>因为OpenGL只是一个标准，具体的实现是由驱动厂商来完成的，针对不同的显卡，有很多不同版本的OpenGL驱动，大多数函数的地址做不到一成不变，需要在运行的时候去查询。而具体的查询方法又是系统相关的，不同的操作系统，使用的方法也不一样，所以出现了很多load库来处理这些事情。</p>
+<p>GLAD和GLEW就是其中的两个，其他的还有GL3W等。</p>
+<h3 id="下载GLAD"><a href="#下载GLAD" class="headerlink" title="下载GLAD"></a>下载GLAD</h3><p>GLAD的<a href="https://glad.dav1d.de/" target="_blank" rel="noopener">官网</a>提供了一个web service，作为一个开始，进行如下设置即可：</p>
+<p><img src="/images/glad_settings.png" alt="glad_settings.png"></p>
+<p>点击<code>Generate</code>按钮生成配置文件，下载并解压后，有一个<code>include</code>目录和一个<code>src</code>目录。</p>
+<h3 id="实例代码和编译"><a href="#实例代码和编译" class="headerlink" title="实例代码和编译"></a>实例代码和编译</h3><p>创建一个文件夹作为项目目录，把上一步解压的glad的include 和src目录放到项目目录中。进入<code>src</code>目录，里面有一个<code>glad.c</code>文件，再创建一个<code>main.cpp</code>文件，编辑<code>main.cpp</code>，使用下面的示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    glfwInit();</span><br><span class="line">    </span><br><span class="line">    GLFWwindow* window = glfwCreateWindow(<span class="number">800</span>, <span class="number">600</span>, <span class="string">"LearnOpenGL"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (window == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      glfwTerminate();</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    glfwMakeContextCurrent(window);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">    &#123;</span><br><span class="line">      glfwSwapBuffers(window);</span><br><span class="line">      glfwPollEvents();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在无需深究API的含义，<strong>但是要注意<code>#include &lt;glad/glad.h&gt;</code>需要放在<code>#include &lt;GLFW/glfw3.h&gt;</code>前面</strong>。</p>
+<p>在命令行进入项目根目录，输入编译命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cc $(pkg-config --cflags glfw3 gl) -Iinclude -o <span class="built_in">test</span> src/main.cpp src/glad.c $(pkg-config --static --libs glfw3 gl)</span><br></pre></td></tr></table></figure>
+
+<p>可能会疑惑<code>pkg-config</code>的作用，其实没什么特别的，也就是查询各个库编译和链接需要的参数。比如我的系统下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pkg-config --cflags --static --libs glfw3 gl</span><br></pre></td></tr></table></figure>
+<p>输出为<code>-lglfw -lrt -lm -ldl -lGL</code></p>
+<p>和<a href="https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/">GLFW 学习笔记 （一）</a>中相比，增加了<code>-Iinclude</code>和<code>src/glad.c</code>，前者表示增加include的搜索路径为当前目录下的include文件夹，后者表示编译的时候需要一起编译<code>src/glad.c</code>文件，这些都是 gcc/g++ 的参数。</p>
+<p>由此可见，glad的依赖关系还是相当简单的，了解了这些，再用cmake等工具生成编译配置心里就比较有数了。</p>
+<h3 id="glad-的作用s"><a href="#glad-的作用s" class="headerlink" title="glad 的作用s"></a>glad 的作用s</h3><p>上面的代码，我们只使用到了一个glad的函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)</span><br></pre></td></tr></table></figure>
+
+<p>如果把<code>include &lt;glad/glad.h&gt;</code> 和上面的代码注释掉，一样可以正常编译，正常运行，看不出有什么用处，但是如果按照<a href="https://learnopengl.com/Getting-started/Hello-Triangle" target="_blank" rel="noopener">LearnOpenGL - Hello Triangle</a>教程学下去，会发现很多函数，比如<code>glGetShaderiv</code>会提示找不到。</p>
+<p>glad的作用，就是在头文件中声明了这个函数：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(APIENTRYP PFNGLGETSHADERIVPROC)</span><span class="params">(GLuint shader, GLenum pname, GLint *params)</span></span>;</span><br><span class="line">GLAPI PFNGLGETSHADERIVPROC glad_glGetShaderiv;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> glGetShaderiv glad_glGetShaderiv</span></span><br></pre></td></tr></table></figure>
+<p>并且在初始化的时候获取了这个函数的地址：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">glad_glGetShaderiv = (PFNGLGETSHADERIVPROC)load(<span class="string">"glGetShaderiv"</span>);</span><br></pre></td></tr></table></figure>
+<p>这样代码中就可以安全而方便的使用了。</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://learnopengl.com/Getting-started/Creating-a-window" target="_blank" rel="noopener">LearnOpenGL - Creating a window</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Load-库"><span class="toc-number">1.</span> <span class="toc-text">Load 库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GLAD-and-GLEW"><span class="toc-number">1.0.1.</span> <span class="toc-text">GLAD and GLEW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载GLAD"><span class="toc-number">1.0.2.</span> <span class="toc-text">下载GLAD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码和编译"><span class="toc-number">1.0.3.</span> <span class="toc-text">实例代码和编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glad-的作用s"><span class="toc-number">1.0.4.</span> <span class="toc-text">glad 的作用s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考："><span class="toc-number">1.0.5.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&text=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&is_video=false&description=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GLFW 学习笔记 （二）&body=Check out this article: https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&title=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&name=GLFW 学习笔记 （二）&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/&t=GLFW 学习笔记 （二）" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2020
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-164531936-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

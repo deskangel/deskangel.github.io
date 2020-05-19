@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>GLFW 学习笔记 （二）</title>
+      <link href="/2020/05/19/GLFW-study-notes-2/"/>
+      <url>/2020/05/19/GLFW-study-notes-2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Load-库"><a href="#Load-库" class="headerlink" title="Load 库"></a>Load 库</h1><ul><li>这几篇不会讲OpenGL和GLFW的原理性的东西，只是开发环境的建立。万事开头难，编程学习的开头就是开发环境，有了开发环境后，其他就可以自己摸索了。*</li></ul><p>这一篇引入了GLAD这个加载库。</p><h3 id="GLAD-and-GLEW"><a href="#GLAD-and-GLEW" class="headerlink" title="GLAD and GLEW"></a>GLAD and GLEW</h3><p>因为OpenGL只是一个标准，具体的实现是由驱动厂商来完成的，针对不同的显卡，有很多不同版本的OpenGL驱动，大多数函数的地址做不到一成不变，需要在运行的时候去查询。而具体的查询方法又是系统相关的，不同的操作系统，使用的方法也不一样，所以出现了很多load库来处理这些事情。</p><p>GLAD和GLEW就是其中的两个，其他的还有GL3W等。</p><h3 id="下载GLAD"><a href="#下载GLAD" class="headerlink" title="下载GLAD"></a>下载GLAD</h3><p>GLAD的<a href="https://glad.dav1d.de/" target="_blank" rel="noopener">官网</a>提供了一个web service，作为一个开始，进行如下设置即可：</p><p><img src="/images/glad_settings.png" alt="glad_settings.png"></p><p>点击<code>Generate</code>按钮生成配置文件，下载并解压后，有一个<code>include</code>目录和一个<code>src</code>目录。</p><h3 id="实例代码和编译"><a href="#实例代码和编译" class="headerlink" title="实例代码和编译"></a>实例代码和编译</h3><p>创建一个文件夹作为项目目录，把上一步解压的glad的include 和src目录放到项目目录中。进入<code>src</code>目录，里面有一个<code>glad.c</code>文件，再创建一个<code>main.cpp</code>文件，编辑<code>main.cpp</code>，使用下面的示例代码：</p><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    glfwInit();</span><br><span class="line">    </span><br><span class="line">    GLFWwindow* window = glfwCreateWindow(<span class="number">800</span>, <span class="number">600</span>, <span class="string">"LearnOpenGL"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (window == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      glfwTerminate();</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    glfwMakeContextCurrent(window);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!glfwWindowShouldClose(window))</span><br><span class="line">    &#123;</span><br><span class="line">      glfwSwapBuffers(window);</span><br><span class="line">      glfwPollEvents();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>现在无需深究API的含义，<strong>但是要注意<code>#include &lt;glad/glad.h&gt;</code>需要放在<code>#include &lt;GLFW/glfw3.h&gt;</code>前面</strong>。</p><p>在命令行进入项目根目录，输入编译命令：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cc $(pkg-config --cflags glfw3 gl) -Iinclude -o <span class="built_in">test</span> src/main.cpp src/glad.c $(pkg-config --static --libs glfw3 gl)</span><br></pre></td></tr></table></figure><p>可能会疑惑<code>pkg-config</code>的作用，其实没什么特别的，也就是查询各个库编译和链接需要的参数。比如我的系统下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pkg-config --cflags --static --libs glfw3 gl</span><br></pre></td></tr></table></figure><p>输出为<code>-lglfw -lrt -lm -ldl -lGL</code></p><p>和<a href="https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/">GLFW 学习笔记 （一）</a>中相比，增加了<code>-Iinclude</code>和<code>src/glad.c</code>，前者表示增加include的搜索路径为当前目录下的include文件夹，后者表示编译的时候需要一起编译<code>src/glad.c</code>文件，这些都是 gcc/g++ 的参数。</p><p>由此可见，glad的依赖关系还是相当简单的，了解了这些，再用cmake等工具生成编译配置心里就比较有数了。</p><h3 id="glad-的作用s"><a href="#glad-的作用s" class="headerlink" title="glad 的作用s"></a>glad 的作用s</h3><p>上面的代码，我们只使用到了一个glad的函数：</p><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)</span><br></pre></td></tr></table></figure><p>如果把<code>include &lt;glad/glad.h&gt;</code> 和上面的代码注释掉，一样可以正常编译，正常运行，看不出有什么用处，但是如果按照<a href="https://learnopengl.com/Getting-started/Hello-Triangle" target="_blank" rel="noopener">LearnOpenGL - Hello Triangle</a>教程学下去，会发现很多函数，比如<code>glGetShaderiv</code>会提示找不到。</p><p>glad的作用，就是在头文件中声明了这个函数：</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(APIENTRYP PFNGLGETSHADERIVPROC)</span><span class="params">(GLuint shader, GLenum pname, GLint *params)</span></span>;</span><br><span class="line">GLAPI PFNGLGETSHADERIVPROC glad_glGetShaderiv;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> glGetShaderiv glad_glGetShaderiv</span></span><br></pre></td></tr></table></figure><p>并且在初始化的时候获取了这个函数的地址：</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">glad_glGetShaderiv = (PFNGLGETSHADERIVPROC)load(<span class="string">"glGetShaderiv"</span>);</span><br></pre></td></tr></table></figure><p>这样代码中就可以安全而方便的使用了。</p><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://learnopengl.com/Getting-started/Creating-a-window" target="_blank" rel="noopener">LearnOpenGL - Creating a window</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> glfw </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 20.04 调优 （二）</title>
       <link href="/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/"/>
       <url>/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/</url>

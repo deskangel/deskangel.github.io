@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 18 May 2020 13:48:01 GMT</pubDate>
+    <pubDate>Tue, 19 May 2020 02:31:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>GLFW 学习笔记 （二）</title>
+      <link>https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/</link>
+      <guid>https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/</guid>
+      <pubDate>Tue, 19 May 2020 02:25:34 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h1 id=&quot;Load-库&quot;&gt;&lt;a href=&quot;#Load-库&quot; class=&quot;headerlink&quot; title=&quot;Load 库&quot;&gt;&lt;/a&gt;Load
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 20.04 调优 （二）</title>
@@ -450,28 +471,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>docker之程序员系列 （一）</title>
-      <link>https://blog.deskangel.com/2015/04/23/docker-for-programmer/</link>
-      <guid>https://blog.deskangel.com/2015/04/23/docker-for-programmer/</guid>
-      <pubDate>Wed, 22 Apr 2015 18:47:57 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;&lt;em&gt;因为我主要使用 ubuntu 做服务器，所以以下的操作都是在 ubuntu server 14.04下进行。&lt;/em&gt;&lt;/p&gt;
-&lt;h4 id=&quot;OSX-下的选择&quot;&gt;&lt;a href=&quot;#OSX-下的选择&quot; class=&quot;headerlink&quot; title=&quot;OSX
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/04/23/docker-for-programmer/#disqus_thread</comments>
     </item>
     
   </channel>
