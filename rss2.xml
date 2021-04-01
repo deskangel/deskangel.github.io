@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 19 May 2020 02:31:21 GMT</pubDate>
+    <pubDate>Thu, 01 Apr 2021 16:01:58 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Termux配置及优化</title>
+      <link>https://blog.deskangel.com/2021/04/01/termux-tweak/</link>
+      <guid>https://blog.deskangel.com/2021/04/01/termux-tweak/</guid>
+      <pubDate>Thu, 01 Apr 2021 12:56:09 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;p&gt;当前 Google Play 中的版本不再更新，最新版在 &lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/01/termux-tweak/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>GLFW 学习笔记 （二）</title>
@@ -449,28 +470,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>sftp用户创建与设置</title>
-      <link>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/</link>
-      <guid>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/</guid>
-      <pubDate>Wed, 29 Apr 2015 10:19:16 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;环境：ubuntu server 14.04&lt;br&gt;目的：用户只能通过 sftp 访问指定目录，并且不能登录 shell&lt;/p&gt;
-&lt;p&gt;网上有很多这方面的介绍，最有价值的是&lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/04/29/sftp-user-creat-and-config/#disqus_thread</comments>
     </item>
     
   </channel>
