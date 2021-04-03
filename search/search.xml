@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>macos 下 vim j k 移动速度的问题</title>
+      <link href="2021/04/03/vim-j-k-speed-issue/"/>
+      <url>2021/04/03/vim-j-k-speed-issue/</url>
+      
+        <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>这个问题其实困扰我好几年了，表现得相当怪异。</p><p>一开始是在 Vim 中发现的，在 iTerm2 下，使用 j 和 k 移动光标的时候，光标和文本的滚动会变得非常的卡顿，但是使用箭头键又是好的。</p><p>有怀疑是 iTerm2的问题，但是换成系统自带的也是一样；有怀疑是 Vim 版本的问题，但是其他版本甚至 gui 版本也有同样的问题；有怀疑是 Vim 插件问题，但是去除所有插件后虽然情况略有好转，但是卡顿还是非常明显；有怀疑有Filco蓝牙键盘的问题，但是 rmbp 自带的键盘也是那副样子；怀疑 macos 是否对键盘进行来特殊处理，因为如果使用<code>上下箭头</code>来移动光标是非常流畅的……</p><p>Google 了很多次，确实也有很多人都会遇到类似的问题，解决方案是调整系统的按键速度——呵呵~😒 还有说安装了一些键盘按键工具，覆盖了系统的按键速度。最过分的是有人说既然使用了 Vim，要学会Vim 的生活方式，不要使用<code>j</code>，要使用<code>10j</code>🤮。</p><p>不过Google 后也不是没有所获。有人提醒说不光是 Vim，其实在 man 等工具中也是一样：确实如此！！</p><h3 id="替换方案"><a href="#替换方案" class="headerlink" title="替换方案"></a>替换方案</h3><p>另一个收获是发现了一个软件：<a href="https://github.com/alacritty/alacritty" target="_blank" rel="noopener">alacritty</a>，一个使用 GPU 加速的终端。使用了之后，确实速度改善非常大，<code>h、j、k、l</code>光标移动问题看不出来了。但是，美中不足的是，它不是 iTerm2。</p><h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><p>虽然 Vim 不是我的主力编辑器，但是使用的次数也非常频繁，特别是在命令行环境下修改一些参数什么的非常方便，但是每次使用遇到<code>h、j、k、l</code> 光标移动问题特别糟心，每次遇到都要研究一番。比如今天使用了<code>:set verbose=9</code>来查看按键的运行情况，虽然<code>j</code>和<code>ctrl+n</code>产生的命令调用是一样的，但是发现<code>ctrl+n</code>移动光标就是流畅！以前没有试过用组合键来移动光标。如果系统针对字母键和方向键做了不同的按键频率的处理，那么同为字母键应该都一样。难道真的装了我没有发现的键盘按键工具？</p><p>打印出所有进程一个一个查看……没有问题啊……目光不经意的飘向了右上角……输入法……输入法？百度输入法……会不会有影响？换成系统的试试……！！！</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>百度输入法可以设置一个清单，清单中的软件默认切换成英文输入模式——百度输入法的英文模式，而问题也就在这个模式，也许是它要做一些监听和联想？可是翻遍了输入法的配置，没有看到在英文模式下显示联想词的开关，事实也是不会显示联想词语的，不知道在做什么。</p><p>知道了原因，发现不光是Vim等软件中会遇到这个问题，其实iTerm2下就有这个问题，按住字母键就会卡顿，只是正常输入不需要连按，所以平时遇不到。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Termux配置及优化</title>
       <link href="2021/04/01/termux-tweak/"/>
       <url>2021/04/01/termux-tweak/</url>

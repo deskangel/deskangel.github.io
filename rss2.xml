@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 01 Apr 2021 16:06:20 GMT</pubDate>
+    <pubDate>Sat, 03 Apr 2021 08:34:16 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>macos 下 vim j k 移动速度的问题</title>
+      <link>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/</link>
+      <guid>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/</guid>
+      <pubDate>Sat, 03 Apr 2021 06:58:37 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;这个问题其实困扰我好几年了，表现得相当怪异。&lt;/p&gt;
+&lt;p&gt;一开始是在 Vim 中发现的，在 iTerm2 下，使用 j
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Termux配置及优化</title>
@@ -449,27 +471,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>java压缩，javascript 解压缩总结</title>
-      <link>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/</link>
-      <guid>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/</guid>
-      <pubDate>Sat, 06 Jun 2015 09:05:30 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;这里描述如何在 client 端使用 javascript 处理通过 ajax 调用返回的压缩数据。服务器端使用java
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/06/06/java-compress-javascript-uncompress/#disqus_thread</comments>
     </item>
     
   </channel>
