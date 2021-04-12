@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 03 Apr 2021 08:34:16 GMT</pubDate>
+    <pubDate>Mon, 12 Apr 2021 02:54:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>DaRemote v1.1.0 功能</title>
+      <link>https://blog.deskangel.com/2021/04/11/daremote-v1-1-0-release/</link>
+      <guid>https://blog.deskangel.com/2021/04/11/daremote-v1-1-0-release/</guid>
+      <pubDate>Sun, 11 Apr 2021 09:25:41 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;###&lt;br&gt;DaRemote 是一款通过 ssh 隧道和 Linux 自带的工具来查询系统信息和运行状态，在您的手机上用直观的图列展示出来的 Android App。&lt;br&gt;&lt;img src=&quot;/images/daremote/daremote_home.jpg&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/11/daremote-v1-1-0-release/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>macos 下 vim j k 移动速度的问题</title>
@@ -444,33 +465,6 @@
       
       
       <comments>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>搞定 osx 下 virtualbox 中的 docker container 访问共享文件夹的权限问题</title>
-      <link>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</link>
-      <guid>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/</guid>
-      <pubDate>Sun, 13 Sep 2015 13:22:23 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;案例是这样的：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有一台 osx 系统&lt;/li&gt;
-&lt;li&gt;安装了 virtualbox 虚拟机&lt;/li&gt;
-&lt;li&gt;在虚拟机里面装 Linux&lt;/li&gt;
-&lt;li&gt;在 Linux 里面装了 docker&lt;/li&gt;
-&lt;li&gt;用 docker 装了
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/09/13/osx-virtualbox-shared-folder-permission-issue/#disqus_thread</comments>
     </item>
     
   </channel>
