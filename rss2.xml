@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 12 Apr 2021 03:05:21 GMT</pubDate>
+    <pubDate>Fri, 16 Apr 2021 04:00:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>OpenWrt 19.07 使用 u 盘</title>
+      <link>https://blog.deskangel.com/2021/04/16/attach-usb-disk-to-openwrt/</link>
+      <guid>https://blog.deskangel.com/2021/04/16/attach-usb-disk-to-openwrt/</guid>
+      <pubDate>Fri, 16 Apr 2021 03:43:26 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;格式化-U-盘&quot;&gt;&lt;a href=&quot;#格式化-U-盘&quot; class=&quot;headerlink&quot; title=&quot;格式化 U 盘&quot;&gt;&lt;/a&gt;格式化 U 盘&lt;/h3&gt;&lt;p&gt;第一步需要格式化 U 盘，可以在其他 Linux 系统下进行，如果需要在 OpenWrt
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/16/attach-usb-disk-to-openwrt/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>DaRemote v1.1.0 功能</title>
@@ -442,29 +463,6 @@
       
       
       <comments>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>phpStorm remote debug with xdebug</title>
-      <link>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/</link>
-      <guid>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/</guid>
-      <pubDate>Sun, 20 Sep 2015 13:54:45 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;因为使用了 docker 进行了环境隔离，所以需要对 phpStorm 进行远程调试的配置。&lt;/p&gt;
-&lt;p&gt;网上有一些教程，不是太复杂就是已经过时。经过摸索，一下是完整的配置流程。&lt;/p&gt;
-&lt;p&gt;版本： ubuntu 14.04 LTS, phpStorm 9,
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2015/09/20/phpstorm-remote-debug-with-xdebug/#disqus_thread</comments>
     </item>
     
   </channel>

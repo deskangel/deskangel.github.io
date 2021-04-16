@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>OpenWrt 19.07 使用 u 盘</title>
+      <link href="2021/04/16/attach-usb-disk-to-openwrt/"/>
+      <url>2021/04/16/attach-usb-disk-to-openwrt/</url>
+      
+        <content type="html"><![CDATA[<h3 id="格式化-U-盘"><a href="#格式化-U-盘" class="headerlink" title="格式化 U 盘"></a>格式化 U 盘</h3><p>第一步需要格式化 U 盘，可以在其他 Linux 系统下进行，如果需要在 OpenWrt 下，则需要安装对应的工具。</p><p>格式化之前，首先需要确定哪个设备是 U盘，</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure><p>我的是在<code>/dev/sdb1</code>。<br>确定了位置，就开始格式化。这里是格式化成 ext3文件格式：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkfs.ext3 /dev/sdb1</span><br></pre></td></tr></table></figure><p>格式化过程会比较缓慢，而且正常情况下是不需要交互的，不要看到有<code>:</code>就去输入。</p><h3 id="安装必要的软件"><a href="#安装必要的软件" class="headerlink" title="安装必要的软件"></a>安装必要的软件</h3><p>默认情况下，OpenWrt 是没有安装块设备相关的文件的，需要自己安装：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install block-mount</span><br><span class="line">opkg install kmod-usb-storage</span><br><span class="line">opkg install kmod-fs-ext4</span><br><span class="line">opkg install usbutils</span><br></pre></td></tr></table></figure><p><code>block-mount</code> 提供了 block 工具，用来检查块设备。<code>kmod-usb-storage</code> 提供 usb 存储设备的驱动，有一些设备可能还需要额外安装<code>opkg install kmod-usb-storage-uas</code>。<code>kmod-fs-ext4</code>提供了文件系统的支持，向下兼容，所以装这个就可以了。<code>usbutils</code> 提供了 usb 工具，比如<code>lsusb</code>，如果没有空间，也可以不用安装。</p><h3 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h3><h4 id="一-使用如下命令创建-fstab-文件："><a href="#一-使用如下命令创建-fstab-文件：" class="headerlink" title="一. 使用如下命令创建 fstab 文件："></a>一. 使用如下命令创建 <code>fstab</code> 文件：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">block detect | uci import fstab</span><br><span class="line">uci <span class="built_in">set</span> fstab.@mount[-1].enabled=<span class="string">'1'</span></span><br><span class="line">uci commit fstab</span><br></pre></td></tr></table></figure><p>当然也可以手工编辑<code>/etc/config/fstab</code>文件：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">config global</span><br><span class="line">option anon_swap <span class="string">'0'</span></span><br><span class="line">option anon_mount <span class="string">'0'</span></span><br><span class="line">option auto_swap <span class="string">'1'</span></span><br><span class="line">option auto_mount <span class="string">'1'</span></span><br><span class="line">option delay_root <span class="string">'5'</span></span><br><span class="line">option check_fs <span class="string">'0'</span></span><br><span class="line"></span><br><span class="line">config mount</span><br><span class="line">option target <span class="string">'/upan'</span></span><br><span class="line">option uuid <span class="string">'xxxxxf-6xxxx-4xxxx-axxxx-797xxxxxxx'</span></span><br><span class="line">option enabled <span class="string">'1'</span></span><br></pre></td></tr></table></figure><p>其中 uuid 可以使用<code>block info</code>命令获取。需要注意的是 <strong>每次格式化之后，uuid 都会改变，需要更新</strong></p><h4 id="二-验证是否正确："><a href="#二-验证是否正确：" class="headerlink" title="二. 验证是否正确："></a>二. 验证是否正确：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">block umount</span><br><span class="line">block mount</span><br></pre></td></tr></table></figure><p>或者使用<code>service  fstab boot</code>进行挂载，然后<code>df</code>看下是否的挂载都正确。</p><p>重启后看一下是否能自动挂载。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://openwrt.org/docs/guide-user/storage/usb-drives" target="_blank" rel="noopener">https://openwrt.org/docs/guide-user/storage/usb-drives</a><br><a href="https://openwrt.org/docs/guide-user/storage/usb-drives-quickstart" target="_blank" rel="noopener">https://openwrt.org/docs/guide-user/storage/usb-drives-quickstart</a><br><a href="https://openwrt.org/docs/guide-user/storage/fstab" target="_blank" rel="noopener">https://openwrt.org/docs/guide-user/storage/fstab</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OpenWrt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DaRemote v1.1.0 功能</title>
       <link href="2021/04/11/daremote-v1-1-0-release/"/>
       <url>2021/04/11/daremote-v1-1-0-release/</url>
