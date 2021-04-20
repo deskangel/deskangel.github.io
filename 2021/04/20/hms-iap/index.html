@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="开启 IAP iap开启，除了要在AppGallery Connect项目中开启应用内支付服务 API外，  还需要激活“盈利”下的应用内支付服务的配置以获得签名验证公钥。这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报6002错误。如果不需要验证，可以不使用公钥。  除了这两个地方，还需要在AppGallery Con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为 HMS Core 实现 IAP 内购功能的几个备注点">
+<meta property="og:url" content="https://blog.deskangel.com/2021/04/20/hms-iap/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="开启 IAP iap开启，除了要在AppGallery Connect项目中开启应用内支付服务 API外，  还需要激活“盈利”下的应用内支付服务的配置以获得签名验证公钥。这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报6002错误。如果不需要验证，可以不使用公钥。  除了这两个地方，还需要在AppGallery Con">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-20T02:14:02.000Z">
+<meta property="article:modified_time" content="2021-04-20T02:31:51.337Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="iap">
+<meta property="article:tag" content="hms">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>华为 HMS Core 实现 IAP 内购功能的几个备注点</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/04/20/not-kitty/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/04/16/attach-usb-disk-to-openwrt/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2021/04/20/hms-iap/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2021/04/20/hms-iap/&text=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2021/04/20/hms-iap/&is_video=false&description=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华为 HMS Core 实现 IAP 内购功能的几个备注点&body=Check out this article: https://blog.deskangel.com/2021/04/20/hms-iap/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2021/04/20/hms-iap/&name=华为 HMS Core 实现 IAP 内购功能的几个备注点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2021/04/20/hms-iap/&t=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        华为 HMS Core 实现 IAP 内购功能的几个备注点
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">William Hsueh</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-20T02:14:02.000Z" itemprop="datePublished">2021-04-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/hms/" rel="tag">hms</a>, <a class="tag-link" href="/tags/iap/" rel="tag">iap</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="开启-IAP"><a href="#开启-IAP" class="headerlink" title="开启 IAP"></a>开启 IAP</h3><ol>
+<li><p><code>iap</code>开启，除了要在<code>AppGallery Connect</code>项目中开启<code>应用内支付服务</code> API外，</p>
+</li>
+<li><p>还需要激活“盈利”下的<code>应用内支付服务</code>的配置以获得<code>签名验证公钥</code>。<br>这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报<code>6002</code>错误。如果不需要验证，可以不使用公钥。</p>
+</li>
+<li><p>除了这两个地方，还需要在<code>AppGallery Connect</code>应用中运营页面里配置商品，特别需要注意到地方是配置完商品还需要激活，一定要点激活才行。</p>
+</li>
+</ol>
+<p>上面两个地方是在 AppGallery Connect 的项目中设置的，而最后这个是在 AppGallery Connect 的应用中设置的。</p>
+<h3 id="密钥指纹"><a href="#密钥指纹" class="headerlink" title="密钥指纹"></a>密钥指纹</h3><p>如果使用了<code>上传密钥</code>和<code>应用签名密钥</code>分开的配置，那么debug版本也需要应用签名，否则HMS 的 api 请求会报<code>6003</code>错误。如果签名后依然还是<code>6003</code>，那么把<code>应用签名证书</code>和<code>上传证书</code>的 SHA-256指纹都添加到<code>AppGallery Connect</code>项目设置下的 SHA256证书指纹中。因为按照流程，你本地的签名用的应该是上传证书，需要把它的指纹也加入。</p>
+<h3 id="地区"><a href="#地区" class="headerlink" title="地区"></a>地区</h3><p>测试时应用不需要上传，只需要把应用的信息都配置好，包括发行的国家地区。如果选择中有中国大陆，那需要提供软著等信息，如果没有可以去掉不在中国大陆发行。</p>
+<p>测试手机上的应用商店国家地区要对应发行的地区，如果有地区没有发行而应用商店正好设置为该地区（就是中国），那需要把应用商店的国家改成选择发行的国家</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>华为 HMS 的配置虽然零散，开放资料也不够直观全面，但是其实坑还是比较少的。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2021/04/20/hms-iap/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2021/04/20/hms-iap/&text=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2021/04/20/hms-iap/&is_video=false&description=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=华为 HMS Core 实现 IAP 内购功能的几个备注点&body=Check out this article: https://blog.deskangel.com/2021/04/20/hms-iap/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2021/04/20/hms-iap/&title=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2021/04/20/hms-iap/&name=华为 HMS Core 实现 IAP 内购功能的几个备注点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2021/04/20/hms-iap/&t=华为 HMS Core 实现 IAP 内购功能的几个备注点" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2021
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

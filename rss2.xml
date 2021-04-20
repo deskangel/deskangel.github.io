@@ -15,8 +15,51 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 16 Apr 2021 04:00:38 GMT</pubDate>
+    <pubDate>Tue, 20 Apr 2021 02:46:25 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>放弃 Kitty</title>
+      <link>https://blog.deskangel.com/2021/04/20/not-kitty/</link>
+      <guid>https://blog.deskangel.com/2021/04/20/not-kitty/</guid>
+      <pubDate>Tue, 20 Apr 2021 02:38:08 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;GPU-加持的终端&quot;&gt;&lt;a href=&quot;#GPU-加持的终端&quot; class=&quot;headerlink&quot; title=&quot;GPU 加持的终端&quot;&gt;&lt;/a&gt;GPU 加持的终端&lt;/h3&gt;&lt;p&gt;由于上次研究 &lt;code&gt;iterm2&lt;/code&gt; 下 vim
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/20/not-kitty/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>华为 HMS Core 实现 IAP 内购功能的几个备注点</title>
+      <link>https://blog.deskangel.com/2021/04/20/hms-iap/</link>
+      <guid>https://blog.deskangel.com/2021/04/20/hms-iap/</guid>
+      <pubDate>Tue, 20 Apr 2021 02:14:02 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;开启-IAP&quot;&gt;&lt;a href=&quot;#开启-IAP&quot; class=&quot;headerlink&quot; title=&quot;开启 IAP&quot;&gt;&lt;/a&gt;开启 IAP&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;iap&lt;/code&gt;开启，除了要在&lt;code&gt;AppGallery
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/04/20/hms-iap/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>OpenWrt 19.07 使用 u 盘</title>
@@ -404,65 +447,6 @@
       
       
       <comments>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>React with Node.js in Webstorm</title>
-      <link>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/</link>
-      <guid>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/</guid>
-      <pubDate>Sat, 30 Jul 2016 13:05:28 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;软件环境：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;软件&lt;/th&gt;
-&lt;th&gt;版本&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;OSX&lt;/td&gt;
-&lt;td&gt;10.11.6&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;WebStorm&lt;/
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2016/07/30/React-with-Node-js-in-Webstorm/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Node.js from scratch</title>
-      <link>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/</link>
-      <guid>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/</guid>
-      <pubDate>Mon, 18 Apr 2016 08:48:55 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;使用 webstorm，从创建一个空白的工程开始构建一个 Node.js 的websocket服务器。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;创建空白工程&lt;/li&gt;
-&lt;li&gt;添加一个 js 文件，比如 main.js&lt;/li&gt;
-&lt;li&gt;添加一个 package.json
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2016/04/18/Node-js-from-scratch/#disqus_thread</comments>
     </item>
     
   </channel>

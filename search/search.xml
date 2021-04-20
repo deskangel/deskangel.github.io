@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>放弃 Kitty</title>
+      <link href="2021/04/20/not-kitty/"/>
+      <url>2021/04/20/not-kitty/</url>
+      
+        <content type="html"><![CDATA[<h3 id="GPU-加持的终端"><a href="#GPU-加持的终端" class="headerlink" title="GPU 加持的终端"></a>GPU 加持的终端</h3><p>由于上次研究 <code>iterm2</code> 下 vim 使用<code>j,k</code>等键进行移动的时候非常慢的问题-&gt;<a href="https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/">macos 下 vim j k 移动速度的问题</a>，开始接触了 GPU 加速的模拟终端软件，比如 <code>Kitty</code> 和 <code>Alacritty</code>，速度确实比 <code>iterm2</code> 快了不少。</p><p>有两个软件，难免会有侧重，主要使用了 <code>Kitty</code>。使用过程中难免会遇到些问题，比如 macos 上没有办法记住窗口的位置，去作者的 github 上翻找，感觉作者不太友善，比较难听进去意见，把用户都赶跑了。其实这也正常，有时候一个自己在意的项目，呵护过度也是有的，不过 <code>Kitty</code> 的 bug 有点多，社区也比较小。</p><h3 id="ssh-连接-bug"><a href="#ssh-连接-bug" class="headerlink" title="ssh 连接 bug"></a>ssh 连接 bug</h3><p>这次是因为想在 <code>OpenWrt</code> 下使用 <code>iftop</code> 这个工具，在 <code>iterm2</code> 和 <code>Alacritty</code> 下都没有问题，但是在 <code>Kitty</code> 下却遇到了问题：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~ » ssh root@192.168.1.1</span><br><span class="line">root@OpenWrt:~<span class="comment"># iftop</span></span><br><span class="line">interface: eth0</span><br><span class="line">Unable to get IP address <span class="keyword">for</span> interface: eth0</span><br><span class="line">ioctl(SIOCGIFADDR): Address not available</span><br><span class="line">MAC address is: xxxxxxxxxxxxx</span><br><span class="line">Error opening terminal: xterm-kitty.</span><br><span class="line">root@OpenWrt:~<span class="comment"># exit</span></span><br><span class="line">Connection to 192.168.1.1 closed.</span><br><span class="line">~ » kitty +kitten ssh root@192.168.1.1</span><br><span class="line">ash: tic: not found</span><br><span class="line">Connection to 192.168.1.1 closed.</span><br><span class="line">~ » kitty +kitten ssh root@192.168.1.1</span><br></pre></td></tr></table></figure><p>作者给出的方案是使用<code>kitty +kitten ssh root@192.168.1.1</code>这样的方式去使用 ssh，但是很明显，失败了。在这么基础的功能上有这样的问题，以及解决方案是如此的“丑陋”(<code>kitty +kitten</code>?)，说实话还是很失望的。</p><h3 id="放弃"><a href="#放弃" class="headerlink" title="放弃"></a>放弃</h3><p>其实我的主力还是 <code>iterm2</code>，而且本来 <code>Kitty</code> 和 <code>Alacritty</code> 到底用哪个还在纠结，这下可以安心的放弃一个了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> kitty </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>华为 HMS Core 实现 IAP 内购功能的几个备注点</title>
+      <link href="2021/04/20/hms-iap/"/>
+      <url>2021/04/20/hms-iap/</url>
+      
+        <content type="html"><![CDATA[<h3 id="开启-IAP"><a href="#开启-IAP" class="headerlink" title="开启 IAP"></a>开启 IAP</h3><ol><li><p><code>iap</code>开启，除了要在<code>AppGallery Connect</code>项目中开启<code>应用内支付服务</code> API外，</p></li><li><p>还需要激活“盈利”下的<code>应用内支付服务</code>的配置以获得<code>签名验证公钥</code>。<br>这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报<code>6002</code>错误。如果不需要验证，可以不使用公钥。</p></li><li><p>除了这两个地方，还需要在<code>AppGallery Connect</code>应用中运营页面里配置商品，特别需要注意到地方是配置完商品还需要激活，一定要点激活才行。</p></li></ol><p>上面两个地方是在 AppGallery Connect 的项目中设置的，而最后这个是在 AppGallery Connect 的应用中设置的。</p><h3 id="密钥指纹"><a href="#密钥指纹" class="headerlink" title="密钥指纹"></a>密钥指纹</h3><p>如果使用了<code>上传密钥</code>和<code>应用签名密钥</code>分开的配置，那么debug版本也需要应用签名，否则HMS 的 api 请求会报<code>6003</code>错误。如果签名后依然还是<code>6003</code>，那么把<code>应用签名证书</code>和<code>上传证书</code>的 SHA-256指纹都添加到<code>AppGallery Connect</code>项目设置下的 SHA256证书指纹中。因为按照流程，你本地的签名用的应该是上传证书，需要把它的指纹也加入。</p><h3 id="地区"><a href="#地区" class="headerlink" title="地区"></a>地区</h3><p>测试时应用不需要上传，只需要把应用的信息都配置好，包括发行的国家地区。如果选择中有中国大陆，那需要提供软著等信息，如果没有可以去掉不在中国大陆发行。</p><p>测试手机上的应用商店国家地区要对应发行的地区，如果有地区没有发行而应用商店正好设置为该地区（就是中国），那需要把应用商店的国家改成选择发行的国家</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>华为 HMS 的配置虽然零散，开放资料也不够直观全面，但是其实坑还是比较少的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> iap </tag>
+            
+            <tag> hms </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OpenWrt 19.07 使用 u 盘</title>
       <link href="2021/04/16/attach-usb-disk-to-openwrt/"/>
       <url>2021/04/16/attach-usb-disk-to-openwrt/</url>
@@ -1503,8 +1555,8 @@
     
     <entry>
       <title>Adjust brightness for Android devices</title>
-      <link href="2010/07/20/adjust-brightness-for-android-devices/"/>
-      <url>2010/07/20/adjust-brightness-for-android-devices/</url>
+      <link href="2010/07/19/adjust-brightness-for-android-devices/"/>
+      <url>2010/07/19/adjust-brightness-for-android-devices/</url>
       
         <content type="html"><![CDATA[<p><a href="http://www.deskangel.com/adjbrightness/images/snap20100701_165318.png" target="_blank" rel="noopener"><img src="http://www.deskangel.com/adjbrightness/images/snap20100701_165318-200x300.png" alt="AdjBrightness main page" title="AdjBrightness"></a></p><p>The settings for brightness of buttons and screen are very rough in Android devices, like in HTC Hero. But if your rom is <span style="color: #ff0000;">ROOTED</span>, you can download and install <a href="market://search?q=pname:com.deskangel.adjbrightness">AdjBrightness</a>, which can adjust the brightness of the screen from the value 2 to 255.</p><p>There are six predefined values in the main page, simply click one of them to set the brightness. If the predefined values cannot fit your request, just type the brightness value you want in the edit box and set it.</p><p>Besides those, in the option page, you can find several settings:</p><ol><li>Auto restore: Tick this if you want AdjBrightness to restore the brightness after the screen turned on.</li><li>Notification: Tick this, AdjBrightness will display a message on screen every after it set the brightness.</li><li>Lock brightness: This is really cool. Tick this if you do not want other applications to change the brightness. After tick this, you needn’t tick the Auto restore.</li><li>Lock off button light: This is for background light of keyboard. If you don’t like the light as well, tick this to turn off and lock it.<br>You can download this application from Google Market. Just search adjbrightness or access following link in your phone <a href="market://search?q=pname:com.deskangel.adjbrightness" title="market://search?q=pname:com.deskangel.adjbrightness">market://search?q=pname:com.deskangel.adjbrightness</a>.</li></ol><p>Always, if you encounter any problem, drop me an <a href="mailto:william.xue@gmail.com" title="email">email</a>.</p><p><span style="color: #ff0000;">NOTICE</span>: If you cannot turn on the screen, please keep the “Auto restore” ticked in settings.</p>]]></content>
       
