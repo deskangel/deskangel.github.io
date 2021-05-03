@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 20 Apr 2021 02:46:25 GMT</pubDate>
+    <pubDate>Mon, 03 May 2021 13:41:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 下中文输入法安装的坑</title>
+      <link>https://blog.deskangel.com/2021/05/03/im-ubuntu/</link>
+      <guid>https://blog.deskangel.com/2021/05/03/im-ubuntu/</guid>
+      <pubDate>Mon, 03 May 2021 12:47:04 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。&lt;/p&gt;
+&lt;h3 id=&quot;一-折腾&quot;&gt;&lt;a href=&quot;#一-折腾&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/05/03/im-ubuntu/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>放弃 Kitty</title>
@@ -426,27 +448,6 @@
       
       
       <comments>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>乐动力“网络不给力”问题的处理</title>
-      <link>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/</link>
-      <guid>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/</guid>
-      <pubDate>Fri, 30 Sep 2016 16:58:41 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;MX5上的乐动力 App 很早以前就不能登录了，各种途径都是提示“网络不给力”，等了大半年看他们是否会修正这个问题，但是每次版本更新后都试了，问题依旧存在。而且，无论是官网还是
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2016/10/01/ledongli-login-issue-workaround/#disqus_thread</comments>
     </item>
     
   </channel>

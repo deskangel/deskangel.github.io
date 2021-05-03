@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。 一. 折腾我的系统是从Ubuntu 20.04经过两次升级上来的。在20.04版本里面调出系统的输入法就失败了。当时已经在地区和语言里添加上了中文，但是就是只能输入英文。后来无奈装了换成fcitx，装了go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 下中文输入法安装的坑">
+<meta property="og:url" content="https://blog.deskangel.com/2021/05/03/im-ubuntu/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。 一. 折腾我的系统是从Ubuntu 20.04经过两次升级上来的。在20.04版本里面调出系统的输入法就失败了。当时已经在地区和语言里添加上了中文，但是就是只能输入英文。后来无奈装了换成fcitx，装了go">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-03T12:47:04.000Z">
+<meta property="article:modified_time" content="2021-05-03T13:41:20.552Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="rime">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>Ubuntu 下中文输入法安装的坑</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/04/20/not-kitty/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2021/05/03/im-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&text=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&is_video=false&description=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu 下中文输入法安装的坑&body=Check out this article: https://blog.deskangel.com/2021/05/03/im-ubuntu/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&name=Ubuntu 下中文输入法安装的坑&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2021/05/03/im-ubuntu/&t=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-折腾"><span class="toc-number">1.</span> <span class="toc-text">一. 折腾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-转机"><span class="toc-number">2.</span> <span class="toc-text">二. 转机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-总结"><span class="toc-number">3.</span> <span class="toc-text">三. 总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Ubuntu 下中文输入法安装的坑
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">William Hsueh</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-03T12:47:04.000Z" itemprop="datePublished">2021-05-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Software/">Software</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/rime/" rel="tag">rime</a>, <a class="tag-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。</p>
+<h3 id="一-折腾"><a href="#一-折腾" class="headerlink" title="一. 折腾"></a>一. 折腾</h3><p>我的系统是从Ubuntu 20.04经过两次升级上来的。在20.04版本里面调出系统的输入法就失败了。当时已经在地区和语言里添加上了中文，但是就是只能输入英文。后来无奈装了换成fcitx，装了google输入法，可以用，但是字库什么的几乎没有，很难用。</p>
+<p>升级到最新的21.04后，又尝试了很多次配置，甚至安装了fcitx5，都没什么效果。又安装了fcitx-rime，只能输入繁体，调整配置后又会自动改回去，莫名其妙。又安装了ibus-rime，运行<code>ibus-daemon -drx</code>，运行<code>ibus restart</code>，注销重新登陆，都没有效果，只能输入英文，还不如fcitx，好歹还能输入中文。</p>
+<h3 id="二-转机"><a href="#二-转机" class="headerlink" title="二. 转机"></a>二. 转机</h3><p>虽然fcitx下凑合着能用，但是想用rime，想输入简体中文，毕竟名气那么大，口碑那么好，一定有过人之出吧。于是一边调整配置，一边从网上找资料参考。但是网上的资料基本雷同，而且总觉得语焉不详，看起来很简单的样子，都没有人提到ibus只能输入英文的问题。</p>
+<p>转机的出现总是那么突然，在一次调整<code>地区和语言</code>的设置的时候，本来在安装的语言内已经有了<code>Chinese</code>和<code>English</code>，我还是点开了管理，选择<code>Chinese</code>，惊奇的发现<code>Chinese</code>居然可以点开，里面还有<code>Chiense(Rime)</code>和<code>Chinese(Intelligent Pinyin)</code>。果断添加，虽然输入的时候还是只能是英文，<code>ibus restart</code>等命令运行了还是没有效果，注销也没有效果，但是这个时候感觉曙光就在眼前，直接重启系统了！而且也回想起看到有文章提到“要重启，不推荐注销”。当时没有注意，现在觉得这个可能就是为什么ibus下只能输入英文的关键。</p>
+<p>果然，重启之后，智能拼音可以正常使用了! 切换到rime，也正常！</p>
+<p>接下来就可以参考着配置rime了。</p>
+<h3 id="三-总结"><a href="#三-总结" class="headerlink" title="三. 总结"></a>三. 总结</h3><ol>
+<li>不知道为什么<code>地区和语言</code>的设置里面会有一个<code>Chinese</code>，后面没有跟任何输入法名称。每次看到都没有深入考虑，一直以为已经安装了中文了，因为下面的按钮是:<code>Manage Installed Languages</code>，而不是<code>Manage Installed Input Methods</code>。</li>
+<li>切换到fcitx只需要注销就可以生效，但是ibus必须得重启才行。偷懒只是注销，甚至只是重启ibus框架是没有用的。</li>
+<li>rime也不是非常好用，而且配置麻烦。智能拼音也比较完善了，不想折腾配置的直接用智能拼音也就可以了。</li>
+</ol>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-折腾"><span class="toc-number">1.</span> <span class="toc-text">一. 折腾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-转机"><span class="toc-number">2.</span> <span class="toc-text">二. 转机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-总结"><span class="toc-number">3.</span> <span class="toc-text">三. 总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2021/05/03/im-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&text=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&is_video=false&description=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu 下中文输入法安装的坑&body=Check out this article: https://blog.deskangel.com/2021/05/03/im-ubuntu/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&title=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2021/05/03/im-ubuntu/&name=Ubuntu 下中文输入法安装的坑&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2021/05/03/im-ubuntu/&t=Ubuntu 下中文输入法安装的坑" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2021
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
