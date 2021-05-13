@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 03 May 2021 13:41:20 GMT</pubDate>
+    <pubDate>Thu, 13 May 2021 05:01:53 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>加密、算法、证书、密钥和密钥格式</title>
+      <link>https://blog.deskangel.com/2021/05/13/key-format-etc/</link>
+      <guid>https://blog.deskangel.com/2021/05/13/key-format-etc/</guid>
+      <pubDate>Thu, 13 May 2021 04:57:39 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;加密&quot;&gt;&lt;a href=&quot;#加密&quot; class=&quot;headerlink&quot; title=&quot;加密&quot;&gt;&lt;/a&gt;加密&lt;/h3&gt;&lt;p&gt;加密有两种目的：&lt;/p&gt;
+&lt;h4 id=&quot;签名&quot;&gt;&lt;a href=&quot;#签名&quot; class=&quot;headerlink&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/05/13/key-format-etc/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 下中文输入法安装的坑</title>
@@ -425,29 +447,6 @@
       
       
       <comments>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>custom-eui-control-in-egret</title>
-      <link>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/</link>
-      <guid>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/</guid>
-      <pubDate>Thu, 21 Sep 2017 13:43:53 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;如何创建一个 eui 的控件，在 egret 的文档中是比较零散的，而且有些东西也没有讲到。这里提供一个比较完整的范例。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;创建一个 exml 文件，用来定义控件的显示元素，这里要注意的&lt;code&gt;classname&lt;/code&gt;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2017/09/21/custom-eui-control-in-egret/#disqus_thread</comments>
     </item>
     
   </channel>

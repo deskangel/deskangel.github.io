@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>加密、算法、证书、密钥和密钥格式</title>
+      <link href="2021/05/13/key-format-etc/"/>
+      <url>2021/05/13/key-format-etc/</url>
+      
+        <content type="html"><![CDATA[<h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>加密有两种目的：</p><h4 id="签名"><a href="#签名" class="headerlink" title="签名"></a><em>签名</em></h4><p>只需要加密后的密文，用来做验证，确保提供的原始文本在传递或者保存过程中没有被修改过，但是原始的明文文本是什么它不关心或者没有隐藏的必要。这在现实中用途很广泛，比如老板说“明天放假一天”，这条文本本身没有加密的必要，但是需要确保的是内容没有被修改，一天不会被改成两天。</p><p>实现这一目的的加密算法，一般是使用被称为<code>单向散列函数加密</code>的算法，但也有使用<code>非对称加密</code>的算法，比如<code>DSA</code>。</p><h4 id="解密"><a href="#解密" class="headerlink" title="解密"></a><em>解密</em></h4><p>加密后的密文，需要可以被解密成明文。这是我们一般意义上的加密的目的，在传递或者保存中，第三方看不到原始的明文文本，不知道内容是什么。</p><p>实现这一目的的加密算法有两种：<code>对称加密</code>和<code>非对称加密</code>。</p><h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>哈希要达到的效果是：不能由密文推导出明文；而解密要达到的效果是：没有密码或者密钥，不能推导出明文。</p><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>加密算法可以分成三个种类：单向散列函数加密、对称加密和非对称加密。第一种一般用来处理签名和消息验证，后面两种一般用来进行加密解密，但这不是绝对的区分。</p><h4 id="单向散列函数加密"><a href="#单向散列函数加密" class="headerlink" title="单向散列函数加密"></a>单向散列函数加密</h4><h5 id="哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><a href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：" class="headerlink" title="哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："></a><em>哈希</em>：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</h5><ol><li>MD5（Message-Digest Algorithm，即信息摘要算法），由MD2、MD3、MD4改进而来。</li><li>SHA（Secure Hash Algorithm，即安全散列算法），包含SHA-0，SHA-1，SHA-2（SHA-224、SHA-256、SHA-512等）和SHA-3（SHA3-224、SHA3-256和SHA3-512等）。</li></ol><h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密，是指加密和解密使用相同的密钥。最常用的有以下两种算法。</p><ol><li>DES（Data Encryption Standard，即数据加密标准）和 3DES（即三重数据加密算法）</li><li>AES（Advanced Encryption Standard，即高级加密标准）</li></ol><h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密，是指加密和解密使用的是两个不相同的密钥。通常这两个密钥其中一个是公开的，所以这一加密方法也被称为<code>公开密钥加密</code>。</p><ol><li>RSA（三个人名的首字母），它的核心是质因数分解。这个算法可以用来对文本进行加密和解密。</li><li>DSA（Digital Signature Algorithm，即数字签名算法），它的核心是模算数和离散对数问题。它仅用于签名而不能用户解密。算法中使用的散列函数是SHA家族。</li></ol><p>实际实现中还有使用 ECC（Elliptic Curve Cryptography，即椭圆曲线密码学）的ECDSA等算法，是ECC和DSA的结合。</p><h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p><code>X.509</code>是密码学里公钥证书的格式标准。</p><p><a href="https://zh.wikipedia.org/wiki/X.509" target="_blank" rel="noopener">X.509</a>证书里含有公钥、身份信息（比如网络主机名，组织的名称或个体名称等）和签名信息，还附带了证书吊销列表和用于从最终对证书进行签名的证书签发机构直到最终可信点为止的证书合法性验证算法。</p><h3 id="格式标准"><a href="#格式标准" class="headerlink" title="格式标准"></a>格式标准</h3><p>格式标准用于指定保存证书或者是公钥和密钥的容器格式。</p><ul><li>DER（Distinguished Encoding Rules，即唯一编码规则），是一种二进制格式。</li><li>PEM（Privacy-Enhanced Mail，即隐私增强型邮件），是一种被编码成base64的文本格式。</li><li>PKCS（Public Key Cryptography Standards，即公钥加密标准），这是有RSA信息安全公司制定的一系列公开密钥密码编译标准。包含 <code>PKCS#1</code>~<code>PKCS#15</code></li></ul><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://www.microfocus.com/documentation/visual-cobol/VC40/CSWin/BKCJCJCERTS001.html" target="_blank" rel="noopener">Certificate and Key Formats</a><br><a href="https://zh.wikipedia.org/wiki/X.509" target="_blank" rel="noopener">X.509 - 维基百科，自由的百科全书</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+          <category> Information </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pem </tag>
+            
+            <tag> ssh </tag>
+            
+            <tag> rsa </tag>
+            
+            <tag> dsa </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 下中文输入法安装的坑</title>
       <link href="2021/05/03/im-ubuntu/"/>
       <url>2021/05/03/im-ubuntu/</url>
