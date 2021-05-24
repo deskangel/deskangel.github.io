@@ -8,7 +8,7 @@
       <link href="2021/05/24/rime-conf-editor/"/>
       <url>2021/05/24/rime-conf-editor/</url>
       
-        <content type="html"><![CDATA[<p>切换到 Ubuntu 下后，<a href="https://blog.deskangel.com/2021/05/03/im-ubuntu/">配置中文输入法</a>花了一些时间，终于搞定了Rime的配置，顺手写了一个基本的配置编辑器，这样就不需要每次都手工编辑了。</p><p>这款编辑器完全开源，代码已经上传到<a href="https://github.com/deskangel/RimeConf" target="_blank" rel="noopener">github</a>，因为我本身对Rime配置并不熟悉，暂时只支持 Linux 。如果有熟悉 Rime 而配置的小伙伴愿意提供帮助和支持，请联系我。</p><h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p><img src="https://blog.deskangel.com/images/rimeconf/general.png" alt="General"><br><img src="https://blog.deskangel.com/images/rimeconf/schema.png" alt="Schema"><br><img src="https://blog.deskangel.com/images/rimeconf/switch.png" alt="Switch"><br><img src="https://blog.deskangel.com/images/rimeconf/fuzzy.png" alt="Fuzzys"></p>]]></content>
+        <content type="html"><![CDATA[<p>切换到 Ubuntu 下后，<a href="https://blog.deskangel.com/2021/05/03/im-ubuntu/">配置中文输入法</a>花了一些时间，终于搞定了Rime的配置，顺手写了一个基本的配置编辑器，这样就不需要每次都手工编辑了。</p><p>这款编辑器完全开源，代码已经上传到<a href="https://github.com/deskangel/RimeConf" target="_blank" rel="noopener">github</a>，因为我本身对Rime配置并不熟悉，暂时只支持 Linux 。如果有熟悉 Rime 而配置的小伙伴愿意提供帮助和支持，请联系我。</p><h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><p><img src="/images/rimeconf/general.png" alt="General"><br><img src="/images/rimeconf/schema.png" alt="Schema"><br><img src="/images/rimeconf/switch.png" alt="Switch"><br><img src="/images/rimeconf/fuzzy.png" alt="Fuzzys"></p>]]></content>
       
       
       <categories>
