@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 13 May 2021 05:01:53 GMT</pubDate>
+    <pubDate>Mon, 24 May 2021 12:43:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>rime配置文件编辑器</title>
+      <link>https://blog.deskangel.com/2021/05/24/rime-conf-editor/</link>
+      <guid>https://blog.deskangel.com/2021/05/24/rime-conf-editor/</guid>
+      <pubDate>Mon, 24 May 2021 12:23:13 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;切换到 Ubuntu 下后，&lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/05/24/rime-conf-editor/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>加密、算法、证书、密钥和密钥格式</title>
@@ -425,28 +446,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Build EOS on ubuntu 16.04</title>
-      <link>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/</link>
-      <guid>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/</guid>
-      <pubDate>Sat, 31 Mar 2018 11:55:07 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;为了和官方测试链对接，选择的是&lt;code&gt;dawn-2.x&lt;/code&gt;分支。官方推荐的是在&lt;code&gt;Ubuntu 16.10&lt;/code&gt;上面编译，但是我只有16.04，想来应该是差不多的。&lt;/p&gt;
-&lt;p&gt;参考&lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2018/03/31/build-eos-on-ubuntu-16-04/#disqus_thread</comments>
     </item>
     
   </channel>
