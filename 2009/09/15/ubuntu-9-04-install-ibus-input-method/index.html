@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="按照https:&#x2F;&#x2F;launchpad.net&#x2F;~ibus-dev&#x2F;+archive&#x2F;ppa的指南，添加source与key。 选择ibus和ibus-pinyin安装。sudo apt-get install ibus ibus-gtk ibus-pinyin 运行im-switch -v -s ibus，设置使用ibus。如果运行 sudo im-switch -v -s ibus，可能会报">
+    <meta name="description" content="按照https:&#x2F;&#x2F;launchpad.net&#x2F;~ibus-dev&#x2F;+archive&#x2F;ppa的指南，添加source与key。  选择ibus和ibus-pinyin安装: sudo apt-get install ibus ibus-gtk ibus-pinyin  运行im-switch -v -s ibus，设置使用ibus。如果运行 sudo im-switch -v -s ibus，可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 9.04 安装ibus输入法">
 <meta property="og:url" content="https://blog.deskangel.com/2009/09/15/ubuntu-9-04-install-ibus-input-method/index.html">
 <meta property="og:site_name" content="DeskAngel">
-<meta property="og:description" content="按照https:&#x2F;&#x2F;launchpad.net&#x2F;~ibus-dev&#x2F;+archive&#x2F;ppa的指南，添加source与key。 选择ibus和ibus-pinyin安装。sudo apt-get install ibus ibus-gtk ibus-pinyin 运行im-switch -v -s ibus，设置使用ibus。如果运行 sudo im-switch -v -s ibus，可能会报">
+<meta property="og:description" content="按照https:&#x2F;&#x2F;launchpad.net&#x2F;~ibus-dev&#x2F;+archive&#x2F;ppa的指南，添加source与key。  选择ibus和ibus-pinyin安装: sudo apt-get install ibus ibus-gtk ibus-pinyin  运行im-switch -v -s ibus，设置使用ibus。如果运行 sudo im-switch -v -s ibus，可">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2009-09-15T07:05:28.000Z">
-<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:published_time" content="2009-09-14T23:05:28.000Z">
+<meta property="article:modified_time" content="2021-05-27T05:28:11.899Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="ubuntu">
 <meta property="article:tag" content="ibus">
@@ -136,7 +136,7 @@
       
     <div class="postdate">
       
-        <time datetime="2009-09-15T07:05:28.000Z" itemprop="datePublished">2009-09-15</time>
+        <time datetime="2009-09-14T23:05:28.000Z" itemprop="datePublished">2009-09-15</time>
         
       
     </div>
@@ -162,21 +162,24 @@
 
   <div class="content" itemprop="articleBody">
     <ol>
-<li>按照<a href="https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。" target="_blank" rel="noopener">https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。</a></li>
-<li>选择ibus和ibus-pinyin安装。<br>sudo apt-get install ibus ibus-gtk ibus-pinyin</li>
-<li>运行im-switch -v -s ibus，设置使用ibus。如果运行 sudo im-switch -v -s ibus，可能会报找不到ibus之类的错误</li>
-<li>在~/.profile中添加：<blockquote>
-<p>export XMODIFIERS=@im=ibus<br>export GTK_IM_MODULE=xim<br>export QT_IM_MODULE=xim<br>ibus-daemon -d -x -r</p>
-</blockquote>
+<li><p>按照<a href="https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。" target="_blank" rel="noopener">https://launchpad.net/~ibus-dev/+archive/ppa的指南，添加source与key。</a></p>
 </li>
-<li>注销，重新登录。</li>
-<li>在ibus的Preferences-&gt;Input Methods中添加中文输入法。</li>
+<li><p>选择ibus和ibus-pinyin安装:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install ibus ibus-gtk ibus-pinyin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行<code>im-switch -v -s ibus</code>，设置使用ibus。如果运行 <code>sudo im-switch -v -s ibus</code>，可能会报找不到ibus之类的错误</p>
+</li>
+<li><p>在<code>~/.profile</code>中添加：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> XMODIFIERS=@im=ibus</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=xim</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=xim</span><br><span class="line">ibus-daemon -d -x -r</span><br></pre></td></tr></table></figure></li>
+<li><p>注销，重新登录。</p>
+</li>
+<li><p>在ibus的<code>Preferences-&gt;Input Methods</code>中添加中文输入法。</p>
+</li>
 </ol>
 <p>最重要的是第四步，我使用了该配置后，在英文环境下，opera中都可以输入中文。</p>
-<p>如果在英文环境下无法输入中文，可以在~/.profile文件中添加：</p>
-<blockquote>
-<p>LC_CTYPE=”en_US.UTF-8”<br>export LANG=”zh_CN.UTF-8”<br>待可以输入后再删除。</p>
-</blockquote>
+<p>如果在英文环境下无法输入中文，可以在<code>~/.profile</code>文件中添加：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LC_CTYPE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line"><span class="built_in">export</span> LANG=<span class="string">"zh_CN.UTF-8"</span></span><br></pre></td></tr></table></figure>
+<p>待可以输入后再删除。</p>
 
   </div>
 </article>

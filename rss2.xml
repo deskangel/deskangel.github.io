@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 24 May 2021 12:49:08 GMT</pubDate>
+    <pubDate>Thu, 27 May 2021 05:26:01 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 20.04 升级 nginx 1.18 到 1.20.1</title>
+      <link>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/</link>
+      <guid>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/</guid>
+      <pubDate>Thu, 27 May 2021 05:20:50 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;因为低于 1.20.1 的版本受到 &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23017&quot; target=&quot;_blank&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>rime配置文件编辑器</title>
@@ -424,28 +445,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/04/25/p-diary/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>DaFileShare 开发笔记</title>
-      <link>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/</link>
-      <guid>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/</guid>
-      <pubDate>Mon, 20 Apr 2020 06:06:16 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;一直以来都觉得电脑分享文件到手机上比较麻烦，试过不少软件，不是收费很贵就是不太方便，至于通过 USB 线——感觉这个更不方便。每次通过微信，QQ 之类的 IM 传了文件之后，就想要开发一个简单的文件分享工具。&lt;/p&gt;
-&lt;p&gt;DaFileShare
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/04/20/dafileserver-dev-notes/#disqus_thread</comments>
     </item>
     
   </channel>

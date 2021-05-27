@@ -9,12 +9,12 @@
     <meta name="description" content="Jenkins是一个开源的持续集成的工具，安装什么的都没有问题，非常简单。但是在配置的时候还是遇到了几个问题：  配置权限管理的时候，一定要先创建一个用户之后再进行。如果没有创建用户，又去掉了”Allow users to sign up”的勾，那么只能去编辑config.xml了。  jenkins用户需要提升到root权限来进行一些操作。先把他加入到root group，再编辑&#x2F;etc&#x2F;sud">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下部署Jenkins的一些要点">
-<meta property="og:url" content="https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/index.html">
+<meta property="og:url" content="https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/index.html">
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="Jenkins是一个开源的持续集成的工具，安装什么的都没有问题，非常简单。但是在配置的时候还是遇到了几个问题：  配置权限管理的时候，一定要先创建一个用户之后再进行。如果没有创建用户，又去掉了”Allow users to sign up”的勾，那么只能去编辑config.xml了。  jenkins用户需要提升到root权限来进行一些操作。先把他加入到root group，再编辑&#x2F;etc&#x2F;sud">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2013-03-20T20:00:20.000Z">
-<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:published_time" content="2013-03-20T12:00:20.000Z">
+<meta property="article:modified_time" content="2021-05-27T05:28:56.747Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="ubuntu">
 <meta property="article:tag" content="jenkins">
@@ -97,17 +97,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&text=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&is_video=false&description=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Ubuntu下部署Jenkins的一些要点&body=Check out this article: https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&name=Ubuntu下部署Jenkins的一些要点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&t=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&text=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&is_video=false&description=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu下部署Jenkins的一些要点&body=Check out this article: https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&name=Ubuntu下部署Jenkins的一些要点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&t=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -136,7 +136,7 @@
       
     <div class="postdate">
       
-        <time datetime="2013-03-20T20:00:20.000Z" itemprop="datePublished">2013-03-21</time>
+        <time datetime="2013-03-20T12:00:20.000Z" itemprop="datePublished">2013-03-20</time>
         
       
     </div>
@@ -166,13 +166,14 @@
 <li><p>配置权限管理的时候，一定要先创建一个用户之后再进行。如果没有创建用户，又去掉了”Allow users to sign up”的勾，那么只能去编辑config.xml了。</p>
 </li>
 <li><p>jenkins用户需要提升到root权限来进行一些操作。先把他加入到root group，再编辑/etc/sudoers设在sudo的时候不需要密码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gpasswd -a jenkins root</span><br><span class="line">$ sudo vim &#x2F;etc&#x2F;sudoers</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo gpasswd -a jenkins root</span><br><span class="line">sudo vim /etc/sudoers</span><br></pre></td></tr></table></figure>
 <p>在sudoers中加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jenkins ALL&#x3D;NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jenkins ALL=NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
 <p>当然，也可以使用expect工具来提升脚本执行时的权限</p>
 </li>
 <li><p>多个命令执行的时候，无法正确的反映执行的状态，往往其中已经出现错误了，jenkins还是返回成功。这个问题可以通过检查每个命令的返回值来处理，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">sudo make clean</span><br><span class="line">if [ $? -ne 0 ]; then</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">sudo make</span><br><span class="line">if [ $? -ne 0 ]; then</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">sudo make install</span><br><span class="line">if [ $? -ne 0 ]; then</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">sudo make clean</span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">sudo make</span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">sudo make install</span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
   </div>
@@ -214,17 +215,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&text=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&is_video=false&description=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Ubuntu下部署Jenkins的一些要点&body=Check out this article: https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&name=Ubuntu下部署Jenkins的一些要点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2013/03/21/ubuntu-jenkins/&t=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&text=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&is_video=false&description=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu下部署Jenkins的一些要点&body=Check out this article: https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&title=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&name=Ubuntu下部署Jenkins的一些要点&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2013/03/20/ubuntu-jenkins/&t=Ubuntu下部署Jenkins的一些要点" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
