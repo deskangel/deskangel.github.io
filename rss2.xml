@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 27 May 2021 05:26:01 GMT</pubDate>
+    <pubDate>Wed, 16 Jun 2021 04:54:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Flutter如何做到“按条件”编译</title>
+      <link>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/</link>
+      <guid>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/</guid>
+      <pubDate>Wed, 16 Jun 2021 04:52:37 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;我们在&lt;code&gt;C/C++&lt;/code&gt;下的时候，有时候不需要编辑某些代码，只需要设置一个条件编译即可，但是到了&lt;code&gt;Java&lt;/code&gt;、&lt;code&gt;Kotlin&lt;/code&gt;、&lt;code&gt;Dart&lt;/code&gt;时，这很难做到——不是说做不到，而是编译器不再支持
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 20.04 升级 nginx 1.18 到 1.20.1</title>
@@ -423,28 +444,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>私人日记 P.Diary</title>
-      <link>https://blog.deskangel.com/2020/04/25/p-diary/</link>
-      <guid>https://blog.deskangel.com/2020/04/25/p-diary/</guid>
-      <pubDate>Sat, 25 Apr 2020 02:41:21 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;P.Diary就是 Personal Diary 的意思。&lt;/p&gt;
-&lt;p&gt;之前用 iPhone 的时候，记点私人的感悟什么的，都用的是 Momento，但是换到 Android
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/04/25/p-diary/#disqus_thread</comments>
     </item>
     
   </channel>
