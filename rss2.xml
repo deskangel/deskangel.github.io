@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 16 Jun 2021 04:54:22 GMT</pubDate>
+    <pubDate>Thu, 05 Aug 2021 02:04:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>DaRemote Q&amp;A</title>
+      <link>https://blog.deskangel.com/2021/08/05/daremote-qa/</link>
+      <guid>https://blog.deskangel.com/2021/08/05/daremote-qa/</guid>
+      <pubDate>Thu, 05 Aug 2021 01:43:06 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;一-无法在Google-play商店找到-DaRemote&quot;&gt;&lt;a href=&quot;#一-无法在Google-play商店找到-DaRemote&quot; class=&quot;headerlink&quot; title=&quot;一. 无法在Google play商店找到
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2021/08/05/daremote-qa/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Flutter如何做到“按条件”编译</title>
@@ -422,28 +443,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/02/vino-on-headless-ubuntu-desktop/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>DaFileShare macos 版本介绍</title>
-      <link>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/</link>
-      <guid>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/</guid>
-      <pubDate>Sun, 26 Apr 2020 11:47:25 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;DaFileShare 主要用来在电脑和手机之间进行文件分享。手机端无需下载任何软件，通过浏览器就可以接收文件。&lt;/p&gt;
-&lt;h1 id=&quot;使用&quot;&gt;&lt;a href=&quot;#使用&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h1&gt;&lt;p&gt;启动
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/04/26/dafileshare-macos-version-how-to/#disqus_thread</comments>
     </item>
     
   </channel>
