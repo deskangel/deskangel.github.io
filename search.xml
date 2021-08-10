@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>修改Ubuntu登录界面的语言</title>
+      <link href="/2021/08/10/change-ubuntu-login-screen-language/"/>
+      <url>/2021/08/10/change-ubuntu-login-screen-language/</url>
+      
+        <content type="html"><![CDATA[<p>通常我们修改语言设置是在 <code>Settings-&gt;Region &amp; Language</code>，这里不光修改语言，还可以修改输入法。但是你会发现，有时你在这里修改了语言后，登录界面的语言并不会改变。</p><p>登录界面的语言设置在什么地方修改呢？ 下面这个地方：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/default/locale</span><br></pre></td></tr></table></figure><p>该文件内容如下：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LANG&#x3D;en_US.UTF-8</span><br><span class="line">LANGUAGE&#x3D;en_US.UTF-7</span><br><span class="line">LC_NUMERIC&#x3D;en_US.UTF-8</span><br><span class="line">LC_TIME&#x3D;en_US.UTF-8</span><br><span class="line">LC_MONETARY&#x3D;en_US.UTF-8</span><br><span class="line">LC_PAPER&#x3D;en_US.UTF-8</span><br><span class="line">LC_NAME&#x3D;en_US.UTF-8</span><br><span class="line">LC_ADDRESS&#x3D;en_US.UTF-8</span><br><span class="line">LC_TELEPHONE&#x3D;en_US.UTF-8</span><br><span class="line">LC_MEASUREMENT&#x3D;en_US.UTF-8</span><br><span class="line">LC_IDENTIFICATION&#x3D;en_US.UTF-8</span><br></pre></td></tr></table></figure><p>修改<code>LANG</code>和<code>LANGUAGE</code>就可以。其中<code>LANG</code>是locale的默认设置，即没有单独设置<code>LC_</code>的变量就使用它的值。<code>[LANGUAGE</code>定义一个后备列表](<a href="https://wiki.archlinux.org/title/locale#LANGUAGE:_fallback_locales)，即在某些情况下首选locale不能用的时候，按照它定义的顺序逐个尝试。" target="_blank" rel="noopener">https://wiki.archlinux.org/title/locale#LANGUAGE:_fallback_locales)，即在某些情况下首选locale不能用的时候，按照它定义的顺序逐个尝试。</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DaRemote Q&amp;A</title>
       <link href="/2021/08/05/daremote-qa/"/>
       <url>/2021/08/05/daremote-qa/</url>
