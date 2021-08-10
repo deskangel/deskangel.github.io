@@ -14,7 +14,7 @@
 <meta property="og:description" content="通常我们修改语言设置是在 Settings-&gt;Region &amp; Language，这里不光修改语言，还可以修改输入法。但是你会发现，有时你在这里修改了语言后，登录界面的语言并不会改变。 登录界面的语言设置在什么地方修改呢？ 下面这个地方： sudo vim &#x2F;etc&#x2F;default&#x2F;locale  该文件内容如下： LANG&#x3D;en_US.UTF-8LANGUAGE&amp;#x3D">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-10T05:44:43.000Z">
-<meta property="article:modified_time" content="2021-08-10T06:10:28.119Z">
+<meta property="article:modified_time" content="2021-08-10T06:13:43.064Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="ubuntu">
 <meta name="twitter:card" content="summary">
@@ -167,7 +167,7 @@
 <p>该文件内容如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LANG&#x3D;en_US.UTF-8</span><br><span class="line">LANGUAGE&#x3D;en_US.UTF-7</span><br><span class="line">LC_NUMERIC&#x3D;en_US.UTF-8</span><br><span class="line">LC_TIME&#x3D;en_US.UTF-8</span><br><span class="line">LC_MONETARY&#x3D;en_US.UTF-8</span><br><span class="line">LC_PAPER&#x3D;en_US.UTF-8</span><br><span class="line">LC_NAME&#x3D;en_US.UTF-8</span><br><span class="line">LC_ADDRESS&#x3D;en_US.UTF-8</span><br><span class="line">LC_TELEPHONE&#x3D;en_US.UTF-8</span><br><span class="line">LC_MEASUREMENT&#x3D;en_US.UTF-8</span><br><span class="line">LC_IDENTIFICATION&#x3D;en_US.UTF-8</span><br></pre></td></tr></table></figure>
 
-<p>修改<code>LANG</code>和<code>LANGUAGE</code>就可以。其中<code>LANG</code>是locale的默认设置，即没有单独设置<code>LC_</code>的变量就使用它的值。<code>[LANGUAGE</code>定义一个后备列表](<a href="https://wiki.archlinux.org/title/locale#LANGUAGE:_fallback_locales)，即在某些情况下首选locale不能用的时候，按照它定义的顺序逐个尝试。" target="_blank" rel="noopener">https://wiki.archlinux.org/title/locale#LANGUAGE:_fallback_locales)，即在某些情况下首选locale不能用的时候，按照它定义的顺序逐个尝试。</a></p>
+<p>修改<code>LANG</code>和<code>LANGUAGE</code>就可以。其中<code>LANG</code>是locale的默认设置，即没有单独设置<code>LC_</code>的变量就使用它的值。<a href="https://wiki.archlinux.org/title/locale#LANGUAGE:_fallback_locales" target="_blank" rel="noopener"><code>LANGUAGE</code>定义一个后备列表</a>，即在某些情况下首选locale不能用的时候，按照它定义的顺序逐个尝试。</p>
 
   </div>
 </article>
