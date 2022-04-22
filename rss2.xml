@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 10 Aug 2021 06:13:43 GMT</pubDate>
+    <pubDate>Fri, 22 Apr 2022 14:21:46 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>P.Diary Q&amp;A</title>
+      <link>https://blog.deskangel.com/2022/04/22/pdiary-qa/</link>
+      <guid>https://blog.deskangel.com/2022/04/22/pdiary-qa/</guid>
+      <pubDate>Fri, 22 Apr 2022 14:09:07 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;下载和购买&quot;&gt;&lt;a href=&quot;#下载和购买&quot; class=&quot;headerlink&quot; title=&quot;下载和购买&quot;&gt;&lt;/a&gt;下载和购买&lt;/h3&gt;&lt;h4 id=&quot;一-无法在Google-play商店找到-P-Diary&quot;&gt;&lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2022/04/22/pdiary-qa/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>修改Ubuntu登录界面的语言</title>
@@ -420,28 +441,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/05/android-simulator-network-service/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>build ubuntu 18.04 kernel</title>
-      <link>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/</link>
-      <guid>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/</guid>
-      <pubDate>Tue, 05 May 2020 02:50:19 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;虽然是在 Ubuntu 18.04 上的实验，但是其他版本应该也适用。&lt;/p&gt;
-&lt;h3 id=&quot;安装环境&quot;&gt;&lt;a href=&quot;#安装环境&quot; class=&quot;headerlink&quot; title=&quot;安装环境&quot;&gt;&lt;/a&gt;安装环境&lt;/h3&gt;&lt;h4
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/#disqus_thread</comments>
     </item>
     
   </channel>
