@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 22 Apr 2022 14:24:25 GMT</pubDate>
+    <pubDate>Sat, 21 May 2022 08:57:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>daremote-qa-en.md</title>
+      <link>https://blog.deskangel.com/2022/05/21/daremote-qa-en-md/</link>
+      <guid>https://blog.deskangel.com/2022/05/21/daremote-qa-en-md/</guid>
+      <pubDate>Sat, 21 May 2022 08:50:49 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;Usage&quot;&gt;&lt;a href=&quot;#Usage&quot; class=&quot;headerlink&quot; title=&quot;Usage&quot;&gt;&lt;/a&gt;Usage&lt;/h3&gt;&lt;h4 id=&quot;ssh-keys-format&quot;&gt;&lt;a href=&quot;#ssh-keys-format&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2022/05/21/daremote-qa-en-md/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>P.Diary Q&amp;A</title>
@@ -420,27 +441,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>开发机访问Android模拟器网络</title>
-      <link>https://blog.deskangel.com/2020/05/05/android-simulator-network-service/</link>
-      <guid>https://blog.deskangel.com/2020/05/05/android-simulator-network-service/</guid>
-      <pubDate>Tue, 05 May 2020 15:28:57 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h3 id=&quot;模拟器网络&quot;&gt;&lt;a href=&quot;#模拟器网络&quot; class=&quot;headerlink&quot; title=&quot;模拟器网络&quot;&gt;&lt;/a&gt;模拟器网络&lt;/h3&gt;&lt;p&gt;这里说的模拟器，是 Google
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/05/android-simulator-network-service/#disqus_thread</comments>
     </item>
     
   </channel>
