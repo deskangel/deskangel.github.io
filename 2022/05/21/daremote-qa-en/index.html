@@ -13,14 +13,16 @@
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="Usagessh keys formatDaRemote supports legacy PEM and the default private key&#x2F;public key file format after OpenSSH v7.8. Other unsupported file formats need to be converted to such formats.If the priva">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.deskangel.com/images/daremote/daremote_brief_card.png">
+<meta property="og:image" content="https://blog.deskangel.com/images/daremote/daremote_docker.png">
 <meta property="og:image" content="https://blog.deskangel.com/images/daremote/daremote_keyboard.png">
 <meta property="article:published_time" content="2022-05-21T08:50:49.000Z">
-<meta property="article:modified_time" content="2022-05-21T10:55:21.843Z">
+<meta property="article:modified_time" content="2022-05-27T21:52:33.838Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="android">
 <meta property="article:tag" content="daremote">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.deskangel.com/images/daremote/daremote_keyboard.png">
+<meta name="twitter:image" content="https://blog.deskangel.com/images/daremote/daremote_brief_card.png">
 <meta name="twitter:creator" content="@ideskangel">
     
     
@@ -114,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-keys-format"><span class="toc-number">1.1.</span> <span class="toc-text">ssh keys format</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-access-the-command-set-and-terminal-emulator"><span class="toc-number">1.2.</span> <span class="toc-text">How to access the command set and terminal emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keyboard-legends"><span class="toc-number">1.3.</span> <span class="toc-text">Keyboard legends</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-keys-format"><span class="toc-number">1.1.</span> <span class="toc-text">ssh keys format</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-access-the-command-set-and-terminal-emulator"><span class="toc-number">1.2.</span> <span class="toc-text">How to access the command set and terminal emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-add-docker-containers"><span class="toc-number">1.3.</span> <span class="toc-text">How to add docker containers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keyboard-legends-in-terminal-emulator"><span class="toc-number">1.4.</span> <span class="toc-text">Keyboard legends in terminal emulator</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -165,8 +167,15 @@
   <div class="content" itemprop="articleBody">
     <h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="ssh-keys-format"><a href="#ssh-keys-format" class="headerlink" title="ssh keys format"></a>ssh keys format</h4><p><code>DaRemote</code> supports legacy <code>PEM</code> and the default private key/public key file format after <code>OpenSSH</code> v7.8. Other unsupported file formats need to be converted to such formats.<br>If the private key file cannot be selected in the file picker UI, remove the file extension and try again.</p>
 <p>You can also generate key pairs directly in the app and deploy the keys to the server.</p>
-<h4 id="How-to-access-the-command-set-and-terminal-emulator"><a href="#How-to-access-the-command-set-and-terminal-emulator" class="headerlink" title="How to access the command set and terminal emulator"></a>How to access the command set and terminal emulator</h4><p>In the server list screen, click the label name of the server on the left to go directly to <code>Terminal Emulator</code>, and click the server version type on the right to go directly to <code>Command Set</code>.</p>
-<h4 id="Keyboard-legends"><a href="#Keyboard-legends" class="headerlink" title="Keyboard legends"></a>Keyboard legends</h4><p><img src="/images/daremote/daremote_keyboard.png" alt="Keybaord symbols"></p>
+<h4 id="How-to-access-the-command-set-and-terminal-emulator"><a href="#How-to-access-the-command-set-and-terminal-emulator" class="headerlink" title="How to access the command set and terminal emulator"></a>How to access the command set and terminal emulator</h4><p>In the server list screen, click the label name of the server on the left to go directly to <code>Terminal Emulator</code>, and click the server version type on the right to go directly to <code>Command Set</code>.<br><img src="/images/daremote/daremote_brief_card.png" alt="How to add docker"></p>
+<h4 id="How-to-add-docker-containers"><a href="#How-to-add-docker-containers" class="headerlink" title="How to add docker containers"></a>How to add docker containers</h4><ol>
+<li>Add a host with docker containers running</li>
+<li>Change the os-type to Docker</li>
+<li>Click the <code>Find Containers</code> button to find the running containers</li>
+<li>Select the containers your want to add to <code>DaRemote</code> (multiple selection supported)</li>
+<li>Click the <code>Save</code> button<br><img src="/images/daremote/daremote_docker.png" alt="How to add docker"></li>
+</ol>
+<h4 id="Keyboard-legends-in-terminal-emulator"><a href="#Keyboard-legends-in-terminal-emulator" class="headerlink" title="Keyboard legends in terminal emulator"></a>Keyboard legends in terminal emulator</h4><p><img src="/images/daremote/daremote_keyboard.png" alt="Keybaord symbols"></p>
 
   </div>
 </article>
@@ -202,7 +211,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-keys-format"><span class="toc-number">1.1.</span> <span class="toc-text">ssh keys format</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-access-the-command-set-and-terminal-emulator"><span class="toc-number">1.2.</span> <span class="toc-text">How to access the command set and terminal emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keyboard-legends"><span class="toc-number">1.3.</span> <span class="toc-text">Keyboard legends</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh-keys-format"><span class="toc-number">1.1.</span> <span class="toc-text">ssh keys format</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-access-the-command-set-and-terminal-emulator"><span class="toc-number">1.2.</span> <span class="toc-text">How to access the command set and terminal emulator</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-add-docker-containers"><span class="toc-number">1.3.</span> <span class="toc-text">How to add docker containers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Keyboard-legends-in-terminal-emulator"><span class="toc-number">1.4.</span> <span class="toc-text">Keyboard legends in terminal emulator</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
