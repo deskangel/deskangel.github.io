@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>From /proc/meminfo to free</title>
+      <link href="/2022/06/19/meminfo-to-free/"/>
+      <url>/2022/06/19/meminfo-to-free/</url>
+      
+        <content type="html"><![CDATA[<p>How to calculate each field of the <code>free</code> command from <code>proc/meminfo</code>:</p><table><thead><tr><th>free</th><th>/proc/meminfo</th></tr></thead><tbody><tr><td>Mem total</td><td>MemTotal</td></tr><tr><td>Mem free</td><td>MemFree</td></tr><tr><td>Mem available</td><td>MemAvailable</td></tr><tr><td>Mem used</td><td>MemTotal - Buffers - (Cached + SReclaimable) - MemFree</td></tr><tr><td>Mem shared</td><td>Shmem</td></tr><tr><td>Mem buffers</td><td>Buffers</td></tr><tr><td>Mem cache</td><td>Cached + SReclaimable</td></tr><tr><td>Mem buffer/cache</td><td>Buffers + Cached + SReclaimable</td></tr><tr><td>Swap total</td><td>SwapTotal</td></tr><tr><td>Swap free</td><td>SwapFree</td></tr><tr><td>Swap used</td><td>SwapTotal - SwapFree</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DaRemote Q&amp;A[EN]</title>
       <link href="/2022/05/21/daremote-qa-en/"/>
       <url>/2022/05/21/daremote-qa-en/</url>

@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 27 May 2022 21:52:33 GMT</pubDate>
+    <pubDate>Sat, 18 Jun 2022 21:36:12 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>From /proc/meminfo to free</title>
+      <link>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</link>
+      <guid>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</guid>
+      <pubDate>Sat, 18 Jun 2022 21:32:44 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;How to calculate each field of the &lt;code&gt;free&lt;/code&gt; command from
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2022/06/19/meminfo-to-free/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>DaRemote Q&amp;A[EN]</title>
@@ -419,28 +440,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 下安装 clang</title>
-      <link>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/</link>
-      <guid>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/</guid>
-      <pubDate>Wed, 13 May 2020 15:24:56 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h3 id=&quot;版本&quot;&gt;&lt;a href=&quot;#版本&quot; class=&quot;headerlink&quot; title=&quot;版本&quot;&gt;&lt;/a&gt;版本&lt;/h3&gt;&lt;p&gt;Ubuntu 20.04&lt;br&gt;clang 10&lt;/p&gt;
-&lt;h3 id=&quot;准备&quot;&gt;&lt;a href=&quot;#准备&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/13/install-clang-on-ubuntu/#disqus_thread</comments>
     </item>
     
   </channel>
