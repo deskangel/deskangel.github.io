@@ -14,7 +14,7 @@
 <meta property="og:description" content="How to calculate each field of the free command from proc&#x2F;meminfo:    free &#x2F;proc&#x2F;meminfo    Mem total MemTotal   Mem free MemFree   Mem available MemAvailable   Mem used MemTotal - Buffers - (Cached +">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-18T21:32:44.000Z">
-<meta property="article:modified_time" content="2022-06-18T21:36:12.745Z">
+<meta property="article:modified_time" content="2022-06-18T21:49:00.594Z">
 <meta property="article:author" content="William Hsueh">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -198,7 +198,7 @@
 </tr>
 <tr>
 <td>Mem buffer/cache</td>
-<td>Buffers + Cached + SReclaimable</td>
+<td>Buffers + (Cached + SReclaimable)</td>
 </tr>
 <tr>
 <td>Swap total</td>
@@ -213,6 +213,9 @@
 <td>SwapTotal - SwapFree</td>
 </tr>
 </tbody></table>
+<ul>
+<li>Note: For some distributions, like busybox, <code>SReclaimable</code> is not counted in <code>Mem cache</code>.</li>
+</ul>
 
   </div>
 </article>
