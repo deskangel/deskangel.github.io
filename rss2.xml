@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 18 Jun 2022 21:49:00 GMT</pubDate>
+    <pubDate>Thu, 14 Jul 2022 08:35:53 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>docker-keybinding</title>
+      <link>https://blog.deskangel.com/2022/07/14/docker-keybinding/</link>
+      <guid>https://blog.deskangel.com/2022/07/14/docker-keybinding/</guid>
+      <pubDate>Thu, 14 Jul 2022 08:11:05 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h4 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h4&gt;&lt;p&gt;用 &lt;code&gt;docker&lt;/code&gt; 这么久，有一个问题一直令人不爽：&lt;code&gt;ctrl+p&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2022/07/14/docker-keybinding/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>From /proc/meminfo to free</title>
@@ -419,27 +440,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 20.04 调优 (一)</title>
-      <link>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</link>
-      <guid>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/</guid>
-      <pubDate>Thu, 14 May 2020 07:36:35 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h1 id=&quot;macos转换到Ubuntu必做的调整&quot;&gt;&lt;a href=&quot;#macos转换到Ubuntu必做的调整&quot; class=&quot;headerlink&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/14/ubuntu-2004-tweak-for-macos-users/#disqus_thread</comments>
     </item>
     
   </channel>
