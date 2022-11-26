@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>DaRemote ssh终端模拟器反色问题调整记录</title>
+      <link href="/2022/11/26/daremote-inverse-mode-issue-debug/"/>
+      <url>/2022/11/26/daremote-inverse-mode-issue-debug/</url>
+      
+        <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。</p><h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>先是花了一个小时研究 <code>bracketed paste mode</code>，发现其实没关系。又花了差不多三小时找到问题是 <code>csi 7m</code>, <code>inverse mode</code> 处理的问题，改了一行代码后搞定。</p><h3 id="隐藏问题"><a href="#隐藏问题" class="headerlink" title="隐藏问题"></a>隐藏问题</h3><p>搞定后发现在<code>Last login</code>和<code>提示符</code>之间会显示一个反色的<code>%</code>，而且是所有的服务器都会显示这个字符。又足足花了两个小时 分析返回的字节，</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[27, 91, 49, 109, 27, 91, 55, 109, 37, 27, 91, 50, 55, 109, 27, 91, 49, 109, 27, 91, 48, 109]</span><br><span class="line"> esc [    1  m    esc [    7   m   %   esc [   2    7   m   esc [   1    m   esc [    0   m</span><br><span class="line"></span><br><span class="line">[32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 13, 32, 13]</span><br><span class="line"></span><br><span class="line">[13, 27, 91, 48, 109, 27, 91, 50, 55, 109, 27, 91, 50, 52, 109, 27, 91, 74, 27, 91, 51, 50, 109, 126, 27, 91, 48, 49, 59, 51, 52, 109, 32, 27, 91, 48, 49, 59, 51, 53, 109, 187, 27, 91, 48, 48, 109, 32]</span><br><span class="line">esc [   0    m   esc [   2    7   m   esc  [  2   4    m   esc [   J   esc [   3   2    m   ~    esc [    0  1   ;   3   4   m    &quot; &quot; esc [   0    1  ;   3   5   m         esc  [  0   0    m</span><br><span class="line">[27, 91, 75]</span><br><span class="line">esc  [   K</span><br><span class="line">[27, 91, 63, 49, 104, 27, 61, 27, 91, 63, 50, 48, 48, 52, 104]</span><br><span class="line">esc [   ?   1    h   esc &#x3D;   esc [   ?   2    0  0   4    h</span><br></pre></td></tr></table></figure><p>最后的 <code>esc[?2004h</code>就是开启<code>bracketed paste mode</code>。感觉都没有问题啊，<code>esc[J</code>和<code>esc[K</code>也都是往后删除，删不了前面的 <code>%</code>。</p><h3 id="转折"><a href="#转折" class="headerlink" title="转折"></a>转折</h3><p>陷入困境的时候突然意识到，我所有的服务器都是用的<code>zsh</code>。<code>chsh -s /bin/bash</code>换成<code>bash</code>果然没有问题！</p><p>最后查到资料只需要在<code>.zshrc</code>中设置<code>unsetopt prompt_cr prompt_sp</code> 即可不显示 %。</p><p>又花两小时研究该设置，因为即使不在<code>.zshrc</code>中去掉这两个选项，其他终端模拟器也不会显示%。不过没什么收获，也许是什么特殊处理，有时间再研究。</p><h3 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h3><p>回顾这个调试过程，其实粘贴不显示的问题一开始就意识到可能是反色的原因，但是思维定势用了一个错误的方法：既然深色背景浅色文字不显示，那换成浅色背景深色文字试试。😭</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> daremote </tag>
+            
+            <tag> zsh </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker-keybinding</title>
       <link href="/2022/07/14/docker-keybinding/"/>
       <url>/2022/07/14/docker-keybinding/</url>

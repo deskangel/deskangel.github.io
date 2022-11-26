@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="起因用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。 处理先是花了一个小时研究 bracketed paste mode，发现其实没关系。又花了差不多三小时找到问题是 csi 7m, inverse mode 处理的问题，改了一行代码后搞定。 隐藏问题搞定后发现在Last login和提示符之间会显示一个反色的%，而且是所有的服务器都会显示这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DaRemote ssh终端模拟器反色问题调整记录">
+<meta property="og:url" content="https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="起因用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。 处理先是花了一个小时研究 bracketed paste mode，发现其实没关系。又花了差不多三小时找到问题是 csi 7m, inverse mode 处理的问题，改了一行代码后搞定。 隐藏问题搞定后发现在Last login和提示符之间会显示一个反色的%，而且是所有的服务器都会显示这">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-25T23:50:00.000Z">
+<meta property="article:modified_time" content="2022-11-26T00:12:32.862Z">
+<meta property="article:author" content="William Hsueh">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="daremote">
+<meta property="article:tag" content="zsh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>DaRemote ssh终端模拟器反色问题调整记录</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2022/07/14/docker-keybinding/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&text=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&is_video=false&description=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DaRemote ssh终端模拟器反色问题调整记录&body=Check out this article: https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&name=DaRemote ssh终端模拟器反色问题调整记录&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&t=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理"><span class="toc-number">2.</span> <span class="toc-text">处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏问题"><span class="toc-number">3.</span> <span class="toc-text">隐藏问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转折"><span class="toc-number">4.</span> <span class="toc-text">转折</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反思"><span class="toc-number">5.</span> <span class="toc-text">反思</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        DaRemote ssh终端模拟器反色问题调整记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">William Hsueh</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-25T23:50:00.000Z" itemprop="datePublished">2022-11-26</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/android/" rel="tag">android</a>, <a class="tag-link" href="/tags/daremote/" rel="tag">daremote</a>, <a class="tag-link" href="/tags/zsh/" rel="tag">zsh</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。</p>
+<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>先是花了一个小时研究 <code>bracketed paste mode</code>，发现其实没关系。又花了差不多三小时找到问题是 <code>csi 7m</code>, <code>inverse mode</code> 处理的问题，改了一行代码后搞定。</p>
+<h3 id="隐藏问题"><a href="#隐藏问题" class="headerlink" title="隐藏问题"></a>隐藏问题</h3><p>搞定后发现在<code>Last login</code>和<code>提示符</code>之间会显示一个反色的<code>%</code>，而且是所有的服务器都会显示这个字符。又足足花了两个小时 分析返回的字节，</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[27, 91, 49, 109, 27, 91, 55, 109, 37, 27, 91, 50, 55, 109, 27, 91, 49, 109, 27, 91, 48, 109]</span><br><span class="line"> esc [    1  m    esc [    7   m   %   esc [   2    7   m   esc [   1    m   esc [    0   m</span><br><span class="line"></span><br><span class="line">[32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 13, 32, 13]</span><br><span class="line"></span><br><span class="line">[13, 27, 91, 48, 109, 27, 91, 50, 55, 109, 27, 91, 50, 52, 109, 27, 91, 74, 27, 91, 51, 50, 109, 126, 27, 91, 48, 49, 59, 51, 52, 109, 32, 27, 91, 48, 49, 59, 51, 53, 109, 187, 27, 91, 48, 48, 109, 32]</span><br><span class="line">esc [   0    m   esc [   2    7   m   esc  [  2   4    m   esc [   J   esc [   3   2    m   ~    esc [    0  1   ;   3   4   m    &quot; &quot; esc [   0    1  ;   3   5   m         esc  [  0   0    m</span><br><span class="line">[27, 91, 75]</span><br><span class="line">esc  [   K</span><br><span class="line">[27, 91, 63, 49, 104, 27, 61, 27, 91, 63, 50, 48, 48, 52, 104]</span><br><span class="line">esc [   ?   1    h   esc &#x3D;   esc [   ?   2    0  0   4    h</span><br></pre></td></tr></table></figure>
+
+<p>最后的 <code>esc[?2004h</code>就是开启<code>bracketed paste mode</code>。感觉都没有问题啊，<code>esc[J</code>和<code>esc[K</code>也都是往后删除，删不了前面的 <code>%</code>。</p>
+<h3 id="转折"><a href="#转折" class="headerlink" title="转折"></a>转折</h3><p>陷入困境的时候突然意识到，我所有的服务器都是用的<code>zsh</code>。<code>chsh -s /bin/bash</code>换成<code>bash</code>果然没有问题！</p>
+<p>最后查到资料只需要在<code>.zshrc</code>中设置<code>unsetopt prompt_cr prompt_sp</code> 即可不显示 %。</p>
+<p>又花两小时研究该设置，因为即使不在<code>.zshrc</code>中去掉这两个选项，其他终端模拟器也不会显示%。不过没什么收获，也许是什么特殊处理，有时间再研究。</p>
+<h3 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h3><p>回顾这个调试过程，其实粘贴不显示的问题一开始就意识到可能是反色的原因，但是思维定势用了一个错误的方法：既然深色背景浅色文字不显示，那换成浅色背景深色文字试试。😭</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#起因"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理"><span class="toc-number">2.</span> <span class="toc-text">处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏问题"><span class="toc-number">3.</span> <span class="toc-text">隐藏问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转折"><span class="toc-number">4.</span> <span class="toc-text">转折</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反思"><span class="toc-number">5.</span> <span class="toc-text">反思</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&text=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&is_video=false&description=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DaRemote ssh终端模拟器反色问题调整记录&body=Check out this article: https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&title=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&name=DaRemote ssh终端模拟器反色问题调整记录&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/&t=DaRemote ssh终端模拟器反色问题调整记录" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2022
+    William Hsueh
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

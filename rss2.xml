@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 14 Jul 2022 08:35:53 GMT</pubDate>
+    <pubDate>Sat, 26 Nov 2022 00:12:32 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>DaRemote ssh终端模拟器反色问题调整记录</title>
+      <link>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</link>
+      <guid>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</guid>
+      <pubDate>Fri, 25 Nov 2022 23:50:00 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。&lt;/p&gt;
+&lt;h3
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>docker-keybinding</title>
@@ -419,27 +441,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>GLFW 学习笔记 （一）</title>
-      <link>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/</link>
-      <guid>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/</guid>
-      <pubDate>Sat, 16 May 2020 09:05:31 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h1 id=&quot;从零开始&quot;&gt;&lt;a href=&quot;#从零开始&quot; class=&quot;headerlink&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/16/GLFW-study-notes-1/#disqus_thread</comments>
     </item>
     
   </channel>
