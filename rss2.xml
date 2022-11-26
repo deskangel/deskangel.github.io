@@ -15,11 +15,11 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 26 Nov 2022 00:12:32 GMT</pubDate>
+    <pubDate>Sat, 26 Nov 2022 00:18:37 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>DaRemote ssh终端模拟器反色问题调整记录</title>
+      <title>DaRemote ssh终端模拟器反色问题调试记录</title>
       <link>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</link>
       <guid>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</guid>
       <pubDate>Fri, 25 Nov 2022 23:50:00 GMT</pubDate>
