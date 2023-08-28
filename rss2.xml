@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 26 Nov 2022 00:18:37 GMT</pubDate>
+    <pubDate>Mon, 28 Aug 2023 12:21:19 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>PageView in ListView</title>
+      <link>https://blog.deskangel.com/2023/08/28/pageview-in-listview/</link>
+      <guid>https://blog.deskangel.com/2023/08/28/pageview-in-listview/</guid>
+      <pubDate>Mon, 28 Aug 2023 12:15:28 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;如何为&lt;code&gt;ListView&lt;/code&gt;中的每一项实现 &lt;code&gt;PageView&lt;/code&gt; 滑动的效果？&lt;/p&gt;
+&lt;p&gt;因为 &lt;code&gt;PageView&lt;/code&gt; 会独占整个显示区域的剩余部分，必须包上如 &lt;code&gt;SizedBox&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2023/08/28/pageview-in-listview/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>DaRemote ssh终端模拟器反色问题调试记录</title>
@@ -420,27 +442,6 @@
       
       
       <comments>https://blog.deskangel.com/2020/05/19/GLFW-study-notes-2/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 20.04 调优 （二）</title>
-      <link>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/</link>
-      <guid>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/</guid>
-      <pubDate>Mon, 18 May 2020 06:38:27 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h1 id=&quot;macos转换到Ubuntu必做的调整&quot;&gt;&lt;a href=&quot;#macos转换到Ubuntu必做的调整&quot; class=&quot;headerlink&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2020/05/18/ubuntu-2004-tweak-for-macos-users-2/#disqus_thread</comments>
     </item>
     
   </channel>
