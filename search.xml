@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>DaShare, A File Share App on Android</title>
+      <link href="/2023/08/30/dashare/"/>
+      <url>/2023/08/30/dashare/</url>
+      
+        <content type="html"><![CDATA[<h4 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h4><p><code>DaShare</code> is a simple file sharing tool for local area networks. It is easy to use, requiring only a browser for the recipient to download the file.</p><p>Steps for sharing a file:</p><ol><li>Open the file in the app you want to share it from, and then select the ‘Share’ option.</li><li>From the list of sharing options, select ‘DaShare’</li><li>In DaShare, click “Start sharing” to generate an HTTP address and a QR code for the file.</li><li>The recipient scans the QR code or enters the HTTP address in their browser.<br>5  The file is downloaded to the recipient’s device.</li></ol><figure>    <img src="/images/dashare/share.png" alt="Share a file" title="Share a file" width="200" max-width="300">    <figcaption>Share a file</figcaption></figure><h4 id="v1-2-0-version"><a href="#v1-2-0-version" class="headerlink" title="v1.2.0 version"></a>v1.2.0 version</h4><p>The v1.2.0 version adds the following new features:</p><ol><li>Support for scanning QR codes in app, makes it easier for browsers without built-in scanning capabilities to use.</li><li>The original file name is now displayed to the recipient, allowing them to save the file with the correct name.</li></ol><h4 id="Future-versions"><a href="#Future-versions" class="headerlink" title="Future versions"></a>Future versions</h4><p>Text sharing is planned..</p><p>Download address: <a href="https://play.google.com/store/apps/details?id=com.deskangel.dashare" target="_blank" rel="noopener">DaShare: File share – Apps on Google Play</a><br>Open source code: <a href="https://github.com/deskangel/DaShare" target="_blank" rel="noopener">GitHub - deskangel/DaShare: Android version for DaFileShare</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> dashare </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PageView in ListView</title>
       <link href="/2023/08/28/pageview-in-listview/"/>
       <url>/2023/08/28/pageview-in-listview/</url>
