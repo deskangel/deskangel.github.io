@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 30 Aug 2023 06:48:52 GMT</pubDate>
+    <pubDate>Sat, 23 Sep 2023 00:10:58 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>同步 SnackBar 的动作函数</title>
+      <link>https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/</link>
+      <guid>https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/</guid>
+      <pubDate>Sat, 23 Sep 2023 00:07:56 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;因为想在 &lt;code&gt;flutter&lt;/code&gt; 中“在调用者端获得用户是否点击 &lt;code&gt;snackbar&lt;/code&gt; 的动作按钮”这个功能，深入研究了一下 &lt;code&gt;dart&lt;/code&gt; 的同步方式。&lt;/p&gt;
+&lt;p&gt;本以为 &lt;code&gt;Dart&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>DaShare, A File Share App on Android</title>
@@ -421,27 +443,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Termux配置及优化</title>
-      <link>https://blog.deskangel.com/2021/04/01/termux-tweak/</link>
-      <guid>https://blog.deskangel.com/2021/04/01/termux-tweak/</guid>
-      <pubDate>Thu, 01 Apr 2021 12:56:09 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;p&gt;当前 Google Play 中的版本不再更新，最新版在 &lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/04/01/termux-tweak/#disqus_thread</comments>
     </item>
     
   </channel>

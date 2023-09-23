@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="因为想在 flutter 中“在调用者端获得用户是否点击 snackbar 的动作按钮”这个功能，深入研究了一下 dart 的同步方式。 本以为 Dart 中和回调函数进行同步需要用到的会是semphore或mutex等第三方包，而实际上只需要 dart:async 库中的 Completer 类。 同步import &#39;dart:async&#39;;import &#39;package:flutter&#x2F;mat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同步 SnackBar 的动作函数">
+<meta property="og:url" content="https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="因为想在 flutter 中“在调用者端获得用户是否点击 snackbar 的动作按钮”这个功能，深入研究了一下 dart 的同步方式。 本以为 Dart 中和回调函数进行同步需要用到的会是semphore或mutex等第三方包，而实际上只需要 dart:async 库中的 Completer 类。 同步import &#39;dart:async&#39;;import &#39;package:flutter&#x2F;mat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-23T00:07:56.000Z">
+<meta property="article:modified_time" content="2023-09-23T00:10:58.386Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>同步 SnackBar 的动作函数</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2023/08/30/dashare/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&text=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&is_video=false&description=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=同步 SnackBar 的动作函数&body=Check out this article: https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&name=同步 SnackBar 的动作函数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&t=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#同步"><span class="toc-number">1.</span> <span class="toc-text">同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#snackbar"><span class="toc-number">2.</span> <span class="toc-text">snackbar</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        同步 SnackBar 的动作函数
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-23T00:07:56.000Z" itemprop="datePublished">2023-09-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/dart/" rel="tag">dart</a>, <a class="tag-link" href="/tags/flutter/" rel="tag">flutter</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>因为想在 <code>flutter</code> 中“在调用者端获得用户是否点击 <code>snackbar</code> 的动作按钮”这个功能，深入研究了一下 <code>dart</code> 的同步方式。</p>
+<p>本以为 <code>Dart</code> 中和回调函数进行同步需要用到的会是<code>semphore</code>或<code>mutex</code>等第三方包，而实际上只需要 <code>dart:async</code> 库中的 <code>Completer</code> 类。</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:async'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line">Future&lt;<span class="built_in">bool</span>&gt; showSnackbarAndReturnResult(BuildContext context, <span class="built_in">String</span> message) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> completer = Completer&lt;<span class="built_in">bool</span>&gt;();</span><br><span class="line">  <span class="keyword">final</span> scaffoldMessenger = ScaffoldMessenger.of(context);</span><br><span class="line"></span><br><span class="line">  scaffoldMessenger.showSnackBar(</span><br><span class="line">    SnackBar(</span><br><span class="line">      content: Text(message),</span><br><span class="line">      action: SnackBarAction(</span><br><span class="line">        label: <span class="string">'OK'</span>,</span><br><span class="line">        onPressed: () &#123;</span><br><span class="line">          completer.complete(<span class="keyword">true</span>); <span class="comment">// 表示操作已完成</span></span><br><span class="line">          scaffoldMessenger.hideCurrentSnackBar();</span><br><span class="line">        &#125;,</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> completer.future;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MaterialApp(</span><br><span class="line">    home: Scaffold(</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title: Text(<span class="string">'Snackbar Example'</span>),</span><br><span class="line">      ),</span><br><span class="line">      body: Center(</span><br><span class="line">        child: ElevatedButton(</span><br><span class="line">          onPressed: () <span class="keyword">async</span> &#123;</span><br><span class="line">            <span class="keyword">final</span> result = <span class="keyword">await</span> showSnackbarAndReturnResult(</span><br><span class="line">              context,</span><br><span class="line">              <span class="string">'This is a Snackbar!'</span>,</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (result) &#123;</span><br><span class="line">              <span class="built_in">print</span>(<span class="string">'Snackbar action completed!'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          child: Text(<span class="string">'Show Snackbar'</span>),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>completer.future</code> 只在 <code>complete</code> 或 <code>completeError</code> 被调用后才会完成，从而达到了同步的目的。</p>
+<h4 id="snackbar"><a href="#snackbar" class="headerlink" title="snackbar"></a>snackbar</h4><p>同步就是这么简单，但是上述代码并不能使用在产品中，因为很不完善。比如用户不点 <code>snackbar</code> 的按钮，哪怕 <code>snackbar</code> 隐藏，<code>completer</code>和函数 还是没有返回。为了完善上述功能，不能简单的使用 <code>return await completer.future;</code>，而需要加上延时和 <code>snackbar</code> 关闭判断。</p>
+<p>为了获得 <code>snackbar</code> 是否隐藏，需要使用 <code>showSnackBar</code> 的返回值，一个<code>ScaffoldFeatureController</code>类型的 <code>controller</code>。延时比较简单，使用 <code>Future.delayed</code>即可。代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> completer = Completer&lt;<span class="built_in">bool</span>&gt;();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">final</span> controller = scaffoldMessenger.showSnackBar(...);</span><br><span class="line">...</span><br><span class="line"><span class="keyword">await</span> Future.any([</span><br><span class="line">  completer.future,</span><br><span class="line">  Future.delayed(<span class="built_in">Duration</span>(seconds: seconds)),</span><br><span class="line">  controller.closed,</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (completer.isCompleted) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  completer.complete(<span class="keyword">false</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改 <code>showSnackbarAndReturnResult</code> 函数的参数，传入 <code>seconds</code> 即可。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#同步"><span class="toc-number">1.</span> <span class="toc-text">同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#snackbar"><span class="toc-number">2.</span> <span class="toc-text">snackbar</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&text=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&is_video=false&description=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=同步 SnackBar 的动作函数&body=Check out this article: https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&title=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&name=同步 SnackBar 的动作函数&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2023/09/23/sync-with-snackbar-action/&t=同步 SnackBar 的动作函数" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2023
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
