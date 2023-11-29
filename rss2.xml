@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 23 Sep 2023 00:10:58 GMT</pubDate>
+    <pubDate>Wed, 29 Nov 2023 13:23:31 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>migrate-willpopscope-to-popscope</title>
+      <link>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/</link>
+      <guid>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/</guid>
+      <pubDate>Wed, 29 Nov 2023 12:24:30 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;新的 &lt;code&gt;PopScope&lt;/code&gt; 替换 &lt;code&gt;WillPopScope&lt;/code&gt; 时会出现一个问题，因为 &lt;code&gt;PopScope.canPop&lt;/code&gt; 的值是在 build 时就确定了的，pop 的时候并不会再次计算，因此，如果赋值给
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>同步 SnackBar 的动作函数</title>
@@ -421,28 +442,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/04/11/daremote-v1-1-0-release/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>macos 下 vim j k 移动速度的问题</title>
-      <link>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/</link>
-      <guid>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/</guid>
-      <pubDate>Sat, 03 Apr 2021 06:58:37 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h3&gt;&lt;p&gt;这个问题其实困扰我好几年了，表现得相当怪异。&lt;/p&gt;
-&lt;p&gt;一开始是在 Vim 中发现的，在 iTerm2 下，使用 j
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/04/03/vim-j-k-speed-issue/#disqus_thread</comments>
     </item>
     
   </channel>
