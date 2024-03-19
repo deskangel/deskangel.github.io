@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Using fingerprint authentication to enter sudo password, Simplify input, enhance security</title>
+      <link href="/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/"/>
+      <url>/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/</url>
+      
+        <content type="html"><![CDATA[<p>Using fingerprint authentication to enter sudo password: Simplify input, enhance security</p><p>While maintaining system security, DaRemote now introduces its latest feature: system fingerprint authentication for sudo password input! Say goodbye to the hassle of password memorization and keyboard input.</p><p>Feel free to use complex passwords to enhance security, as fingerprint authentication will help you effortlessly enter passwords.</p><p>Steps to enable the function:</p><ol><li>Set <code>sudo password</code> on the <code>Server Config</code> page.</li><li>Enable the <code>Use biometric</code> option.</li><li>Set the <code>Sudo prompt pattern</code>, which is the text displayed on the next line under the sudo command in the terminal.<br> For most Linux distributions, you can keep the default setting without modification.</li><li>Save settings.</li></ol><p>In addition to <code>fingerprint</code>, it also supports other methods such as <code>facial recognition</code>.</p><p>Update to v4.3.0 now to experience this feature!”</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> daremote </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>migrate-willpopscope-to-popscope</title>
       <link href="/2023/11/29/migrate-willpopscope-to-popscope/"/>
       <url>/2023/11/29/migrate-willpopscope-to-popscope/</url>
