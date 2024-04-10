@@ -14,7 +14,7 @@
 <meta property="og:description" content="加密加密有两种目的： 签名只需要加密后的密文，用来做验证，确保提供的原始文本在传递或者保存过程中没有被修改过，但是原始的明文文本是什么它不关心或者没有隐藏的必要。这在现实中用途很广泛，比如老板说“明天放假一天”，这条文本本身没有加密的必要，但是需要确保的是内容没有被修改，一天不会被改成两天。 实现这一目的的加密算法，一般是使用被称为单向散列函数加密的算法，但也有使用非对称加密的算法，比如DSA。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-13T04:57:39.000Z">
-<meta property="article:modified_time" content="2021-06-07T06:17:24.630Z">
+<meta property="article:modified_time" content="2024-04-10T16:00:44.256Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="pem">
 <meta property="article:tag" content="ssh">
@@ -116,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#加密"><span class="toc-number">1.</span> <span class="toc-text">加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#签名"><span class="toc-number">1.1.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解密"><span class="toc-number">1.2.</span> <span class="toc-text">解密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比较"><span class="toc-number">1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单向散列函数加密"><span class="toc-number">2.1.</span> <span class="toc-text">单向散列函数加密</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><span class="toc-number">2.1.1.</span> <span class="toc-text">哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对称加密"><span class="toc-number">2.2.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非对称加密"><span class="toc-number">2.3.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#证书"><span class="toc-number">3.</span> <span class="toc-text">证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式标准"><span class="toc-number">4.</span> <span class="toc-text">格式标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number"></span> <span class="toc-text">参考：</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#加密"><span class="toc-number">1.</span> <span class="toc-text">加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名"><span class="toc-number">1.1.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解密"><span class="toc-number">1.2.</span> <span class="toc-text">解密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较"><span class="toc-number">1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单向散列函数加密"><span class="toc-number">2.1.</span> <span class="toc-text">单向散列函数加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><span class="toc-number">2.1.1.</span> <span class="toc-text">哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对称加密"><span class="toc-number">2.2.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非对称加密"><span class="toc-number">2.3.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书"><span class="toc-number">3.</span> <span class="toc-text">证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式标准"><span class="toc-number">4.</span> <span class="toc-text">格式标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number">5.</span> <span class="toc-text">参考：</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -165,31 +165,31 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>加密有两种目的：</p>
-<h4 id="签名"><a href="#签名" class="headerlink" title="签名"></a><em>签名</em></h4><p>只需要加密后的密文，用来做验证，确保提供的原始文本在传递或者保存过程中没有被修改过，但是原始的明文文本是什么它不关心或者没有隐藏的必要。这在现实中用途很广泛，比如老板说“明天放假一天”，这条文本本身没有加密的必要，但是需要确保的是内容没有被修改，一天不会被改成两天。</p>
+    <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密有两种目的：</p>
+<h3 id="签名"><a href="#签名" class="headerlink" title="签名"></a><em>签名</em></h3><p>只需要加密后的密文，用来做验证，确保提供的原始文本在传递或者保存过程中没有被修改过，但是原始的明文文本是什么它不关心或者没有隐藏的必要。这在现实中用途很广泛，比如老板说“明天放假一天”，这条文本本身没有加密的必要，但是需要确保的是内容没有被修改，一天不会被改成两天。</p>
 <p>实现这一目的的加密算法，一般是使用被称为<code>单向散列函数加密</code>的算法，但也有使用<code>非对称加密</code>的算法，比如<code>DSA</code>。</p>
-<h4 id="解密"><a href="#解密" class="headerlink" title="解密"></a><em>解密</em></h4><p>加密后的密文，需要可以被解密成明文。这是我们一般意义上的加密的目的，在传递或者保存中，第三方看不到原始的明文文本，不知道内容是什么。</p>
+<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a><em>解密</em></h3><p>加密后的密文，需要可以被解密成明文。这是我们一般意义上的加密的目的，在传递或者保存中，第三方看不到原始的明文文本，不知道内容是什么。</p>
 <p>实现这一目的的加密算法有两种：<code>对称加密</code>和<code>非对称加密</code>。</p>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>哈希要达到的效果是：不能由密文推导出明文；而解密要达到的效果是：没有密码或者密钥，不能推导出明文。</p>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>加密算法可以分成三个种类：单向散列函数加密、对称加密和非对称加密。第一种一般用来处理签名和消息验证，后面两种一般用来进行加密解密，但这不是绝对的区分。</p>
-<h4 id="单向散列函数加密"><a href="#单向散列函数加密" class="headerlink" title="单向散列函数加密"></a>单向散列函数加密</h4><h5 id="哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><a href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：" class="headerlink" title="哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："></a><em>哈希</em>：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</h5><ol>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>哈希要达到的效果是：不能由密文推导出明文；而解密要达到的效果是：没有密码或者密钥，不能推导出明文。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>加密算法可以分成三个种类：单向散列函数加密、对称加密和非对称加密。第一种一般用来处理签名和消息验证，后面两种一般用来进行加密解密，但这不是绝对的区分。</p>
+<h3 id="单向散列函数加密"><a href="#单向散列函数加密" class="headerlink" title="单向散列函数加密"></a>单向散列函数加密</h3><h4 id="哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><a href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：" class="headerlink" title="哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："></a><em>哈希</em>：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</h4><ol>
 <li>MD5（Message-Digest Algorithm，即信息摘要算法），由MD2、MD3、MD4改进而来。</li>
 <li>SHA（Secure Hash Algorithm，即安全散列算法），包含SHA-0，SHA-1，SHA-2（SHA-224、SHA-256、SHA-512等）和SHA-3（SHA3-224、SHA3-256和SHA3-512等）。</li>
 </ol>
-<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密，是指加密和解密使用相同的密钥。最常用的有以下两种算法。</p>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>对称加密，是指加密和解密使用相同的密钥。最常用的有以下两种算法。</p>
 <ol>
 <li>DES（Data Encryption Standard，即数据加密标准）和 3DES（即三重数据加密算法）</li>
 <li>AES（Advanced Encryption Standard，即高级加密标准）</li>
 </ol>
-<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密，是指加密和解密使用的是两个不相同的密钥。通常这两个密钥其中一个是公开的，所以这一加密方法也被称为<code>公开密钥加密</code>。</p>
+<h3 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h3><p>非对称加密，是指加密和解密使用的是两个不相同的密钥。通常这两个密钥其中一个是公开的，所以这一加密方法也被称为<code>公开密钥加密</code>。</p>
 <ol>
 <li>RSA（三个人名的首字母），它的核心是质因数分解。这个算法可以用来对文本进行加密和解密。</li>
 <li>DSA（Digital Signature Algorithm，即数字签名算法），它的核心是模算数和离散对数问题。它仅用于签名而不能用户解密。算法中使用的散列函数是SHA家族。</li>
 </ol>
 <p>实际实现中还有使用 ECC（Elliptic Curve Cryptography，即椭圆曲线密码学）的ECDSA等算法，是ECC和DSA的结合。</p>
-<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p><code>X.509</code>是密码学里公钥证书的格式标准。</p>
+<h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><p><code>X.509</code>是密码学里公钥证书的格式标准。</p>
 <p><a href="https://zh.wikipedia.org/wiki/X.509" target="_blank" rel="noopener">X.509</a>证书里含有公钥、身份信息（比如网络主机名，组织的名称或个体名称等）和签名信息，还附带了证书吊销列表和用于从最终对证书进行签名的证书签发机构直到最终可信点为止的证书合法性验证算法。</p>
-<h3 id="格式标准"><a href="#格式标准" class="headerlink" title="格式标准"></a>格式标准</h3><p>格式标准用于指定保存证书或者是公钥和密钥的容器格式。</p>
+<h2 id="格式标准"><a href="#格式标准" class="headerlink" title="格式标准"></a>格式标准</h2><p>格式标准用于指定保存证书或者是公钥和密钥的容器格式。</p>
 <ul>
 <li>DER（Distinguished Encoding Rules，即唯一编码规则），是一种二进制格式。</li>
 <li>PEM（Privacy-Enhanced Mail，即隐私增强型邮件），是一种被编码成base64的文本格式。</li>
@@ -231,7 +231,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#加密"><span class="toc-number">1.</span> <span class="toc-text">加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#签名"><span class="toc-number">1.1.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解密"><span class="toc-number">1.2.</span> <span class="toc-text">解密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#比较"><span class="toc-number">1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单向散列函数加密"><span class="toc-number">2.1.</span> <span class="toc-text">单向散列函数加密</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><span class="toc-number">2.1.1.</span> <span class="toc-text">哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对称加密"><span class="toc-number">2.2.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非对称加密"><span class="toc-number">2.3.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#证书"><span class="toc-number">3.</span> <span class="toc-text">证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式标准"><span class="toc-number">4.</span> <span class="toc-text">格式标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number"></span> <span class="toc-text">参考：</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#加密"><span class="toc-number">1.</span> <span class="toc-text">加密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#签名"><span class="toc-number">1.1.</span> <span class="toc-text">签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解密"><span class="toc-number">1.2.</span> <span class="toc-text">解密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较"><span class="toc-number">1.3.</span> <span class="toc-text">比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">2.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单向散列函数加密"><span class="toc-number">2.1.</span> <span class="toc-text">单向散列函数加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#哈希：散列，又称为杂凑，哈希，其实都是英文-hash-的翻译。散列函数又被称为散列算法。最常用的是以下两种算法："><span class="toc-number">2.1.1.</span> <span class="toc-text">哈希：散列，又称为杂凑，哈希，其实都是英文 hash 的翻译。散列函数又被称为散列算法。最常用的是以下两种算法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对称加密"><span class="toc-number">2.2.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非对称加密"><span class="toc-number">2.3.</span> <span class="toc-text">非对称加密</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书"><span class="toc-number">3.</span> <span class="toc-text">证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式标准"><span class="toc-number">4.</span> <span class="toc-text">格式标准</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number">5.</span> <span class="toc-text">参考：</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
