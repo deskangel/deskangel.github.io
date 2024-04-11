@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 10 Apr 2024 12:28:21 GMT</pubDate>
+    <pubDate>Thu, 11 Apr 2024 01:58:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>remote-flutter-dev-on-ubuntu</title>
+      <link>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</link>
+      <guid>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</guid>
+      <pubDate>Thu, 11 Apr 2024 01:56:09 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h2 id=&quot;配置环境&quot;&gt;&lt;a href=&quot;#配置环境&quot; class=&quot;headerlink&quot; title=&quot;配置环境&quot;&gt;&lt;/a&gt;配置环境&lt;/h2&gt;&lt;p&gt;这些环境的配置都是在 Ubuntu 上进行的。&lt;/p&gt;
+&lt;h3 id=&quot;Android-SDK&quot;&gt;&lt;a
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>ls 和 exa 的配色方案</title>
@@ -422,28 +444,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/04/20/not-kitty/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>华为 HMS Core 实现 IAP 内购功能的几个备注点</title>
-      <link>https://blog.deskangel.com/2021/04/20/hms-iap/</link>
-      <guid>https://blog.deskangel.com/2021/04/20/hms-iap/</guid>
-      <pubDate>Tue, 20 Apr 2021 02:14:02 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h3 id=&quot;开启-IAP&quot;&gt;&lt;a href=&quot;#开启-IAP&quot; class=&quot;headerlink&quot; title=&quot;开启 IAP&quot;&gt;&lt;/a&gt;开启 IAP&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;iap&lt;/code&gt;开启，除了要在&lt;code&gt;AppGallery
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/04/20/hms-iap/#disqus_thread</comments>
     </item>
     
   </channel>
