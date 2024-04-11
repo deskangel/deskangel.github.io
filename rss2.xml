@@ -15,11 +15,11 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 11 Apr 2024 01:58:00 GMT</pubDate>
+    <pubDate>Thu, 11 Apr 2024 12:39:32 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>remote-flutter-dev-on-ubuntu</title>
+      <title>在 Ubuntu 上进行远程 Flutter 开发</title>
       <link>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</link>
       <guid>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</guid>
       <pubDate>Thu, 11 Apr 2024 01:56:09 GMT</pubDate>

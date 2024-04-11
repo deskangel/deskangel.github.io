@@ -8,14 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="配置环境这些环境的配置都是在 Ubuntu 上进行的。 Android SDK下载 Android sdk 的过程就不说了，下载完成后在 .zshrc&#x2F;.bashrc 中配置 ANDROID_HOME 等环境变量： export ANDROID_SDK_ROOT&#x3D;&quot;$HOME&#x2F;Library&#x2F;Android&#x2F;SDK&quot;export ANDROID_HOME&#x3D;$ANDROID_SDK_ROOTexpo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="remote-flutter-dev-on-ubuntu">
+<meta property="og:title" content="在 Ubuntu 上进行远程 Flutter 开发">
 <meta property="og:url" content="https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/index.html">
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="配置环境这些环境的配置都是在 Ubuntu 上进行的。 Android SDK下载 Android sdk 的过程就不说了，下载完成后在 .zshrc&#x2F;.bashrc 中配置 ANDROID_HOME 等环境变量： export ANDROID_SDK_ROOT&#x3D;&quot;$HOME&#x2F;Library&#x2F;Android&#x2F;SDK&quot;export ANDROID_HOME&#x3D;$ANDROID_SDK_ROOTexpo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-11T01:56:09.000Z">
-<meta property="article:modified_time" content="2024-04-11T01:58:00.558Z">
+<meta property="article:modified_time" content="2024-04-11T12:39:32.457Z">
 <meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="flutter">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@ideskangel">
     
@@ -37,7 +39,7 @@
       
     
     <!-- title -->
-    <title>remote-flutter-dev-on-ubuntu</title>
+    <title>在 Ubuntu 上进行远程 Flutter 开发</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -96,16 +98,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&text=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&is_video=false&description=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=remote-flutter-dev-on-ubuntu&body=Check out this article: https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&name=remote-flutter-dev-on-ubuntu&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&t=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&text=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&is_video=false&description=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=在 Ubuntu 上进行远程 Flutter 开发&body=Check out this article: https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&name=在 Ubuntu 上进行远程 Flutter 开发&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&t=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -122,7 +124,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        remote-flutter-dev-on-ubuntu
+        在 Ubuntu 上进行远程 Flutter 开发
     </h1>
 
 
@@ -141,8 +143,18 @@
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="tag-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+    </div>
+
 
     </div>
   </header>
@@ -220,16 +232,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&text=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&is_video=false&description=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=remote-flutter-dev-on-ubuntu&body=Check out this article: https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&name=remote-flutter-dev-on-ubuntu&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&t=remote-flutter-dev-on-ubuntu" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&text=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&is_video=false&description=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=在 Ubuntu 上进行远程 Flutter 开发&body=Check out this article: https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&title=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&name=在 Ubuntu 上进行远程 Flutter 开发&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/&t=在 Ubuntu 上进行远程 Flutter 开发" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -56,7 +56,7 @@ $(document).ready(function () {
      */
     if (menu.length) {
       $(window).on("scroll", function () {
-        // use 150 to fix the issue causing the nav never show again.
+        // fix the issue causing the nav never show again.
         var topDistance = document.documentElement.scrollTop;// menu.offset().top;
 
         // hide only the navigation links on desktop
