@@ -14,7 +14,7 @@
 <meta property="og:description" content="版本Ubuntu 20.04clang 10 准备Ubuntu 20.04下直接装不行，sudo apt install clang 会提依赖问题。 为了找到问题所在，使用apt 把依赖的包都放到命令上，比如第一个提示的是 clang-10 blabla，那么： sudo apt install clang clang-10 这时会提示一堆库依赖问题，选一个放到clang-10后面继续回车，一路下">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-13T15:24:56.000Z">
-<meta property="article:modified_time" content="2020-05-13T15:28:09.155Z">
+<meta property="article:modified_time" content="2024-04-11T02:05:42.624Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ubuntu">
@@ -115,7 +115,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本"><span class="toc-number">1.</span> <span class="toc-text">版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#版本"><span class="toc-number">1.</span> <span class="toc-text">版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -164,8 +164,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>Ubuntu 20.04<br>clang 10</p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>Ubuntu 20.04下直接装不行，<code>sudo apt install clang</code> 会提依赖问题。</p>
+    <h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Ubuntu 20.04<br>clang 10</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>Ubuntu 20.04下直接装不行，<code>sudo apt install clang</code> 会提依赖问题。</p>
 <p>为了找到问题所在，使用apt 把依赖的包都放到命令上，比如第一个提示的是 <code>clang-10</code> blabla，那么：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install clang clang-10</span><br></pre></td></tr></table></figure>
 <p>这时会提示一堆库依赖问题，选一个放到<code>clang-10</code>后面继续回车，一路下去，最后提示<code>libllvm10</code>找不到。</p>
@@ -173,7 +173,7 @@
 <p>既然这样，到<a href="https://apt.llvm.org/" target="_blank" rel="noopener">llvm网站</a>，按照指示添加源至<code>/etc/apt/sources.list</code>。因为是Ubuntu 20.04，所以添加focal的部分就可以了：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># i386 not available</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal main</span><br><span class="line"># 9</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-9 main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-9 main</span><br><span class="line"># 10</span><br><span class="line">deb http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-10 main</span><br><span class="line">deb-src http:&#x2F;&#x2F;apt.llvm.org&#x2F;focal&#x2F; llvm-toolchain-focal-10 main</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>我们选择装稳定版（stable branch）：</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>我们选择装稳定版（stable branch）：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先添加key</span></span><br><span class="line">wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装clang最新的稳定版本</span></span><br><span class="line">apt-get install clang-10 lldb-10 lld-10</span><br></pre></td></tr></table></figure>
 <p>如果没有指定版本，会安装clang-11，这个还是开发版。</p>
 <p>安装完成后，默认的命令是<code>clang-10</code>和<code>clang++-10</code>，需要使用<code>update-alternatives</code>来设置成<code>clang</code>和<code>clang++</code>：</p>
@@ -220,7 +220,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#版本"><span class="toc-number">1.</span> <span class="toc-text">版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#版本"><span class="toc-number">1.</span> <span class="toc-text">版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。  把A组均分成两组：a组4个球，b组也是4个球。 假如a＝b，则x在B组；                            （第一次称） 1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。 2.）假如c＝d，则x在e组。">
+    <meta name="description" content="这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。 1. 把A组均分成两组：a组4个球，b组也是4个球。2. 假如a＝b，则x在B组；                            （第一次称）    1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。    2.）假如c＝d，则x在e组。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于“十三个球用天平称三次，找出其中一个质量不同的球”的解">
 <meta property="og:url" content="https://blog.deskangel.com/2011/03/07/algorithm-about-thirteen-balls/index.html">
 <meta property="og:site_name" content="DeskAngel">
-<meta property="og:description" content="这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。  把A组均分成两组：a组4个球，b组也是4个球。 假如a＝b，则x在B组；                            （第一次称） 1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。 2.）假如c＝d，则x在e组。">
+<meta property="og:description" content="这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。 1. 把A组均分成两组：a组4个球，b组也是4个球。2. 假如a＝b，则x在B组；                            （第一次称）    1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。    2.）假如c＝d，则x在e组。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2011-03-07T15:35:23.000Z">
-<meta property="article:modified_time" content="2020-05-16T15:18:25.213Z">
+<meta property="article:modified_time" content="2024-04-11T02:46:15.608Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
@@ -82,10 +82,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post " href="/2011/03/21/perspective-of-three-desktop-oses/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post " href="/2011/03/20/perspective-of-three-desktop-oses/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/2011/02/09/proxy-switchy/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2011/02/08/proxy-switchy/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -163,35 +163,7 @@
 
   <div class="content" itemprop="articleBody">
     <p>这个问题最重要的是如何分配这些球。我们可以假设该质量不同的球为x，并把13个球分成两组：A组8个球，B组5个球。</p>
-<ol>
-<li>把A组均分成两组：a组4个球，b组也是4个球。</li>
-<li>假如a＝b，则x在B组；                            （第一次称）<br> 1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。<br> 2.）假如c＝d，则x在e组。                      （第二次称）<pre><code>（1.）在A组中取出一正常球作为f；在e组取出一球作为g，余下一球为h。
-（2.）假如f＝g，则h即为x。                （第三次称）
-（结束）
-（3.）否则g即为x。
-（结束）</code></pre> 3.）假如c＞d，则x在d组，并且为重球。<pre><code>（1.）把d组的三个球分别表示为f，g，h。
-（2.）假如f＝g，则h即为x。               （第三次称）
-（结束）
-（3.）假如f＞g，则f即为x，因为x是重球。
-（结束）
-（4.）假如f＜g，则g即为x，因为x是重球。
-（结束）</code></pre> 4.）假如c＜d，则x在d组，并且为轻球。过程同3.）。</li>
-<li>否则，则x在A组。假如a＞b，<br> 1.）在a中取三个球组成c组，余下一球为d。<br> 2.）在b中取两个球组成e组，余下两球为f组。<br> 3.）假如（c＋e）＝B，则x在（d＋f）中。        （第二次称）<pre><code>（1.）把f组中两球分别表示为g，h。
-（2.）假如（d＋g）＝e，则h即为x。            （第三次称）
-（结束）
-（3.）假如（d＋g）＞e，可知x为重球，因已知a＞b，可得d即为x。
-（结束）
-（4.）假如（d＋g）＜e，可知x为轻球，因已知a＞b，可知g即为x。
-（结束）</code></pre> 4.）假如（c＋e）＞B，则x在（c＋e）中，且为重球。<pre><code>（1.）因为a＞b，而x为重球，则x在c中。
-（2.）由2.3.）,可以得出x所在。
-（结束）</code></pre> 5.）假如（c＋e）＜B，则x在（c＋e）中，且为轻球。<pre><code>（1.）因为a＞b，而x为轻球，则x在e中。
-（2.）把e组的两个球分别表示为g，h。
-（3.）假如g＞h，则h为x。              （第三次称）
-（结束）
-（4.）假如g＜h，则g为x。
-（结束）</code></pre></li>
-<li>否则，则x在A组。假如a＜b，<br> 1.）过程同3.</li>
-</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 把A组均分成两组：a组4个球，b组也是4个球。</span><br><span class="line">2. 假如a＝b，则x在B组；                            （第一次称）</span><br><span class="line">    1.）在A组中拿出3个正常的球组成c组；在B组5个球中取3个作为d组，剩余2个球为e组。</span><br><span class="line">    2.）假如c＝d，则x在e组。                      （第二次称）</span><br><span class="line">        （1.）在A组中取出一正常球作为f；在e组取出一球作为g，余下一球为h。</span><br><span class="line">        （2.）假如f＝g，则h即为x。                （第三次称）</span><br><span class="line">        （结束）</span><br><span class="line">        （3.）否则g即为x。</span><br><span class="line">        （结束）</span><br><span class="line">    3.）假如c＞d，则x在d组，并且为重球。</span><br><span class="line">        （1.）把d组的三个球分别表示为f，g，h。</span><br><span class="line">        （2.）假如f＝g，则h即为x。               （第三次称）</span><br><span class="line">        （结束）</span><br><span class="line">        （3.）假如f＞g，则f即为x，因为x是重球。</span><br><span class="line">        （结束）</span><br><span class="line">        （4.）假如f＜g，则g即为x，因为x是重球。</span><br><span class="line">        （结束）</span><br><span class="line">    4.）假如c＜d，则x在d组，并且为轻球。过程同3.）。</span><br><span class="line">3. 否则，则x在A组。假如a＞b，</span><br><span class="line">    1.）在a中取三个球组成c组，余下一球为d。</span><br><span class="line">    2.）在b中取两个球组成e组，余下两球为f组。</span><br><span class="line">    3.）假如（c＋e）＝B，则x在（d＋f）中。        （第二次称）</span><br><span class="line">        （1.）把f组中两球分别表示为g，h。</span><br><span class="line">        （2.）假如（d＋g）＝e，则h即为x。            （第三次称）</span><br><span class="line">        （结束）</span><br><span class="line">        （3.）假如（d＋g）＞e，可知x为重球，因已知a＞b，可得d即为x。</span><br><span class="line">        （结束）</span><br><span class="line">        （4.）假如（d＋g）＜e，可知x为轻球，因已知a＞b，可知g即为x。</span><br><span class="line">        （结束）</span><br><span class="line">    4.）假如（c＋e）＞B，则x在（c＋e）中，且为重球。</span><br><span class="line">        （1.）因为a＞b，而x为重球，则x在c中。</span><br><span class="line">        （2.）由2.3.）,可以得出x所在。</span><br><span class="line">        （结束）</span><br><span class="line">    5.）假如（c＋e）＜B，则x在（c＋e）中，且为轻球。</span><br><span class="line">        （1.）因为a＞b，而x为轻球，则x在e中。</span><br><span class="line">        （2.）把e组的两个球分别表示为g，h。</span><br><span class="line">        （3.）假如g＞h，则h为x。              （第三次称）</span><br><span class="line">        （结束）</span><br><span class="line">        （4.）假如g＜h，则g为x。</span><br><span class="line">        （结束）</span><br><span class="line">4. 否则，则x在A组。假如a＜b，</span><br><span class="line">    1.）过程同3.</span><br></pre></td></tr></table></figure>
 
   </div>
 </article>

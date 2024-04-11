@@ -14,7 +14,7 @@
 <meta property="og:description" content="因为不想把当前的 osx 的环境弄得更复杂以及想实战一下docker，所以选择了在docker下搭建pomelo 的开发环境，大致的过程如下： 一. 安装 安装 VirtualBox 在 VirtualBox 安装 Ubuntu server 在 Ubuntu 下安装 docker 在 docker 下下载 Ubuntu image 运行 Ubuntu image，下载各种工具 根据文档安装 po">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-02-01T05:15:50.000Z">
-<meta property="article:modified_time" content="2024-04-10T16:01:21.484Z">
+<meta property="article:modified_time" content="2024-04-11T02:07:24.896Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="osx">
@@ -87,7 +87,7 @@
         <li><a class="icon" aria-label="Previous post " href="/2015/04/18/Blog-moved/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/2014/12/11/quick-cocos2d-x-with-protobuf/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2014/12/10/quick-cocos2d-x-with-protobuf/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -115,7 +115,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-安装"><span class="toc-number">1.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-配置"><span class="toc-number">2.</span> <span class="toc-text">二. 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-文件"><span class="toc-number">3.</span> <span class="toc-text">三. 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-调试"><span class="toc-number">4.</span> <span class="toc-text">四. 调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五-问题"><span class="toc-number">5.</span> <span class="toc-text">五. 问题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-安装"><span class="toc-number">1.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-配置"><span class="toc-number">2.</span> <span class="toc-text">二. 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-文件"><span class="toc-number">3.</span> <span class="toc-text">三. 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-调试"><span class="toc-number">4.</span> <span class="toc-text">四. 调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-问题"><span class="toc-number">5.</span> <span class="toc-text">五. 问题</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -165,7 +165,7 @@
 
   <div class="content" itemprop="articleBody">
     <p>因为不想把当前的 osx 的环境弄得更复杂以及想实战一下docker，所以选择了在docker下搭建pomelo 的开发环境，大致的过程如下：</p>
-<h3 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h3><ol>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><ol>
 <li>安装 VirtualBox</li>
 <li>在 VirtualBox 安装 Ubuntu server</li>
 <li>在 Ubuntu 下安装 docker</li>
@@ -173,21 +173,21 @@
 <li>运行 Ubuntu image，下载各种工具</li>
 <li>根据文档安装 pomelo</li>
 </ol>
-<h3 id="二-配置"><a href="#二-配置" class="headerlink" title="二. 配置"></a>二. 配置</h3><ol>
+<h2 id="二-配置"><a href="#二-配置" class="headerlink" title="二. 配置"></a>二. 配置</h2><ol>
 <li>在 VirtualBox 中映射 Ubuntu 到 OSX 的 ssh 端口</li>
 <li>在 VirtualBox 中映射 Ubuntu 到 OSX 的 pomelo 需要的端口</li>
 <li>在 docker 下映射 Ubuntu container 到 Ubuntu host 的 pomelo 需要的端口</li>
 </ol>
-<h3 id="三-文件"><a href="#三-文件" class="headerlink" title="三. 文件"></a>三. 文件</h3><ol>
+<h2 id="三-文件"><a href="#三-文件" class="headerlink" title="三. 文件"></a>三. 文件</h2><ol>
 <li>在 VirtualBox 中设置 OSX 到 Ubuntu 的共享文件夹</li>
 <li>在 docker 下把 Ubuntu host 中的共享文件夹映射到 Ubuntu container</li>
 </ol>
-<h3 id="四-调试"><a href="#四-调试" class="headerlink" title="四. 调试"></a>四. 调试</h3><ol>
+<h2 id="四-调试"><a href="#四-调试" class="headerlink" title="四. 调试"></a>四. 调试</h2><ol>
 <li>安装node-inspector，并指定web-port和 debug-port</li>
 <li>编辑 pomelo 的工程中的 servers.json，为需要调试的服务器指定调试端口</li>
 <li>在 Chrome 中按照node-inspector 的提示打开调试的 url</li>
 </ol>
-<h3 id="五-问题"><a href="#五-问题" class="headerlink" title="五. 问题"></a>五. 问题</h3><ol>
+<h2 id="五-问题"><a href="#五-问题" class="headerlink" title="五. 问题"></a>五. 问题</h2><ol>
 <li>安装 pomelo 的时候花了很多时间，有些包比如 heapdump 总是出错，后来发现是没有安装 make 和 g++等开发工具</li>
 <li>在 container 中用命令创建 pomelo 工程后在 OSX 下无法保存，发现是因为权限的问题。一个方法是在 container 中把目录和文件都改成 other 可写，另一个方法是在 OSX 下把 container 中创建的工程复制一份，把原来的工程目录删除即可</li>
 <li>服务器指定调试端口（3005）后一直没有办法连上，Chrome 中也看不到工程的文件，此时换一个调试端口即可</li>
@@ -228,7 +228,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-安装"><span class="toc-number">1.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-配置"><span class="toc-number">2.</span> <span class="toc-text">二. 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-文件"><span class="toc-number">3.</span> <span class="toc-text">三. 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-调试"><span class="toc-number">4.</span> <span class="toc-text">四. 调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五-问题"><span class="toc-number">5.</span> <span class="toc-text">五. 问题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-安装"><span class="toc-number">1.</span> <span class="toc-text">一. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-配置"><span class="toc-number">2.</span> <span class="toc-text">二. 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-文件"><span class="toc-number">3.</span> <span class="toc-text">三. 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-调试"><span class="toc-number">4.</span> <span class="toc-text">四. 调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-问题"><span class="toc-number">5.</span> <span class="toc-text">五. 问题</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

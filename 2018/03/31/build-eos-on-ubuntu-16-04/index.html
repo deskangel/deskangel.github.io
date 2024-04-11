@@ -14,7 +14,7 @@
 <meta property="og:description" content="为了和官方测试链对接，选择的是dawn-2.x分支。官方推荐的是在Ubuntu 16.10上面编译，但是我只有16.04，想来应该是差不多的。 参考官方文档，直接开干。 第一个坑第一个坑其实是关于git的，具体一点就是关于git的子模块的。如果在命令行checkout dawn-2.x分支，一定不要忘了在子模块不会自动切换分支。而且，手动切换后，也会留下一堆Untracked files，我是直接">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-03-31T03:55:07.000Z">
-<meta property="article:modified_time" content="2024-04-10T15:55:50.475Z">
+<meta property="article:modified_time" content="2024-04-11T02:49:45.284Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="eos">
 <meta property="article:tag" content="blockchain">
@@ -170,9 +170,7 @@
 <h2 id="第三个坑"><a href="#第三个坑" class="headerlink" title="第三个坑"></a>第三个坑</h2><p>然后<code>make -j4</code>，还是提示错误，仔细一看，是<code>binaryen</code>没有。处理第一个坑的时候，明明看到<code>binaryen</code>明晃晃的躺在<code>opt/</code>目录下，怎么没有了？进去一看，居然是空的！！</p>
 <p>把<a href="https://github.com/EOSIO/eos/blob/DAWN-2018-02-14/README.md#ubuntu" target="_blank" rel="noopener">官方文档</a>翻到手动编译部分，找到<code>binaryen</code>的github地址，开始clone，只是速度非常慢。过了一段时间，一看已经失败了。提示错误信息：</p>
 <blockquote>
-<blockquote>
 <p>error: RPC failed; curl 18 transfer closed with outstanding read data remaining<br>fatal: The remote end hung up unexpectedly<br>fatal: early EOF</p>
-</blockquote>
 </blockquote>
 <p>Google之后，网友们会告诉你，这是缓存不够的原因。设置下git的配置 <code>git config --global http.postBuffer 524288000</code>，把缓存加大。而我修改了这个设置之后，又设置了http代理，几秒钟就把代码拉下来了。</p>
 <p>大概也就遇到了这两个问题，应该说还算是比较顺利的。文档上说要下载<code>secp256k1-zkp</code>，然后我找了下，自动化脚本应该没有下载，而我也没有手动去下，并没有影响到编译和运行。</p>

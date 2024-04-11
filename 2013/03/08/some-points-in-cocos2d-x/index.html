@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。 Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码： 123456do&amp;#123;    CC_BREAK_IF(! CCLayer::init());    CCSprite* bomb1 &#x3D; CCSprite::create(&quot;CloseNormal.png&quot;);    addChil">
+    <meta name="description" content="这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。 Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码： do&amp;#123;    CC_BREAK_IF(! CCLayer::init());    CCSprite* bomb1 &#x3D; CCSprite::create(&quot;CloseNormal.png&quot;);    addChild(bomb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cocos2d-x的几个注意点">
 <meta property="og:url" content="https://blog.deskangel.com/2013/03/08/some-points-in-cocos2d-x/index.html">
 <meta property="og:site_name" content="DeskAngel">
-<meta property="og:description" content="这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。 Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码： 123456do&amp;#123;    CC_BREAK_IF(! CCLayer::init());    CCSprite* bomb1 &#x3D; CCSprite::create(&quot;CloseNormal.png&quot;);    addChil">
+<meta property="og:description" content="这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。 Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码： do&amp;#123;    CC_BREAK_IF(! CCLayer::init());    CCSprite* bomb1 &#x3D; CCSprite::create(&quot;CloseNormal.png&quot;);    addChild(bomb">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2013-03-08T14:39:59.000Z">
-<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:published_time" content="2013-03-08T06:39:59.000Z">
+<meta property="article:modified_time" content="2024-04-11T02:22:48.943Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="cocos2d">
 <meta name="twitter:card" content="summary">
@@ -85,7 +85,7 @@
         <li><a class="icon" aria-label="Previous post " href="/2013/03/12/lua-and-c++/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/2012/12/22/dictionary-assignment-issue/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2012/12/21/dictionary-assignment-issue/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -137,7 +137,7 @@
       
     <div class="postdate">
       
-        <time datetime="2013-03-08T14:39:59.000Z" itemprop="datePublished">2013-03-08</time>
+        <time datetime="2013-03-08T06:39:59.000Z" itemprop="datePublished">2013-03-08</time>
         
       
     </div>
@@ -164,13 +164,13 @@
   <div class="content" itemprop="articleBody">
     <p>这段时间渐渐地从剑II的项目中退出来，来说研究一些cocos2d-x相关的内容。</p>
 <p>Cocos2d-x虽然是使用C++来实现的，但是代码显得很怪异。比如下面的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    CC_BREAK_IF(! CCLayer::init());</span><br><span class="line">    CCSprite* bomb1 = CCSprite::create(<span class="string">"CloseNormal.png"</span>);</span><br><span class="line">    addChild(bomb1,<span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span> (<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    CC_BREAK_IF(! CCLayer::init());</span><br><span class="line">    CCSprite* bomb1 = CCSprite::create(<span class="string">"CloseNormal.png"</span>);</span><br><span class="line">    addChild(bomb1,<span class="number">1</span>);</span><br><span class="line">&#125;<span class="keyword">while</span> (<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>这里之所以要用<code>do...while</code>，仅仅只是为了使用CC_BREAK_IF这个宏。非但打乱了C++的语法，而且也是代码复杂化了。</p>
 <p>另外一个需要注意的地方是它的对象的生命周期管理，和C++通行的逻辑不同。看下面的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CSpriteSheetMgr</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    CSpriteSheetMgr();</span><br><span class="line">    ~CSpriteSheetMgr();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    cocos2d::CCDictionary *m_pBatchNodeDic;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CSpriteSheetMgr::CSpriteSheetMgr()</span><br><span class="line">&#123;</span><br><span class="line">    m_pBatchNodeDic = CCDictionary::create();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CSpriteSheetMgr</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    CSpriteSheetMgr();</span><br><span class="line">    ~CSpriteSheetMgr();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    cocos2d::CCDictionary *m_pBatchNodeDic;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CSpriteSheetMgr::CSpriteSheetMgr()</span><br><span class="line">&#123;</span><br><span class="line">    m_pBatchNodeDic = CCDictionary::create();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果你以为m_pBatchNodeDic的生命周期是跟随类的实例的话，那么就错了。在 <em>每一个Message Loop之后，cocos2d-x引擎都会尝试去释放这类对象</em> ，可能你还没有用到，他就已经无效了。这个就是cocos2d-x的内存管理模型<strong>Reference Count and AutoReleasePool</strong></p>
 <p>正确的，需要写成：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CSpriteSheetMgr::CSpriteSheetMgr()</span><br><span class="line">&#123;</span><br><span class="line">    m_pBatchNodeDic = CCDictionary::create();</span><br><span class="line">    m_pBatchNodeDic-&amp;gt;retain();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">CSpriteSheetMgr::CSpriteSheetMgr()</span><br><span class="line">&#123;</span><br><span class="line">    m_pBatchNodeDic = CCDictionary::create();</span><br><span class="line">    m_pBatchNodeDic-&amp;gt;retain();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
   </div>
 </article>

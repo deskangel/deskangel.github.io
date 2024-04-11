@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Usually, we use GetWindowRect to calculate windows size in windows. It works always right until vista comes. Under Vista, if you still use GetWindowRect to retrieve windows rectangle size, you can not">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Calculate window size in Vista">
+<meta property="og:title" content="calculate-window-size-in-vista">
 <meta property="og:url" content="https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/index.html">
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="Usually, we use GetWindowRect to calculate windows size in windows. It works always right until vista comes. Under Vista, if you still use GetWindowRect to retrieve windows rectangle size, you can not">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2009-03-18T15:04:27.000Z">
-<meta property="article:modified_time" content="2020-04-20T08:45:01.955Z">
+<meta property="article:published_time" content="2009-03-18T07:04:27.000Z">
+<meta property="article:modified_time" content="2024-04-11T02:54:23.121Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="vista">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>Calculate window size in Vista</title>
+    <title>calculate-window-size-in-vista</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -85,7 +85,7 @@
         <li><a class="icon" aria-label="Previous post " href="/2009/03/24/psi-with-openpgp/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post " href="/2009/02/27/base-rules-of-regular-expression/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post " href="/2009/02/26/base-rules-of-regular-expression/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,16 +99,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&text=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&is_video=false&description=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Calculate window size in Vista&body=Check out this article: https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&name=Calculate window size in Vista&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&t=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&text=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&is_video=false&description=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=calculate-window-size-in-vista&body=Check out this article: https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&name=calculate-window-size-in-vista&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&t=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -125,7 +125,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Calculate window size in Vista
+        calculate-window-size-in-vista
     </h1>
 
 
@@ -137,7 +137,7 @@
       
     <div class="postdate">
       
-        <time datetime="2009-03-18T15:04:27.000Z" itemprop="datePublished">2009-03-18</time>
+        <time datetime="2009-03-18T07:04:27.000Z" itemprop="datePublished">2009-03-18</time>
         
       
     </div>
@@ -168,7 +168,8 @@
 <p>The problem is caused of the new Desktop Window Management features, exactly,  <a href="http://msdn.microsoft.com/en-us/library/bb688195(VS.85).aspx" target="_blank" rel="noopener" title="Custom Window Frame Using DWM">extending frame</a>.</p>
 <p>To resolve the problem, you can use DWM api, <code>DwmGetWindowAttribute</code>, instead of the <code>GetWindowRect</code> before Microsoft fixed it.</p>
 <p>The api which can be used like following,</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DwmGetWindowAttribute(h_wnd, DWMWA_EXTENDED_FRAME_BOUNDS, &amp;rt_target_wnd, <span class="keyword">sizeof</span>(RECT));</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">DwmGetWindowAttribute(h_wnd, DWMWA_EXTENDED_FRAME_BOUNDS, &amp;rt_target_wnd, <span class="keyword">sizeof</span>(RECT));</span><br></pre></td></tr></table></figure>
+
   </div>
 </article>
 
@@ -209,16 +210,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&text=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&is_video=false&description=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Calculate window size in Vista&body=Check out this article: https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&name=Calculate window size in Vista&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&t=Calculate window size in Vista" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&text=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&is_video=false&description=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=calculate-window-size-in-vista&body=Check out this article: https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&title=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&name=calculate-window-size-in-vista&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2009/03/18/calculate-window-size-in-vista/&t=calculate-window-size-in-vista" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

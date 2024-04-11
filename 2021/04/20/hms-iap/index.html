@@ -14,7 +14,7 @@
 <meta property="og:description" content="开启 IAP iap开启，除了要在AppGallery Connect项目中开启应用内支付服务 API外，  还需要激活“盈利”下的应用内支付服务的配置以获得签名验证公钥。这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报6002错误。如果不需要验证，可以不使用公钥。  除了这两个地方，还需要在AppGallery Con">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-20T02:14:02.000Z">
-<meta property="article:modified_time" content="2021-04-20T02:31:51.337Z">
+<meta property="article:modified_time" content="2024-04-11T02:05:16.163Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="iap">
 <meta property="article:tag" content="hms">
@@ -114,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -163,7 +163,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="开启-IAP"><a href="#开启-IAP" class="headerlink" title="开启 IAP"></a>开启 IAP</h3><ol>
+    <h2 id="开启-IAP"><a href="#开启-IAP" class="headerlink" title="开启 IAP"></a>开启 IAP</h2><ol>
 <li><p><code>iap</code>开启，除了要在<code>AppGallery Connect</code>项目中开启<code>应用内支付服务</code> API外，</p>
 </li>
 <li><p>还需要激活“盈利”下的<code>应用内支付服务</code>的配置以获得<code>签名验证公钥</code>。<br>这个公钥是用来验证支付回调是否合法的，类似web中用几个关键参数按顺序加时间和约定的key做md5的签名。没有开启这个的话会报<code>6002</code>错误。如果不需要验证，可以不使用公钥。</p>
@@ -172,10 +172,10 @@
 </li>
 </ol>
 <p>上面两个地方是在 AppGallery Connect 的项目中设置的，而最后这个是在 AppGallery Connect 的应用中设置的。</p>
-<h3 id="密钥指纹"><a href="#密钥指纹" class="headerlink" title="密钥指纹"></a>密钥指纹</h3><p>如果使用了<code>上传密钥</code>和<code>应用签名密钥</code>分开的配置，那么debug版本也需要应用签名，否则HMS 的 api 请求会报<code>6003</code>错误。如果签名后依然还是<code>6003</code>，那么把<code>应用签名证书</code>和<code>上传证书</code>的 SHA-256指纹都添加到<code>AppGallery Connect</code>项目设置下的 SHA256证书指纹中。因为按照流程，你本地的签名用的应该是上传证书，需要把它的指纹也加入。</p>
-<h3 id="地区"><a href="#地区" class="headerlink" title="地区"></a>地区</h3><p>测试时应用不需要上传，只需要把应用的信息都配置好，包括发行的国家地区。如果选择中有中国大陆，那需要提供软著等信息，如果没有可以去掉不在中国大陆发行。</p>
+<h2 id="密钥指纹"><a href="#密钥指纹" class="headerlink" title="密钥指纹"></a>密钥指纹</h2><p>如果使用了<code>上传密钥</code>和<code>应用签名密钥</code>分开的配置，那么debug版本也需要应用签名，否则HMS 的 api 请求会报<code>6003</code>错误。如果签名后依然还是<code>6003</code>，那么把<code>应用签名证书</code>和<code>上传证书</code>的 SHA-256指纹都添加到<code>AppGallery Connect</code>项目设置下的 SHA256证书指纹中。因为按照流程，你本地的签名用的应该是上传证书，需要把它的指纹也加入。</p>
+<h2 id="地区"><a href="#地区" class="headerlink" title="地区"></a>地区</h2><p>测试时应用不需要上传，只需要把应用的信息都配置好，包括发行的国家地区。如果选择中有中国大陆，那需要提供软著等信息，如果没有可以去掉不在中国大陆发行。</p>
 <p>测试手机上的应用商店国家地区要对应发行的地区，如果有地区没有发行而应用商店正好设置为该地区（就是中国），那需要把应用商店的国家改成选择发行的国家</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>华为 HMS 的配置虽然零散，开放资料也不够直观全面，但是其实坑还是比较少的。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>华为 HMS 的配置虽然零散，开放资料也不够直观全面，但是其实坑还是比较少的。</p>
 
   </div>
 </article>
@@ -211,7 +211,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开启-IAP"><span class="toc-number">1.</span> <span class="toc-text">开启 IAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#密钥指纹"><span class="toc-number">2.</span> <span class="toc-text">密钥指纹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地区"><span class="toc-number">3.</span> <span class="toc-text">地区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

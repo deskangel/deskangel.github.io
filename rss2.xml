@@ -181,8 +181,8 @@
         
           
           
-            &lt;h3 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。&lt;/p&gt;
-&lt;h3
+            &lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。&lt;/p&gt;
+&lt;h2
           
         
       
@@ -203,7 +203,7 @@
         
           
           
-            &lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;用 &lt;code&gt;docker&lt;/code&gt; 这么久，有一个问题一直令人不爽：&lt;code&gt;ctrl+p&lt;/code&gt;
+            &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;用 &lt;code&gt;docker&lt;/code&gt; 这么久，有一个问题一直令人不爽：&lt;code&gt;ctrl+p&lt;/code&gt;
           
         
       
@@ -415,7 +415,7 @@
           
           
             &lt;p&gt;我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。&lt;/p&gt;
-&lt;h3 id=&quot;一-折腾&quot;&gt;&lt;a href=&quot;#一-折腾&quot;
+&lt;h2 id=&quot;一-折腾&quot;&gt;&lt;a href=&quot;#一-折腾&quot;
           
         
       
@@ -436,7 +436,7 @@
         
           
           
-            &lt;h3 id=&quot;GPU-加持的终端&quot;&gt;&lt;a href=&quot;#GPU-加持的终端&quot; class=&quot;headerlink&quot; title=&quot;GPU 加持的终端&quot;&gt;&lt;/a&gt;GPU 加持的终端&lt;/h3&gt;&lt;p&gt;由于上次研究 &lt;code&gt;iterm2&lt;/code&gt; 下 vim
+            &lt;h2 id=&quot;GPU-加持的终端&quot;&gt;&lt;a href=&quot;#GPU-加持的终端&quot; class=&quot;headerlink&quot; title=&quot;GPU 加持的终端&quot;&gt;&lt;/a&gt;GPU 加持的终端&lt;/h2&gt;&lt;p&gt;由于上次研究 &lt;code&gt;iterm2&lt;/code&gt; 下 vim
           
         
       
