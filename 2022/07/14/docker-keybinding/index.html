@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="问题用 docker 这么久，有一个问题一直令人不爽：ctrl+p 向上翻行的时候，总会吞掉一行。 但因为容器只是用来作为运行环境，而且还可以用箭头来进行翻动，就一直留着没去解决它。 今天解决了一堆 DaRemote 关于 Top 10 Processes 的 bug，不想再继续写代码；而儿子又睡着，终于无聊得想来着手解决这个恼人的问题。 原因产生这个问题的原因非常简单：docker 容器的 de">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker-keybinding">
+<meta property="og:title" content="Docker Keybinding">
 <meta property="og:url" content="https://blog.deskangel.com/2022/07/14/docker-keybinding/index.html">
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="问题用 docker 这么久，有一个问题一直令人不爽：ctrl+p 向上翻行的时候，总会吞掉一行。 但因为容器只是用来作为运行环境，而且还可以用箭头来进行翻动，就一直留着没去解决它。 今天解决了一堆 DaRemote 关于 Top 10 Processes 的 bug，不想再继续写代码；而儿子又睡着，终于无聊得想来着手解决这个恼人的问题。 原因产生这个问题的原因非常简单：docker 容器的 de">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-14T08:11:05.000Z">
-<meta property="article:modified_time" content="2024-04-11T02:04:09.243Z">
+<meta property="article:modified_time" content="2024-04-12T11:08:31.601Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>docker-keybinding</title>
+    <title>Docker Keybinding</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -99,16 +99,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&text=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&is_video=false&description=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=docker-keybinding&body=Check out this article: https://blog.deskangel.com/2022/07/14/docker-keybinding/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&name=docker-keybinding&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/&t=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&text=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&is_video=false&description=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker Keybinding&body=Check out this article: https://blog.deskangel.com/2022/07/14/docker-keybinding/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&name=Docker Keybinding&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/&t=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -125,7 +125,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        docker-keybinding
+        Docker Keybinding
     </h1>
 
 
@@ -212,16 +212,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&text=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&is_video=false&description=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=docker-keybinding&body=Check out this article: https://blog.deskangel.com/2022/07/14/docker-keybinding/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&name=docker-keybinding&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/&t=docker-keybinding" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&text=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&is_video=false&description=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker Keybinding&body=Check out this article: https://blog.deskangel.com/2022/07/14/docker-keybinding/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&title=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2022/07/14/docker-keybinding/&name=Docker Keybinding&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2022/07/14/docker-keybinding/&t=Docker Keybinding" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
