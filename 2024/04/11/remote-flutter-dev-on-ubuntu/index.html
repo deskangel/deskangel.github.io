@@ -14,7 +14,7 @@
 <meta property="og:description" content="配置环境这些环境的配置都是在 Ubuntu 上进行的。 Android SDK下载 Android sdk 的过程就不说了，下载完成后在 .zshrc&#x2F;.bashrc 中配置 ANDROID_HOME 等环境变量： export ANDROID_SDK_ROOT&#x3D;&quot;$HOME&#x2F;Library&#x2F;Android&#x2F;SDK&quot;export ANDROID_HOME&#x3D;$ANDROID_SDK_ROOTexpo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-11T01:56:09.000Z">
-<meta property="article:modified_time" content="2024-04-11T12:39:32.457Z">
+<meta property="article:modified_time" content="2024-04-12T11:21:39.103Z">
 <meta property="article:author" content="ideskangel">
 <meta property="article:tag" content="ubuntu">
 <meta property="article:tag" content="flutter">
@@ -192,7 +192,7 @@
 <h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>在本地启动 <code>vscode</code>，在侧边栏的 <code>Remote Explorer</code> 中创建一个远程服务器，或者点击设置⚙️，打开<code>~/.ssh/config</code>进行配置：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ServerAliveInterval 120</span><br><span class="line">TCPKeepAlive no</span><br><span class="line"></span><br><span class="line">Host ubuntu</span><br><span class="line">	HostName 192.168.1.x</span><br><span class="line">	User [your-user]</span><br><span class="line">	IdentityFile ~/.ssh/id_ed25519</span><br></pre></td></tr></table></figure>
 <p>然后通过 <code>Remote Explorer</code> 打开远程服务器上的项目。</p>
-<h2 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h2><p> <code>adb</code> 权限问题。我在另一篇文章中有讲如何解决这个问题。</p>
+<h2 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h2><p> <code>adb</code> 权限问题。我在<a href="https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/">另一篇文章</a>中有讲如何解决这个问题。</p>
 
   </div>
 </article>
