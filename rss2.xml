@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 12 Apr 2024 11:20:09 GMT</pubDate>
+    <pubDate>Sat, 13 Apr 2024 12:18:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>说一下 git fetch</title>
+      <link>https://blog.deskangel.com/2024/04/13/essensce-of-git-fetch/</link>
+      <guid>https://blog.deskangel.com/2024/04/13/essensce-of-git-fetch/</guid>
+      <pubDate>Sat, 13 Apr 2024 12:14:31 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h2 id=&quot;误解&quot;&gt;&lt;a href=&quot;#误解&quot; class=&quot;headerlink&quot; title=&quot;误解&quot;&gt;&lt;/a&gt;误解&lt;/h2&gt;&lt;p&gt;当在 Google 上搜索 &lt;code&gt;git fetch&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/13/essensce-of-git-fetch/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题</title>
@@ -423,28 +444,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/05/13/key-format-etc/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 下中文输入法安装的坑</title>
-      <link>https://blog.deskangel.com/2021/05/03/im-ubuntu/</link>
-      <guid>https://blog.deskangel.com/2021/05/03/im-ubuntu/</guid>
-      <pubDate>Mon, 03 May 2021 12:47:04 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;我的系统是Ubuntu 21.04，本来安装输入法本来是应该很简单的，甚至无需安装，只需要把输入法调出来就可以了。但是Ubuntu真的不是很稳定，中间不知道什么地方出了问题，导致走了很多弯路。&lt;/p&gt;
-&lt;h2 id=&quot;一-折腾&quot;&gt;&lt;a href=&quot;#一-折腾&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/05/03/im-ubuntu/#disqus_thread</comments>
     </item>
     
   </channel>

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>说一下 git fetch</title>
+      <link href="/2024/04/13/essensce-of-git-fetch/"/>
+      <url>/2024/04/13/essensce-of-git-fetch/</url>
+      
+        <content type="html"><![CDATA[<h2 id="误解"><a href="#误解" class="headerlink" title="误解"></a>误解</h2><p>当在 Google 上搜索 <code>git fetch</code> 作用的时候，获取到的内容都是类似：</p><blockquote><p>git fetch：从远程获取最新版本到本地，但不会自动merge，<strong>用于从远程跟踪分支下载和查看其他人完成的最新提交，但不将这些提交合并到本地存储库中</strong>。 它从远程存储库中获取更改并将其存储在本地存储库中。<br>git pull：从远程获取最新版本并merge 到本地，它会自动将提交合并到您的本地存储库中，而无需查看提交。</p></blockquote><p>人的思维是很容易被操控的。往往非常正确的话，却能把人往歧路上带，路走着走着就窄了。</p><p>网上充斥的对 <code>git fetch</code> 的介绍，都是和 <code>git pull</code> 比较，仿佛 <code>git fetch</code> 的作用就是为了合并代码而更新，只是做了 <code>git pull</code> 一半的工作。</p><p>而实际上，<code>git fetch</code> 和 <code>merge</code> 完全没有关系！!</p><h2 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h2><p>当我们把代码库从远程 <code>clone</code> 下来后，在本地磁盘上至少有<code>几个分支</code>？会有一个本地分支，比如叫 <code>master</code>，没有了吗？其实至少还有一个远程分支，比如叫 <code>origin/master</code> 的，<code>也在本地</code>。</p><p>当我们运行 <code>git branch -r</code> 查看远程分支情况的时候，这个命令并不会去远程仓库检索，而只是在你 clone 下来的本地的仓库进行检索。远程仓库的一些更新，无论是和代码的提交，还是分支的创建，还是加了 tag相关，你在本地是无法感知到的。</p><p>比如某人推送了一个新的分支 <code>release/v1.1</code> 到远程仓库，你在本地反复的运行 <code>git branch -r</code> 都是看不到的。</p><p>想要知道以上这些，就需要运行 <code>git fetch</code> 来从远程仓库获取。<strong>从远程仓库更新下来的信息，存放在<code>本地仓库的远程分支</code>中，比如 <code>origin/*</code> 。</strong></p><p>所以，<code>git fetch</code> 仅仅只是从远程仓库更新信息，仅此而以。至于后面是要合并新的提交还是要切换到新的分支，那是之后的选择。</p><h2 id="man中的信息"><a href="#man中的信息" class="headerlink" title="man中的信息"></a>man中的信息</h2><p><code>man git fetch</code>:</p><blockquote><p>Fetch branches and/or tags (collectively, “refs”) from one or more other repositories, along with the objects necessary to complete their histories.</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题</title>
       <link href="/2024/04/12/adb-permission-issue-on-ubuntu/"/>
       <url>/2024/04/12/adb-permission-issue-on-ubuntu/</url>
@@ -1641,10 +1666,10 @@
     
     <entry>
       <title>Python处理多个不同编码的文件</title>
-      <link href="/2012/09/09/different-encoding-files-with-python/"/>
-      <url>/2012/09/09/different-encoding-files-with-python/</url>
+      <link href="/2012/09/08/different-encoding-files-with-python/"/>
+      <url>/2012/09/08/different-encoding-files-with-python/</url>
       
-        <content type="html"><![CDATA[<p>当需要把多个不同编码的文件合并成一个的时候，unicode是一个很好的选择。但是如果把不同的编码转换成unicode，python并没有提供一个很好的方法。</p><p>Python内部是使用unicode来编码，但要把不同的编码转换成unicode，首先需要知道需要转换的内容是什么编码的。这种设计用来处理转码特定的编码文件没有问题，但是要写一个通用的工具，将是不可能的任务。</p><p>但是对于一些特殊的项目，还是可以做一些事情的。有一个检测文本编码类型的库可以借用：<a href="http://pypi.python.org/pypi/chardet" target="_blank" rel="noopener">chardet</a> 。</p><p>chardet的使用很简单。它的输入如下：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;'confidence': 0.62467997951868914, 'encoding': 'GB2312'&#125;</span><br></pre></td></tr></table></figure><p>从它的输出可以看到，这并不是一个非常有效的方法，但是聊胜于无。</p><p>在我的案例里面，是这样使用的：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sf = codecs.open(<span class="string">"xxx.txt"</span>, <span class="string">"w"</span>, <span class="string">"utf-8"</span>)</span><br><span class="line"></span><br><span class="line">of1 = codecs.open(f1, <span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line">line1 = of1.read()</span><br><span class="line">enc = chardet.detect(line1)</span><br><span class="line"><span class="keyword">print</span> enc</span><br><span class="line"><span class="keyword">if</span> enc[<span class="string">'encoding'</span>] == <span class="string">'utf-8'</span>:</span><br><span class="line"> line1 = unicode(line1, <span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"> line1 = line1.decode(<span class="string">'gb18030'</span>)</span><br><span class="line"></span><br><span class="line">sf.write(line1)</span><br></pre></td></tr></table></figure><p>对中文需要注意的是， 虽然chardet 能检测出的中文编码是gb2312，但是最好用<span style="color: #ff0000;">gb18030<span style="color: #000000;">来处理它，后者的覆盖会更全一点。</span></span></p>]]></content>
+        <content type="html"><![CDATA[<p>当需要把多个不同编码的文件合并成一个的时候，unicode是一个很好的选择。但是如果把不同的编码转换成unicode，python并没有提供一个很好的方法。</p><p>Python内部是使用unicode来编码，但要把不同的编码转换成unicode，首先需要知道需要转换的内容是什么编码的。这种设计用来处理转码特定的编码文件没有问题，但是要写一个通用的工具，将是不可能的任务。</p><p>但是对于一些特殊的项目，还是可以做一些事情的。有一个检测文本编码类型的库可以借用：<a href="http://pypi.python.org/pypi/chardet" target="_blank" rel="noopener">chardet</a> 。</p><p>chardet的使用很简单。它的输入如下：</p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;'confidence': 0.62467997951868914, 'encoding': 'GB2312'&#125;</span><br></pre></td></tr></table></figure><p>从它的输出可以看到，这并不是一个非常有效的方法，但是聊胜于无。</p><p>在我的案例里面，是这样使用的：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sf = codecs.open(<span class="string">"xxx.txt"</span>, <span class="string">"w"</span>, <span class="string">"utf-8"</span>)</span><br><span class="line"></span><br><span class="line">of1 = codecs.open(f1, <span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line">line1 = of1.read()</span><br><span class="line">enc = chardet.detect(line1)</span><br><span class="line"><span class="keyword">print</span> enc</span><br><span class="line"><span class="keyword">if</span> enc[<span class="string">'encoding'</span>] == <span class="string">'utf-8'</span>:</span><br><span class="line"> line1 = unicode(line1, <span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line"> line1 = line1.decode(<span class="string">'gb18030'</span>)</span><br><span class="line"></span><br><span class="line">sf.write(line1)</span><br></pre></td></tr></table></figure><p>对中文需要注意的是， 虽然chardet 能检测出的中文编码是gb2312，但是最好用<span style="color: #ff0000;">gb18030<span style="color: #000000;">来处理它，后者的覆盖会更全一点。</span></span></p>]]></content>
       
       
       <categories>
@@ -2012,8 +2037,8 @@
     
     <entry>
       <title>error RC1106: invalid option: -ologo</title>
-      <link href="/2010/08/31/error-rc1106-invalid-option-ologo/"/>
-      <url>/2010/08/31/error-rc1106-invalid-option-ologo/</url>
+      <link href="/2010/08/30/error-rc1106-invalid-option-ologo/"/>
+      <url>/2010/08/30/error-rc1106-invalid-option-ologo/</url>
       
         <content type="html"><![CDATA[<p>After switch to vs2010, if you encounter the error:</p><pre>Error    1    error RC1106: invalid option: -ologo</pre><p>not only set the “<span style="color: #ff0000;">Suppress Startup Banner</span>“ to “No” in Properties-&gt;Resources, but also need to set the “<span style="color: #ff0000;">Enable Incremental Linking</span>“ to “No” in Properties-&gt;Linker.</p>]]></content>
       
