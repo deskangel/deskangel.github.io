@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Fix macos (olcp) wake up issue</title>
+      <link href="/2024/04/14/macos-olcp-wake-up-issue/"/>
+      <url>/2024/04/14/macos-olcp-wake-up-issue/</url>
+      
+        <content type="html"><![CDATA[<p>遇到使用 olcp （OpenCore Legacy Patcher） 安装的 macos 会每小时被唤醒一次。运行<code>log show --last boot --style syslog | fgrep &quot;Wake reason&quot;</code>可以看到：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2024-04-03 18:06:19.475909+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br><span class="line">2024-04-03 18:06:19.475916+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br><span class="line">2024-04-03 18:36:52.405990+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br><span class="line">2024-04-03 18:36:52.405997+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br><span class="line">2024-04-03 19:32:22.424347+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 19:32:22.424354+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 20:32:08.881396+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 20:32:08.881403+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 20:37:19.146799+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 20:37:19.146806+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: RTC (Alarm)</span><br><span class="line">2024-04-03 21:37:21.900473+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br><span class="line">2024-04-03 21:37:21.900480+0800  localhost kernel[0]: (AppleACPIPlatform) AppleACPIPlatformPower Wake reason: XHC1</span><br></pre></td></tr></table></figure><p>其中 RTC (Alarm) 就是由 olcp 引起的。</p><p>运行 <code>diskutil list</code> 查看 <strong>EFI</strong>所在的分区，部分结果如下：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;dev&#x2F;disk0 (internal, physical):</span><br><span class="line">   #:                       TYPE NAME                    SIZE       IDENTIFIER</span><br><span class="line">   0:      GUID_partition_scheme                        *500.3 GB   disk0</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk1         500.1 GB   disk0s2</span><br><span class="line"></span><br><span class="line">&#x2F;dev&#x2F;disk1 (synthesized):</span><br></pre></td></tr></table></figure><p>然后使用<code>sudo mount -t msdos /dev/disk0s1 /Volumes/ESP</code>挂载对应的分区。 如果<code>/Volumes/ESP</code>目录不存在，可以直接创建。</p><p>用 xcode 或者文本编辑器打开<code>/Volumes/ESP/EFI/OC/config.plist</code>，在<code>Kernel -&gt; Patch</code>下增加一个 item，内容是：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;Arch&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;Any&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;Base&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;__ZN8AppleRTC18setupDateTimeAlarmEPK11RTCDateTime&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;Comment&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;Disable RTC wake scheduling&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;Count&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;integer&gt;1&lt;&#x2F;integer&gt;</span><br><span class="line">    &lt;key&gt;Enabled&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;true&#x2F;&gt;</span><br><span class="line">    &lt;key&gt;Find&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;data&gt;&lt;&#x2F;data&gt;</span><br><span class="line">    &lt;key&gt;Identifier&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;com.apple.driver.AppleRTC&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;Limit&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;integer&gt;0&lt;&#x2F;integer&gt;</span><br><span class="line">    &lt;key&gt;Mask&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;data&gt;&lt;&#x2F;data&gt;</span><br><span class="line">    &lt;key&gt;MaxKernel&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;MinKernel&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;string&gt;19.0.0&lt;&#x2F;string&gt;</span><br><span class="line">    &lt;key&gt;Replace&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;data&gt;ww&#x3D;&#x3D;&lt;&#x2F;data&gt;</span><br><span class="line">    &lt;key&gt;ReplaceMask&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;data&gt;&lt;&#x2F;data&gt;</span><br><span class="line">    &lt;key&gt;Skip&lt;&#x2F;key&gt;</span><br><span class="line">    &lt;integer&gt;0&lt;&#x2F;integer&gt;</span><br><span class="line">&lt;&#x2F;dict&gt;</span><br></pre></td></tr></table></figure><p>重启系统即可。</p><h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a href="https://www.tonymacx86.com/threads/solved-ventura-sonoma-random-scheduled-pm-wake-from-sleep.323359/" target="_blank" rel="noopener">https://www.tonymacx86.com/threads/solved-ventura-sonoma-random-scheduled-pm-wake-from-sleep.323359/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+            <tag> olcp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>说一下 git fetch</title>
       <link href="/2024/04/13/essensce-of-git-fetch/"/>
       <url>/2024/04/13/essensce-of-git-fetch/</url>
