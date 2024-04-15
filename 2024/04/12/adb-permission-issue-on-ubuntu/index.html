@@ -13,13 +13,17 @@
 <meta property="og:site_name" content="DeskAngel">
 <meta property="og:description" content="为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。 但在 Ubuntu 下使用 vscode 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示： [12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&amp;#123;&quot;event&quot;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/images/adb_permission_error.png">
-<meta property="og:image" content="https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/images/adb_launching_correct.png">
+<meta property="og:image" content="https://blog.deskangel.com/images/adb_permission_error.png">
+<meta property="og:image" content="https://blog.deskangel.com/images/adb_launching_correct.png">
 <meta property="article:published_time" content="2024-04-12T11:15:53.000Z">
-<meta property="article:modified_time" content="2024-04-12T11:20:09.907Z">
+<meta property="article:modified_time" content="2024-04-15T01:46:52.512Z">
 <meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="flutter">
+<meta property="article:tag" content="adb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/images/adb_permission_error.png">
+<meta name="twitter:image" content="https://blog.deskangel.com/images/adb_permission_error.png">
 <meta name="twitter:creator" content="@ideskangel">
     
     
@@ -146,8 +150,18 @@
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/adb/" rel="tag">adb</a>, <a class="tag-link" href="/tags/android/" rel="tag">android</a>, <a class="tag-link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="tag-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+    </div>
+
 
     </div>
   </header>
@@ -160,7 +174,7 @@
 
 <p>命令能找到，环境变量也设置了，看这个 log 完全不知道是什么原因。</p>
 <p>于是尝试重启 adb server:<code>$ adb start-server</code>出现错误（此时调试手机已经连接到电脑）：</p>
-<p><img src="images/adb_permission_error.png" alt=""><br>有错误就好办，可以针对性的处理了，在 <a href="https://www.janosgyerik.com/adding-udev-rules-for-usb-debugging-android-devices/" target="_blank" rel="noopener">这里</a>有详细的方法。</p>
+<p><img src="/images/adb_permission_error.png" alt=""><br>有错误就好办，可以针对性的处理了，在 <a href="https://www.janosgyerik.com/adding-udev-rules-for-usb-debugging-android-devices/" target="_blank" rel="noopener">这里</a>有详细的方法。</p>
 <p>我嫌他比较麻烦，因为</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~ $ lsusb</span><br><span class="line">Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0bc2:231a Seagate RSS LLC Expansion Portable</span><br><span class="line">Bus 001 Device 004: ID 152d:9561 JMicron Technology Corp. / JMicron USA Technology Corp. goreche</span><br><span class="line">Bus 001 Device 010: ID 18d1:4ee7 Google Inc. Nexus/Pixel Device (charging + debug)</span><br><span class="line">Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 003 Device 003: ID 1c4f:0002 SiGma Micro Keyboard TRACER Gamma Ivory</span><br><span class="line">Bus 003 Device 002: ID 046d:c52b Logitech, Inc. Unifying Receiver</span><br><span class="line">Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
 <p>这么多的设备我不想去试，而 <code>sudo adb</code> 又因为 <code>secure_path</code> 没有配置相关的环境变量而找不到文件，于是选择了简单粗暴的解决方法 <code>su -</code> 直接进 <code>root</code> 账户，在 <code>/root</code> 目录下创建到工作用户 <code>～/Library/Android</code> 的软链接。然后运行 <code>adb devices</code> 显示正确。</p>
@@ -168,7 +182,7 @@
 <p><strong>P.S.: 今天想到一个更简单粗暴的方法：</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/bin</span><br><span class="line">sudo ln -s <span class="variable">$ANDROID_HOME</span>/platform-tools/adb</span><br></pre></td></tr></table></figure>
 <p>这样就可以直接使用 <code>sudo adb</code> 命令了。</p>
-<p>万事俱备<br><img src="images/adb_launching_correct.png" alt="远程编译中"></p>
+<p>万事俱备<br><img src="/images/adb_launching_correct.png" alt="远程编译中"></p>
 
   </div>
 </article>

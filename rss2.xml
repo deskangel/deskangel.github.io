@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 14 Apr 2024 14:14:56 GMT</pubDate>
+    <pubDate>Mon, 15 Apr 2024 02:23:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>textinputconfig-and-gboard-toolbar</title>
+      <link>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</link>
+      <guid>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</guid>
+      <pubDate>Mon, 15 Apr 2024 02:20:12 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;When &lt;code&gt;enableIMEPersonalizedLearning&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;, the toolbar’s left-side button displays as a settings
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Fix macos (olcp) wake up issue</title>
@@ -422,27 +443,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>rime配置文件编辑器</title>
-      <link>https://blog.deskangel.com/2021/05/24/rime-conf-editor/</link>
-      <guid>https://blog.deskangel.com/2021/05/24/rime-conf-editor/</guid>
-      <pubDate>Mon, 24 May 2021 12:23:13 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;切换到 Ubuntu 下后，&lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/05/24/rime-conf-editor/#disqus_thread</comments>
     </item>
     
   </channel>

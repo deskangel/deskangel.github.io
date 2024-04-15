@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>textinputconfig-and-gboard-toolbar</title>
+      <link href="/2024/04/15/textinputconfig-and-gboard-toolbar/"/>
+      <url>/2024/04/15/textinputconfig-and-gboard-toolbar/</url>
+      
+        <content type="html"><![CDATA[<p>When <code>enableIMEPersonalizedLearning</code> is set to <code>true</code>, the toolbar’s left-side button displays as a settings button with four squares; when set to <code>false</code>, it displays as a privacy avatar.</p><p><code>enableSuggestions</code>: When set to <code>true</code>, the suggestion toolbar is displayed. When set to <code>false</code>, the toolbar is not displayed, but the <code>HarmonyOS</code> <code>secure keyboard</code> is used in the <code>HarmonyOS</code> system. The specific relationship is as follows:</p><table><thead><tr><th>TextInputType</th><th>enableSuggestions</th><th>Harmony Secure kb</th><th>GBoard toolbar</th></tr></thead><tbody><tr><td>text</td><td>false</td><td>yes</td><td>-</td></tr><tr><td>multiline</td><td>false</td><td>yes</td><td>-</td></tr><tr><td>url</td><td>false</td><td>yes</td><td>-</td></tr><tr><td>visiblePassword</td><td>true &amp; false</td><td>yes</td><td>-</td></tr><tr><td>emailAddress</td><td>true &amp; false</td><td>no</td><td>yes</td></tr><tr><td>name</td><td>true &amp; false</td><td>no</td><td>yes</td></tr><tr><td>streetAddress</td><td>true &amp; false</td><td>no</td><td>yes</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> flutter </tag>
+            
+            <tag> gboard </tag>
+            
+            <tag> harmonyos </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Fix macos (olcp) wake up issue</title>
       <link href="/2024/04/14/macos-olcp-wake-up-issue/"/>
       <url>/2024/04/14/macos-olcp-wake-up-issue/</url>
@@ -60,9 +91,27 @@
       <link href="/2024/04/12/adb-permission-issue-on-ubuntu/"/>
       <url>/2024/04/12/adb-permission-issue-on-ubuntu/</url>
       
-        <content type="html"><![CDATA[<p>为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。</p><p>但在 Ubuntu 下使用 <code>vscode</code> 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&#123;&quot;event&quot;:&quot;daemon.logMessage&quot;,&quot;params&quot;:&#123;&quot;level&quot;:&quot;error&quot;,&quot;message&quot;:&quot;Unable to run \&quot;adb\&quot;, check your Android SDK installation and ANDROID_HOME environment variable: $HOME&#x2F;Library&#x2F;Android&#x2F;SDK&#x2F;platform-tools&#x2F;adb&quot;&#125;&#125;]</span><br></pre></td></tr></table></figure><p>命令能找到，环境变量也设置了，看这个 log 完全不知道是什么原因。</p><p>于是尝试重启 adb server:<code>$ adb start-server</code>出现错误（此时调试手机已经连接到电脑）：</p><p><img src="images/adb_permission_error.png" alt=""><br>有错误就好办，可以针对性的处理了，在 <a href="https://www.janosgyerik.com/adding-udev-rules-for-usb-debugging-android-devices/" target="_blank" rel="noopener">这里</a>有详细的方法。</p><p>我嫌他比较麻烦，因为</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~ $ lsusb</span><br><span class="line">Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0bc2:231a Seagate RSS LLC Expansion Portable</span><br><span class="line">Bus 001 Device 004: ID 152d:9561 JMicron Technology Corp. / JMicron USA Technology Corp. goreche</span><br><span class="line">Bus 001 Device 010: ID 18d1:4ee7 Google Inc. Nexus/Pixel Device (charging + debug)</span><br><span class="line">Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 003 Device 003: ID 1c4f:0002 SiGma Micro Keyboard TRACER Gamma Ivory</span><br><span class="line">Bus 003 Device 002: ID 046d:c52b Logitech, Inc. Unifying Receiver</span><br><span class="line">Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure><p>这么多的设备我不想去试，而 <code>sudo adb</code> 又因为 <code>secure_path</code> 没有配置相关的环境变量而找不到文件，于是选择了简单粗暴的解决方法 <code>su -</code> 直接进 <code>root</code> 账户，在 <code>/root</code> 目录下创建到工作用户 <code>～/Library/Android</code> 的软链接。然后运行 <code>adb devices</code> 显示正确。</p><p>退出 root 账户，打开项目，一切都正常了。</p><p><strong>P.S.: 今天想到一个更简单粗暴的方法：</strong></p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/bin</span><br><span class="line">sudo ln -s <span class="variable">$ANDROID_HOME</span>/platform-tools/adb</span><br></pre></td></tr></table></figure><p>这样就可以直接使用 <code>sudo adb</code> 命令了。</p><p>万事俱备<br><img src="images/adb_launching_correct.png" alt="远程编译中"></p>]]></content>
+        <content type="html"><![CDATA[<p>为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。</p><p>但在 Ubuntu 下使用 <code>vscode</code> 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&#123;&quot;event&quot;:&quot;daemon.logMessage&quot;,&quot;params&quot;:&#123;&quot;level&quot;:&quot;error&quot;,&quot;message&quot;:&quot;Unable to run \&quot;adb\&quot;, check your Android SDK installation and ANDROID_HOME environment variable: $HOME&#x2F;Library&#x2F;Android&#x2F;SDK&#x2F;platform-tools&#x2F;adb&quot;&#125;&#125;]</span><br></pre></td></tr></table></figure><p>命令能找到，环境变量也设置了，看这个 log 完全不知道是什么原因。</p><p>于是尝试重启 adb server:<code>$ adb start-server</code>出现错误（此时调试手机已经连接到电脑）：</p><p><img src="/images/adb_permission_error.png" alt=""><br>有错误就好办，可以针对性的处理了，在 <a href="https://www.janosgyerik.com/adding-udev-rules-for-usb-debugging-android-devices/" target="_blank" rel="noopener">这里</a>有详细的方法。</p><p>我嫌他比较麻烦，因为</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~ $ lsusb</span><br><span class="line">Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0bc2:231a Seagate RSS LLC Expansion Portable</span><br><span class="line">Bus 001 Device 004: ID 152d:9561 JMicron Technology Corp. / JMicron USA Technology Corp. goreche</span><br><span class="line">Bus 001 Device 010: ID 18d1:4ee7 Google Inc. Nexus/Pixel Device (charging + debug)</span><br><span class="line">Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 003 Device 003: ID 1c4f:0002 SiGma Micro Keyboard TRACER Gamma Ivory</span><br><span class="line">Bus 003 Device 002: ID 046d:c52b Logitech, Inc. Unifying Receiver</span><br><span class="line">Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure><p>这么多的设备我不想去试，而 <code>sudo adb</code> 又因为 <code>secure_path</code> 没有配置相关的环境变量而找不到文件，于是选择了简单粗暴的解决方法 <code>su -</code> 直接进 <code>root</code> 账户，在 <code>/root</code> 目录下创建到工作用户 <code>～/Library/Android</code> 的软链接。然后运行 <code>adb devices</code> 显示正确。</p><p>退出 root 账户，打开项目，一切都正常了。</p><p><strong>P.S.: 今天想到一个更简单粗暴的方法：</strong></p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/bin</span><br><span class="line">sudo ln -s <span class="variable">$ANDROID_HOME</span>/platform-tools/adb</span><br></pre></td></tr></table></figure><p>这样就可以直接使用 <code>sudo adb</code> 命令了。</p><p>万事俱备<br><img src="/images/adb_launching_correct.png" alt="远程编译中"></p>]]></content>
       
       
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> android </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> flutter </tag>
+            
+            <tag> adb </tag>
+            
+        </tags>
       
     </entry>
     
@@ -508,6 +557,8 @@
       
       
         <tags>
+            
+            <tag> ubuntu </tag>
             
             <tag> rime </tag>
             
@@ -1319,6 +1370,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> blog </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -1758,6 +1815,8 @@
       
         <tags>
             
+            <tag> as3 </tag>
+            
             <tag> flash builder </tag>
             
         </tags>
@@ -1880,6 +1939,16 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> macos </tag>
+            
+            <tag> windows </tag>
+            
+        </tags>
       
     </entry>
     
@@ -2526,16 +2595,16 @@
     
     
     <entry>
-      <title>Google market alternative</title>
-      <link href="/2010/03/10/google-market-alternative/"/>
-      <url>/2010/03/10/google-market-alternative/</url>
+      <title>Android资源文件名</title>
+      <link href="/2010/03/10/resource-name-in-android/"/>
+      <url>/2010/03/10/resource-name-in-android/</url>
       
-        <content type="html"><![CDATA[<p>Google market is not supported in China and it is hard to publish android applications to it from China mainland, even if your application is a free version.</p><p>I did some search and find some alternative sites which accept android applications.:</p><p>SlideME (<a href="https://slideme.org/" target="_blank" rel="noopener" title="https://slideme.org/">https://slideme.org/</a> ), I uploaded my first android application <em>Days and date</em> to it yesterday.</p><p>MOBANGO (<a href="http://www.mobango.com/" target="_blank" rel="noopener" title="http://www.mobango.com/">http://www.mobango.com/</a>), it more like a social community than an application download site.</p>]]></content>
+        <content type="html"><![CDATA[<p>今天在<code>eclipse</code>中创建了一个新的工程，在<code>layout</code>中添加了一个<code>FileList.xml</code>的文件，结果就报错了：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res\layout\Filelist.xml: Invalid file name: must contain only [a-z0-9_.]</span><br></pre></td></tr></table></figure><p>这意思是只支持小写加数字，其他一概不认。唉，只有照做了。</p><p>代码文件倒是没有这样的限制。 大概的原因应该是代码文件会被编译，而资源文件只是附在包中没有改变。但其实，也不过是在读取时做一个大小写转换的事情啊！</p>]]></content>
       
       
       <categories>
           
-          <category> Information </category>
+          <category> Programming </category>
           
       </categories>
       
@@ -2551,16 +2620,16 @@
     
     
     <entry>
-      <title>Android资源文件名</title>
-      <link href="/2010/03/10/resource-name-in-android/"/>
-      <url>/2010/03/10/resource-name-in-android/</url>
+      <title>Google market alternative</title>
+      <link href="/2010/03/10/google-market-alternative/"/>
+      <url>/2010/03/10/google-market-alternative/</url>
       
-        <content type="html"><![CDATA[<p>今天在<code>eclipse</code>中创建了一个新的工程，在<code>layout</code>中添加了一个<code>FileList.xml</code>的文件，结果就报错了：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res\layout\Filelist.xml: Invalid file name: must contain only [a-z0-9_.]</span><br></pre></td></tr></table></figure><p>这意思是只支持小写加数字，其他一概不认。唉，只有照做了。</p><p>代码文件倒是没有这样的限制。 大概的原因应该是代码文件会被编译，而资源文件只是附在包中没有改变。但其实，也不过是在读取时做一个大小写转换的事情啊！</p>]]></content>
+        <content type="html"><![CDATA[<p>Google market is not supported in China and it is hard to publish android applications to it from China mainland, even if your application is a free version.</p><p>I did some search and find some alternative sites which accept android applications.:</p><p>SlideME (<a href="https://slideme.org/" target="_blank" rel="noopener" title="https://slideme.org/">https://slideme.org/</a> ), I uploaded my first android application <em>Days and date</em> to it yesterday.</p><p>MOBANGO (<a href="http://www.mobango.com/" target="_blank" rel="noopener" title="http://www.mobango.com/">http://www.mobango.com/</a>), it more like a social community than an application download site.</p>]]></content>
       
       
       <categories>
           
-          <category> Programming </category>
+          <category> Information </category>
           
       </categories>
       
@@ -2679,8 +2748,8 @@
     
     <entry>
       <title>如何设计类</title>
-      <link href="/2010/02/21/how-to-design-class/"/>
-      <url>/2010/02/21/how-to-design-class/</url>
+      <link href="/2010/02/20/how-to-design-class/"/>
+      <url>/2010/02/20/how-to-design-class/</url>
       
         <content type="html"><![CDATA[<p>一.</p><p>类是面向对象的基础。面向对象有三大特点：封装，继承和多态。</p><p>我们学习面向对象，不可回避几部经典，比如C++编程，编程思想等。</p><p>无论Java还是C++，只要讲解面向对象，都会有一些例子用来说明什么是封装，继承和多态。</p><p>大部分都会用shape来举例。</p><p>shape作为抽象的基类，circle，square和triangle继承自shape。shape会有个draw的函数，多半还是个虚函数。</p><p>这样的例子对初学者来说也是简单易懂的，很能说明白面向对象是什么。</p><p>但这却是一个非常糟糕的开端，就像小时候父母告诉你是从胳肢窝里出来的一样，从一开始就给了你一个错误的概念。</p><p>二.</p><p>面向对象的产生，不仅仅是为了解决问题，还应该要站在待解决问题的角度来描述问题，从而让问题本身更容易被理解和解决。</p><p>换个说法，就是我们应该如实的描述问题，不夸张不过分。</p><p>什么是夸张？你从胳肢窝里出来就是夸张。shape有个draw的函数，也是夸张。你见过一个会draw自己的shape？</p><p>有人认为这无伤大雅，把draw放在shape中，能更简洁的解决问题。</p><p>但我们应该从一开始就建立一个正确的概念。</p><p>三.</p><p>然而把draw放在shape中并不能简洁的解决问题。</p><p>我们需要在真实的环境中使用这些类，比如Microsoft Windows。我们使用GDI来画这些shape。我们需要一个DC。</p><p>怎么表示？在shape中聚合一个HDC，还是把HDC作为参数传递给draw？（应该没有人会让shape从DC继承吧？）</p><p>我们还需要一个画笔，来表达这个shape的其他属性，比如颜色，粗细等。</p><p>我们还需要知道位置，这个shape在DC上的位置。</p><p>问题开始变得复杂了，shape类以及它的子类与GDI对象耦合在一起。</p><p>四.</p><p>shape类以及它的子类本应该是独立的。</p><p>cycle在在Windows下是cycle，在Linux下也应该是cycle，不管有没有GDI对象。</p><p>问题出在什么地方？</p><p>在这个例子中显而易见：只有在真正开始draw的时候，才需要GDI对象，而shape本身，并不能做draw这件事情。</p><p>把一件不能做的事情，或是不适合做的事情硬塞给对象来实现，迟早是会出问题的。</p><p>最糟糕的不是我们发现不了问题，而恰恰是问题迟早会被发现。</p><p>五.</p><p>如何从一开始就避免这样的情况，而不是在第二次的时候才做正确？</p><p>我们如何才能够设计出一个正确的类？或者更确切的说，如何才能够正确的设计出一个类？</p><p>从一开始就如实的描述问题，不夸张不过分。不给它不拥有的属性，更不给它不应该有的父类。</p><p>这是最基本的设计原则。</p><p>六.</p><p>对于设计现实中不存在对应的类，同样需要如实描述——如实描述想法，设计。不要想的是孙悟空，出来的却是二郎神。</p><p>计算机只识别0和1，这是个讲究精确的行业。</p>]]></content>
       
@@ -2777,8 +2846,8 @@
     
     <entry>
       <title>杭州，又一个斑马线附近</title>
-      <link href="/2009/10/16/hangzhou-crash-again/"/>
-      <url>/2009/10/16/hangzhou-crash-again/</url>
+      <link href="/2009/10/15/hangzhou-crash-again/"/>
+      <url>/2009/10/15/hangzhou-crash-again/</url>
       
         <content type="html"><![CDATA[<p>晚上21：10分，在公交车上经过文三路丰潭路附近，一辆宝马停在路中间，前挡风玻璃布满裂纹，离车头半米左右，一辆公用自行车横倒在地，严重扭曲。前方两米左右，人行道的油漆在璀璨的灯光下泛着白光，嘲笑对生命的漠视，抑或，无所畏惧！</p><div align="left"></div><p>（今天得知，一辆当时停在对面奥迪为肇事车辆，宝马前挡风的裂痕为自行车落下所砸。）</p>]]></content>
       
