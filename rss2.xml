@@ -15,11 +15,32 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 15 Apr 2024 02:23:26 GMT</pubDate>
+    <pubDate>Thu, 18 Apr 2024 01:32:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>textinputconfig-and-gboard-toolbar</title>
+      <title>Ubuntu 22.04共享</title>
+      <link>https://blog.deskangel.com/2024/04/18/ubuntu-22-04-sharing/</link>
+      <guid>https://blog.deskangel.com/2024/04/18/ubuntu-22-04-sharing/</guid>
+      <pubDate>Thu, 18 Apr 2024 00:47:42 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;h2 id=&quot;桌面共享&quot;&gt;&lt;a href=&quot;#桌面共享&quot; class=&quot;headerlink&quot; title=&quot;桌面共享&quot;&gt;&lt;/a&gt;桌面共享&lt;/h2&gt;&lt;p&gt;如果使用 &lt;code&gt;Wayland&lt;/code&gt;，&lt;code&gt;Microsoft Remote
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/18/ubuntu-22-04-sharing/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>TextInputConfig and GBoard toolbar</title>
       <link>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</link>
       <guid>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</guid>
       <pubDate>Mon, 15 Apr 2024 02:20:12 GMT</pubDate>
@@ -422,27 +443,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Ubuntu 20.04 升级 nginx 1.18 到 1.20.1</title>
-      <link>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/</link>
-      <guid>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/</guid>
-      <pubDate>Thu, 27 May 2021 05:20:50 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;因为低于 1.20.1 的版本受到 &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23017&quot; target=&quot;_blank&quot;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/05/27/upgrade-nginx-to-1-20-1/#disqus_thread</comments>
     </item>
     
   </channel>

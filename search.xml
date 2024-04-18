@@ -4,7 +4,38 @@
   
     
     <entry>
-      <title>textinputconfig-and-gboard-toolbar</title>
+      <title>Ubuntu 22.04共享</title>
+      <link href="/2024/04/18/ubuntu-22-04-sharing/"/>
+      <url>/2024/04/18/ubuntu-22-04-sharing/</url>
+      
+        <content type="html"><![CDATA[<h2 id="桌面共享"><a href="#桌面共享" class="headerlink" title="桌面共享"></a>桌面共享</h2><p>如果使用 <code>Wayland</code>，<code>Microsoft Remote Desktop</code> 连接会黑屏——不过对于 MRD 来说其实无所谓，反正无论选什么都很不稳定，往往第一次能连上，但断开后就再也连不上了。</p><p>VNC 的话，我这边一定要选 <code>Require a password</code>，如果选 <code>New connections must ask for access</code>会无法连接。 选择后者，即使能连接，也需要在 Ubuntu 桌面弹出的连接请求中点击允许，没有远程的意义。<br><img src="/images/ubuntu-2204-desktop-share.png" alt=""><br>论效果 MRD 要好很多，VNC 哪怕本地千兆鼠标还是感觉有延迟。不过 VNC 方便，如果是 macos，用 <code>Scree Sharing app</code> 就可以了。</p><p>Ubuntu 只能登录之后才可以进行桌面共享，如果没有登录，可以使用 <code>sudo loginctl unlock-sessions</code> 解锁。</p><h2 id="目录文件共享"><a href="#目录文件共享" class="headerlink" title="目录文件共享"></a>目录文件共享</h2><p>共享使用的还是 samba 服务。需要先创建用户和密码：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo smbpasswd -a <span class="variable">$USER</span></span><br></pre></td></tr></table></figure><p>以本地用户为用户名，输入密码即可。如果要查看有哪些 samba 用户，可以使用命令 ：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pdbedit -L</span><br></pre></td></tr></table></figure><p>Ubuntu 22.04 桌面版有两种方式设置 samba 共享：</p><h3 id="Local-Network-Share"><a href="#Local-Network-Share" class="headerlink" title="Local Network Share"></a>Local Network Share</h3><p>通过文件管理器右键的菜单可以看到这个选项，进行共享很方便。需要注意的是这种方式进行的文件共享不会修改到 <code>/etc/samba/smb.conf</code> 这个配置文件，但还是和这个文件有关联的，比如如果你要分享的目录权限是 root，它可能要求你在smb.conf 中的 <code>[global]</code>设置 <code>usershare owner only = false</code>。</p><p>通过这种方式共享的文件，它的配置存放在 <code>/var/lib/samba/usershares</code> 目录下，但是直接修改是无法生效的，需要通过命令 <code>net usershare</code> 来操作。比如增加一个共享：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">net usershare add music /mnt/backups/Misc <span class="string">""</span> <span class="string">"S-1-1-0:R,S-1-22-1-1000:F"</span></span><br></pre></td></tr></table></figure><p>它的格式是：<code>net usershare add &lt;sharename&gt; &lt;path&gt; &quot;&lt;description&gt;&quot; &quot;&lt;ACL&gt;&quot;</code>，其中 ACL 的 <code>usershare_acl=&lt;SID&gt;:&lt;permissions&gt;,&lt;SID&gt;:&lt;permissions&gt;,...</code></p><h3 id="Classic"><a href="#Classic" class="headerlink" title="Classic"></a>Classic</h3><p>传统的分享方式就是编辑<code>/etc/samba/smb.conf</code> ，比如添加：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[videos]</span><br><span class="line">comment = Movies</span><br><span class="line">path = /mnt/shared/Movie</span><br><span class="line">browseable = yes</span><br><span class="line"><span class="built_in">read</span> only = no</span><br><span class="line">guest ok = no</span><br><span class="line">valid users = root, user1</span><br></pre></td></tr></table></figure><p>没有特殊需求，<code>valid users</code> 行也可以完全省略。之后重启 samba 服务即可：<code>sudo service smbd restart</code>。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Linux 功能很强大，但是总给人不是一个统一的产品，而更像是一个缝合怪。一个相同的功能，有多种方式可以实现，遗憾的是每一种都或多或少会有些问题，除了桌面共享和文件共享，更严重的是网络方面的设置和管理。有时候只提供唯一的、好用的一种方法，或许就足够了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> vnc </tag>
+            
+            <tag> rdp </tag>
+            
+            <tag> samba </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>TextInputConfig and GBoard toolbar</title>
       <link href="/2024/04/15/textinputconfig-and-gboard-toolbar/"/>
       <url>/2024/04/15/textinputconfig-and-gboard-toolbar/</url>
       
