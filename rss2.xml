@@ -15,8 +15,29 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 18 Apr 2024 01:32:14 GMT</pubDate>
+    <pubDate>Sun, 21 Apr 2024 07:22:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Sublime Merge命令行工具运行错误</title>
+      <link>https://blog.deskangel.com/2024/04/21/smerge-error/</link>
+      <guid>https://blog.deskangel.com/2024/04/21/smerge-error/</guid>
+      <pubDate>Sun, 21 Apr 2024 07:19:11 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;通过命令行运行 &lt;code&gt;smerge&lt;/code&gt; ，出现 &lt;code&gt;Timeout waiting for detached instance to start: Connection refused&lt;/code&gt;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/21/smerge-error/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Ubuntu 22.04共享</title>
@@ -422,27 +443,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/08/05/daremote-qa/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>Flutter如何做到“按条件”编译</title>
-      <link>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/</link>
-      <guid>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/</guid>
-      <pubDate>Wed, 16 Jun 2021 04:52:37 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;我们在&lt;code&gt;C/C++&lt;/code&gt;下的时候，有时候不需要编辑某些代码，只需要设置一个条件编译即可，但是到了&lt;code&gt;Java&lt;/code&gt;、&lt;code&gt;Kotlin&lt;/code&gt;、&lt;code&gt;Dart&lt;/code&gt;时，这很难做到——不是说做不到，而是编译器不再支持
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/06/16/flutter-conditional-compiling/#disqus_thread</comments>
     </item>
     
   </channel>
