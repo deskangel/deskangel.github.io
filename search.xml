@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>在 Ubuntu 上手动部署 flutter 开发的应用</title>
+      <link href="/2024/04/25/deploy-flutter-app-on-ubuntu/"/>
+      <url>/2024/04/25/deploy-flutter-app-on-ubuntu/</url>
+      
+        <content type="html"><![CDATA[<p>当用编译出 <code>release</code> 版 app 后，需要部署到系统的相关目录下才可以正常使用。下面是几个关键的点：</p><h2 id="应用位置"><a href="#应用位置" class="headerlink" title="应用位置"></a>应用位置</h2><p>通常，应用安装在 <code>/opt/</code> 目录下。对于 <code>flutter</code> 应用，可以复制整个 <code>bundle</code> 目录，比如：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cp -r build/linux/x64/release/bundle /opt/DaChatAI</span><br></pre></td></tr></table></figure><p><code>bundle</code> 目录中包含可执行文件，<code>data</code> 和 <code>lib</code> 目录，或许还有其他内容。</p><h2 id="图标文件"><a href="#图标文件" class="headerlink" title="图标文件"></a>图标文件</h2><p>图标文件通常放在<code>~/.local/share/icons</code> 目录下，如果没有其他需要，可以只提供 <code>48x48</code> 大小的图标。</p><p>这里有多个选择，比如放在 <code>~/.local/share/icons/hicolor/256x256/apps</code> 下，还有放在 <code>theme</code> 目录的 <code>apps</code> 下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">~/.<span class="built_in">local</span>/share/icons $ ls Colloid/apps/scalable/sublime*</span><br><span class="line">sublime-merge.svg    sublime-text.svg     sublime3-text.svg@   sublimemerge.svg@</span><br><span class="line">sublime-text-2.svg@  sublime-text2.svg@   sublime_merge.svg@   sublimetext.svg@</span><br><span class="line">sublime-text-3.svg@  sublime.svg@         sublime_text.svg@</span><br></pre></td></tr></table></figure><h2 id="desktop文件"><a href="#desktop文件" class="headerlink" title=".desktop文件"></a>.desktop文件</h2><p><code>.desktop</code>文件是一种桌面应用程序启动器文件，<code>Ubuntu</code> 上需要放在 <code>/usr/share/applications/</code> 目录下。内容如下：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Version&#x3D;1.3.1</span><br><span class="line">Type&#x3D;Application</span><br><span class="line">Name&#x3D;DaChatAI</span><br><span class="line">GenericName&#x3D;AI Assistant</span><br><span class="line">Comment&#x3D;AI Assistant Application</span><br><span class="line">Exec&#x3D;&#x2F;opt&#x2F;DaChatAI&#x2F;dachatai</span><br><span class="line">Terminal&#x3D;false</span><br><span class="line">Icon&#x3D;dachatai</span><br><span class="line">Categories&#x3D;Utility;</span><br><span class="line">StartupNotify&#x3D;false</span><br></pre></td></tr></table></figure><p><code>Icon</code> 不需要写图标的扩展名。</p><p><code>.desktop</code>文件中除了 <code>[Desktop Entry]</code> 还可以包含其他的功能，如：<code>[Desktop Action new-window]</code>和 <code>[Desktop Action new-file]</code>等。</p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>放对这三个位置，应用就部署完成了！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> flutter </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Sublime Merge命令行工具运行错误</title>
       <link href="/2024/04/21/smerge-error/"/>
       <url>/2024/04/21/smerge-error/</url>

@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 21 Apr 2024 07:22:04 GMT</pubDate>
+    <pubDate>Thu, 25 Apr 2024 05:50:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>在 Ubuntu 上手动部署 flutter 开发的应用</title>
+      <link>https://blog.deskangel.com/2024/04/25/deploy-flutter-app-on-ubuntu/</link>
+      <guid>https://blog.deskangel.com/2024/04/25/deploy-flutter-app-on-ubuntu/</guid>
+      <pubDate>Thu, 25 Apr 2024 05:46:31 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;当用编译出 &lt;code&gt;release&lt;/code&gt; 版 app 后，需要部署到系统的相关目录下才可以正常使用。下面是几个关键的点：&lt;/p&gt;
+&lt;h2 id=&quot;应用位置&quot;&gt;&lt;a href=&quot;#应用位置&quot; class=&quot;headerlink&quot;
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/25/deploy-flutter-app-on-ubuntu/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Sublime Merge命令行工具运行错误</title>
@@ -422,27 +444,6 @@
       
       
       <comments>https://blog.deskangel.com/2021/08/10/change-ubuntu-login-screen-language/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>DaRemote Q&amp;A</title>
-      <link>https://blog.deskangel.com/2021/08/05/daremote-qa/</link>
-      <guid>https://blog.deskangel.com/2021/08/05/daremote-qa/</guid>
-      <pubDate>Thu, 05 Aug 2021 01:43:06 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h2 id=&quot;下载和购买&quot;&gt;&lt;a href=&quot;#下载和购买&quot; class=&quot;headerlink&quot; title=&quot;下载和购买&quot;&gt;&lt;/a&gt;下载和购买&lt;/h2&gt;&lt;h3 id=&quot;一-无法在Google-play商店找到-DaRemote&quot;&gt;&lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/08/05/daremote-qa/#disqus_thread</comments>
     </item>
     
   </channel>
