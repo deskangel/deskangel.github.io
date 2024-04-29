@@ -15,8 +15,31 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 25 Apr 2024 05:50:05 GMT</pubDate>
+    <pubDate>Mon, 29 Apr 2024 01:32:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>OpenWrt 安装应用到其他分区</title>
+      <link>https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/</link>
+      <guid>https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/</guid>
+      <pubDate>Mon, 29 Apr 2024 01:11:17 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;由于路由自带的空间比较小，安装不了几个应用，但好在可以它支持挂载 u 盘。我的 u 盘挂载在 &lt;code&gt;/mnt/upan&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;不过，要把 app 安装到 u 盘 上并且能正常使用，还需要做一些工作。&lt;/p&gt;
+&lt;h2
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>在 Ubuntu 上手动部署 flutter 开发的应用</title>
@@ -321,8 +344,8 @@
     
     <item>
       <title>DaRemote ssh终端模拟器反色问题调试记录</title>
-      <link>https://blog.deskangel.com/2022/11/25/daremote-inverse-mode-issue-debug/</link>
-      <guid>https://blog.deskangel.com/2022/11/25/daremote-inverse-mode-issue-debug/</guid>
+      <link>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</link>
+      <guid>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</guid>
       <pubDate>Fri, 25 Nov 2022 23:50:00 GMT</pubDate>
       <description>
       
@@ -338,7 +361,7 @@
       </description>
       
       
-      <comments>https://blog.deskangel.com/2022/11/25/daremote-inverse-mode-issue-debug/#disqus_thread</comments>
+      <comments>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/#disqus_thread</comments>
     </item>
     
     <item>
@@ -364,8 +387,8 @@
     
     <item>
       <title>From /proc/meminfo to free</title>
-      <link>https://blog.deskangel.com/2022/06/18/meminfo-to-free/</link>
-      <guid>https://blog.deskangel.com/2022/06/18/meminfo-to-free/</guid>
+      <link>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</link>
+      <guid>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</guid>
       <pubDate>Sat, 18 Jun 2022 21:32:44 GMT</pubDate>
       <description>
       
@@ -380,7 +403,7 @@
       </description>
       
       
-      <comments>https://blog.deskangel.com/2022/06/18/meminfo-to-free/#disqus_thread</comments>
+      <comments>https://blog.deskangel.com/2022/06/19/meminfo-to-free/#disqus_thread</comments>
     </item>
     
     <item>
@@ -423,27 +446,6 @@
       
       
       <comments>https://blog.deskangel.com/2022/04/22/pdiary-qa/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>修改Ubuntu登录界面的语言</title>
-      <link>https://blog.deskangel.com/2021/08/10/change-ubuntu-login-screen-language/</link>
-      <guid>https://blog.deskangel.com/2021/08/10/change-ubuntu-login-screen-language/</guid>
-      <pubDate>Tue, 10 Aug 2021 05:44:43 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;p&gt;通常我们修改语言设置是在 &lt;code&gt;Settings-&amp;gt;Region &amp;amp;
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2021/08/10/change-ubuntu-login-screen-language/#disqus_thread</comments>
     </item>
     
   </channel>

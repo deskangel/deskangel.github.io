@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="由于路由自带的空间比较小，安装不了几个应用，但好在可以它支持挂载 u 盘。我的 u 盘挂载在 &#x2F;mnt&#x2F;upan。 不过，要把 app 安装到 u 盘 上并且能正常使用，还需要做一些工作。 修改配置文件 编辑 &#x2F;etc&#x2F;opkg.conf，添加 dest usb &#x2F;mnt&#x2F;upan。如果 usb 这一行放在dest root &#x2F;前，使用 opkg install 安装软件的时候，会默认安装到 &#x2F;m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenWrt 安装应用到其他分区">
+<meta property="og:url" content="https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="由于路由自带的空间比较小，安装不了几个应用，但好在可以它支持挂载 u 盘。我的 u 盘挂载在 &#x2F;mnt&#x2F;upan。 不过，要把 app 安装到 u 盘 上并且能正常使用，还需要做一些工作。 修改配置文件 编辑 &#x2F;etc&#x2F;opkg.conf，添加 dest usb &#x2F;mnt&#x2F;upan。如果 usb 这一行放在dest root &#x2F;前，使用 opkg install 安装软件的时候，会默认安装到 &#x2F;m">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-29T01:11:17.000Z">
+<meta property="article:modified_time" content="2024-04-29T01:32:10.012Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="openwrt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>OpenWrt 安装应用到其他分区</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2024/04/25/deploy-flutter-app-on-ubuntu/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&text=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&is_video=false&description=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=OpenWrt 安装应用到其他分区&body=Check out this article: https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&name=OpenWrt 安装应用到其他分区&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&t=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">1.</span> <span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立链接"><span class="toc-number">2.</span> <span class="toc-text">建立链接</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        OpenWrt 安装应用到其他分区
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-29T01:11:17.000Z" itemprop="datePublished">2024-04-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Software/">Software</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/openwrt/" rel="tag">openwrt</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>由于路由自带的空间比较小，安装不了几个应用，但好在可以它支持挂载 u 盘。我的 u 盘挂载在 <code>/mnt/upan</code>。</p>
+<p>不过，要把 app 安装到 u 盘 上并且能正常使用，还需要做一些工作。</p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><ol>
+<li>编辑 <code>/etc/opkg.conf</code>，添加 <code>dest usb /mnt/upan</code>。如果 <code>usb</code> 这一行放在<code>dest root /</code>前，使用 <code>opkg install</code> 安装软件的时候，会默认安装到 <code>/mnt/upan</code>。</li>
+<li>安装的时候使用 <code>-d</code> 指定路径，比如 <code>opkg -d usb install xxxx</code>。</li>
+</ol>
+<p>应用安装之后，会在 <code>/mnt/upan/</code> 目录下建立相关的目录结构，如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#ls</span></span><br><span class="line">lib/ usr/</span><br><span class="line"><span class="comment">#ls usr/</span></span><br><span class="line">bin/ lib/ libexec/ share/</span><br></pre></td></tr></table></figure>
+<p>此时大概率不能运行刚安装的应用，还需要在系统分区对应的位置建立链接。<em>也可以通过把路径添加到执行文件和库文件的搜索路径中。</em></p>
+<h2 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h2><p>把几个目录中的所有文件和目录在对应的路径下全部都建立链接即可，下面是建立全部链接的一个简单脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">ln -s /upan/apps/lib/* /lib/</span><br><span class="line">ln -s /upan/apps/usr/bin/* /usr/bin/</span><br><span class="line">ln -s /upan/apps/usr/lib/* /usr/lib/</span><br><span class="line">ln -s /upan/apps/usr/libexec/* /usr/libexec/</span><br><span class="line">ln -s /upan/apps/usr/share/* /usr/share/</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">1.</span> <span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立链接"><span class="toc-number">2.</span> <span class="toc-text">建立链接</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&text=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&is_video=false&description=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=OpenWrt 安装应用到其他分区&body=Check out this article: https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&title=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&name=OpenWrt 安装应用到其他分区&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/29/openwrt-install-app-to-customized-path/&t=OpenWrt 安装应用到其他分区" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2024
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>

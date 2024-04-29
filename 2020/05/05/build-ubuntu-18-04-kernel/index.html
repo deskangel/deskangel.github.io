@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="虽然是在 Ubuntu 18.04 上的实验，但是其他版本应该也适用。 安装环境安装 linux 和 linux image 依赖sudo apt-get build-dep linux linux-image-$(uname -r) 在能成功运行上面的命令之前，可能需要编辑&#x2F;etc&#x2F;apt&#x2F;sources.list，把其中deb-src的行的注释都去掉，然后 sudo apt-get updat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="build ubuntu 18.04 kernel">
+<meta property="og:url" content="https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="虽然是在 Ubuntu 18.04 上的实验，但是其他版本应该也适用。 安装环境安装 linux 和 linux image 依赖sudo apt-get build-dep linux linux-image-$(uname -r) 在能成功运行上面的命令之前，可能需要编辑&#x2F;etc&#x2F;apt&#x2F;sources.list，把其中deb-src的行的注释都去掉，然后 sudo apt-get updat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-04T18:50:19.000Z">
+<meta property="article:modified_time" content="2024-04-10T15:56:00.799Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>build ubuntu 18.04 kernel</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2020/05/05/android-simulator-network-service/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2020/05/02/vino-on-headless-ubuntu-desktop/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&text=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&is_video=false&description=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=build ubuntu 18.04 kernel&body=Check out this article: https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&name=build ubuntu 18.04 kernel&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&t=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装环境"><span class="toc-number">1.</span> <span class="toc-text">安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-linux-和-linux-image-依赖"><span class="toc-number">1.1.</span> <span class="toc-text">安装 linux 和 linux image 依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备代码"><span class="toc-number">2.</span> <span class="toc-text">准备代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核"><span class="toc-number">3.</span> <span class="toc-text">编译内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装内核"><span class="toc-number">4.</span> <span class="toc-text">安装内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        build ubuntu 18.04 kernel
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-05-04T18:50:19.000Z" itemprop="datePublished">2020-05-05</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>虽然是在 Ubuntu 18.04 上的实验，但是其他版本应该也适用。</p>
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><h3 id="安装-linux-和-linux-image-依赖"><a href="#安装-linux-和-linux-image-依赖" class="headerlink" title="安装 linux 和 linux image 依赖"></a>安装 linux 和 linux image 依赖</h3><p><code>sudo apt-get build-dep linux linux-image-$(uname -r)</code></p>
+<p>在能成功运行上面的命令之前，可能需要编辑<code>/etc/apt/sources.list</code>，把其中<code>deb-src</code>的行的注释都去掉，然后</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>继续安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install linux-source kernel-package</span><br><span class="line">sudo apt-get install libncurses-dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="准备代码"><a href="#准备代码" class="headerlink" title="准备代码"></a>准备代码</h2><ul>
+<li><p>进入 <code>/usr/src/linux-source-4.15.0</code>目录，其中，<code>linux-source-4.15.0</code> 也是当前 Ubuntu 18.04 默认使用的内核版本，这可以通过 <code>uname -r</code> 来进行确认。</p>
+</li>
+<li><p>解压缩文件<code>linux-source-4.15.0.tar.bz2</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo tar jvcf linux-source-4.15.0.tar.bz2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制当前的配置文件到源码目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo cp /boot/config-4.15.0-99-generic .config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把上面复制的旧的配置文件应用到内核代码中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo make oldconfig</span><br></pre></td></tr></table></figure></li>
+<li><p>配置内核</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+<h2 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h2><p>运行下面的命令开始编译代码。其中，<code>deb-pkg</code> 参数会在<code>/usr/src/</code>下生成几个 deb 安装包，之后可以通过 <code>dpkg -i linux-*.deb</code> 来安装内核。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo make clean</span><br><span class="line">sudo make -j2 deb-pkg LOCALVERSION=-custom</span><br></pre></td></tr></table></figure>
+
+<p><code>-custom</code>参数可以自己设定，会在内核版本后面添加该字符串，也就是运行<code>uname -r</code>看到的 generic 这样的字符串。</p>
+<p>如果需要编译模块，可以运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo make modules</span><br><span class="line">sudo make modules_install</span><br></pre></td></tr></table></figure>
+<p><code>make modules_install</code>是模块编译完成后进行安装到对应目录。</p>
+<h2 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h2><p>编译好的内核文件默认放在上一级目录，共有4个 deb 文件。安装命令入下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">sudo dpkg -i linux-*.deb</span><br></pre></td></tr></table></figure>
+<p>安装后，新的内核文件会出现在<code>/boot</code>目录下，同时<code>/boot/grub/menu.lst</code>中还会添加新的内核启动入口，在系统启动的时候按住<code>shift</code>键可以选择使用哪个内核，默认使用新内核。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel" target="_blank" rel="noopener">Kernel/BuildYourOwnKernel - Ubuntu Wiki</a></li>
+<li><a href="https://www.linuxtopia.org/online_books/linux_kernel/kernel_configuration/re137.html" target="_blank" rel="noopener">Linux Kernel Configuration - LOCALVERSION</a></li>
+<li><a href="https://debian-handbook.info/browse/stable/sect.kernel-compilation.html" target="_blank" rel="noopener">The Debian Administrator’s Handbook: 8.10. Compiling a Kernel</a></li>
+<li><a href="https://help.ubuntu.com/lts/installation-guide/amd64/ch08s06.html" target="_blank" rel="noopener">Ubuntu Installation Guide: 8.6. Compiling a New Kernel</a></li>
+<li><a href="https://askubuntu.com/questions/1056598/trying-to-build-kernel-on-18-04-no-editconfigs-option" target="_blank" rel="noopener">compiling - Trying to build kernel on 18.04. No editconfigs option - Ask Ubuntu</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装环境"><span class="toc-number">1.</span> <span class="toc-text">安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-linux-和-linux-image-依赖"><span class="toc-number">1.1.</span> <span class="toc-text">安装 linux 和 linux image 依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备代码"><span class="toc-number">2.</span> <span class="toc-text">准备代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核"><span class="toc-number">3.</span> <span class="toc-text">编译内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装内核"><span class="toc-number">4.</span> <span class="toc-text">安装内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&text=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&is_video=false&description=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=build ubuntu 18.04 kernel&body=Check out this article: https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&title=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&name=build ubuntu 18.04 kernel&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2020/05/05/build-ubuntu-18-04-kernel/&t=build ubuntu 18.04 kernel" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2024
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
