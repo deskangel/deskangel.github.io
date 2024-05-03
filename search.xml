@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Ubuntu 24.04 网络唤醒</title>
+      <link href="/2024/05/03/wol-on-ubuntu-24-04/"/>
+      <url>/2024/05/03/wol-on-ubuntu-24-04/</url>
+      
+        <content type="html"><![CDATA[<p>这个设置在 UI 上找不到，需要通过命令行设置开启，需要 <code>ethtool</code> 工具。首先需要确定网络接口（网卡）的名称，比如：enp3s0。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ethtool enp3s0 | grep Wake</span><br></pre></td></tr></table></figure><p>结果为：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Supports Wake-on: pumbg</span><br><span class="line">Wake-on: d</span><br></pre></td></tr></table></figure><p>使用 <code>sudo ethtool -s enp3s0 wol g</code> 设置 <code>Wake-on</code> 为 g 即可开启。</p><p>但是，这个设置并不持久保存，每次开启需要重新设置，我使用一个服务来做这件事。在 <code>/etc/systemd/system</code> 下创建一个 <code>wol@.service</code> 的文件：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Wake-on-LAN <span class="keyword">for</span> %i</span><br><span class="line">Requires=network.target</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/sbin/ethtool -s %i wol g</span><br><span class="line">Type=oneshot</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure><p>运行 <code>sudo systemctl daemon-reload</code> , 再激活这个服务 <code>sudo systemctl enable wol@enp3s0.service</code>, 它会创建一个 <a href="mailto:wol@enp3s0.service">wol@enp3s0.service</a> 的链接：</p><blockquote><p>Created symlink /etc/systemd/system/multi-user.target.wants/wol@enp3s0.service → /etc/systemd/system/wol@.service.</p></blockquote><p>这是个每次开机只运行一次的服务，可以使用 <code>sudo systemctl start wol@enp3s0</code> 手动运行。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>OpenWrt 安装应用到其他分区</title>
       <link href="/2024/04/29/openwrt-install-app-to-customized-path/"/>
       <url>/2024/04/29/openwrt-install-app-to-customized-path/</url>

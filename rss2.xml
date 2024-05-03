@@ -15,8 +15,30 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 29 Apr 2024 01:32:10 GMT</pubDate>
+    <pubDate>Fri, 03 May 2024 00:13:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 24.04 网络唤醒</title>
+      <link>https://blog.deskangel.com/2024/05/03/wol-on-ubuntu-24-04/</link>
+      <guid>https://blog.deskangel.com/2024/05/03/wol-on-ubuntu-24-04/</guid>
+      <pubDate>Thu, 02 May 2024 23:55:04 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;这个设置在 UI 上找不到，需要通过命令行设置开启，需要 &lt;code&gt;ethtool&lt;/code&gt; 工具。首先需要确定网络接口（网卡）的名称，比如：enp3s0。&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+          
+        
+      
+      </description>
+      
+      
+      <comments>https://blog.deskangel.com/2024/05/03/wol-on-ubuntu-24-04/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>OpenWrt 安装应用到其他分区</title>
@@ -425,27 +447,6 @@
       
       
       <comments>https://blog.deskangel.com/2022/05/21/daremote-qa-en/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>P.Diary Q&amp;A</title>
-      <link>https://blog.deskangel.com/2022/04/22/pdiary-qa/</link>
-      <guid>https://blog.deskangel.com/2022/04/22/pdiary-qa/</guid>
-      <pubDate>Fri, 22 Apr 2022 14:09:07 GMT</pubDate>
-      <description>
-      
-        
-        
-          
-          
-            &lt;h2 id=&quot;下载和购买&quot;&gt;&lt;a href=&quot;#下载和购买&quot; class=&quot;headerlink&quot; title=&quot;下载和购买&quot;&gt;&lt;/a&gt;下载和购买&lt;/h2&gt;&lt;h3 id=&quot;一-无法在Google-play商店找到-P-Diary&quot;&gt;&lt;a
-          
-        
-      
-      </description>
-      
-      
-      <comments>https://blog.deskangel.com/2022/04/22/pdiary-qa/#disqus_thread</comments>
     </item>
     
   </channel>
