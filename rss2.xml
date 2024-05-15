@@ -15,8 +15,37 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 03 May 2024 00:13:30 GMT</pubDate>
+    <pubDate>Wed, 15 May 2024 12:49:54 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>对 hexo cactus theme做了一些调整</title>
+      <link>https://blog.deskangel.com/2024/05/15/tweak-of-hexo-cactus-theme/</link>
+      <guid>https://blog.deskangel.com/2024/05/15/tweak-of-hexo-cactus-theme/</guid>
+      <pubDate>Wed, 15 May 2024 12:41:05 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;导航栏问题&quot;&gt;&lt;a href=&quot;#导航栏问题&quot; class=&quot;headerlink&quot; title=&quot;导航栏问题&quot;&gt;&lt;/a&gt;导航栏问题&lt;/h2&gt;&lt;p&gt;在大屏幕上（宽度大于</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/hexo/">hexo</category>
+      
+      <category domain="https://blog.deskangel.com/tags/nodejs/">nodejs</category>
+      
+      
+      <comments>https://blog.deskangel.com/2024/05/15/tweak-of-hexo-cactus-theme/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Ubuntu 24.04 网络唤醒</title>
@@ -575,35 +604,6 @@
       
       
       <comments>https://blog.deskangel.com/2022/06/19/meminfo-to-free/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>DaRemote Q&amp;A[EN]</title>
-      <link>https://blog.deskangel.com/2022/05/21/daremote-qa-en/</link>
-      <guid>https://blog.deskangel.com/2022/05/21/daremote-qa-en/</guid>
-      <pubDate>Sat, 21 May 2022 08:50:49 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h2 id=&quot;Usage&quot;&gt;&lt;a href=&quot;#Usage&quot; class=&quot;headerlink&quot; title=&quot;Usage&quot;&gt;&lt;/a&gt;Usage&lt;/h2&gt;&lt;h3 id=&quot;ssh-keys-format&quot;&gt;&lt;a href=&quot;#ssh-keys-format&quot;</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/android/">android</category>
-      
-      <category domain="https://blog.deskangel.com/tags/daremote/">daremote</category>
-      
-      
-      <comments>https://blog.deskangel.com/2022/05/21/daremote-qa-en/#disqus_thread</comments>
       
     </item>
     
