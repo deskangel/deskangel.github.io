@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。 但在 Ubuntu 下使用 vscode 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示： [12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&amp;#123;&quot;event&quot;">
+    <meta name="description" content="为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。 但在 Ubuntu 下使用 vscode 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示： [12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&#123;&quot;event&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题">
 <meta property="og:url" content="https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/index.html">
 <meta property="og:site_name" content="DeskAngel">
-<meta property="og:description" content="为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。 但在 Ubuntu 下使用 vscode 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示： [12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&amp;#123;&quot;event&quot;">
+<meta property="og:description" content="为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。 但在 Ubuntu 下使用 vscode 打开项目的时候，出现 daemon 停止工作的提示，查看 log，显示： [12:32:49 PM] [FlutterDaemon] [Info] &lt;&#x3D;&#x3D; [&#123;&quot;event&quot;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://blog.deskangel.com/images/adb_permission_error.png">
 <meta property="og:image" content="https://blog.deskangel.com/images/adb_launching_correct.png">
@@ -58,7 +58,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 7.2.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -104,17 +104,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&text=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&is_video=false&description=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&text=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&is_video=false&description=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&body=Check out this article: https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&name=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&t=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&name=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&t=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -159,7 +159,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/adb/" rel="tag">adb</a>, <a class="tag-link" href="/tags/android/" rel="tag">android</a>, <a class="tag-link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="tag-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+        <a class="tag-link-link" href="/tags/adb/" rel="tag">adb</a>, <a class="tag-link-link" href="/tags/android/" rel="tag">android</a>, <a class="tag-link-link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="tag-link-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>
     </div>
 
 
@@ -223,17 +223,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&text=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&is_video=false&description=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&text=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&is_video=false&description=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&body=Check out this article: https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&name=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&t=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&title=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&name=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/&t=Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
