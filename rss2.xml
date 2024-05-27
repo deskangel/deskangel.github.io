@@ -15,8 +15,41 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 15 May 2024 12:49:54 GMT</pubDate>
+    <pubDate>Mon, 27 May 2024 01:07:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 24.04 容器安装 vim</title>
+      <link>https://blog.deskangel.com/2024/05/27/install-vim-on-ubuntu-2404-container/</link>
+      <guid>https://blog.deskangel.com/2024/05/27/install-vim-on-ubuntu-2404-container/</guid>
+      <pubDate>Mon, 27 May 2024 01:04:21 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;在 Ubuntu 24.04 容器中安装 vim 时出现下面的错误：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;debconf: unable to initialize frontend: Dialog&lt;br&gt;debconf: (No usable dialog-like</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/docker/">docker</category>
+      
+      <category domain="https://blog.deskangel.com/tags/ubuntu/">ubuntu</category>
+      
+      <category domain="https://blog.deskangel.com/tags/vim/">vim</category>
+      
+      
+      <comments>https://blog.deskangel.com/2024/05/27/install-vim-on-ubuntu-2404-container/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>对 hexo cactus theme做了一些调整</title>
@@ -577,33 +610,6 @@
       
       
       <comments>https://blog.deskangel.com/2022/07/14/docker-keybinding/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>From /proc/meminfo to free</title>
-      <link>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</link>
-      <guid>https://blog.deskangel.com/2022/06/19/meminfo-to-free/</guid>
-      <pubDate>Sat, 18 Jun 2022 21:32:44 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;How to calculate each field of the &lt;code&gt;free&lt;/code&gt; command from</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/linux/">linux</category>
-      
-      
-      <comments>https://blog.deskangel.com/2022/06/19/meminfo-to-free/#disqus_thread</comments>
       
     </item>
     

@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Ubuntu 24.04 容器安装 vim</title>
+      <link href="/2024/05/27/install-vim-on-ubuntu-2404-container/"/>
+      <url>/2024/05/27/install-vim-on-ubuntu-2404-container/</url>
+      
+        <content type="html"><![CDATA[<p>在 Ubuntu 24.04 容器中安装 vim 时出现下面的错误：</p><blockquote><p>debconf: unable to initialize frontend: Dialog<br>debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at &#x2F;usr&#x2F;share&#x2F;perl5&#x2F;Debconf&#x2F;FrontEnd&#x2F;Dialog.pm line 79.)<br>debconf: falling back to frontend: Readline<br>debconf: unable to initialize frontend: Readline<br>debconf: (Can’t locate Term&#x2F;ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: &#x2F;etc&#x2F;perl &#x2F;usr&#x2F;local&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;perl&#x2F;5.38.2 &#x2F;</p></blockquote><p><code>ChatGPT</code> 说需要：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install perl cpanminus</span><br><span class="line">sudo cpanm Term::ReadLine</span><br></pre></td></tr></table></figure><p><code>llama3-8b on Groq</code>说：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt install libterm-readline-gnu-perl</span><br></pre></td></tr></table></figure><p>安装了<code>libterm-readline-gnu-perl</code>后问题解决。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> vim </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>对 hexo cactus theme做了一些调整</title>
       <link href="/2024/05/15/tweak-of-hexo-cactus-theme/"/>
       <url>/2024/05/15/tweak-of-hexo-cactus-theme/</url>
