@@ -15,8 +15,36 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 27 May 2024 01:07:15 GMT</pubDate>
+    <pubDate>Mon, 03 Feb 2025 09:13:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>fzf 的使用</title>
+      <link>https://blog.deskangel.com/2025/02/03/fzf-usage/</link>
+      <guid>https://blog.deskangel.com/2025/02/03/fzf-usage/</guid>
+      <pubDate>Mon, 03 Feb 2025 09:12:16 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;fzf 是在终端使用的一个模糊搜索工具，它的功能非常强大。&lt;/p&gt;
+&lt;h2 id=&quot;文件搜索&quot;&gt;&lt;a href=&quot;#文件搜索&quot; class=&quot;headerlink&quot; title=&quot;文件搜索&quot;&gt;&lt;/a&gt;文件搜索&lt;/h2&gt;&lt;p&gt;可以使用 &lt;code&gt;bat&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/fzf/">fzf</category>
+      
+      
+      <comments>https://blog.deskangel.com/2025/02/03/fzf-usage/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Ubuntu 24.04 容器安装 vim</title>
@@ -583,33 +611,6 @@
       
       
       <comments>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Docker Keybinding</title>
-      <link>https://blog.deskangel.com/2022/07/14/docker-keybinding/</link>
-      <guid>https://blog.deskangel.com/2022/07/14/docker-keybinding/</guid>
-      <pubDate>Thu, 14 Jul 2022 08:11:05 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;用 &lt;code&gt;docker&lt;/code&gt; 这么久，有一个问题一直令人不爽：&lt;code&gt;ctrl+p&lt;/code&gt;</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/docker/">docker</category>
-      
-      
-      <comments>https://blog.deskangel.com/2022/07/14/docker-keybinding/#disqus_thread</comments>
       
     </item>
     

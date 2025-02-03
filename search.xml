@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>fzf 的使用</title>
+      <link href="/2025/02/03/fzf-usage/"/>
+      <url>/2025/02/03/fzf-usage/</url>
+      
+        <content type="html"><![CDATA[<p>fzf 是在终端使用的一个模糊搜索工具，它的功能非常强大。</p><h2 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h2><p>可以使用 <code>bat</code> 作为预览工具，<code>&#123;&#125;</code> 接收选择的文件路径：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> fzfb=<span class="string">&#x27;fzf --preview &quot;bat --color=always &#123;&#125;&quot;&#x27;</span></span><br></pre></td></tr></table></figure><h2 id="和系统整合"><a href="#和系统整合" class="headerlink" title="和系统整合"></a>和系统整合</h2><p>把下面的代码添加到 <code>shell</code> 的配置文件中，比如 <code>.zshrc</code>。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Set up fzf key bindings and fuzzy completion</span></span><br><span class="line"><span class="built_in">source</span> &lt;(fzf --zsh)</span><br></pre></td></tr></table></figure><p>然后就可以通过 <code>**</code> 加 <code>TAB</code>来启动 <code>fzf</code>。</p><p>比如要进入某个目录，可以 <code>cd **</code> 然后按 <code>TAB</code>，就会在命令的下面弹出一个窗口，显示所有的子目录。搜索到正确的路径后回车就可以；</p><p>如果要 <code>kill</code> 某个进程，也只需要  <code>kill **</code>再按 <code>TAB</code> ，然后搜索进程的名字后回车即可。</p><h2 id="和编辑器结合"><a href="#和编辑器结合" class="headerlink" title="和编辑器结合"></a>和编辑器结合</h2><p>因为 <code>fzf</code> 默认回车会返回选择的路径，所以要打开文件，只需要在文件的参数位置使用 <code>fzf</code> 就可以了。比如：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim <span class="variable">$&#123;fzf -m --preview &quot;bat --color=always &#123;&#125;</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure><p>其中，<code>-m</code> 是指可以通过 <code>TAB</code> 按键选择多个文件。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> fzf </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Ubuntu 24.04 容器安装 vim</title>
       <link href="/2024/05/27/install-vim-on-ubuntu-2404-container/"/>
       <url>/2024/05/27/install-vim-on-ubuntu-2404-container/</url>
@@ -1915,7 +1940,7 @@
       <link href="/2012/09/23/extract-file-from-pkg-in-osx/"/>
       <url>/2012/09/23/extract-file-from-pkg-in-osx/</url>
       
-        <content type="html"><![CDATA[<p>今天犯了个错误，本来想把几个文件夹复制到/usr/share/vim/vim73/目录下合并的，谁知osx下却是替换的操作（系统确实有替换的提示，但是windows下的目录，都是合并的操作:-(）——它真的替换了，结果原来的文件丢失了。</p><p>系统是OSX 10.8，没有从安装盘装回软件的选项，只有自己动手。</p><ol><li><p>翻出安装盘挂载，很明显应该是在Packages目录下的文件；</p></li><li><p>逐个启动里面的pkg文件，但是并不进行下一步，而是选择 <code>File-&gt;Show Files</code> 查看是否所需的包。最后发现是在<code>BSD.pkg</code>里面；</p></li><li><p>启动Terminal，运行命令 <code>pkgutil --expand BSD.pkg ~/wxue/bsd</code>，把文件都提取到bsd目录下；</p></li><li><p>进入<code>~/wxue/bsd</code> 目录，把最大的那个文件（Payload）增加后缀<code>.pax.gz</code>；</p></li><li><p>接下去就简单了，解压即可。</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>今天犯了个错误，本来想把几个文件夹复制到<code>/usr/share/vim/vim73/</code>目录下合并的，谁知<code>osx</code>下却是替换的操作（系统确实有替换的提示，但是<code>windows</code>下的目录，都是合并的操作:-(）——它真的替换了，结果原来的文件丢失了。</p><p>系统是<code>OSX 10.8</code>，没有从安装盘装回软件的选项，只有自己动手。</p><ol><li><p>翻出安装盘挂载，很明显应该是在<code>Packages</code>目录下的文件；</p></li><li><p>逐个启动里面的<code>pkg</code>文件，但是并不进行下一步，而是选择 <code>File-&gt;Show Files</code> 查看是否所需的包。最后发现是在<code>BSD.pkg</code>里面；</p></li><li><p>启动Terminal，运行命令 <code>pkgutil --expand BSD.pkg ~/wxue/bsd</code>，把文件都提取到bsd目录下；</p></li><li><p>进入<code>~/wxue/bsd</code> 目录，把最大的那个文件（Payload）增加后缀<code>.pax.gz</code>；</p></li><li><p>接下去就简单了，解压即可。</p></li></ol>]]></content>
       
       
       <categories>
