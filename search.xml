@@ -8,7 +8,7 @@
       <link href="/2025/02/07/android-emulator-access-lan/"/>
       <url>/2025/02/07/android-emulator-access-lan/</url>
       
-        <content type="html"><![CDATA[<p>之前写过一篇：<a href="android-simulator-network-service.md">开发机访问Android模拟器网络</a></p><p>今天遇到的问题是，<code>macos</code> 上的 <code>Android</code> 的模拟器可以访问外部网络，但是访问不了本地网络中的服务器。</p><p>经过一番尝试，发现是系统中设置了代理的问题。关闭代理，或者把 <code>10.0.2/24</code> 加到 <code>Bypass proxy settings for these hosts &amp; domains:</code> 下，然后重启模拟器，问题解决。</p>]]></content>
+        <content type="html"><![CDATA[<p>之前写过一篇：<a href="https://blog.deskangel.com/2020/05/05/android-simulator-network-service">开发机访问Android模拟器网络</a></p><p>今天遇到的问题是，<code>macos</code> 上的 <code>Android</code> 的模拟器可以访问外部网络，但是访问不了本地网络中的服务器。</p><p>经过一番尝试，发现是系统中设置了代理的问题。关闭代理，或者把 <code>10.0.2/24</code> 加到 <code>Bypass proxy settings for these hosts &amp; domains:</code> 下，然后重启模拟器，问题解决。</p>]]></content>
       
       
       <categories>
