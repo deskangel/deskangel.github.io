@@ -15,8 +15,38 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 03 Feb 2025 09:13:20 GMT</pubDate>
+    <pubDate>Fri, 07 Feb 2025 06:11:13 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Andriod 模拟器访问 lan 中的服务器</title>
+      <link>https://blog.deskangel.com/2025/02/07/android-emulator-access-lan/</link>
+      <guid>https://blog.deskangel.com/2025/02/07/android-emulator-access-lan/</guid>
+      <pubDate>Fri, 07 Feb 2025 06:03:07 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;之前写过一篇：&lt;a href=&quot;android-simulator-network-service.md&quot;&gt;开发机访问Android模拟器网络&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;今天遇到的问题是，&lt;code&gt;macos&lt;/code&gt; 上的 &lt;code&gt;Android&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/android/">android</category>
+      
+      <category domain="https://blog.deskangel.com/tags/macos/">macos</category>
+      
+      
+      <comments>https://blog.deskangel.com/2025/02/07/android-emulator-access-lan/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>fzf 的使用</title>
@@ -579,38 +609,6 @@
       
       
       <comments>https://blog.deskangel.com/2023/08/28/pageview-in-listview/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>DaRemote ssh终端模拟器反色问题调试记录</title>
-      <link>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</link>
-      <guid>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/</guid>
-      <pubDate>Fri, 25 Nov 2022 23:50:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;用户报告在ssh终端下粘贴时显示不出内容。试了一下能复现，但为修复这个问题昨天还是差不多花了一整天时间。&lt;/p&gt;
-&lt;h2</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/android/">android</category>
-      
-      <category domain="https://blog.deskangel.com/tags/daremote/">daremote</category>
-      
-      <category domain="https://blog.deskangel.com/tags/zsh/">zsh</category>
-      
-      
-      <comments>https://blog.deskangel.com/2022/11/26/daremote-inverse-mode-issue-debug/#disqus_thread</comments>
       
     </item>
     
