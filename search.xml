@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Edge-TTS 和 PopClip 结合朗读选择的文字</title>
+      <link href="/2025/02/10/edge-tts-and-popclip/"/>
+      <url>/2025/02/10/edge-tts-and-popclip/</url>
+      
+        <content type="html"><![CDATA[<p>一直使用默认的 <code>say</code> 来朗读，但是效果一言难尽。今天 <code>google</code> 了一下 “popclip 朗读”，前两个推荐就是 <code>edge-tts</code>，特别是 <a href="https://x.com/limbopeng/status/1820668512068899007">X 上的推友 </a> 连代码都写出来了，于是部署了 一下。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 <code>mkdir edge-tts</code> 创建一个目录，进入目录中初始化<code>python</code>虚拟环境：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv .venv</span><br><span class="line"><span class="built_in">source</span> .venv/bin/activate</span><br></pre></td></tr></table></figure><p>然后把 <code>edge-tts</code>安装到该虚拟环境中：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install edge-tts</span><br></pre></td></tr></table></figure><p>使用 <code>edge-playback --text &quot;hello&quot;</code>测试，提示需要安装 <code>mpv</code>。使用 <code>brew</code> 安装 <code>mpv</code>（会安装比较多的依赖）：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure><p>再次运行 <code>edge-playback --text &quot;hello&quot;</code>，<code>lulu</code> 提示要连接网络，允许后就可以播放声音了，效果非常不错。</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>修改推友的代码，把</p><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">/path/to/edge-playback</span> <span class="string">--rate=&quot;$&#123;POPCLIP_OPTION_RATE:-+20%&#125;&quot;</span> <span class="string">--voice</span> <span class="string">&quot;$&#123;POPCLIP_OPTION_VOICE:-zh-CN-XiaoxiaoNeural&#125;&quot;</span> <span class="string">--text</span> <span class="string">&quot;$POPCLIP_TEXT&quot;</span></span><br></pre></td></tr></table></figure><p>改成了</p><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">PATH=$&#123;POPCLIP_OPTION_PATH&#125;:$PATH</span></span><br><span class="line"><span class="string">edge-playback</span> <span class="string">--rate=&quot;$&#123;POPCLIP_OPTION_RATE:-+20%&#125;&quot;</span> <span class="string">--voice</span> <span class="string">&quot;$&#123;POPCLIP_OPTION_VOICE:-zh-CN-XiaoxiaoNeural&#125;&quot;</span> <span class="string">--text</span> <span class="string">&quot;$POPCLIP_TEXT&quot;</span></span><br></pre></td></tr></table></figure><p>因为我们是把 <code>edge-tts</code> 安装在 <code>python</code> 的虚拟环境中，需要设置 <code>PATH</code> 环境变量。</p><p>然后，在下面的 options 中增加了</p><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">identifier:</span> <span class="string">path</span></span><br><span class="line">  <span class="attr">label:</span> <span class="string">Path</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">The</span> <span class="string">bin</span> <span class="string">path</span> <span class="string">where</span> <span class="string">edge-playback/edge-tts</span> <span class="string">located</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure><p>这样使用的时候就不需要修改代码，只需要把之前创建的<code>edge-tts/.venv/bin</code> 目录的全路径填入第一个设置栏即可。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>完整的代码在 <a href="https://github.com/deskangel/popclip-exts/blob/master/edg-tts.yaml">github</a></p><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://gist.github.com/limboinf/e9345163d721548e580d730d094dd003">https://gist.github.com/limboinf/e9345163d721548e580d730d094dd003</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+            <tag> popclip </tag>
+            
+            <tag> edge-tts </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Andriod 模拟器访问 lan 中的服务器</title>
       <link href="/2025/02/07/android-emulator-access-lan/"/>
       <url>/2025/02/07/android-emulator-access-lan/</url>

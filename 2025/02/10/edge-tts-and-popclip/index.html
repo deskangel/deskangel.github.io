@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一直使用默认的 say 来朗读，但是效果一言难尽。今天 google 了一下 “popclip 朗读”，前两个推荐就是 edge-tts，特别是 X 上的推友  连代码都写出来了，于是部署了 一下。 安装使用 mkdir edge-tts 创建一个目录，进入目录中初始化python虚拟环境： python3 -m venv .venvsource .venv&#x2F;bin&#x2F;activate 然后把 ed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Edge-TTS 和 PopClip 结合朗读选择的文字">
+<meta property="og:url" content="https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="一直使用默认的 say 来朗读，但是效果一言难尽。今天 google 了一下 “popclip 朗读”，前两个推荐就是 edge-tts，特别是 X 上的推友  连代码都写出来了，于是部署了 一下。 安装使用 mkdir edge-tts 创建一个目录，进入目录中初始化python虚拟环境： python3 -m venv .venvsource .venv&#x2F;bin&#x2F;activate 然后把 ed">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-10T13:29:29.000Z">
+<meta property="article:modified_time" content="2025-02-10T13:31:16.739Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="macos">
+<meta property="article:tag" content="popclip">
+<meta property="article:tag" content="edge-tts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>Edge-TTS 和 PopClip 结合朗读选择的文字</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2025/02/07/android-emulator-access-lan/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&text=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&is_video=false&description=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Edge-TTS 和 PopClip 结合朗读选择的文字&body=Check out this article: https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&name=Edge-TTS 和 PopClip 结合朗读选择的文字&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&t=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">参考：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Edge-TTS 和 PopClip 结合朗读选择的文字
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-02-10T13:29:29.000Z" itemprop="datePublished">2025-02-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Software/">Software</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/edge-tts/" rel="tag">edge-tts</a>, <a class="tag-link-link" href="/tags/macos/" rel="tag">macos</a>, <a class="tag-link-link" href="/tags/popclip/" rel="tag">popclip</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>一直使用默认的 <code>say</code> 来朗读，但是效果一言难尽。今天 <code>google</code> 了一下 “popclip 朗读”，前两个推荐就是 <code>edge-tts</code>，特别是 <a target="_blank" rel="noopener" href="https://x.com/limbopeng/status/1820668512068899007">X 上的推友 </a> 连代码都写出来了，于是部署了 一下。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用 <code>mkdir edge-tts</code> 创建一个目录，进入目录中初始化<code>python</code>虚拟环境：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv .venv</span><br><span class="line"><span class="built_in">source</span> .venv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>然后把 <code>edge-tts</code>安装到该虚拟环境中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install edge-tts</span><br></pre></td></tr></table></figure>
+<p>使用 <code>edge-playback --text &quot;hello&quot;</code>测试，提示需要安装 <code>mpv</code>。使用 <code>brew</code> 安装 <code>mpv</code>（会安装比较多的依赖）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install mpv</span><br></pre></td></tr></table></figure>
+<p>再次运行 <code>edge-playback --text &quot;hello&quot;</code>，<code>lulu</code> 提示要连接网络，允许后就可以播放声音了，效果非常不错。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>修改推友的代码，把</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">/path/to/edge-playback</span> <span class="string">--rate=&quot;$&#123;POPCLIP_OPTION_RATE:-+20%&#125;&quot;</span> <span class="string">--voice</span> <span class="string">&quot;$&#123;POPCLIP_OPTION_VOICE:-zh-CN-XiaoxiaoNeural&#125;&quot;</span> <span class="string">--text</span> <span class="string">&quot;$POPCLIP_TEXT&quot;</span></span><br></pre></td></tr></table></figure>
+<p>改成了</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">PATH=$&#123;POPCLIP_OPTION_PATH&#125;:$PATH</span></span><br><span class="line"><span class="string">edge-playback</span> <span class="string">--rate=&quot;$&#123;POPCLIP_OPTION_RATE:-+20%&#125;&quot;</span> <span class="string">--voice</span> <span class="string">&quot;$&#123;POPCLIP_OPTION_VOICE:-zh-CN-XiaoxiaoNeural&#125;&quot;</span> <span class="string">--text</span> <span class="string">&quot;$POPCLIP_TEXT&quot;</span></span><br></pre></td></tr></table></figure>
+<p>因为我们是把 <code>edge-tts</code> 安装在 <code>python</code> 的虚拟环境中，需要设置 <code>PATH</code> 环境变量。</p>
+<p>然后，在下面的 options 中增加了</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">identifier:</span> <span class="string">path</span></span><br><span class="line">  <span class="attr">label:</span> <span class="string">Path</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">The</span> <span class="string">bin</span> <span class="string">path</span> <span class="string">where</span> <span class="string">edge-playback/edge-tts</span> <span class="string">located</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure>
+<p>这样使用的时候就不需要修改代码，只需要把之前创建的<code>edge-tts/.venv/bin</code> 目录的全路径填入第一个设置栏即可。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>完整的代码在 <a target="_blank" rel="noopener" href="https://github.com/deskangel/popclip-exts/blob/master/edg-tts.yaml">github</a></p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="https://gist.github.com/limboinf/e9345163d721548e580d730d094dd003">https://gist.github.com/limboinf/e9345163d721548e580d730d094dd003</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">参考：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&text=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&is_video=false&description=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Edge-TTS 和 PopClip 结合朗读选择的文字&body=Check out this article: https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&title=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&name=Edge-TTS 和 PopClip 结合朗读选择的文字&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2025/02/10/edge-tts-and-popclip/&t=Edge-TTS 和 PopClip 结合朗读选择的文字"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2025
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
