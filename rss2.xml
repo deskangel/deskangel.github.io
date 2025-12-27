@@ -15,8 +15,37 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 03 May 2025 03:36:37 GMT</pubDate>
+    <pubDate>Sat, 27 Dec 2025 07:35:37 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Flutter didUpdateWidget 和 didChangeDependencies</title>
+      <link>https://blog.deskangel.com/2025/12/27/flutter-didupdatewidget-didchangedependencies/</link>
+      <guid>https://blog.deskangel.com/2025/12/27/flutter-didupdatewidget-didchangedependencies/</guid>
+      <pubDate>Sat, 27 Dec 2025 07:34:52 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h2 id=&quot;didUpdateWidget&quot;&gt;&lt;a href=&quot;#didUpdateWidget&quot; class=&quot;headerlink&quot; title=&quot;didUpdateWidget&quot;&gt;&lt;/a&gt;didUpdateWidget&lt;/h2&gt;&lt;p&gt;这个方法用于更新</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/android/">android</category>
+      
+      <category domain="https://blog.deskangel.com/tags/flutter/">flutter</category>
+      
+      
+      <comments>https://blog.deskangel.com/2025/12/27/flutter-didupdatewidget-didchangedependencies/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>dart 代码格式化时末尾的逗号被删除的问题</title>
@@ -586,33 +615,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Migrate WillPopScope to PopScope</title>
-      <link>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/</link>
-      <guid>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/</guid>
-      <pubDate>Wed, 29 Nov 2023 12:24:30 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;新的 &lt;code&gt;PopScope&lt;/code&gt; 替换 &lt;code&gt;WillPopScope&lt;/code&gt; 时会出现一个问题，因为 &lt;code&gt;PopScope.canPop&lt;/code&gt; 的值是在 build 时就确定了的，pop 的时候并不会再次计算，因此，如果赋值给</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/flutter/">flutter</category>
-      
-      
-      <comments>https://blog.deskangel.com/2023/11/29/migrate-willpopscope-to-popscope/#disqus_thread</comments>
       
     </item>
     
