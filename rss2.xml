@@ -15,8 +15,36 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 27 Dec 2025 07:35:37 GMT</pubDate>
+    <pubDate>Wed, 31 Dec 2025 00:53:17 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>清理 Privacy &amp; Security 下 Automation 和 Microphone 中的项</title>
+      <link>https://blog.deskangel.com/2025/12/31/cleaning-up-entries-in-automation-and-microphone/</link>
+      <guid>https://blog.deskangel.com/2025/12/31/cleaning-up-entries-in-automation-and-microphone/</guid>
+      <pubDate>Wed, 31 Dec 2025 00:51:12 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;因为 automation和 microphone这两个分类下面都没有提供删除功能，当你想不重启电脑直接清理某些僵尸项，或者看着某些项碍眼，可以通过系统提供的命令行工具直接精准地删除或直接充值。&lt;/p&gt;
+&lt;h2 id=&quot;获取应用的-Bundle-ID&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/macos/">macos</category>
+      
+      
+      <comments>https://blog.deskangel.com/2025/12/31/cleaning-up-entries-in-automation-and-microphone/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Flutter didUpdateWidget 和 didChangeDependencies</title>
@@ -585,36 +613,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/10/ls-and-exa-color-scheme/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Using fingerprint authentication to enter sudo password, Simplify input, enhance security</title>
-      <link>https://blog.deskangel.com/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/</link>
-      <guid>https://blog.deskangel.com/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/</guid>
-      <pubDate>Tue, 19 Mar 2024 05:28:13 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;Using fingerprint authentication to enter sudo password: Simplify input, enhance security&lt;/p&gt;
-&lt;p&gt;While maintaining system security,</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/android/">android</category>
-      
-      <category domain="https://blog.deskangel.com/tags/daremote/">daremote</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/03/19/daremote-fingerprint-auth-to-fill-sudo-password/#disqus_thread</comments>
       
     </item>
     
