@@ -15,8 +15,39 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 31 Dec 2025 00:53:17 GMT</pubDate>
+    <pubDate>Sun, 04 Jan 2026 01:32:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>macos 下使用launchctl和plist启动进程</title>
+      <link>https://blog.deskangel.com/2026/01/04/launchctl-plist-on-macos/</link>
+      <guid>https://blog.deskangel.com/2026/01/04/launchctl-plist-on-macos/</guid>
+      <pubDate>Sun, 04 Jan 2026 01:27:58 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;macOS 下可以用 &lt;code&gt;launchctl&lt;/code&gt; 和 &lt;code&gt;plist&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/macos/">macos</category>
+      
+      <category domain="https://blog.deskangel.com/tags/launchctl/">launchctl</category>
+      
+      <category domain="https://blog.deskangel.com/tags/plist/">plist</category>
+      
+      
+      <comments>https://blog.deskangel.com/2026/01/04/launchctl-plist-on-macos/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>清理 Privacy &amp; Security 下 Automation 和 Microphone 中的项</title>
@@ -583,36 +614,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>ls 和 exa 的配色方案</title>
-      <link>https://blog.deskangel.com/2024/04/10/ls-and-exa-color-scheme/</link>
-      <guid>https://blog.deskangel.com/2024/04/10/ls-and-exa-color-scheme/</guid>
-      <pubDate>Wed, 10 Apr 2024 08:55:41 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;&lt;code&gt;ls&lt;/code&gt; 使用的是 &lt;code&gt;LSCOLORS&lt;/code&gt; 环境变量，&lt;code&gt;exa&lt;/code&gt; 使用的是 &lt;code&gt;LS_COLORS&lt;/code&gt; 环境变量，它们的格式是不同的。&lt;/p&gt;
-&lt;figure</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/exa/">exa</category>
-      
-      <category domain="https://blog.deskangel.com/tags/ls/">ls</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/04/10/ls-and-exa-color-scheme/#disqus_thread</comments>
       
     </item>
     

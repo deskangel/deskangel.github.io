@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>macos 下使用launchctl和plist启动进程</title>
+      <link href="/2026/01/04/launchctl-plist-on-macos/"/>
+      <url>/2026/01/04/launchctl-plist-on-macos/</url>
+      
+        <content type="html"><![CDATA[<p>macOS 下可以用 <code>launchctl</code> 和 <code>plist</code> 手动启动应用进程，或者让程序随系统启动。它有好几个域（domain）来将服务进行分类，并管理不同的权限。最常用的是System和GUI，下面是使用的一些规则：</p><h2 id="system-域"><a href="#system-域" class="headerlink" title="system 域"></a>system 域</h2><p>有需要使用 root 权限的，可以使用 System 域来启动，但是 plist 必须放在：<code>/Library/LaunchDaemons/</code> 下面。（<code>/System/Library/LaunchDaemons/</code> 下是系统自带的一些服务，用户不用考虑这个路径）</p><p>plist 文件的权限也需要调整，用户和组是 <code>root:wheel</code>，权限是 <code>644</code> (<code>-rw-r--r--</code>)。</p><p>加载和卸载的命令是：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo launchctl bootstrap system /Library/LaunchDaemons/com.xxx.plist</span><br><span class="line">sudo launchctl bootout system /Library/LaunchDaemons/com.xxx.plist</span><br></pre></td></tr></table></figure><h2 id="gui-域"><a href="#gui-域" class="headerlink" title="gui 域"></a>gui 域</h2><p>普通应用直接使用 gui 域就可以了。对应的plist文件需要放在：<code>~/Library/LaunchAgents/</code>（当前用户）或 <code>/Library/LaunchAgents/</code>（所有用户）下面。</p><p>加载和卸载命令是:</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">launchctl bootstrap gui/uid ~/Library/LaunchAgents/com.xxx.plist</span><br><span class="line">launchctl bootout gui/uid ~/Library/LaunchAgents/com.xxx.plist</span><br></pre></td></tr></table></figure><p>命令中的 <code>uid</code> 可以通过 <code>id</code> 命令获取：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">id</span> -u username</span><br></pre></td></tr></table></figure><h2 id="plist-内容"><a href="#plist-内容" class="headerlink" title="plist 内容"></a>plist 内容</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">plist</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span> <span class="string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>com.xxx.xxx<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>/usr/local/bin/filename<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>-argument<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">string</span>&gt;</span>/path/to/if/necessary<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>KeepAlive<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><p><code>launchctl</code> 还有其他的命令，比如 <code>enable</code> 和 <code>disable</code>，<code>kickstart</code> 等，有需要可以通过 <code>man launchctl</code> 去详细了解。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+            <tag> launchctl </tag>
+            
+            <tag> plist </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>清理 Privacy &amp; Security 下 Automation 和 Microphone 中的项</title>
       <link href="/2025/12/31/cleaning-up-entries-in-automation-and-microphone/"/>
       <url>/2025/12/31/cleaning-up-entries-in-automation-and-microphone/</url>
