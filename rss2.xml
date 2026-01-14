@@ -15,8 +15,38 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 04 Jan 2026 01:32:14 GMT</pubDate>
+    <pubDate>Wed, 14 Jan 2026 01:07:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>终端下命令缓存问题</title>
+      <link>https://blog.deskangel.com/2026/01/14/path-cache-in-terminal/</link>
+      <guid>https://blog.deskangel.com/2026/01/14/path-cache-in-terminal/</guid>
+      <pubDate>Wed, 14 Jan 2026 00:36:48 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;&lt;code&gt;macOS&lt;/code&gt; 系统自带的 &lt;code&gt;rsync&lt;/code&gt; 版本比较老，所以使用 &lt;code&gt;brew&lt;/code&gt; 安装了一个新版本。&lt;/p&gt;
+&lt;p&gt;但是，明明查看 &lt;code&gt;$PATH&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/shell/">shell</category>
+      
+      <category domain="https://blog.deskangel.com/tags/AI/">AI</category>
+      
+      
+      <comments>https://blog.deskangel.com/2026/01/14/path-cache-in-terminal/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>macos 下使用launchctl和plist启动进程</title>
@@ -584,36 +614,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>在 Ubuntu 上进行远程 Flutter 开发</title>
-      <link>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</link>
-      <guid>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/</guid>
-      <pubDate>Thu, 11 Apr 2024 01:56:09 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h2 id=&quot;配置环境&quot;&gt;&lt;a href=&quot;#配置环境&quot; class=&quot;headerlink&quot; title=&quot;配置环境&quot;&gt;&lt;/a&gt;配置环境&lt;/h2&gt;&lt;p&gt;这些环境的配置都是在 Ubuntu 上进行的。&lt;/p&gt;
-&lt;h3 id=&quot;Android-SDK&quot;&gt;&lt;a</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/ubuntu/">ubuntu</category>
-      
-      <category domain="https://blog.deskangel.com/tags/flutter/">flutter</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/04/11/remote-flutter-dev-on-ubuntu/#disqus_thread</comments>
       
     </item>
     

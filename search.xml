@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>终端下命令缓存问题</title>
+      <link href="/2026/01/14/path-cache-in-terminal/"/>
+      <url>/2026/01/14/path-cache-in-terminal/</url>
+      
+        <content type="html"><![CDATA[<p><code>macOS</code> 系统自带的 <code>rsync</code> 版本比较老，所以使用 <code>brew</code> 安装了一个新版本。</p><p>但是，明明查看 <code>$PATH</code> 的列表，<code>/opt/homebrew/bin</code> 是在 <code>/usr/bin</code> 的前面，但是终端下使用 <code>rsync --version</code> 查看，版本没有改变。</p><p>不过在新的终端下，版本确实是更新。</p><p>使用<code>为什么在 PATH 环境变量中，/opt/homebrew/bin在/usr/bin前面，但是使用的还是/usr/bin 中的 rsync？需要在新的 terminal 窗口才会正确？</code>问了 <code>Claude</code>，告知 <code>shell</code> 会把命令的路径缓存在一个哈希表中，并且贴心的告知了解决步骤：</p><h3 id="验证问题"><a href="#验证问题" class="headerlink" title="验证问题"></a>验证问题</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看当前使用的 rsync 路径</span></span><br><span class="line"><span class="built_in">which</span> rsync</span><br><span class="line"><span class="comment"># 可能显示：/usr/bin/rsync（旧的缓存）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 shell 的命令哈希表</span></span><br><span class="line"><span class="built_in">hash</span> -t rsync</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line"><span class="built_in">type</span> rsync</span><br></pre></td></tr></table></figure><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">hash</span> -d rsync</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">rehash</span>  <span class="comment"># zsh</span></span><br><span class="line"><span class="built_in">hash</span> -r  <span class="comment"># bash，清除所有缓存</span></span><br></pre></td></tr></table></figure><p>它除了告诉我 <code>bash</code> 下怎么处理，还给出了 <code>zsh</code> 的命令。<br><code>hash</code> 是 <code>shell</code> 内建的命令，在 <code>bash</code> 和 <code>zsh</code> 中是不同的。<code>zsh</code> 中分成了三个命令：<code>hash</code>，<code>rehash</code> 和 <code>unhash</code>，而 <code>bash</code> 中只有一个命令，使用参数来控制。</p><p>最后，<code>Claude</code> 还告知我，要养成好的习惯：</p><h3 id="预防措施"><a href="#预防措施" class="headerlink" title="预防措施"></a>预防措施</h3><blockquote><blockquote><p>在安装新软件后，养成习惯：</p></blockquote></blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># zsh</span></span><br><span class="line"><span class="built_in">rehash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># bash</span></span><br><span class="line"><span class="built_in">hash</span> -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者直接</span></span><br><span class="line"><span class="built_in">exec</span> <span class="variable">$SHELL</span>  <span class="comment"># 重启当前 shell</span></span><br></pre></td></tr></table></figure><p>在前 <code>AI</code> 时代，这个问题不得花个十几分钟找答案？于是我 <code>Google</code> 了一下上面的提示词，结果无论是 <code>Google</code> 列出的前几页网站还是 <code>Google</code> 网页上的 <code>AI Overview</code>，都没有给出正确的答案。 <code>AI Overview</code> 还是纠结在 <code>.zshrc</code> 中：</p><blockquote><blockquote><p>解决方法<br>检查当前 PATH: 在终端输入 echo $PATH，查看当前 PATH 变量的实际顺序。<br>确认配置文件:<br>Zsh (macOS 默认): 检查 ~&#x2F;.zshrc。<br>Bash: 检查 ~&#x2F;.bash_profile (登录时) 或 ~&#x2F;.bashrc (交互式 shell)。<br>正确添加路径 (以 Zsh 为例):<br>打开 ~&#x2F;.zshrc 文件。<br>确认有类似以下行（确保路径正确，且位置靠前）:</p></blockquote></blockquote><p>不过使用 <code>Gemini</code>，倒是和 <code>Claude</code> 一样立刻判断除了问题所在。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+            <tag> AI </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>macos 下使用launchctl和plist启动进程</title>
       <link href="/2026/01/04/launchctl-plist-on-macos/"/>
       <url>/2026/01/04/launchctl-plist-on-macos/</url>
