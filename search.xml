@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Ubuntu 24.04 使用 Virt-Manager 并设置网桥</title>
+      <link href="/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"/>
+      <url>/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/</url>
+      
+        <content type="html"><![CDATA[<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>昨晚用户反馈了一个 <code>DaRemote</code> 的 bug，说在 <code>Windows</code> 上获取信息失败了。以前都是在 <code>Vultr</code> 上创建的 <code>Windows</code> 服务器，这次想趁此机会在本地重新把虚拟机运行起来，于是翻出早先备份的 <code>Windows10.vdi</code>，又在 <code>Ubuntu 24.04</code> 上下载了 <code>VirtualBox</code>，结果启动的时候报 <code>VERR_VMX_IN_VMX_ROOT_MODE</code>。<code>Gemini</code> 说是有另一个虚拟程序占用硬件控制，导致 <code>VirtualBox</code> 无法进入“根模式”来接管 <code>CPU</code>。</p><p>Gemini 给出了一些列处理方法，最后来了一句：</p><blockquote><p>如果你打算长期在 Ubuntu 上通过远程桌面运行虚拟机，<strong>VirtualBox 并不是最佳选择</strong>。</p><blockquote><ul><li><strong>更好的方案</strong>：使用 Ubuntu 自带的 **Virt-Manager (KVM&#x2F;QEMU)**。</li><li><strong>原因</strong>：KVM 是内核原生的，它和 Ubuntu 的远程桌面环境、系统服务兼容性极好，永远不会出现 <code>VMX_ROOT_MODE</code> 这种“抢位置”的报错，因为大家都在用同一个“位置”。</li></ul></blockquote></blockquote><blockquote><p><strong>你想让我教你如何把现有的 VDI 磁盘无损转换到 KVM (Virt-Manager) 中运行吗？这样以后远程使用会顺滑得多。</strong></p></blockquote><p>既然都这么说了，我就从善如流，试试看 <code>Virt Manger</code> 怎么样。</p><h1 id="安装-Virt-Manager"><a href="#安装-Virt-Manager" class="headerlink" title="安装  Virt-Manager"></a>安装  <code>Virt-Manager</code></h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install virt-manager qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils</span><br><span class="line">sudo usermod -aG libvirt <span class="variable">$USER</span></span><br><span class="line">sudo usermod -aG kvm <span class="variable">$USER</span></span><br></pre></td></tr></table></figure><p>一步一步配置，挂载 <code>vdi</code>，一切顺利，很快进了系统，网络也有了。然后我看了一些一下网络，发现走的 <code>NAT</code>，而我希望能和开发机在同一个局域网。</p><p>于是开始配置网桥。</p><h1 id="配置网桥"><a href="#配置网桥" class="headerlink" title="配置网桥"></a>配置网桥</h1><p><code>Gemini</code> 给了我一堆在终端下配置的步骤，但我不准备听它的。虽然它警告我：</p><blockquote><p>虽然有 GUI，但很多教程倾向于使用 Netplan（命令行）的原因是：</p><blockquote><ul><li><strong>稳定性</strong>：在服务器环境或远程登录模式下，GUI 可能会因为权限问题无法修改正在使用的物理网卡。</li><li><strong>透明度</strong>：Netplan 配置文件（YAML）一目了然，而 GUI 操作在后台生成的配置有时比较混乱。</li></ul></blockquote></blockquote><p>但是 <code>Ubuntu</code> 的尿性我了解，在终端下配置网络很可能会不生效。我决定不听 <code>Gemini</code> 的建议，选择 <code>GUI</code> 工具。</p><p>打开 <code>nm-connection-editor</code> （即 <code>Advanced Network Configuration</code>）的时候，我觉得很快就能搞定。也确实很简单：创建网桥<code>br0</code>，添加物理网卡，点击保存。结果进入虚拟机，获取不到 ip，手动设置后也连接不了网络。</p><p>再次询问 <code>Gemini</code>，告诉我看下网桥是否挂在了网卡：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brctl show br0</span><br></pre></td></tr></table></figure><blockquote><p>如果 <code>interfaces</code> 这一列是空的，说明网桥只是一个空壳，没有连接到外网，虚拟机自然拿不到 IP。<br>这通常是因为在 Ubuntu 24.04 的 GUI 或是 Netplan 配置中，<strong>物理网卡被原有的连接（Wired Connection）占用了</strong>，导致它无法加入新创建的 <code>br0</code>。</p></blockquote><p>我一看，interfaces 下果然是空的。再次追问怎么办，它推荐使用 nmcli 进行强制绑定：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 找到物理网卡的连接名</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将物理网卡绑定到 br0 (假设物理连接名是 &#x27;Wired connection 1&#x27;)</span></span><br><span class="line">sudo nmcli connection modify <span class="string">&quot;Wired connection 1&quot;</span> master br0 slave-type bridge</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新激活连接</span></span><br><span class="line">sudo nmcli connection up br0</span><br><span class="line">sudo nmcli connection up <span class="string">&quot;Wired connection 1&quot;</span></span><br></pre></td></tr></table></figure><p>上面这步操作之后，<code>br0</code> 还是无法使用网卡。多次沟通后，它祭出终极手段：</p><blockquote><p><strong>彻底删除冲突的旧连接定义</strong>： 既然 <code>enp3s0</code> 这个连接名一直在干扰网桥，我们把它删掉，让系统只能通过网桥连接。</p></blockquote><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo nmcli connection delete enp3s0</span><br><span class="line"><span class="comment"># 一次启动网桥连接</span></span><br><span class="line">sudo nmcli connection up <span class="string">&quot;Wired connection 1&quot;</span></span><br><span class="line">sudo nmcli connection up <span class="string">&quot;br0&quot;</span></span><br><span class="line"><span class="comment"># 再次连接网卡</span></span><br><span class="line">sudo nmcli device connect enp3s0</span><br><span class="line">sudo nmcli connection modify <span class="string">&quot;Wired connection 1&quot;</span> ethernet.mac-address <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 手动创建了 br-slave 连接</span></span><br><span class="line">sudo nmcli connection add <span class="built_in">type</span> ethernet slave-type bridge con-name br-slave ifname enp3s0 master br0</span><br></pre></td></tr></table></figure><p>这几个命令下去，网桥终于工作了！</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmcli device status</span><br><span class="line">DEVICE       TYPE      STATE                   CONNECTION</span><br><span class="line">br0          bridge    connected               br0</span><br><span class="line">enp3s0       ethernet  connected               br-slave</span><br><span class="line">docker0      bridge    connected (externally)  docker0</span><br><span class="line">lo           loopback  connected (externally)  lo</span><br><span class="line">virbr0       bridge    connected (externally)  virbr0</span><br><span class="line">vethaec7531  ethernet  unmanaged               --</span><br></pre></td></tr></table></figure><p>因为使用了最后手动创建的 <code>br-slave</code> 连接，所以 <code>Wired connection 1</code> 可以删除。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>只要用对了方法，创建网桥还是很简单的，也就是几条命令而已，我也就花了……嗯……三个多小时。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Software </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> virt-manager </tag>
+            
+            <tag> bridge </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>终端下命令缓存问题</title>
       <link href="/2026/01/14/path-cache-in-terminal/"/>
       <url>/2026/01/14/path-cache-in-terminal/</url>

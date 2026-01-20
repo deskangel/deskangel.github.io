@@ -15,8 +15,39 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 14 Jan 2026 08:07:19 GMT</pubDate>
+    <pubDate>Tue, 20 Jan 2026 03:01:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ubuntu 24.04 使用 Virt-Manager 并设置网桥</title>
+      <link>https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/</link>
+      <guid>https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/</guid>
+      <pubDate>Tue, 20 Jan 2026 03:00:09 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;昨晚用户反馈了一个 &lt;code&gt;DaRemote&lt;/code&gt; 的 bug，说在 &lt;code&gt;Windows&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/ubuntu/">ubuntu</category>
+      
+      <category domain="https://blog.deskangel.com/tags/virt-manager/">virt-manager</category>
+      
+      <category domain="https://blog.deskangel.com/tags/bridge/">bridge</category>
+      
+      
+      <comments>https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>终端下命令缓存问题</title>
@@ -580,40 +611,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/13/essensce-of-git-fetch/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Ubuntu 下配置 Flutter Android 开发环境时 adb 权限问题</title>
-      <link>https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/</link>
-      <guid>https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/</guid>
-      <pubDate>Fri, 12 Apr 2024 11:15:53 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;为了让 vscode 能通过 ssh 连接到服务器上的项目并进行编译，降低本地电脑的负载，对闲置的 Ubuntu 进行的配置。&lt;/p&gt;
-&lt;p&gt;但在 Ubuntu 下使用 &lt;code&gt;vscode&lt;/code&gt; 打开项目的时候，出现 daemon 停止工作的提示，查看</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/android/">android</category>
-      
-      <category domain="https://blog.deskangel.com/tags/ubuntu/">ubuntu</category>
-      
-      <category domain="https://blog.deskangel.com/tags/flutter/">flutter</category>
-      
-      <category domain="https://blog.deskangel.com/tags/adb/">adb</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/04/12/adb-permission-issue-on-ubuntu/#disqus_thread</comments>
       
     </item>
     

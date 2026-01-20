@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="缘由昨晚用户反馈了一个 DaRemote 的 bug，说在 Windows 上获取信息失败了。以前都是在 Vultr 上创建的 Windows 服务器，这次想趁此机会在本地重新把虚拟机运行起来，于是翻出早先备份的 Windows10.vdi，又在 Ubuntu 24.04 上下载了 VirtualBox，结果启动的时候报 VERR_VMX_IN_VMX_ROOT_MODE。Gemini 说是有另一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 24.04 使用 Virt-Manager 并设置网桥">
+<meta property="og:url" content="https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="缘由昨晚用户反馈了一个 DaRemote 的 bug，说在 Windows 上获取信息失败了。以前都是在 Vultr 上创建的 Windows 服务器，这次想趁此机会在本地重新把虚拟机运行起来，于是翻出早先备份的 Windows10.vdi，又在 Ubuntu 24.04 上下载了 VirtualBox，结果启动的时候报 VERR_VMX_IN_VMX_ROOT_MODE。Gemini 说是有另一">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-20T03:00:09.000Z">
+<meta property="article:modified_time" content="2026-01-20T03:01:07.463Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="virt-manager">
+<meta property="article:tag" content="bridge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>Ubuntu 24.04 使用 Virt-Manager 并设置网桥</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2026/01/14/path-cache-in-terminal/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&text=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&is_video=false&description=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu 24.04 使用 Virt-Manager 并设置网桥&body=Check out this article: https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&name=Ubuntu 24.04 使用 Virt-Manager 并设置网桥&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&t=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%98%E7%94%B1"><span class="toc-number">1.</span> <span class="toc-text">缘由</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Virt-Manager"><span class="toc-number">2.</span> <span class="toc-text">安装  Virt-Manager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E6%A1%A5"><span class="toc-number">3.</span> <span class="toc-text">配置网桥</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Ubuntu 24.04 使用 Virt-Manager 并设置网桥
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-01-20T03:00:09.000Z" itemprop="datePublished">2026-01-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Software/">Software</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/bridge/" rel="tag">bridge</a>, <a class="tag-link-link" href="/tags/ubuntu/" rel="tag">ubuntu</a>, <a class="tag-link-link" href="/tags/virt-manager/" rel="tag">virt-manager</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>昨晚用户反馈了一个 <code>DaRemote</code> 的 bug，说在 <code>Windows</code> 上获取信息失败了。以前都是在 <code>Vultr</code> 上创建的 <code>Windows</code> 服务器，这次想趁此机会在本地重新把虚拟机运行起来，于是翻出早先备份的 <code>Windows10.vdi</code>，又在 <code>Ubuntu 24.04</code> 上下载了 <code>VirtualBox</code>，结果启动的时候报 <code>VERR_VMX_IN_VMX_ROOT_MODE</code>。<code>Gemini</code> 说是有另一个虚拟程序占用硬件控制，导致 <code>VirtualBox</code> 无法进入“根模式”来接管 <code>CPU</code>。</p>
+<p>Gemini 给出了一些列处理方法，最后来了一句：</p>
+<blockquote>
+<p>如果你打算长期在 Ubuntu 上通过远程桌面运行虚拟机，<strong>VirtualBox 并不是最佳选择</strong>。</p>
+<blockquote>
+<ul>
+<li><strong>更好的方案</strong>：使用 Ubuntu 自带的 **Virt-Manager (KVM&#x2F;QEMU)**。</li>
+<li><strong>原因</strong>：KVM 是内核原生的，它和 Ubuntu 的远程桌面环境、系统服务兼容性极好，永远不会出现 <code>VMX_ROOT_MODE</code> 这种“抢位置”的报错，因为大家都在用同一个“位置”。</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>你想让我教你如何把现有的 VDI 磁盘无损转换到 KVM (Virt-Manager) 中运行吗？这样以后远程使用会顺滑得多。</strong></p>
+</blockquote>
+<p>既然都这么说了，我就从善如流，试试看 <code>Virt Manger</code> 怎么样。</p>
+<h1 id="安装-Virt-Manager"><a href="#安装-Virt-Manager" class="headerlink" title="安装  Virt-Manager"></a>安装  <code>Virt-Manager</code></h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install virt-manager qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils</span><br><span class="line">sudo usermod -aG libvirt <span class="variable">$USER</span></span><br><span class="line">sudo usermod -aG kvm <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+<p>一步一步配置，挂载 <code>vdi</code>，一切顺利，很快进了系统，网络也有了。然后我看了一些一下网络，发现走的 <code>NAT</code>，而我希望能和开发机在同一个局域网。</p>
+<p>于是开始配置网桥。</p>
+<h1 id="配置网桥"><a href="#配置网桥" class="headerlink" title="配置网桥"></a>配置网桥</h1><p><code>Gemini</code> 给了我一堆在终端下配置的步骤，但我不准备听它的。虽然它警告我：</p>
+<blockquote>
+<p>虽然有 GUI，但很多教程倾向于使用 Netplan（命令行）的原因是：</p>
+<blockquote>
+<ul>
+<li><strong>稳定性</strong>：在服务器环境或远程登录模式下，GUI 可能会因为权限问题无法修改正在使用的物理网卡。</li>
+<li><strong>透明度</strong>：Netplan 配置文件（YAML）一目了然，而 GUI 操作在后台生成的配置有时比较混乱。</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>但是 <code>Ubuntu</code> 的尿性我了解，在终端下配置网络很可能会不生效。我决定不听 <code>Gemini</code> 的建议，选择 <code>GUI</code> 工具。</p>
+<p>打开 <code>nm-connection-editor</code> （即 <code>Advanced Network Configuration</code>）的时候，我觉得很快就能搞定。也确实很简单：创建网桥<code>br0</code>，添加物理网卡，点击保存。结果进入虚拟机，获取不到 ip，手动设置后也连接不了网络。</p>
+<p>再次询问 <code>Gemini</code>，告诉我看下网桥是否挂在了网卡：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brctl show br0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果 <code>interfaces</code> 这一列是空的，说明网桥只是一个空壳，没有连接到外网，虚拟机自然拿不到 IP。<br>这通常是因为在 Ubuntu 24.04 的 GUI 或是 Netplan 配置中，<strong>物理网卡被原有的连接（Wired Connection）占用了</strong>，导致它无法加入新创建的 <code>br0</code>。</p>
+</blockquote>
+<p>我一看，interfaces 下果然是空的。再次追问怎么办，它推荐使用 nmcli 进行强制绑定：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 找到物理网卡的连接名</span></span><br><span class="line">nmcli connection show</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将物理网卡绑定到 br0 (假设物理连接名是 &#x27;Wired connection 1&#x27;)</span></span><br><span class="line">sudo nmcli connection modify <span class="string">&quot;Wired connection 1&quot;</span> master br0 slave-type bridge</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新激活连接</span></span><br><span class="line">sudo nmcli connection up br0</span><br><span class="line">sudo nmcli connection up <span class="string">&quot;Wired connection 1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面这步操作之后，<code>br0</code> 还是无法使用网卡。多次沟通后，它祭出终极手段：</p>
+<blockquote>
+<p><strong>彻底删除冲突的旧连接定义</strong>： 既然 <code>enp3s0</code> 这个连接名一直在干扰网桥，我们把它删掉，让系统只能通过网桥连接。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo nmcli connection delete enp3s0</span><br><span class="line"><span class="comment"># 一次启动网桥连接</span></span><br><span class="line">sudo nmcli connection up <span class="string">&quot;Wired connection 1&quot;</span></span><br><span class="line">sudo nmcli connection up <span class="string">&quot;br0&quot;</span></span><br><span class="line"><span class="comment"># 再次连接网卡</span></span><br><span class="line">sudo nmcli device connect enp3s0</span><br><span class="line">sudo nmcli connection modify <span class="string">&quot;Wired connection 1&quot;</span> ethernet.mac-address <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 手动创建了 br-slave 连接</span></span><br><span class="line">sudo nmcli connection add <span class="built_in">type</span> ethernet slave-type bridge con-name br-slave ifname enp3s0 master br0</span><br></pre></td></tr></table></figure>
+<p>这几个命令下去，网桥终于工作了！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmcli device status</span><br><span class="line">DEVICE       TYPE      STATE                   CONNECTION</span><br><span class="line">br0          bridge    connected               br0</span><br><span class="line">enp3s0       ethernet  connected               br-slave</span><br><span class="line">docker0      bridge    connected (externally)  docker0</span><br><span class="line">lo           loopback  connected (externally)  lo</span><br><span class="line">virbr0       bridge    connected (externally)  virbr0</span><br><span class="line">vethaec7531  ethernet  unmanaged               --</span><br></pre></td></tr></table></figure>
+<p>因为使用了最后手动创建的 <code>br-slave</code> 连接，所以 <code>Wired connection 1</code> 可以删除。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>只要用对了方法，创建网桥还是很简单的，也就是几条命令而已，我也就花了……嗯……三个多小时。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%98%E7%94%B1"><span class="toc-number">1.</span> <span class="toc-text">缘由</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Virt-Manager"><span class="toc-number">2.</span> <span class="toc-text">安装  Virt-Manager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E6%A1%A5"><span class="toc-number">3.</span> <span class="toc-text">配置网桥</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&text=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&is_video=false&description=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Ubuntu 24.04 使用 Virt-Manager 并设置网桥&body=Check out this article: https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&title=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&name=Ubuntu 24.04 使用 Virt-Manager 并设置网桥&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/&t=Ubuntu 24.04 使用 Virt-Manager 并设置网桥"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2026
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
