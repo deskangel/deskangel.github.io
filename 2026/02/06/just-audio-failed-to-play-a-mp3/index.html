@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="今天遇到一个十分灵异的问题，使用just audio在macOS上面播放 school.mp3 这个文件的时候死活都会抛异常。 await _player.setAsset(&#x27;assets&#x2F;audio&#x2F;school.mp3&#x27;);await _player.setSpeed(speed);await _player.play();  每次都是：flutter: Error pla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="just_audio 播放某个文件失败">
+<meta property="og:url" content="https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/index.html">
+<meta property="og:site_name" content="DeskAngel">
+<meta property="og:description" content="今天遇到一个十分灵异的问题，使用just audio在macOS上面播放 school.mp3 这个文件的时候死活都会抛异常。 await _player.setAsset(&#x27;assets&#x2F;audio&#x2F;school.mp3&#x27;);await _player.setSpeed(speed);await _player.play();  每次都是：flutter: Error pla">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-06T14:34:42.000Z">
+<meta property="article:modified_time" content="2026-02-06T14:35:35.372Z">
+<meta property="article:author" content="ideskangel">
+<meta property="article:tag" content="macos">
+<meta property="article:tag" content="flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@ideskangel">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/icons/favicon-pc.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/icons/favicon-android.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-apple.png">
+        
+      
+    
+    <!-- title -->
+    <title>just_audio 播放某个文件失败</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="DeskAngel" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2026/01/20/virt-manager-and-bridge-in-ubuntu2404/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&text=just_audio 播放某个文件失败"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&is_video=false&description=just_audio 播放某个文件失败"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=just_audio 播放某个文件失败&body=Check out this article: https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&name=just_audio 播放某个文件失败&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&t=just_audio 播放某个文件失败"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        just_audio 播放某个文件失败
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ideskangel</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-06T14:34:42.000Z" itemprop="datePublished">2026-02-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programming/">Programming</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/flutter/" rel="tag">flutter</a>, <a class="tag-link-link" href="/tags/macos/" rel="tag">macos</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今天遇到一个十分灵异的问题，使用<code>just audio</code>在<code>macOS</code>上面播放 <code>school.mp3</code> 这个文件的时候死活都会抛异常。</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> _player.setAsset(<span class="string">&#x27;assets/audio/school.mp3&#x27;</span>);</span><br><span class="line"><span class="keyword">await</span> _player.setSpeed(speed);</span><br><span class="line"><span class="keyword">await</span> _player.play();</span><br></pre></td></tr></table></figure>
+
+<p>每次都是：<code>flutter: Error playing audio: (-11849) Operation Stopped</code>。</p>
+<p>首先想到的就是这个文件发生的错误，于是就重新生成了一个，结果依然是同样的错误。在调试过程中就发现了一些诡异的事情：</p>
+<ul>
+<li>只要把这个 <code>school.mp3</code> 文件改成另外一个文件名，就可以正常播放。</li>
+<li>其他可以正常播放的文件改成这个 <code>school.mp3</code> 文件名就无法播放。</li>
+</ul>
+<p>在 <code>Antigravity</code> 中，把这些情况告诉 AI，<code>Claude Opus 4.5 (Thinking)</code> 和 <code>Gemini 3 Pro (High)</code> 都无法解决。Opus 运行了一堆 <code>ffmepg</code> 的命令检查这个文件, 最后干脆一直显示 thinking，不回来了。</p>
+<p>于是在<code>网页Gemini</code>中继续提问。 把上面的错误信息丢给它，告诉它只有 <code>school.mp3</code> 无法播放。对于错误代码，它马上给出了解释：</p>
+<blockquote>
+<p>错误代码 <code>(-11849)</code> 在 macOS 和 iOS 开发中属于 <strong>AVFoundation 错误</strong>，对应的描述通常是 <code>AVErrorContentUnsupported</code> 或类似的路径&#x2F;格式加载失败。</p>
+</blockquote>
+<p>这个 <code>Antigravity</code> 也是这样说的，这部分应该属于标准错误。</p>
+<p><code>网页 Gemini</code> 第一次给出的尝试是怀疑<code>AssetManifest.json</code>：</p>
+<blockquote>
+<p>当你添加、删除或重命名资源时，Flutter 虽然会更新自己的 <code>AssetManifest.json</code>，但 macOS 的宿主工程（Runner.app）有时会产生<strong>僵尸引用</strong>。它认为 <code>school.mp3</code> 还在旧的位置，或者试图从一个已经失效的缓存索引中读取它。改名成 <code>school_1.mp3</code> 会迫使系统创建一个全新的文件索引，从而绕过了错误的旧缓存。</p>
+</blockquote>
+<p>它给出的解决方案是看能否读取到数据：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">ByteData data = <span class="keyword">await</span> rootBundle.load(<span class="string">&#x27;assets/audio/school.mp3&#x27;</span>);</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;文件读取成功，大小: <span class="subst">$&#123;data.lengthInBytes&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>很不幸，读取成功。然后它开始怀疑 扩展属性，这个也被证明没有关系。</p>
+<p>然后我告诉它：把其他文件改为 <code>school.mp3</code>，也会无法播放。它立刻给出了三个原因。<br>Gemini:</p>
+<blockquote>
+<ol>
+<li>宿主 App 的沙盒缓存死锁 (最可能)</li>
+<li>隐藏的 Entitlements 权限冲突</li>
+<li>Just Audio 的内部代理缓存</li>
+</ol>
+</blockquote>
+<p>我首先尝试了第三个，用它给出的代码</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">await</span> player.setAsset(<span class="string">&#x27;assets/audio/school.mp3&#x27;</span>, preload: <span class="keyword">false</span>); <span class="comment">// 禁用预加载</span></span><br></pre></td></tr></table></figure>
+<p>结果卡死在后续的 play 上。</p>
+<p>Gemini:</p>
+<blockquote>
+<p>卡在 <code>await _player.play()</code> 且无法返回，进一步证实了这是一个<strong>底层死锁（Deadlock）</strong>。请按以下三个步骤进行最后的排查：</p>
+<ol>
+<li>终极手段：重置 macOS App 容器（沙盒）</li>
+<li>……</li>
+<li>……</li>
+</ol>
+</blockquote>
+<p>我没看下面两个，直接尝试终极手段：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ~/Library/Containers/your.bundle.id</span><br></pre></td></tr></table></figure>
+<p>结果无法删除，上 sudo 也不行：Operation not permitted。</p>
+<p>Gemini：</p>
+<blockquote>
+<p>在 macOS 上，如果你对自己的 <code>Containers</code> 目录执行 <code>rm -rf</code> 却提示 <code>Operation not permitted</code>，通常意味着：</p>
+<ol>
+<li><strong>系统级锁死：</strong> 某个系统进程（如 <code>bird</code> iCloud 同步、<code>mds</code> 聚焦索引，或者最可能的——**<code>AVFoundation</code> 的音频服务进程**）正牢牢勾住这个文件夹里的某个资源。</li>
+<li><strong>SIP 或 TCC 保护：</strong> 你的终端（Terminal&#x2F;iTerm2）没有“完全磁盘访问权限”。</li>
+</ol>
+</blockquote>
+<p>Gemini:</p>
+<blockquote>
+<p>第一步：给终端“最高权力”<br>第二步：尝试在 Finder 中删除，直接按 <code>Command + Delete</code> 移到废纸篓。<br>第三步：重启 <code>coreaudiod</code> (音频服务重置): <code>sudo killall coreaudiod</code><br>第四步：修改 Bundle ID (终极绕路方案)</p>
+</blockquote>
+<p>我试了第二步+第三步，问题解决！Gemini 的总结是：</p>
+<blockquote>
+<p>果然还是<strong>“物理超度”</strong>（直接删掉整个沙盒容器）最管用。<br>总结一下这次“灵异事件”的本质：</p>
+<ol>
+<li><strong>路径诅咒：</strong> 你的 macOS 系统音频服务（<code>coreaudiod</code>）在之前的某次运行中，因为某种原因对 <code>school.mp3</code> 这个路径产生了死锁。</li>
+<li><strong>缓存持久化：</strong> 即使你重新运行 Flutter、执行 <code>flutter clean</code>，由于 macOS 容器（Containers）是持久存在的，那个损坏的路径状态一直被保留在系统底层的 <code>AVFoundation</code> 缓存里。</li>
+<li><strong>权限锁死：</strong> 甚至连 <code>rm -rf</code> 都被拒绝，说明当时系统进程确实正死死地“咬着”那个文件夹。<br>通过 <strong>Finder 强制删除</strong> 加上 <strong>重启音频服务</strong>，你相当于给 macOS 的音频引擎做了一次“全脑格式化”，它终于忘记了那个让它卡死的 <code>school.mp3</code>。</li>
+</ol>
+</blockquote>
+<p>沙盒缓存死锁我还是第一次遇到——第一次听到。我看了一眼，用的是 <code>Gemini 3，Fast</code> 选项。</p>
+<p>现在的问题是，我 Android 手机上也是这个 <code>school.mp3</code> 无法播放——为什么会是同一个文件？</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&text=just_audio 播放某个文件失败"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&is_video=false&description=just_audio 播放某个文件失败"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=just_audio 播放某个文件失败&body=Check out this article: https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&title=just_audio 播放某个文件失败"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&name=just_audio 播放某个文件失败&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://blog.deskangel.com/2026/02/06/just-audio-failed-to-play-a-mp3/&t=just_audio 播放某个文件失败"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2009-2026
+    ideskangel
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/tags/">Tag</a></li>
+         
+          <li><a href="/categories/">Category</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164531936-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-164531936-1');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9412b145e5dc91e326c7692bb8556d28";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ideskangel';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
