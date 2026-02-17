@@ -1376,6 +1376,7 @@ article .content blockquote {
   color: #ccffb6;
   quotes: "\201C" "\201D" "\2018" "\2019";
   font-weight: bold;
+  font-style: italic;
 }
 
 article .content blockquote p {
@@ -1911,10 +1912,10 @@ pre code {
 
 code {
   padding: 0 5px;
-  border: 1px dotted #908d8d;
+  /* border: 1px dotted #908d8d; */
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  color: rgb(170, 98, 15);
+  color: lightcoral;
 }
 
 .highlight {
