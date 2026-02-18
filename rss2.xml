@@ -15,8 +15,38 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 06 Feb 2026 14:35:35 GMT</pubDate>
+    <pubDate>Wed, 18 Feb 2026 15:24:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>本地 git lfs 仓库</title>
+      <link>https://blog.deskangel.com/2026/02/18/local-git-lfs-repo/</link>
+      <guid>https://blog.deskangel.com/2026/02/18/local-git-lfs-repo/</guid>
+      <pubDate>Wed, 18 Feb 2026 15:23:28 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;今天和Grok聊天，偶然得知Git LFS支持&lt;code&gt;standalone file transfer adapter&lt;/code&gt;，也就是不通过 HTTP，而是使用文件协议或本地目录，于是便想尝试一下。&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/git/">git</category>
+      
+      <category domain="https://blog.deskangel.com/tags/lfs/">lfs</category>
+      
+      
+      <comments>https://blog.deskangel.com/2026/02/18/local-git-lfs-repo/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>just_audio 播放某个文件失败</title>
@@ -585,35 +615,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Fix macos (olcp) wake up issue</title>
-      <link>https://blog.deskangel.com/2024/04/14/macos-olcp-wake-up-issue/</link>
-      <guid>https://blog.deskangel.com/2024/04/14/macos-olcp-wake-up-issue/</guid>
-      <pubDate>Sun, 14 Apr 2024 14:12:55 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;遇到使用 olcp （OpenCore Legacy Patcher） 安装的 macos 会每小时被唤醒一次。运行&lt;code&gt;log show --last boot --style syslog | fgrep &amp;quot;Wake</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Software/">Software</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/macos/">macos</category>
-      
-      <category domain="https://blog.deskangel.com/tags/olcp/">olcp</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/04/14/macos-olcp-wake-up-issue/#disqus_thread</comments>
       
     </item>
     
