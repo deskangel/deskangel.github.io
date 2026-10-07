@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>macos-privacy-from-microphone</title>
+      <link href="/2026/10/07/macos-privacy-from-microphone/"/>
+      <url>/2026/10/07/macos-privacy-from-microphone/</url>
+      
+        <content type="html"><![CDATA[<p>最近在 macOS 上用 Flutter 开发一款英语学习应用，调试的时候，App 的麦克风始终无法工作，提示没有权限。</p><p>录音的相关代码查了，<code>entitlement</code> 和 <code>plist</code> 中相关权限也都已经加了，系统隐私设置的麦克风列表中还是看不到该 App。</p><p>各个 AI 全部都只是强调要清空权限：<code>tccutil reset Microphone com.deskangel.xxx</code>，但是这根本没有用处。</p><p>断断续续几个小时之后，及其偶然地，我没有在 VSCode 中通过 F5 调试，而是在 Ghostty 中使用 <code>flutter run -d macos</code> 启动，突然发现麦克风工作了！并且，没有弹出权限请求。</p><p>再次打开麦克风权限列表，果然里面 <code>Ghostty.app</code> 的权限是开着的，而 <code>Visual Studio Code.app</code> 的权限却关着。</p><p>原来macOS 的权限机制，隐私权限的绑定与启动该进程的父进程（宿主应用）紧密相关，要看是如何启动这个程序的。如果通过 <code>open</code> 命令启动，则会进行正常的权限检查；如果是用 app 的 shell 命令或是调试器启动，就借用父进程的权限，从而绕过 <code>tcc</code> 的检查。用户完全不知道也无需给这个 App 进行独立授权。</p><p>想到之前使用 Ghostty 的时候，提示需要全磁盘访问，当时没有细想就给了。现在看来，对我们这些依赖终端的用户来说，这和没有权限检查、没有隐私控制有什么区别？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> macos </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>本地 git lfs 仓库</title>
       <link href="/2026/02/18/local-git-lfs-repo/"/>
       <url>/2026/02/18/local-git-lfs-repo/</url>

@@ -15,8 +15,36 @@
     <atom:link href="https://blog.deskangel.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 18 Feb 2026 15:24:38 GMT</pubDate>
+    <pubDate>Wed, 07 Oct 2026 12:30:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>macos-privacy-from-microphone</title>
+      <link>https://blog.deskangel.com/2026/10/07/macos-privacy-from-microphone/</link>
+      <guid>https://blog.deskangel.com/2026/10/07/macos-privacy-from-microphone/</guid>
+      <pubDate>Wed, 07 Oct 2026 12:28:17 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;最近在 macOS 上用 Flutter 开发一款英语学习应用，调试的时候，App 的麦克风始终无法工作，提示没有权限。&lt;/p&gt;
+&lt;p&gt;录音的相关代码查了，&lt;code&gt;entitlement&lt;/code&gt; 和 &lt;code&gt;plist&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      
+      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
+      
+      
+      <category domain="https://blog.deskangel.com/tags/macos/">macos</category>
+      
+      
+      <comments>https://blog.deskangel.com/2026/10/07/macos-privacy-from-microphone/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>本地 git lfs 仓库</title>
@@ -582,39 +610,6 @@
       
       
       <comments>https://blog.deskangel.com/2024/04/18/ubuntu-22-04-sharing/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>TextInputConfig and GBoard toolbar</title>
-      <link>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</link>
-      <guid>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/</guid>
-      <pubDate>Mon, 15 Apr 2024 02:20:12 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;When &lt;code&gt;enableIMEPersonalizedLearning&lt;/code&gt; is set to &lt;code&gt;true&lt;/code&gt;, the toolbar’s left-side button displays as a settings</description>
-          
-        
-      
-      
-      
-      
-      <category domain="https://blog.deskangel.com/categories/Programming/">Programming</category>
-      
-      
-      <category domain="https://blog.deskangel.com/tags/android/">android</category>
-      
-      <category domain="https://blog.deskangel.com/tags/flutter/">flutter</category>
-      
-      <category domain="https://blog.deskangel.com/tags/gboard/">gboard</category>
-      
-      <category domain="https://blog.deskangel.com/tags/harmonyos/">harmonyos</category>
-      
-      
-      <comments>https://blog.deskangel.com/2024/04/15/textinputconfig-and-gboard-toolbar/#disqus_thread</comments>
       
     </item>
     
